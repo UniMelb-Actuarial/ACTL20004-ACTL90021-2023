@@ -1,4 +1,4 @@
-baseURL: "https://topics-actl.netlify.app"
+baseURL: "https://topics-actl.netlify.app" 
 title: Topics in Actuarial, Insurance and Finance
 theme: hugo-book
 sectionPagesMenu: main
