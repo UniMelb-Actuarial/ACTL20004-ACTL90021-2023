@@ -32,10 +32,10 @@ menu:
       url: https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless
       weight: 15
     - name: ACTL20004 Canvas
-      url: https://canvas.lms.unimelb.edu.au/courses/150824
+      url: https://canvas.lms.unimelb.edu.au/courses/153686
       weight: 16
     - name: ACTL90021 Canvas
-      url: https://canvas.lms.unimelb.edu.au/courses/150864
+      url: https://canvas.lms.unimelb.edu.au/courses/154246
       weight: 17
     - name: Community Canvas
       url: https://canvas.lms.unimelb.edu.au/courses/173733
@@ -46,26 +46,20 @@ menu:
     - name: List of exercises (Excel)
       url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801
       weight: 21
-    - name: Pre-tutorial exercises
-      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391
-      weight: 22
     - name: Tutorial exercises
       url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392
-      weight: 25
-    - name: Additional and Out-of-Scope exercises
-      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464393
       weight: 27
     - name: __________Links___________
       url: 
       weight: 35
     - name: Benjamin Avanzi
       url: https://bavanzicv.netlify.app/
-      weight: 36
-    - name: Yuyu Chen
-      url: https://yuyuchen-uw.github.io
-      weight: 40
+      weight: 46
     - name: Let's connect on LinkedIn!
       url: https://www.linkedin.com/in/benjaminavanzi/
+      weight: 38
+    - name: Yuyu Chen
+      url: https://yuyuchen-uw.github.io
       weight: 41
     - name: Introduction to Actuarial Studies 2021
       url: https://actl10001.netlify.app/

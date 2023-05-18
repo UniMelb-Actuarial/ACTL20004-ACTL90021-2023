@@ -29,4 +29,22 @@ knit_hooks$set(output = function(x, options) {
 
 library("formatR")
 knitr::opts_chunk$set(
-        echo = TRUE,include=TRUE,size="footnotesize",results="markup",tidy=TRUE,tidy.opts=list(blank=FALSE,indent=2,arrow=TRUE,width.cutoff = 60))
+        echo = TRUE,include=TRUE,size="footnotesize",results="markup",
+        tidy=TRUE,tidy.opts=list(blank=FALSE,indent=2,arrow=TRUE,width.cutoff = 60))
+
+## Color Format
+colFmt <- function(x,color) {
+    
+    outputFormat <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+    
+    if(outputFormat == 'beamer') {
+        ret <- paste("\\textcolor{",color,"}{",x,"}",sep="")
+    } else if(outputFormat == 'html') {
+        ret <- paste("<font color='",color,"'>",x,"</font>",sep="")
+    } else {
+        ret <- x
+    }
+    
+    return(ret)
+}
+

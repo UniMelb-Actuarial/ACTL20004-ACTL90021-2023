@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Docs on General Insurance Modelling - AM3</title>
-    <link>https://gim-am3.netlify.app/docs/</link>
-    <description>Recent content in Docs on General Insurance Modelling - AM3</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://gim-am3.netlify.app/docs/index.xml" rel="self" type="application/rss+xml" />
+    <title>Docs on Topics in Actuarial, Insurance and Finance</title>
+    <link>https://topics-actl.netlify.app/docs/</link>
+    <description>Recent content in Docs on Topics in Actuarial, Insurance and Finance</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://topics-actl.netlify.app/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Prerequisite Knowledge</title>
-      <link>https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/</link>
+      <link>https://topics-actl.netlify.app/docs/0-prerequisite-knowledge/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/</guid>
+      <guid>https://topics-actl.netlify.app/docs/0-prerequisite-knowledge/</guid>
       <description>Summary of some of the prerequisite knowledge required for this subject: The first two parts ( Mathematics and Probability) below are basic reminders, and could probably be skipped by most students.
 The third part is more advanced and corresponds to Section 1.2 of the prescribed textbook MW.
 Students are recommended to review all those concepts prior to week 1, and to ask questions at the week 1 tutorial if needed.</description>
@@ -18,11 +18,11 @@ Students are recommended to review all those concepts prior to week 1, and to as
     
     <item>
       <title>M1 Introduction</title>
-      <link>https://gim-am3.netlify.app/docs/m1-introduction/</link>
+      <link>https://topics-actl.netlify.app/docs/m1-introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/m1-introduction/</guid>
-      <description>The nature of general insurance (MW 1.1) #  General insurance #   also called non-life, or property and casualty  Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …   efficient because of the (weak) law of large numbers (Bernoulli):  $$\lim_{n\rightarrow \infty} \Pr \left[ \left| \frac{1}{n} \sum_{i=1}^n Y_i - E[Y_i]\right| \ge \epsilon\right] = 0$$      for more background:  see general insurance practice for further details about the general insurance area see Pooling and Insurance for further details about the law of large numbers mechanism    Risk components #  Insurance organises a risk transfer:</description>
+      <guid>https://topics-actl.netlify.app/docs/m1-introduction/</guid>
+      <description>The nature of general insurance (MW 1.1) #  General insurance #   also called non-life, or property and casualty  Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …   for more background:  see general insurance practice for further details about the general insurance area see Pooling and Insurance for further details about the law of large numbers mechanism    Risk components #  Risk / randomness comes from different sources:</description>
     </item>
     
   </channel>

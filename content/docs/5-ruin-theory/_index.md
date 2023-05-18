@@ -1,0 +1,25 @@
+---
+weight: 48
+title: Ruin theory (CM2 Section 5.1)
+author: ''
+date: []
+slug: []
+categories: []
+tags: []
+---
+
+**<p style="font-size:18px;">Time Series</p>**
+
+This section covers contents in the <span style="color: green;"> **Section 2 in the CS2 syllabus** </span>; see also the [learning outcomes mappings in the Subject Guide](../0-subject-guide/SILO).
+
+The main reference for this section is:
+
+{{< hint info>}}
+
+[TS] Shumway, Robert H., Stoffer, David S. (2017) Time Series Analysis and Its Applications With R Examples, Springer, ISBN 978-3-319-52452-8
+
+{{< /hint >}}
+
+This textbook can be [downloaded from the UniMelb library](https://discovery.ebsco.com/linkprocessor/external?resource=https%3A%2F%2Fgo.openathens.net%2Fredirector%2Funimelb.edu.au%3Furl%3Dhttp%253A%252F%252Flink.springer.com%252F10.1007%252F978-3-319-52452-8&an=melb.b7185977&db=cat00006a&title=Time+series+analysis+and+its+applications+%3A+with+R+examples+%2F+Robert+H.+Shumway%2C+David+S.+Stoffer.&text=Connect+to+ebook+%28University+of+Melbourne+only%29&type=external).
+
+<!-- [other](https://discovery.ebsco.com/linkprocessor/plink?id=df180914-f241-3634-a7c4-443d18f01dc3) -->

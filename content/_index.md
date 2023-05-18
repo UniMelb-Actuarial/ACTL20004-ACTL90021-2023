@@ -23,7 +23,7 @@ This component will be taught by Benjamin Avanzi.
 
 <span style="color: blue;"> **Stochastic investment returns and Ruin theory** </span>
 
-as per items 3 and 5.1 "Liability valuations / Ruin theory" and  of the [CM2 syllabus](https://www.actuaries.org.uk/documents/cm2-syllabus-2023); see also the [course mappings](docs/0-subject-guide/SILO)
+as per items 3 "Stochastic interest rate of return models" and 5.1 "Liability valuations / Ruin theory" and  of the [CM2 syllabus](https://www.actuaries.org.uk/documents/cm2-syllabus-2023); see also the [course mappings](docs/0-subject-guide/SILO)
 
 This component will be taught by Yuyu Chen.
 

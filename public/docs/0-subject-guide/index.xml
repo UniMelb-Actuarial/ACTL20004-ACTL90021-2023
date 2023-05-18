@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Subject Guide on General Insurance Modelling - AM3</title>
-    <link>https://gim-am3.netlify.app/docs/0-subject-guide/</link>
-    <description>Recent content in Subject Guide on General Insurance Modelling - AM3</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://gim-am3.netlify.app/docs/0-subject-guide/index.xml" rel="self" type="application/rss+xml" />
+    <title>Subject Guide on Topics in Actuarial, Insurance and Finance</title>
+    <link>https://topics-actl.netlify.app/docs/0-subject-guide/</link>
+    <description>Recent content in Subject Guide on Topics in Actuarial, Insurance and Finance</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://topics-actl.netlify.app/docs/0-subject-guide/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Eligibility and Requirements</title>
-      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/</link>
+      <link>https://topics-actl.netlify.app/docs/0-subject-guide/Eligibility/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/</guid>
-      <description>To view the eligibility and requirements, including prerequisites, corequisites, recommended background knowledge and core participation requirements for this subject, please see the University Handbook: https://handbook.unimelb.edu.au/2022/subjects/actl30007/eligibility-and-requirements https://handbook.unimelb.edu.au/2022/subjects/actl90020/eligibility-and-requirements
-Prerequisites #  Relevant knowledge from ACTL20003 Stochastic Techniques in Insurance (or MAST20004 Probability) includes in particular:
+      <guid>https://topics-actl.netlify.app/docs/0-subject-guide/Eligibility/</guid>
+      <description>To view the eligibility and requirements, including prerequisites, corequisites, recommended background knowledge and core participation requirements for this subject, please see the University Handbook:
+  ACTL30007 handbook  ACTL90020 handbook  Prerequisites #  Relevant knowledge from ACTL20003 Stochastic Techniques in Insurance (or MAST20004 Probability) includes in particular:
  Distributions of random variables Expectations and conditional expectations Moment and probability generating functions Law of Large Numbers, and the Central Limit Theorem  Relevant knowledge from MAST20005 Statistics includes in particular:</description>
     </item>
     
     <item>
       <title>Learning Outcomes</title>
-      <link>https://gim-am3.netlify.app/docs/0-subject-guide/SILO/</link>
+      <link>https://topics-actl.netlify.app/docs/0-subject-guide/SILO/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/SILO/</guid>
+      <guid>https://topics-actl.netlify.app/docs/0-subject-guide/SILO/</guid>
       <description>Subject Intended Learning Outcomes (SILO) #  To view the subject objectives and the generic skills you will develop through successful completion of this subject, please see the University Handbook.
 ACTL30007 SILO #  The ACTL30007 subject intended learning outcomes (SILO) are as follows:
  Apply relevant pre-requisite knowledge of mathematics, probability theory and statistics in the solution of a range of practical problems. Derive and calculate probabilities for, and moments of, loss distributions both with and without simple reinsurance arrangements.</description>
@@ -29,36 +29,35 @@ ACTL30007 SILO #  The ACTL30007 subject intended learning outcomes (SILO) are as
     
     <item>
       <title>Activities</title>
-      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Activities/</link>
+      <link>https://topics-actl.netlify.app/docs/0-subject-guide/Activities/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Activities/</guid>
+      <guid>https://topics-actl.netlify.app/docs/0-subject-guide/Activities/</guid>
       <description>Lectures #  Lecture Times #  Lectures will be delivered live, in dual mode (both on Zoom and in person) in the following venue:
- PAR-The Spot-3008, Mondays, from 2.15pm to 4.15pm Recordings will be made available on the Canvas website https://canvas.lms.unimelb.edu.au/courses/123529  Notes:
- The tutorials on Friday 15 April 2022 won&amp;rsquo;t run (Good Friday holiday). Students with a tutorial on 13 April 2022 will review the mid-semester exam questions.</description>
+ [PG] PAR-Alan Gilbert-121 (Theatre 3), Mondays, from 11.05am to 1.00pm [UG] PAR-Kwong Lee Dow-227, Mondays, from 2.20pm to 4.15pm  Notes:
+ The tutorials on Friday 7 April 2022 won&amp;rsquo;t run (Good Friday holiday). Students with a tutorial at another time that week will have an opportunity to do a Q&amp;amp;A with their tutor.</description>
     </item>
     
     <item>
       <title>Resources</title>
-      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Resources/</link>
+      <link>https://topics-actl.netlify.app/docs/0-subject-guide/Resources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Resources/</guid>
-      <description>Website #  The current website contains (or links) to all the resources you need for the course (compare the following list with left hand side menu):
-  Subject guide (you are reading it!)  Study Plan: this will outline our recommended study plan for the course, week by week. This will include a link to the video lectures / recordings, too.  Claims modelling: the contents covering Section 1 of the CS2 syllabus.</description>
+      <guid>https://topics-actl.netlify.app/docs/0-subject-guide/Resources/</guid>
+      <description>Website #  Here is a video with detailed overview of the course resources and organisation:
+ The current website contains (or links) to all the resources you need for the course (compare the following list with left hand side menu):
+  Subject guide (you are reading it!)  Study Plan: this outlines your recommended study plan for the subject, week by week. This will include a link to the video lectures / recordings, too.</description>
     </item>
     
     <item>
       <title>Assessment</title>
-      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/</link>
+      <link>https://topics-actl.netlify.app/docs/0-subject-guide/Assessment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/</guid>
+      <guid>https://topics-actl.netlify.app/docs/0-subject-guide/Assessment/</guid>
       <description>Assessment Overview #  Assessment structure #  Your assessment for this subject comprises the following:
-  a 50-in-75-minute mid-semester exam (15%)  individual assignment (25%)  a 2-in-3 hour final exam (60%)  Hurdle requirement: To pass this subject students must pass the end of semester examination.
-In the following sections, details are provided (and will be populated throughout semester) about those assessments.
-Examinations:
-Canvas Quiz will automatically submit the exam when the time limit (comprised of reading time &amp;amp; writing time) has been reached (for example, after 60 minutes for an exam with 30 minutes of writing time and 30 minutes of reading time).</description>
+  a 60 minute closed book mid-semester exam (15%)  an individual assignment (25%)  a 2-in-3 hour online final exam (60%)  Hurdle requirement: To pass this subject students must pass the end of semester examination.
+In the following sections, details are provided (and will be populated throughout semester) about those assessments.</description>
     </item>
     
   </channel>
