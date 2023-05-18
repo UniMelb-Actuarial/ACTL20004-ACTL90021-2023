@@ -1,6 +1,6 @@
 ---
 title: Homepage
-type: docs
+type: docs 
 ---
 
 <!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/107520/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. Access to some files requires you to be logged in as well. </p> -->
