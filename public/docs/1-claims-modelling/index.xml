@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Claims Modelling (CS2 Section 1) on General Insurance Modelling - AM3</title>
+    <link>https://gim-am3.netlify.app/docs/1-claims-modelling/</link>
+    <description>Recent content in Claims Modelling (CS2 Section 1) on General Insurance Modelling - AM3</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://gim-am3.netlify.app/docs/1-claims-modelling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>M2 Collective Risk Modelling</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/</guid>
+      <description>Introduction: Models for aggregate losses #  A portfolio of contracts or a contract will potentially experience a sequence of losses: $$Y_1, Y_2, Y_3, \ldots$$ We are interested in the aggregate sum \(S\) of these losses over a certain period of time.
+ How many losses will occur?  if deterministic \((n)\) \(\longrightarrow\) individual risk model if random \((N)\) \(\longrightarrow\) collective risk model   How do they relate to each other?</description>
+    </item>
+    
+    <item>
+      <title>M3 Individual Claim Size Modelling</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/</guid>
+      <description>Introduction #   How to fit loss models to insurance data? Peculiar characteristics of insurance data:  complete vs incomplete set of observations left-truncated observations right-censored observations heavy tailed risks   Parametric distribution models  model parameter estimation judging quality of fit model selection criteria
+(graphical, score-based approaches, information criteria)   Concepts and R functions are demonstrated with the help of some data sets  Steps in fitting loss models to data #   explore and summarise data  graphical explorations empirical moments and quantiles   select a set of candidate distributions  Pareto, Log-Normal, Inverse Gaussian, Gamma, etc.</description>
+    </item>
+    
+    <item>
+      <title>M4 Approximations for Compound Distributions</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/</guid>
+      <description>\(\adv\) Module 4 Out of Scope #  Please note that this entire module is out of scope for Semester 1, 2022.
+Algorithms for compound distributions #  Preliminary: Discretisation #   In the algorithms considered in this module (and in real life..!), severity distributions are discrete. In Module 3 we discussed how to fit parametric distributions to real data, but these were continuous (which often allows to define a whole df easily with just a few parameters).</description>
+    </item>
+    
+    <item>
+      <title>M5 Copulas</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/</guid>
+      <description>Dependence and multivariate modelling #  Introduction to Dependence #  Motivation #  How does dependence arise?
+ Events affecting more than one variable (e.g., storm on building, car and business interruption covers) Underlying economic factors affecting more than one risk area (e.g., inflation, unemployment) Clustering/concentration of risks (e.g., household, geographical area)   Reasons for modelling dependence:
+ Pricing:  get adequate risk loadings (note that dependence affects quantiles, not the mean)   Solvency assessment:  bottom up: for given risks, get capital requirements (get quantiles of aggregate quantities)   Capital allocation:  top down: for given capital, allocate portions to risk (for profitability assessment)   Portfolio structure: (or strategic asset allocation)  how do assets and liability move together?</description>
+    </item>
+    
+    <item>
+      <title>M6 Extreme Value Theory</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/</guid>
+      <description>Introduction #  Extreme events #   financial (and claims) data is often leptokurtic severity (more peaked - heavy tailed - than normal) reasons include heteroscedasticity (stochastic volatility) almost by definition, extreme events happen with low frequency but extreme events are the ones causing to financial distress, possibly ruin accurate fitting is crucial for capital and risk management (risk based capital, reinsurance, ART such as securitisation via CAT bonds) fitting presents specific issues:  there is little data to work from when fitting a whole distribution, the big bulk of the data (around the mode) overpowers observations in the tails in the optimisation routine (MLE), leading to poor fit in the tail sometimes (in fact, almost always as we will see) a good distribution for the far tail is different from that for the more common outcomes    Framework #   Consider iid random variables \(X_i\), \(i=1,\ldots,n\), with df \(F\) We denote the order statistics $$X_{n,n} \le X_{n-1,n} \le \ldots \le X_{1,n}$$ such that $$X_{n,n}=\min(X_1,\ldots,X_n) \text{ and }X_{1,n}=\max(X_1,\ldots,X_n).</description>
+    </item>
+    
+  </channel>
+</rss>

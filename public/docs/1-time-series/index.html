@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Time Series
+
+This section covers contents in the Section 2 in the CS2 syllabus ; see also the learning outcomes mappings in the Subject Guide.
+The main reference for this section is:
+[TS] Shumway, Robert H., Stoffer, David S. (2017) Time Series Analysis and Its Applications With R Examples, Springer, ISBN 978-3-319-52452-8  This textbook can be downloaded from the UniMelb library.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Time Series (CS2 Section 2)" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-time-series/" />
+
+<title>Time Series (CS2 Section 2) | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://gim-am3.netlify.app/docs/1-time-series/index.xml" title="General Insurance Modelling - AM3" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Time Series (CS2 Section 2)</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><strong><p style="font-size:18px;">Time Series</p></strong></p>
+<p>This section covers contents in the <span style="color: green;"> <strong>Section 2 in the CS2 syllabus</strong> </span>; see also the 
+  <a href="/docs/0-subject-guide/SILO/">learning outcomes mappings in the Subject Guide</a>.</p>
+<p>The main reference for this section is:</p>
+<blockquote class="book-hint info">
+  [TS] Shumway, Robert H., Stoffer, David S. (2017) Time Series Analysis and Its Applications With R Examples, Springer, ISBN 978-3-319-52452-8
+</blockquote>
+
+<p>This textbook can be 
+  <a href="https://discovery.ebsco.com/linkprocessor/external?resource=https%3A%2F%2Fgo.openathens.net%2Fredirector%2Funimelb.edu.au%3Furl%3Dhttp%253A%252F%252Flink.springer.com%252F10.1007%252F978-3-319-52452-8&amp;an=melb.b7185977&amp;db=cat00006a&amp;title=Time&#43;series&#43;analysis&#43;and&#43;its&#43;applications&#43;%3A&#43;with&#43;R&#43;examples&#43;%2F&#43;Robert&#43;H.&#43;Shumway%2C&#43;David&#43;S.&#43;Stoffer.&amp;text=Connect&#43;to&#43;ebook&#43;%28University&#43;of&#43;Melbourne&#43;only%29&amp;type=external">downloaded from the UniMelb library</a>.</p>
+<!-- [other](https://discovery.ebsco.com/linkprocessor/plink?id=df180914-f241-3634-a7c4-443d18f01dc3) -->
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/05bf3c0b5cfbeb01a4adbc3c5a5ad71560c2835c" title='Last modified by Benjamin Avanzi | 18 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>18 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

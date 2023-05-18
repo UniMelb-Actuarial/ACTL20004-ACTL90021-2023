@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="-- Estimation #  Summary: analysing the ACF and PACF #  Behaviour of the ACF and PACF for ARMA Models #  \centering \begin{tabular}{rccc} &amp; AR$(p)$ &amp; MA$(q)$ &amp; ARMA$(p,q)$ \ \hline ACF &amp; Tails off &amp; Cuts off after lag \(q\) &amp; Tails off \
+PACF &amp; Cuts off after lag \(p\) &amp; Tails off &amp; Tails off \end{tabular} \vspace{1cm}
+ The PACF for MA models behaves much like the ACF for AR models.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M10 Estimation and Forecasting" />
+<meta property="og:description" content="-- Estimation #  Summary: analysing the ACF and PACF #  Behaviour of the ACF and PACF for ARMA Models #  \centering \begin{tabular}{rccc} &amp; AR$(p)$ &amp; MA$(q)$ &amp; ARMA$(p,q)$ \ \hline ACF &amp; Tails off &amp; Cuts off after lag \(q\) &amp; Tails off \
+PACF &amp; Cuts off after lag \(p\) &amp; Tails off &amp; Tails off \end{tabular} \vspace{1cm}
+ The PACF for MA models behaves much like the ACF for AR models." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-time-series/m10-estimation-and-forecasting/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-18T10:58:38+11:00" />
+
+<title>M10 Estimation and Forecasting | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M10 Estimation and Forecasting</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#estimation">Estimation</a>
+      <ul>
+        <li><a href="#summary-analysing-the-acf-and-pacf">Summary: analysing the ACF and PACF</a>
+          <ul>
+            <li><a href="#behaviour-of-the-acf-and-pacf-for-arma-models">Behaviour of the ACF and PACF for ARMA Models</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><!-- <!-- To include images: --> -->
+<!-- ```{r fig.align='center',out.width="100%", echo=F} -->
+<!-- include_graphics(sprintf("%s/XXX.png", graphics_path), error = F)  -->
+<!-- ``` -->
+<h1 id="estimation">
+  Estimation
+  <a class="anchor" href="#estimation">#</a>
+</h1>
+<h2 id="summary-analysing-the-acf-and-pacf">
+  Summary: analysing the ACF and PACF
+  <a class="anchor" href="#summary-analysing-the-acf-and-pacf">#</a>
+</h2>
+<h3 id="behaviour-of-the-acf-and-pacf-for-arma-models">
+  Behaviour of the ACF and PACF for ARMA Models
+  <a class="anchor" href="#behaviour-of-the-acf-and-pacf-for-arma-models">#</a>
+</h3>
+<p>\centering
+\begin{tabular}{rccc}
+&amp; AR$(p)$ &amp; MA$(q)$ &amp; ARMA$(p,q)$ \ \hline
+ACF &amp; Tails off &amp; Cuts off after lag <code>\(q\)</code> &amp; Tails off \<br>
+PACF &amp; Cuts off after lag <code>\(p\)</code> &amp; Tails off &amp; Tails off
+\end{tabular}
+\vspace{1cm}</p>
+<ul>
+<li>The PACF for MA models behaves much like the ACF for AR models.</li>
+<li>The PACF for AR models behaves much like the ACF for MA models.</li>
+<li>Because an invertible ARMA model has an infinite AR representation, its PACF will not cut off.</li>
+<li>Remember that the data might have to be detrended and/or transformed first (e.g., to stabilise the variance, apply a log transform), before such analysis is performed.</li>
+</ul>
+<!-- ### Example: Recruitment Series -->
+<!-- ```{r Rec-prelim,fig.show='hide'} -->
+<!-- acf2(rec, 48) # will produce values and a graph -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-prelim,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- - The behaviour of the PACF is consistent with the behaviour of an AR(2): the ACF tails off, the PACF cuts after lag 2. -->
+<!-- - The following slide shows the fit of a regression using the data triplets `\(\{(x:z_1,z_2): (x_3;x_2,x_1),(x_4;x_3,x_2),\ldots,(x_{453};x_{452},x_{451})\}\)` to fit a model of the form -->
+<!-- `$$x_t=\phi_0+\phi_1 x_{t-1}+\phi_2 x_{t-2}+w_t \text{ for }t=3,4,\ldots,453.$$` -->
+<!-- - let us fit this to an AR process using `ar.ols`, which, according to R, will `Fit an autoregressive time series model to the data by ordinary least squares, by default selecting the complexity by AIC.` -->
+<!-- --- -->
+<!-- ```{r Rec-prelim-regr,collapse=TRUE} -->
+<!-- regr = ar.ols(rec, order=2, demean=FALSE, intercept=TRUE) -->
+<!-- regr -->
+<!-- regr$asy.se.coef # standard errors of the estimates -->
+<!-- ``` -->
+<!-- ```{r Rec-prelim-fit,eval=FALSE} -->
+<!-- ts.plot(rec,main="Results of regression using previous two values of the time series") -->
+<!-- lines(time(rec)[-c(1:2)],regr$x.intercept+regr$ar[1]*rec[-c(1,453)]+regr$ar[2]*rec[-c(452,453)],col="blue",lwd=1) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-prelim-fit,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- ### ACF and PACF in presence of seasonality -->
+<!-- \centering -->
+<!-- \begin{tabular}{rccc} -->
+<!-- & AR$(P)_s$ & MA$(Q)_s$ & ARMA$(P,Q)_s$ \\ \hline -->
+<!-- ACF* & Tails off at lags `\(ks\)` & Cuts off after & Tails off at \\ -->
+<!--  & `\(k=1,2,\ldots,\)` & lag `\(Qs\)` & lags `\(ks\)` \\ -->
+<!-- PACF* & Cuts off after  & Tails off at lags `\(ks\)` & Tails off at \\ -->
+<!-- & lag `\(Ps\)` & `\(k=1,2,\ldots,\)` & lags `\(ks\)` -->
+<!-- \end{tabular} -->
+<!-- *The values at nonseasonal lags `\(h\neq ks\)`, for `\(k=1,2,\dots,\)` are zero. -->
+<!-- \vspace{1cm} -->
+<!-- - This can be seen as a generalisation of the previous table   -->
+<!-- (which is the special case `\(s=1\)`) -->
+<!-- - Fitting seasonal autoregressive and moving average components \alert{first} generally leads to more satisfactory results -->
+<!-- ## The Box-Jenkins methodology -->
+<!-- ### Overview - The Box-Jenkins methodology -->
+<!-- 1. Determine the integration order `\(d\)` of the ARIMA$(p,d,q)$ and work on the corresponding ARMA$(p,q)$ by differencing. -->
+<!-- 1. Then choose candidates for `\(p\)` and `\(q\)` from examining ACF and PACF -->
+<!-- 1. For fixed `\(p\)` and `\(q\)` (candidates), several methods can be used:   -->
+<!-- \begin{itemize} -->
+<!-- \item Method of moments   -->
+<!-- \item Maximum likelihood   -->
+<!-- \item Least squares and variations   -->
+<!-- \end{itemize} -->
+<!-- MLE is more involved than the Method of moments, but way more efficient when `\(q>0\)`. -->
+<!-- 1. Perform diagnostics, to choose the best `\(p\)` and `\(q\)`. This may suggest new candidates for `\(p\)` and `\(q\)`, in which case we perform a new iteration from step 2. -->
+<!-- 1. Use the chosen model for forecasting. -->
+<!-- This general approach to fitting is called the \alert{Box-Jenkins methodology}. -->
+<!-- ### ARIMA$(p,d,q)$ `\(\rightarrow\)` ARMA$(p,q)$: choosing `\(d\)` -->
+<!-- Choosing `\(d\)` involves: -->
+<!-- - A time series `\(x_t\)` may be modelled by a stationary ARMA model if the sample ACF decays rapidly. If the decay is slow (and the ACF is positive) then this suggests further differencing. -->
+<!-- - Let `\(\sigma_d^2\)` be the sample variance of the `\(\nabla^d x_t\)`. This quantity should first decrease with `\(d\)` until stationarity is achieved, and then starts to increase. Hence `\(d\)` could be set to the value which minimises `\(\sigma_d^2\)`, `\(d\ge 0\)`. -->
+<!-- Several candidates could be selected, a final choice of which could be made after full estimation of all candidates and based on diagnostics.  -->
+<!-- One should be careful to not over-difference, as this introduces artificial dependence in the data. -->
+<!-- ### Example: Recruitment series -->
+<!-- ```{r Rec-prelim,echo=FALSE,results='hide',fig.height=6} -->
+<!-- ``` -->
+<!-- ### Example: Chicken prices -->
+<!-- ```{r chicken-detrend-acfs,echo=FALSE,results='hide',fig.height=6.5} -->
+<!-- fit <- lm(chicken~time(chicken), na.action=NULL) -->
+<!-- par(mfrow=c(3,1)) # plot ACFs -->
+<!-- acf(chicken, 48, main="chicken") -->
+<!-- acf(resid(fit), 48, main="detrended via regression")  -->
+<!-- acf(diff(chicken), 48, main="detrended via first difference") -->
+<!-- ``` -->
+<!-- ### Choosing `\(p\)` and `\(q\)` for the ARMA$(p,q)$ -->
+<!-- - We work on the differenced series, which is then assumed to be ARMA$(p,q)$. -->
+<!-- - We assume the mean of the differenced series is 0. If it isn't the case in the data, subtract its sample mean, and work on the residuals. -->
+<!-- - Examine ACF and PACF to choose candidates for `\(p\)` and `\(q\)`:   -->
+<!--     - `\(p\)` can be inferred from the number of spikes in the PACF until a geometrical decay to zero is observed. -->
+<!--     - `\(q\)` can be inferred from the number of spikes in the ACF until a geometrical decay to zero is observed.   -->
+<!-- - Alternatively or additionally, work iteratively from the simplest models and increase orders `\(p\)` and `\(q\)`: -->
+<!--     - Higher orders  will always reduce the sum of squares (more parameters). At the extreme a model with `\(n\)` parameters will replicate the data. -->
+<!--     - The appropriate order could be chosen using information criteria   -->
+<!--     (e.g., BIC or AIC). -->
+<!-- ### Example: Recruitment series -->
+<!-- ```{r Rec-prelim,echo=FALSE,results='hide',fig.height=6} -->
+<!-- ``` -->
+<!-- ### Estimation of the parameters -->
+<!-- - We now need estimates for `\(\phi_1,\ldots,\phi_p\)` and `\(\theta_1, \ldots,\theta_q\)` for given `\(p\)` and `\(q\)` -->
+<!-- - Use R to fit the model with the function   -->
+<!-- `fit <- arima(x,order=c(p,0,q))`   -->
+<!-- where `x` is the differenced time series, and where `p` and `q` need to replaced by their chosen numerical values.  The default estimation procedure (unless there are missing values) is to use conditional sum-of-squares to find starting values, then maximum likelihood. -->
+<!-- - This will output parameter estimates, their standard errors, as well as `\(\sigma_2\)` and the AIC. -->
+<!-- - (One could alternatively use a method of moments approach (see later), but this is much less efficient than MLE if `\(q>0\)`.) -->
+<!-- ### Example: Recruitment series -->
+<!-- MLE estimators are implemented in R as follows: -->
+<!-- ``` {r Rec-mle,collapse=TRUE} -->
+<!-- rec.mle = ar.mle(rec, order=2)  -->
+<!-- rec.mle$x.mean  -->
+<!-- rec.mle$ar -->
+<!-- sqrt(diag(rec.mle$asy.var.coef))  -->
+<!-- rec.mle$var.pred  -->
+<!-- ``` -->
+<!-- and then the fit is displayed as follows: -->
+<!-- ```{r Rec-MLE-fit,fig.show='hide'} -->
+<!-- ts.plot(rec,main="Results of fit using the R MLE estimators") -->
+<!-- lines(rec[1:453]-rec.mle$resid,col="blue",lwd=1) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-MLE-fit,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- The best R estimators are implemented in R as follows: -->
+<!-- ``` {r Rec-best,output='hide'} -->
+<!-- rec.arima0 <- arima(rec,order=c(2,0,0)) # to use with tsdiag -->
+<!-- rec.arima <- sarima(rec,2,0,0) -->
+<!-- ``` -->
+<!-- ``` {r Rec-best2,collapse=TRUE} -->
+<!-- rec.arima$coef[3] # 61.86 -->
+<!-- rec.arima$coef[1:2] # 1.35, -.46  -->
+<!-- sqrt(diag(rec.arima$var.coef)) # .04, .04  -->
+<!-- rec.arima$sigma2 # 89.33 -->
+<!-- ``` -->
+<!-- and then the fit is displayed as follows: -->
+<!-- ```{r Rec-ARIMA-fit,fig.show='hide'} -->
+<!-- ts.plot(rec,main="Results of fit using the R ARIMA estimators") -->
+<!-- lines(rec[1:453]-rec.arima$fit$residuals,col="blue",lwd=1) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-ARIMA-fit,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- ### Diagnostics -->
+<!-- Guiding principle: if we have a good fit, the residuals should be uncorrelated white noise. This can be done in three ways: -->
+<!-- - Residuals: If visual inspection of the residuals lets appear any pattern (trend or magnitude) then it can't be white noise -->
+<!-- - ACF and PACF: these should be within their confidence intervals with appropriate frequency (95\%) -->
+<!-- - More formally, one can test for white noise with the \alert{Lung-Box portmanteau test}. This test considers the dimension of the models (the number of parameters), and tests whether correlations are 0 at all lags, and displays `\(p\)`-values. High `\(p\)`-values mean we cannot reject the (null) hypothesis of white noise (which is what we want). -->
+<!-- In Base R , those three diagnostics are output when running the R function `tsdiag(fit)` where `fit` is where we stored our estimation from the function `arima` (but this function has errors!).   -->
+<!-- Better still, use the fitting function `sarima(rec,2,0,0)` of `astsa`. -->
+<!-- --- -->
+<!-- ```{r Rec-ARIMA-diag,fig.show='hide'} -->
+<!-- tsdiag(rec.arima0) -->
+<!-- ``` -->
+<!-- [note no output in the console] -->
+<!-- --- -->
+<!-- ```{r Rec-ARIMA-diag,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-SARIMA-diag,fig.show='hide',collapse=TRUE} -->
+<!-- RecSARIMAdiag <- sarima(rec,2,0,0) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-SARIMA-diag2,include=TRUE,collapse=TRUE} -->
+<!-- RecSARIMAdiag$fit -->
+<!-- RecSARIMAdiag$AIC -->
+<!-- RecSARIMAdiag$AICc -->
+<!-- RecSARIMAdiag$BIC -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-SARIMA-diag,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ### Overfitting caveat -->
+<!-- - If we choose an order that is too high, the unnecessary parameters will be insignificant, but this reduces the efficiency of the parameters that are significant. This might look like a better fit, but might lead to bad forecasts. Hence, this should be avoided. -->
+<!-- - This can be used as a diagnostic though: if we increment the order and we get similar parameter estimates, then the smaller (original) model should have the appropriate order. -->
+<!-- Although generally not well-known, it is an obvious fact to seasoned modellers that extrapolating overfitted models is almost guaranteed to lead to aberrant results. -->
+<!-- ### Example: Overfitting caveat -->
+<!-- \begin{figure} -->
+<!-- \centering -->
+<!-- \includegraphics[width=0.8\textwidth]{TS3-Fig318.png} -->
+<!-- \end{figure} -->
+<!-- - shows the U.S. population by official census, every ten years from 1910 to 1990, as points. If we use these nine observations to predict the future population, we can use an eight-degree polynomial so the fit to the nine observations is perfect. -->
+<!-- - The model predicts that the population of the United States will be close to zero in the year 2000, and will cross zero sometime   -->
+<!-- in the year 2002! -->
+<!-- ## When seasonality is involved -->
+<!-- The process described above is applied by analogy when some seasonality is present in the residuals: -->
+<!-- 1. Of course, the first step is to include a seasonal component in the trend if appropriate (such as with `\(\sin\)` and `\(\cos\)` functions). -->
+<!-- 1. The series is then seasonally and "in-season" differenced to lead to stationarity (if needed). -->
+<!-- 1. Peaks in the ACF and PACF are then analysed with the tables presented at the beginning of this section, and eliminated with an appropriate ARIMA$(p,d,q)\times(P,D,Q)_s$ model. -->
+<!-- 1. Goodness-of-fit is assessed as usual by examining the whiteness of the residuals   -->
+<!-- (e.g., this can be done thanks to the diagnostics of `sarima`) -->
+<!-- ### Example: Air Passengers -->
+<!-- Remember the steps 1.-2. performed in the previous module: -->
+<!-- ```{r AirPassSum,fig.show='hide'} -->
+<!-- x = AirPassengers -->
+<!-- lx = log(x) -->
+<!-- dlx = diff(lx) -->
+<!-- ddlx = diff(dlx, 12) -->
+<!-- plot.ts(cbind(x,lx,dlx,ddlx), main="") -->
+<!-- ``` -->
+<!-- This had led to residuals that look reasonably stationary. We now need to choose a model for them. -->
+<!-- --- -->
+<!-- ```{r AirPassSum,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r AirPassACF,fig.show='hide',collapse=TRUE} -->
+<!-- acf2(ddlx,50) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r AirPassACF,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- Seasonal component: -->
+<!-- - At the seasons, the ACF appears to be cutting off at lag `\(1s\)` ($s=12$) -->
+<!-- - PACF appears to be tailing off at lags `\(1s, 2s, 3s, 4s, \ldots\)`. -->
+<!-- - \alert{$\Longrightarrow$ SMA$(1)$, `\(P=0\)`, `\(Q=1\)`, in the season `\(s=12\)`} -->
+<!-- Non-Seasonal component: -->
+<!-- - We inspect the ACF and PACF at lower lags. -->
+<!-- - Both appear to be tailing off, which suggests ARMA within the seasons, say with `\(p=q=1\)`. -->
+<!-- - \alert{$\Longrightarrow$ ARMA$(1,1)$} -->
+<!-- Thus, we will first try an \alert{ARIMA$(1,1,1)\times(0,1,1)_{12}$} on the logged data: -->
+<!-- ```{r AirPassFit1,results='hide',fig.show='hide'} -->
+<!-- AirPassFit1 <- sarima(lx, 1,1,1, 0,1,1,12) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r AirPassFit1.1,collapse=TRUE} -->
+<!-- AirPassFit1$fit -->
+<!-- ``` -->
+<!-- The AR parameter is not significant, so we try dropping one parameter from the within seasons part. We will try -->
+<!-- ```{r AirPassFit2,results='hide',fig.show='hide'} -->
+<!-- AirPassFit2 <- sarima(lx,0,1,1,0,1,1,12) # ARIMA(0,1,1)x(0,1,1)_12 -->
+<!-- ``` -->
+<!-- ```{r AirPassFit3,results='hide',fig.show='hide'} -->
+<!-- AirPassFit3 <- sarima(lx,1,1,0,0,1,1,12) # ARIMA(1,1,0)x(0,1,1)_12 -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r AirPassFit2-3,output.lines=7:12} -->
+<!-- AirPassFit2$fit -->
+<!-- AirPassFit3$fit -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r AirPassFit2-3.2} -->
+<!-- c(AirPassFit2$AIC,AirPassFit3$AIC) -->
+<!-- c(AirPassFit2$AICc,AirPassFit3$AICc) -->
+<!-- c(AirPassFit2$BIC,AirPassFit3$BIC) -->
+<!-- ``` -->
+<!-- All information criteria prefer the ARIMA$(0,1,1)\times(0,1,1)_{12}$ model, which is displayed next. -->
+<!-- --- -->
+<!-- ```{r AirPassFit2,results='hide',fig.height=6} -->
+<!-- ``` -->
+<!-- Except for 1-2 outliers, the model fits well. -->
+<!-- ## Complete case study: GNP data -->
+<!-- ```{r GNP-data,fig.height=5} -->
+<!-- plot(gnp,main="Quarterly U.S. GNP from 1947(1) to 2002(3)") -->
+<!-- ``` -->
+<!-- GNP data seems to have exponential growth,   -->
+<!-- so a log transformation might be appropriate. -->
+<!-- --- -->
+<!-- ```{r GNP-acf-pacf,fig.height=4,output.lines=1:3} -->
+<!-- acf2(gnp, 50,main="Sample ACF and PACF of the GNP data. Lag is in terms of years.") -->
+<!-- ``` -->
+<!-- Slow decay of ACF `\(\rightarrow\)` differencing may be appropriate. -->
+<!-- --- -->
+<!-- Making those two modifications leads to -->
+<!-- ```{r GNP-diff-data,fig.height=6} -->
+<!-- gnp.log.diff = diff(log(gnp)) # growth rate plot(gnpgr) -->
+<!-- ts.plot(gnp.log.diff,main="U.S. GNP quarterly growth rate. The horizontal line displays the average growth of the process, which is close to 1%.") -->
+<!-- abline(mean(gnp.log.diff),0,col="blue",lwd=2) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r GNP-diff-acf-pacf,fig.height=5,output.lines=1:3} -->
+<!-- acf2(gnp.log.diff, 24) -->
+<!-- ``` -->
+<!-- ### GNP data: MA$(2)$ fit -->
+<!-- ```{r GNP-sarima-002,results='hide',fig.show='hide'} -->
+<!-- GNP.MA2 <- sarima(gnp.log.diff, 0, 0, 2) # MA(2) -->
+<!-- ``` -->
+<!-- ```{r GNP-sarima-002b,fig.show='hide',collapse=TRUE} -->
+<!-- GNP.MA2$fit -->
+<!-- GNP.MA2$AIC -->
+<!-- GNP.MA2$AICc -->
+<!-- GNP.MA2$BIC -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r GNP-sarima-002,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ### GNP data: AR$(1)$ fit -->
+<!-- ```{r GNP-sarima-100,results='hide',fig.show='hide'} -->
+<!-- GNP.AR1 <- sarima(gnp.log.diff, 1, 0, 0) # AR(1) -->
+<!-- ``` -->
+<!-- ```{r GNP-sarima-100b,fig.show='hide',collapse=TRUE} -->
+<!-- GNP.AR1$fit -->
+<!-- GNP.AR1$AIC -->
+<!-- GNP.AR1$AICc -->
+<!-- GNP.AR1$BIC -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r GNP-sarima-100,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ### GNP data: ARMA$(1,2)$ fit -->
+<!-- ```{r GNP-sarima-102,results='hide',fig.show='hide'} -->
+<!-- GNP.ARMA <- sarima(gnp.log.diff, 1, 0, 2) # ARMA(1,2) -->
+<!-- ``` -->
+<!-- ```{r GNP-sarima-102b,fig.show='hide',collapse=TRUE} -->
+<!-- GNP.ARMA$fit -->
+<!-- GNP.ARMA$AIC -->
+<!-- GNP.ARMA$AICc -->
+<!-- GNP.ARMA$BIC -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r GNP-sarima-102,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ### GNP data: Comparison -->
+<!-- Note fitted models are -->
+<!-- - MA(2):   -->
+<!-- `$$\hat{x}_t=0.008_{(0.001)}+0.303_{(0.065)}\hat{w}_{t-1}+0.204_{(0.064)}\hat{w}_{t-2}+\hat{w}_t,$$` -->
+<!-- where `\(\hat{\sigma}_w=0.0094\)`. -->
+<!-- - AR(1):   -->
+<!-- `$$\hat{x}_t=0.008_{(0.001)}(1-0.347)+0.347_{(0.063)}\hat{x}_{t-1}+\hat{w}_t,$$` -->
+<!-- where `\(\hat{\sigma}_w=0.0095\)`. -->
+<!-- --- -->
+<!-- - In fact, both models are nearly the same. This is because the AR model can be rewritten (ignoring the constant) as -->
+<!-- `$$x_t \approx 0.35 w_{t-1}+0.12 w_{t-2}+w_t,$$` -->
+<!-- where the constants were obtained via  -->
+<!-- ```{r GNP-ARMAtoMA,collapse=TRUE} -->
+<!-- formatC(ARMAtoMA(ar=.35, ma=0, 6),digits=3) -->
+<!-- ``` -->
+<!-- ### GNP data: Model selection -->
+<!-- - Information criteria (the lower the better): -->
+<!--     - AR(1):   -->
+<!--     `$AIC: -6.446940 `\(AICc: -6.446693` **`\)`BIC: -6.400958`** -->
+<!--     - MA(2):   -->
+<!--     **`$AIC: -6.450133 `\(AICc: -6.449637`** `\)`BIC: -6.388823` -->
+<!--     - ARMA(1,2):   -->
+<!--     `$AIC: -6.445712 $AICc: -6.444882 $BIC: -6.369075` -->
+<!-- - The AIC and AICc both prefer the MA(2) fit to AR(1) -->
+<!-- - The BIC prefers the simpler AR(1) model to MA(2). -->
+<!-- - It is often the case that the BIC will select a model of smaller order than the AIC or AICc. In either case, it is not unreasonable to retain the AR(1) because pure autoregressive models are easier to work with. -->
+<!-- - Combining the two to ARMA$(1,2)$ leads to poorer scores -->
+<!-- ### Side comment: compare with ARIMA(1,1,2) on log(GNP) -->
+<!-- ```{r GNP-sarima-112,results='hide',fig.show='hide'} -->
+<!-- GNP.MA2 <- sarima(log(gnp), 1, 1, 2) # ARIMA(1,1,2) -->
+<!-- ``` -->
+<!-- ```{r GNP-sarima-112b,fig.show='hide',collapse=TRUE} -->
+<!-- GNP.MA2$fit -->
+<!-- GNP.MA2$AIC -->
+<!-- GNP.MA2$AICc -->
+<!-- GNP.MA2$BIC -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r GNP-sarima-112,eval=TRUE,echo=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ## Appendix: Method of moments for AR$(p)$ models -->
+<!-- We seek to estimate `\(\phi_1, \ldots, \phi_p\)` in the AR$(p)$ model -->
+<!-- `$$x_t=\phi_1 x_{t-1}+\cdots+\phi_p x_{t-p} + w_t.$$` -->
+<!-- A method of moments approach leads us back to the Yule-Walker equations -->
+<!-- \begin{eqnarray*} -->
+<!-- \gamma(h) &=& \phi \gamma(h-1)+\cdots + \phi_p \gamma(h-p), \quad h=1,2,\ldots, p\\ -->
+<!-- \sigma_w^2 &=& \gamma(0)-\phi_1 \gamma(1)-\cdots-\phi_p \gamma(p). -->
+<!-- \end{eqnarray*} -->
+<!-- In matrix notation, these become -->
+<!-- `$$\Gamma_p \phi = \gamma_p\quad\text{and}\quad\sigma_w^2=\gamma(0)-\phi'\gamma_p.$$` -->
+<!-- where -->
+<!-- `$$\Gamma_p=\{\gamma(k-j)\}_{j,k=1}^p$$` -->
+<!-- is a `\(p\times p\)` matrix. -->
+<!-- --- -->
+<!-- Using the method of moments, we replace `\(\gamma(h)\)` by `\(\hat{\gamma}(h)\)` and solve -->
+<!-- `$$\hat{\phi}=\hat{\Gamma}_p^{-1} \hat{\gamma}_p, \quad \hat{\sigma}^2_w=\hat{\gamma}(0)-\hat{\gamma}'_p\hat{\Gamma}_p^{-1}\hat{\gamma}_p.$$` -->
+<!-- These are called the \alert{Yule-Walker estimators}. Equivalently -->
+<!-- `$$\hat{\phi}=\hat{\Gamma}_p^{-1} \hat{\rho}_p, \quad \hat{\sigma}^2_w=\hat{\gamma}(0)\left[ 1-\hat{\rho}'_p\hat{R}_p^{-1}\hat{\rho}_p\right],$$` -->
+<!-- `$$\text{where }\hat{R}_p=\{\hat{\rho}(k-j)\}_{j,k=1}^p \text{ is a }p\times p\text{ matrix.}$$` -->
+<!-- - For AR$(p)$ models, if the sample size is large, the Yule-Walker estimators are approximately normally distributed, and `\(\hat{\sigma}_w^2\)` is close to the true value of `\(\sigma_w^2\)`. -->
+<!-- - The Yule-Walker estimators are essentially least square estimators, which work well on AR models because they are linear. MA (and ARMA) processes are nonlinear in the parameters, and will fare badly with the Yule-Walker estimators. -->
+<!-- ### Example: Recruitment series -->
+<!-- Yule-Walker estimators are implemented in R as follows: -->
+<!-- ```{r Rec-YuleWalker,collapse=TRUE} -->
+<!-- rec.yw = ar.yw(rec, order=2) -->
+<!-- rec.yw$x.mean #  (mean estimate) -->
+<!-- rec.yw$ar # (coefficient estimates)  -->
+<!-- sqrt(diag(rec.yw$asy.var.coef)) # (standard errors)  -->
+<!-- rec.yw$var.pred # (error variance estimate) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- The fit is then displayed as follows: -->
+<!-- ```{r Rec-YuleWalkerFit,fig.height=4.5} -->
+<!-- ts.plot(rec,main="Results of fit using the Yule-Walker estimators") -->
+<!-- lines(rec[1:453]-rec.yw$resid,col="blue",lwd=1) -->
+<!-- ``` -->
+<!-- The estimators obtained are nearly identical to the MLE ones (although MLE has lower variance as expected). It can be shown that this will typically be the case for AR models. -->
+<!-- ## Comparison of estimation techniques via residuals of rec -->
+<!-- ```{r Rec-Residuals-YW-Regr,fig.show='hide'} -->
+<!-- ts.plot(rec.yw$resid-rec.arima$fit$residuals,ylab="Difference in residuals", -->
+<!--         main="Residuals of {black: Yule-Walker, blue: Regression} - Residuals of ARIMA(2,0,0) fit") -->
+<!-- abline(a=mean((rec.yw$resid[3:453]-rec.arima$fit$residuals[3:453])^1),0,col="black") -->
+<!-- lines(regr$resid-rec.arima$fit$residuals,col="blue") -->
+<!-- abline(a=mean((regr$resid[3:453]-rec.arima$fit$residuals[3:453])^1),0,col="blue") -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-Residuals-YW-Regr,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-Residuals-all,fig.show='hide'} -->
+<!-- ts.plot(regr$resid-rec.arima$fit$residuals,col="blue",ylab="Difference in residuals", -->
+<!--       main="Residuals of {black: Yule-Walker (only mean), blue: Regression, red: MLE} - Residuals of ARIMA(2,0,0) fit") -->
+<!-- abline(a=mean((regr$resid[3:453]-rec.arima$fit$residuals[3:453])^1),0,col="blue") -->
+<!-- lines(rec.mle$resid-rec.arima$fit$residuals,col="red") -->
+<!-- abline(a=mean((rec.mle$resid[3:453]-rec.arima$fit$residuals[3:453])),0,col="red") -->
+<!-- #lines(rec.yw$resid-rec.arima$fit$residuals,col="black") -->
+<!-- abline(a=mean((rec.yw$resid[3:453]-rec.arima$fit$residuals[3:453])^1),0,col="black") -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-Residuals-all,echo=FALSE,fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- \begin{tabular}{l|rr|r} -->
+<!-- Model residuals `\(\equiv\)` \alert{innovations `\(\hat{e}\)`} & Mean & `\(\Delta\)` to \texttt{arima} & `\(\sum \hat{e}^2\)`  \\ \hline -->
+<!-- \texttt{regr\$resid[3:453]} & 0.000 & 0.012 & 40462 \\ -->
+<!-- \texttt{rec.yw\$resid[3:453]} & -0.058 & -0.046 & 40491 \\ -->
+<!-- \texttt{rec.mle\$resid[3:453]} & -.056 & -0.044 & 40464 \\ -->
+<!-- \texttt{rec.arima\$fit\$residuals[3:453]} & -0.012 & - & 40463 -->
+<!-- \end{tabular} -->
+<!-- - Yule-Walker and MLE are very close (location) as pointed out earlier. -->
+<!-- - Yule-Walker is focussed on moments irrespective of residuals, so it is the poorest in terms of least squares. -->
+<!-- - As compared to Yule-Walker and MLE, the `arima` methodology sacrifices some Least Square performance in favour of a better fit (mean of residuals is closer to 0). Flatness of MLE (in red) suggests `arima` is a shifted MLE. It seems to be the best compromise. -->
+<!-- - The regression is pure least squares, and minimises them, and has 0 mean residuals. However, it can't be the preferred model as it ignores the fact that the model is \underline{auto}regressive, and is not regressed on an independent, assumed known and independent, series. Forecasts (and  their standard errors) should not be trusted.   -->
+<!-- (see next slide for code that generated numbers) -->
+<!-- --- -->
+<!-- ```{r comparisonnumbers,collapse=TRUE} -->
+<!-- mean((regr$resid[3:453]-rec.arima$fit$residuals[3:453])^1) -->
+<!-- mean((rec.yw$resid[3:453]-rec.arima$fit$residuals[3:453])^1) -->
+<!-- mean((rec.mle$resid[3:453]-rec.arima$fit$residuals[3:453])^1) -->
+<!-- mean(regr$resid[3:453]^1) -->
+<!-- mean(rec.yw$resid[3:453]^1) -->
+<!-- mean(rec.mle$resid[3:453]^1) -->
+<!-- mean(rec.arima$fit$residuals[3:453]^1) -->
+<!-- sum(regr$resid[3:453]^2) -->
+<!-- sum(rec.yw$resid[3:453]^2) -->
+<!-- sum(rec.mle$resid[3:453]^2) -->
+<!-- sum(rec.arima$fit$residuals[3:453]^2) -->
+<!-- ``` -->
+<!-- # Forecasting -->
+<!-- ## Introduction -->
+<!-- - In forecasting, the goal is to predict future values of a time series, `\(x_{n+m}\)`, `\(m = 1, 2,\ldots\)`, based on the data collected to the present, `\(x_{1:n} = \{x_1, x_2,\ldots, x_n\}\)`.  -->
+<!-- - We assume here that  `\(x_t\)` is stationary and the model parameters are known.  -->
+<!-- - The problem of forecasting when the model parameters are unknown is more complicated. We mostly focus on performing predictions using R (which allows for that fact appropriately), rather than the deep technicalities of it (which are outside scope of this course). -->
+<!-- ### Best Linear Predictors (BLPs) -->
+<!-- We will restrict our attention to predictors that are linear functions of the data, that is, predictors of the form -->
+<!-- `$$x_{n+m}^n = \alpha_0 + \sum_{k=1}^n \alpha_k x_k,$$` -->
+<!-- where `\(\alpha_0,\alpha_1,\ldots, \alpha_n\)` are real numbers. These are called \alert{Best Linear Predictors (BLPs)}. -->
+<!-- Note: -->
+<!-- - In fact the `\(\alpha\)`'s depend on `\(m\)` too, but that is not reflected in the notation. -->
+<!-- - Such estimators depend only on the second-order moments of the process, which are easy to estimate from the data. -->
+<!-- - Most actuarial credibility estimators belong to the family of BLPs (Bühlmann, Bühlmann-Straub, \ldots) -->
+<!-- ## Best Linear Prediction for Stationary Processes -->
+<!-- Given data `\(x_1,\ldots,x_n\)`, the best linear predictor -->
+<!-- `$$x_{n+m}^n = \alpha_0 + \sum_{k=1}^n \alpha_k x_k$$` -->
+<!-- of `\(x_{n+m}\)` for `\(m\ge 1\)` is found by solving -->
+<!-- `$$E\left[ (x_{n+m}-x_{n+m}^n)x_k\right]=0,\quad k=0,1,\ldots,n,$$` -->
+<!-- where `\(x_0=1\)`, for `\(\alpha_0\)`, `\(\alpha_1\)`, \ldots, `\(\alpha_n\)`. -->
+<!-- - The `\(n+1\)` equations specified above are called the \alert{prediction equations}, and they are used to solve for the coefficients `\(\{\alpha_0,\alpha_1,\ldots,\alpha_n\}\)`. -->
+<!-- - This results stems from minimising least squares. -->
+<!-- --- -->
+<!-- If `\(E[x_t]=\mu\)`, the first equation ($k=0$) implies -->
+<!-- `$$E[x_{n+m}^n]=E[x_{n+m}]=\mu.$$` -->
+<!-- Thus, taking expectation of the BLP leads to -->
+<!-- `$$\mu=\alpha_0 +\sum_{k=1}^n \alpha_k \mu\quad \text{ or }\quad \alpha_0=\mu\left( 1-\sum_{k=1}^n \alpha_k \right).$$` -->
+<!-- Hence, the form of the BLP is -->
+<!-- `$$x_{n+m}^n = \mu + \sum_{k=1}^n \alpha_k (x_k-\mu)$$` -->
+<!-- Henceforth, we will assume that `\(\mu=0\Longleftrightarrow \alpha_0=0\)`, without loss of generality (as long as parameters are assumed known). -->
+<!-- ## One-step-ahead prediction -->
+<!-- - Given `\(x_{1:n} = \{x_1, x_2,\ldots, x_n\}\)` we wish to forecast the time series value at the next point `\(x_{n+1}\)`. -->
+<!-- - The BLP of `\(x_{n+1}\)` is of the form -->
+<!-- `$$x_{n+1}^n = \phi_{n1} x_n + \phi_{n2} x_{n-1}+\cdots + \phi_{nn} x_1,$$` -->
+<!-- where we now display the dependence of the coefficients on `\(n\)`. -->
+<!-- - In this case, `\(\alpha_k\)` is `\(\phi_{n,n+1-k}\)` for `\(k=1,\ldots, n\)`. -->
+<!-- - Using the BLP result above, the coefficients `\(\{\phi_{n1},\phi_{n2},\ldots,\phi_{nn}\}\)` satisfy -->
+<!-- `$$\sum_{j=1}^n \phi_{nj}\gamma(k-j)=\gamma(k)\text{ for }k=1,\ldots,n\quad\text{ or } \Gamma_n \phi_n =\gamma_n,$$` -->
+<!-- where `\(\Gamma_n=\{\gamma(k-j)\}_{j,k=1}^n\)` is an `\(n\times n\)` matrix, `\(\phi_n=(\phi_{n1},\ldots,\phi_{nn})'\)`, and where `\(\gamma_n=(\gamma(1),\ldots,\gamma(n))'\)`.   -->
+<!-- [Note that these correspond to the Yule-Walker equations.] -->
+<!-- --- -->
+<!-- - The matrix `\(\Gamma_n\)` is nonnegative definite (in fact guaranteed positive definite for ARMA models). We have then -->
+<!-- `$$\phi_n=\Gamma_n^{-1} \gamma_n.$$` -->
+<!-- - The one-step-ahead forecast is then -->
+<!-- `$$x_{n+1}^n=\phi_n' x,\quad x=(x_n,x_{n-1},\ldots,x_1)'.$$` -->
+<!-- - The \alert{mean square one-step-ahead prediction error} is -->
+<!-- `$$P_{n+1}^n = E\left[(x_{n+1}-x_{n+1}^n)^2\right]=\gamma(0)-\gamma_n'\Gamma_n^{-1}\gamma_n.$$` -->
+<!-- ### The Durbin-Levinson Algorithm -->
+<!-- The prediction equations (and associated mean-square errors) of the one-step-ahead prediction can be found iteratively thanks to the \alert{Durbin-Levinson Algorithm}: -->
+<!-- - Initial values: -->
+<!-- `$$\phi_{00}=0, \quad P_1^0=\gamma(0).$$` -->
+<!-- - For all `\(n\ge 1\)` the last `\(\phi\)` is: -->
+<!-- `$$\phi_{nn}=\frac{\rho(n)-\sum_{k=1}^{n-1}\phi_{n-1,k}\rho(n-k)}{1-\sum_{k=1}^{n-1}\phi_{n-1,k}\rho(k)}.$$` -->
+<!-- - If `\(n\ge 2\)`, middle `\(\phi\)`'s are: -->
+<!-- `$$\phi_{nk}=\phi_{n-1,k}-\phi_{nn}\phi_{n-1,n-k},\quad k=1,2,\ldots,n-1.$$` -->
+<!-- - For `\(n\ge 1\)`, the prediction error is -->
+<!-- `$$P_{n+1}^n=P_{n}^{n-1}(1-\phi_{nn}^2)=\gamma(0)\prod_{j=0}^n\left[ 1-\phi_{jj}^2\right].$$` -->
+<!-- ### Concluding notes -->
+<!-- - The Durbin-Levinson Algorithm can be adapted to calculate the PACF iteratively. -->
+<!-- - The results shown above are provided to illustrate the process of forecasting. Students are not expected to be able to show the results. -->
+<!-- - There are other algorithms for calculating one-step-ahead forecasts, such as the \alert{innovations algorithm} (outside scope). -->
+<!-- ## Forecasting ARMA processes -->
+<!-- ### Introduction -->
+<!-- - The technical side of forecasting ARMA models can get involved. -->
+<!-- - There are a number of different ways to express the forecasts, and each aids in \alert{understanding the special structure of ARMA prediction.} -->
+<!-- - Throughout, we assume `\(x_t\)` is a causal and invertible ARMA$(p,q)$ process -->
+<!-- `$$\phi(B)x_t=\theta(B)w_t,\text{ where }w_t\sim\text{ iid N}(0,\sigma_w^2).$$` -->
+<!-- - In the non-zero mean case `\(E[x_t]=\mu_x\)`, simply replace `\(x_t\)` with `\(x_t-\mu_x\)` in the model. -->
+<!-- ### Two types of forecasts -->
+<!-- We consider two types of forecasts: -->
+<!-- 1. The minimum mean square error predictor of `\(x_{n+m}\)` based on the data `\(\{x_n,\ldots,x_1\}\)`, defined as -->
+<!-- `$$x_{n+m}^n=E\left[ x_{n+m}|x_n,x_{n-1},\ldots,x_1\right].$$` -->
+<!-- 1. The predictor of `\(x_{n+m}\)` \emph{based on the infinite past}, defined as -->
+<!-- `$$\tilde{x}_{n+m}=E\left[ x_{n+m}|x_n,x_{n-1},\ldots,x_1,\alert{x_0,x_{-1},\ldots} \right].$$` -->
+<!-- Note: -->
+<!-- - For ARMA models, `\(\tilde{x}_{n+m}\)` is easier to calculate. -->
+<!-- - In general, `\(x_{n+m}^n\)` and `\(\tilde{x}_{n+m}\)` are not the same. -->
+<!-- - The idea is that, for large samples, `\(\tilde{x}_{n+m}\)` provides a good approximation to `\(x_{n+m}^n\)`. -->
+<!-- ### Forecasts for more than one step -->
+<!-- - Write `\(x_{n+m}\)` in its causal form: -->
+<!-- `$$x_{n+m}=\sum_{j=0}^\infty \psi_j w_{n+m-j}, \quad \psi_0=1.$$` -->
+<!-- Taking conditional expectations we have -->
+<!-- `$$\tilde{x}_{n+m}=\sum_{j=0}^\infty \psi_j \tilde{w}_{n+m-j}=\sum_{j=\alert{m}}^\infty \psi_j \alert{w}_{n+m-j}$$` -->
+<!-- because -->
+<!-- $$\tilde{w}_t = E[w_t|x_n,x_{n-1},\ldots,x_0,x_{-1},\ldots]=\left\{\begin{array}{lc} -->
+<!-- 0 & t>n \\ -->
+<!-- w_t & t\le n. -->
+<!-- \end{array}\right.$$ -->
+<!-- --- -->
+<!-- - Write `\(x_{n+m}\)` in its invertible form: -->
+<!-- `$$w_{n+m}=\sum_{j=0}^\infty \pi_j x_{n+m-j}, \quad \pi_0=1.$$` -->
+<!-- Taking conditional expectations we have -->
+<!-- `$$0=\tilde{x}_{n+m}+\sum_{j=\alert{1}}^\infty \pi_j \tilde{x}_{n+m-j}.$$` -->
+<!-- Because `\(E[x_t|x_n,x_{n-1},\ldots,x_0,x_{-1},\ldots]=x_t\)` for `\(t\le n\)` this can be rewritten as -->
+<!-- `$$\tilde{x}_{n+m}=-\sum_{j=1}^{\alert{m-1}} \pi_j \tilde{x}_{n+m-j}-\sum_{j=\alert{m}}^{\infty} \pi_j \alert{x}_{n+m-j}.$$` -->
+<!-- the second part of which is known. -->
+<!-- --- -->
+<!-- - Prediction is accomplished recursively using -->
+<!-- `$$\tilde{x}_{n+m}=-\sum_{j=1}^{m-1} \pi_j \tilde{x}_{n+m-j}-\sum_{j=m}^{\infty} \pi_j x_{n+m-j},$$` -->
+<!-- starting with the one-step-ahead ($m=1$), and then continuing for `\(m=2,3,\ldots\)`. -->
+<!-- - Mean-square prediction error can be calculated thanks to  -->
+<!-- `$$\tilde{x}_{n+m}=\sum_{j=m}^\infty \psi_j w_{n+m-j} \Longrightarrow x_{n+m}-\tilde{x}_{n+m}=\sum_{j=0}^{m-1}\psi_j w_{n+m-j},$$` -->
+<!-- and hence -->
+<!-- `$$P_{n+m}^n=E[(x_{n+m}-\tilde{x}_{n+m})^2]=\sigma_w^2\sum_{j=0}^{m-1}\psi_j^2.$$` -->
+<!-- --- -->
+<!-- - Note that for a fixed sample size, `\(n\)`, the prediction errors are correlated. That is, for time lag `\(k\ge 1\)`,  -->
+<!-- $$ E\left[(x_{n+m}-\tilde{x}_{n+m})(x_{n+m+k}-\tilde{x}_{n+m+k})\right] = \sigma_w^2 \sum_{j=0}^{m-1} \psi_j \psi_{j+k}.$$ -->
+<!-- - \textcolor{DolphinBlue}{Why is it easier to forecast with `\(\tilde{x}_{n+m}\)`?} Note that formulas work thanks to the infinite representation of `\(x_t\)` (causal and invertible forms). Extending the condition of the predictor `\(x_{n+m}^n\)` to infinite past, leading to `\(\tilde{x}_{n+m}\)` was necessary to match those representations. -->
+<!-- ## Truncated predictions -->
+<!-- - When `\(n\)` is small the system of "prediction equations" -->
+<!-- `$$E\left[ (x_{n+m}-x_{n+m}^n)x_k\right]=0,\quad k=0,1,\ldots,n,$$` -->
+<!-- (where `\(x_0=1\)`, for `\(\alpha_0\)`, `\(\alpha_1\)`, \ldots, `\(\alpha_n\)`) can be solved directly. -->
+<!-- - However, when `\(n\)` is large one will want to use -->
+<!-- `$$\tilde{x}_{n+m}=-\sum_{j=1}^{m-1} \pi_j \tilde{x}_{n+m-j}-\sum_{j=m}^{\infty} \pi_j x_{n+m-j}.$$` -->
+<!-- Unfortunately, we do not observe `\(x_0, x_{-1},x_{-2},\ldots\)`, and only data `\(x_1, x_2, \ldots,x_n\)` are available. We then need to truncate the infinite sum in the RHS. -->
+<!-- --- -->
+<!-- - The \alert{truncated predictor} is then written as -->
+<!-- `$$\tilde{x}_{n+m}^{\alert{n}}=-\sum_{j=1}^{m-1} \pi_j \tilde{x}_{n+m-j}^{\alert{n}}-\sum_{j=m}^{\alert{n+m-1}} \pi_j x_{n+m-j},$$` -->
+<!-- which is applied recursively as described above. -->
+<!-- - The mean square prediction error, in this case, is approximated using `\(P_{n+m}^n\)` as before. -->
+<!-- <!-- - Note it is possible to develop a similar procedure for \alert{backcasting}. --> -->
+<!-- ### Truncated prediction for ARMA -->
+<!-- For ARMA$(p,q)$ models, the truncated predictors for `\(m=1,2,\ldots\)` are -->
+<!-- `$$\tilde{x}_{n+m}^n=\phi_1\tilde{x}_{n+m-1}^n+\cdots+\phi_p\tilde{x}_{n+m-p}^n+\theta_1\tilde{w}_{n+m-1}^n+\cdots+\theta_q\tilde{w}_{n+m-q}^n,$$` -->
+<!-- where `\(\tilde{x}_t^n=x_t\)` for `\(1\le t\le n\)` and `\(\tilde{x}_t^n=0\)` for `\(t\le 0\)`. The truncated prediction errors are given by -->
+<!-- $$\tilde{w}_t^n=\left\{\begin{array}{lc} -->
+<!-- 0 & t\le 0 \\ -->
+<!-- \phi(B)\tilde{x}_n^n-\theta_1\tilde{w}_{t-1}^n-\cdots-\theta_q \tilde{w}_{t-q}^n & 1\le t\le n. -->
+<!-- \end{array}\right.$$ -->
+<!-- Note: -->
+<!-- - For AR$(p)$ models with `\(n>p\)`,  -->
+<!-- `$$\tilde{x}_{n+m}^n=\tilde{x}_{n+m}=x_{n+m}^n$$` -->
+<!-- and there is no need for approximations. -->
+<!-- - The above approximation is required for MA$(q)$ and ARMA$(p,q)$ models with `\(q>0\)`. -->
+<!-- ## Long-range forecasts -->
+<!-- - Consider forecasting an ARMA process with mean `\(\mu_x\)`. -->
+<!-- - Replacing `\(x_{n+m}\)` with `\(x_{n+m}-\mu_x\)` in the causal representation above, and taking expectation in an analogous way implies that the `\(m\)`-step-ahead forecast can be written as -->
+<!-- `$$\tilde{x}_{n+m}=\mu_x+\sum_{j=m}^\infty \psi_j w_{n+m-j}.$$` -->
+<!-- - Because the `\(\psi\)` dampen to zero exponentially fast, -->
+<!-- `$$\tilde{x}_{n+m}\rightarrow \mu_x \text{ exponentially fast as }m\rightarrow \infty.$$` -->
+<!-- - Moreover, the mean square prediction error -->
+<!-- `$$P_{n+m}^n\rightarrow \sigma_w^2 \sum_{j=0}^\infty \psi_j^2 = \gamma_x(0)=\sigma_x^2 \text{ exponentially fast as }m\rightarrow \infty.$$` -->
+<!-- - \alert{ARMA forecasts quickly settle to the mean with a constant}   -->
+<!-- \alert{prediction error as the forecast horizon, `\(m\)`, grows.} -->
+<!-- ### Example: Recruitment Series -->
+<!-- ```{r Rec-forecast,collapse=TRUE,fig.show='hide',output.lines=1:16} -->
+<!-- fore2 <- predict(rec.arima0, n.ahead=36) -->
+<!-- cbind(fore2$pred,fore2$se) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ```{r Rec-forecast2,results='hide',fig.height=5} -->
+<!-- ts.plot(rec, fore2$pred, col=1:2, xlim=c(1980,1990.5), ylab="Recruitment") -->
+<!-- U = fore2$pred+fore2$se; L = fore2$pred-fore2$se -->
+<!-- xx = c(time(U), rev(time(U))); yy = c(L, rev(U)) -->
+<!-- polygon(xx, yy, border = 8, col = gray(.6, alpha = .2)) -->
+<!-- lines(fore2$pred, type="p", col=2) -->
+<!-- ``` -->
+<!-- ### Example: Air Passengers -->
+<!-- We forecast the model chosen in the previous section: -->
+<!-- ```{r AirPassFore,fig.height=4.5,results='hide'} -->
+<!--  sarima.for(lx,12,0,1,1,0,1,1,12) -->
+<!-- ``` -->
+<!-- Including seasonality leads (apparently) to much higher precision. -->
+<!-- # References {.allowframebreaks} -->
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/05bf3c0b5cfbeb01a4adbc3c5a5ad71560c2835c" title='Last modified by Benjamin Avanzi | 18 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>18 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#estimation">Estimation</a>
+      <ul>
+        <li><a href="#summary-analysing-the-acf-and-pacf">Summary: analysing the ACF and PACF</a>
+          <ul>
+            <li><a href="#behaviour-of-the-acf-and-pacf-for-arma-models">Behaviour of the ACF and PACF for ARMA Models</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+---
+title: "Week 4 Study Plan"
+weight: 4
+bibliography: ../../../../static/libraries.bib
+---
+
+
+<p style="font-size:18px;font-weight:bold;">Week 4</p> 
+
+# Overview
+
+
+This week, we will cover the following topics, mostly from Module 4:
+
+- Finalising stop-loss calculations
+- Discretisation of continuous distributions (to be able to use Panjer, in particular; see next item)
+- Use of Panjer's recursion algorithm, which allows us to calculate the exact compound distribution of any random sum, if the frequency follows the $(a,b)$ family
+- Recap of the Normal approximation, as well as translated gamma and lognormal approximations, to be used when one needs a quick approximation, or when only moments are available.
+
+
+Here is the end of week 3 video, which introduces week 4:
+
+<!--html_preserve-->
+<iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/e8c17a0f-f4c6-44a6-84a2-5058755409cc/public?autoplay=false&automute=false"></iframe>
+<!--/html_preserve-->
+
+<p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p>
+
+
+
+This is not part of the CS2 syllabus, but must be covered for the Society of Actuaries CAE, exam ASTAM topic 2; see also [``here``](../../0-subject-guide/SILO/#mapping-to-the-society-of-actuaries-exams).
+
+# Main references and lectures
+
+
+## Module 4
+
+Read: [``Module 4``](../../1-claims-modelling/m4-compound-approx/)
+
+Annotate: [``slides``](../../../output/23-GIM-M4-lec.pdf) 
+<!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
+
+Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[``PG``](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.
+
+
+
+# Additional preparation and resources
+
+## Mandatory
+
+1. Chapter 4.1.1-4.1.2, as well as 4.2.1 of @Wut20
+
+
+## Optional
+
+1. n/a
+
+
+
+# Tutorials
+
+Note that a full list of exercises is available [``here``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801). Please let us know of any mistake or required update on [``Ed``](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless).
+
+## Pre-Tutorial work
+
+Please study those questions **before** the tutorial.
+
+Pre-Tutorial exercises are available in the [``Pre-Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions
+
+## Tutorial materials
+
+Some questions have been especially selected for the tutorials. Students should review and attempt those questions ***prior to their scheduled tutorial***, after they complete the pre-tutorial work. 
+
+The [``Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
+
+Note that solutions will be gradually added to that same document. Hence it is not recommended to print it, as it will regularly change (typos will also dynamically be corrected).
+
+## This week
+
+All of Module 4 is in scope for the week 4 tutorials. 
+
+<!-- Here is the recording available for Week 4 from William: -->
+
+<!-- <!--html_preserve--> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/55dbe360-7d90-4fd7-af2d-c204d24c5830/public?autoplay=false&automute=false"></iframe> -->
+<!-- <!--/html_preserve--> -->
+
+<!-- Here is the recording available for Week 4 from Eric: -->
+
+<!-- <!--html_preserve--> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/decc70d6-0e19-49a0-b6ea-e4baf6274fa7/public?autoplay=false&automute=false"></iframe> -->
+<!-- <!--/html_preserve--> -->
+
+<!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
+
+
+## Next week (week 5)
+
+Next week, we will discuss Module 5.
+
+
+
+## Additional questions
+
+The "additional questions" are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available.
+
+
+# Preparation for assessment
+
+
+## Mid-semester (15%) and final (60%) exams
+
+<!-- install.packages("devtools") -->
+<!-- devtools::install_github("hadley/emo") -->
+
+- Finalise your summary of Module 3 as you consolidate your understanding with the exercises.
+- Start your summary of Module 4
+
+
+***Make sure you start preparing for the mid-semester exam***
+
+## Assignment (25%)
+
+- Nothing to do for now.
+
+
+# References

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="-- Introduction (TS 2.0) #  Objectives #   In the previous module we discussed how important it is to have stationary time series, and started to hint at methods to render time series stationary and/or white noise. In this module we discuss those techniques more precisely and more comprehensively. This includes:  regression in the context of time series de-trending via regression de-trending via differencing nonparametric smoothing of time series   We will also introduce the \alert{backshift operator}, which we will use extensively in Module 9.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M8 Time Series Regression and Exploratory Data Analysis" />
+<meta property="og:description" content="-- Introduction (TS 2.0) #  Objectives #   In the previous module we discussed how important it is to have stationary time series, and started to hint at methods to render time series stationary and/or white noise. In this module we discuss those techniques more precisely and more comprehensively. This includes:  regression in the context of time series de-trending via regression de-trending via differencing nonparametric smoothing of time series   We will also introduce the \alert{backshift operator}, which we will use extensively in Module 9." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-time-series/m8-regressions-eda/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-18T10:58:38+11:00" />
+
+<title>M8 Time Series Regression and Exploratory Data Analysis | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M8 Time Series Regression and Exploratory Data Analysis</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-ts-20">Introduction (TS 2.0)</a>
+      <ul>
+        <li><a href="#objectives">Objectives</a></li>
+      </ul>
+    </li>
+    <li><a href="#classical-regression-in-the-time-series-context--ts-21">Classical regression in the Time Series Context  (TS 2.1)</a>
+      <ul>
+        <li><a href="#regression-with-independent-series">Regression with independent series</a></li>
+        <li><a href="#example-de-trending-with-a-linear-trend">Example: de-trending with a linear trend</a>
+          <ul>
+            <li><a href="#model">Model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><!-- <!-- To include images: --> -->
+<!-- ```{r fig.align='center',out.width="100%", echo=F} -->
+<!-- include_graphics(sprintf("%s/XXX.png", graphics_path), error = F)  -->
+<!-- ``` -->
+<h1 id="introduction-ts-20">
+  Introduction (TS 2.0)
+  <a class="anchor" href="#introduction-ts-20">#</a>
+</h1>
+<h2 id="objectives">
+  Objectives
+  <a class="anchor" href="#objectives">#</a>
+</h2>
+<ul>
+<li>In the previous module we discussed how important it is to have stationary time series, and started to hint at methods to render time series stationary and/or white noise.</li>
+<li>In this module we discuss those techniques more precisely and more comprehensively.</li>
+<li>This includes:
+<ul>
+<li>regression in the context of time series</li>
+<li>de-trending via regression</li>
+<li>de-trending via differencing</li>
+<li>nonparametric smoothing of time series</li>
+</ul>
+</li>
+<li>We will also introduce the \alert{backshift operator}, which we will use extensively in Module 9.</li>
+</ul>
+<h1 id="classical-regression-in-the-time-series-context--ts-21">
+  Classical regression in the Time Series Context  (TS 2.1)
+  <a class="anchor" href="#classical-regression-in-the-time-series-context--ts-21">#</a>
+</h1>
+<h2 id="regression-with-independent-series">
+  Regression with independent series
+  <a class="anchor" href="#regression-with-independent-series">#</a>
+</h2>
+<p>Assume some output or \alert{dependent time series <code>\(x_t\)</code>}, for <code>\(t = 1,\ldots, n\)</code>, is being influenced by a collection of <code>\(q\)</code> possible inputs or \alert{independent series <code>\(z_{t1}, z_{t2},\ldots, z_{tq}\)</code>}, where we first regard the inputs as \underline{fixed and known}. We have then
+<code>$$x_t =\beta_0+\beta_1z_{t1}+\beta_2z_{t2}+\cdots+\beta_qz_{tq}+w_t,$$</code>
+where <code>\(\beta_0, \beta_1,\ldots, \beta_q\)</code> are unknown fixed regression coefficients, and <code>\(w_t \sim \text{iid N}(0,\sigma_w^2)\)</code>
+Note:</p>
+<ul>
+<li><code>\(z_{t\cdot}\)</code> being fixed and known is necessary for applying conventional linear regression, but we will relax this later on</li>
+<li>For time series regression <code>\(w_t\)</code> is rarely a white noise, so we will need to relax that assumption</li>
+</ul>
+<h2 id="example-de-trending-with-a-linear-trend">
+  Example: de-trending with a linear trend
+  <a class="anchor" href="#example-de-trending-with-a-linear-trend">#</a>
+</h2>
+<h3 id="model">
+  Model
+  <a class="anchor" href="#model">#</a>
+</h3>
+<ul>
+<li>Monthly price <code>\(x_t\)</code> (per pound) of a chicken in the US from mid-2001 to mid-2016 (180 months)</li>
+<li>We model the trend with a linear regression:
+<code>$$x_t=\beta_0+\beta_1 z_t + w_t, \quad z_t=2001\frac{7}{12},2001\frac{8}{12},\ldots,2016\frac{6}{12},$$</code>
+where <code>\(z_t\)</code> are months in the data. Note here <code>\(q=1\)</code>.</li>
+<li>Note underlying assumption are that <code>\(w_t\sim \text{iid N}(0,\sigma_w^2)\)</code> (uncorrelated), which may not be true. What to do if they are autocorrelated is discussed in Module 9.</li>
+</ul>
+<hr>
+<p>\footnotesize</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(chicken <span style="color:#f92672">~</span> <span style="color:#a6e22e">time</span>(chicken), na.action <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>))
+</code></pre></div><pre><code>...
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   -7.131e+03  1.624e+02  -43.91   &lt;2e-16 ***
+## time(chicken)  3.592e+00  8.084e-02   44.43   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+...
+</code></pre><p>\normalsize</p>
+<ul>
+<li>This means that <code>\(\hat{\beta}_1=3.59\)</code> with standard error of 0.081 (increase of about 3.6 cents per year)</li>
+</ul>
+<!-- ### Fitting results -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,fig.height=5} -->
+<!-- plot(chicken, ylab="US cents per pound",col="blue",  -->
+<!--      lwd = 2,main="Price of chicken with fitted linear -->
+<!--      trend line (spot price, Georgia docks, 08/01-07/16)")  -->
+<!-- abline(fit,col="red",lwd=2) # add the fitted line -->
+<!-- ``` -->
+<!-- ## Revisions: Regression -->
+<!-- ### General set-up -->
+<!-- - The multiple linear regression model written earlier can be written using vectors `\(z_t=(1,z_{t},z_{t2},\ldots,z_{tq})'\)` and `\(\beta=(\beta_0,\beta_1,\ldots,\beta_q)'\)`: -->
+<!-- `$$x_t =\beta_0+\beta_1z_{t1}+\beta_2z_{t2}+\cdots+\beta_qz_{tq}+w_t=\beta'z_t + w_t.$$` -->
+<!-- - Parameters estimates `\(\widehat{\beta}\)` are obtained via \alert{ordinary least squares (OLS)}, that is, we minimise -->
+<!-- `$$Q=\sum_{t=1}^n\left(x_t-\beta'z_t\right)^2=\sum_{t=1}^n w_t ^2$$` -->
+<!-- with resulting minimum -->
+<!-- `$$SSE=\sum_{t=1}^n\left(x_t-\widehat{\beta}'z_t\right)^2,$$` -->
+<!-- called \alert{sum of squares}.  -->
+<!-- ### Properties of `\(\hat{\beta}\)` -->
+<!-- - Estimator `\(\widehat{\beta}\)` is unbiased and has the smallest variance within the class of \alert{linear} unbiased estimators -->
+<!-- \alert{If `\(w_t\)` are normally distributed}: -->
+<!-- - `\(\widehat{\beta}\)` also normally distributed with mean 0 and variance-covariance matrix -->
+<!-- `$$Cov(\widehat{\beta})=\sigma_w^2 C, \quad C=\left(\sum_{t=1}^n z_tz_t'\right)^{-1}.$$` -->
+<!-- - Note `\(c_{ii}\)` denotes the `\(i\)`-th diagonal element of `\(C\)`. -->
+<!-- --- -->
+<!-- \alert{If `\(w_t\)` are normally distributed and `\(\sigma_w^2\)` needs to be estimated}: -->
+<!-- - the distribution of `\(\widehat{\beta}\)` changes to a t-distribution. In this case, -->
+<!-- `$$\text{t}=\frac{\widehat{\beta}_i-\beta_i}{s_w\sqrt{c_{ii}}} \sim \text{t distributed}(n-(q+1)),$$` -->
+<!-- where  -->
+<!-- `$$s_w^2 = \frac{SSE}{n-(q+1)}= MSE$$` -->
+<!-- is an unbiased estimator for `\(\sigma_w^2\)`, called also \alert{mean squared error (MSE)}. -->
+<!-- - This means we can construct of hypothesis test of type `\(H_0:\;\beta_i=0,\)` `\(i=1,\ldots,q\)`. -->
+<!-- ## Stepwise multiple regression -->
+<!-- ### Revisions: select `\(z_{ti}\)` through `\(\widehat{\beta}\)` -->
+<!-- - The question of model selection boils down to -->
+<!--     - how many independent variables ($q$) to use? -->
+<!--     - which independent variables ($z_{ti}$) to use? -->
+<!-- - Strategy is to test for statistical significance of the `\(\beta_i\)`'s: is there statistical evidence that `\(\beta_i\)` is different from 0? -->
+<!-- - This can be done for a given independent variable `\(i\)`, but this approach can prove tedious in practice: -->
+<!--     - the statistical significance of a given `\(\beta_i\)` changes once others are added / removed (as they may be correlated) -->
+<!--     - so if you have `\(q\)` variables, answering the two questions above with an exhaustive analysis  requires testing `\(q!+(q-1)!+\cdots+1\)` models (quite a lot!) -->
+<!-- - Hence, one often compare a smaller number of models, and perform tests by comparing model performance in a pairwise fashion. -->
+<!-- - This is called \alert{stepwise multiple regression}. -->
+<!-- ### Process -->
+<!-- Consider two models of different sizes for the same data, one with `\(r\)` parameters, and the other with `\(q>r\)` parameters -->
+<!-- - Furthermore, the original `\(r\)` parameters are all included in the wider set of `\(q\)` parameters (the smaller model is "nested" within the larger one) -->
+<!-- - Were improvements introduced by the extra `\(q-r\)` variables in the larger model statistically significant?  -->
+<!-- - This is done by comparing the sum of squares between the reduced model ($SSE_r$, with `\(r\)` parameters) and the original sum of squares ($SSE$, with `\(q\)` parameters). -->
+<!-- We have that -->
+<!-- `$$F=\frac{(SSE_r-SSE)/(q-r)}{SSE/(n-q-1)}\equiv\frac{MSR}{MSE}\sim F-\text{distribution}(q-r,n-q-1).$$` -->
+<!-- --- -->
+<!-- Results are summarised in an \alert{Analysis of Variance (ANOVA)} table -->
+<!-- \begin{table} -->
+<!-- \centering \footnotesize -->
+<!-- \begin{tabular}{lcccc}  -->
+<!-- Source & df & Sum of squares & Mean square & `\(F\)` \\ \hline -->
+<!-- `\(z_{t,r+1:q}\)` & `\(q-r\)` & `\(SSR\equiv SSE_r-SSE\)` & `\(MSR \equiv \frac{SSR}{q-r}\)` & `\(F=\frac{MSR}{MSE}\)` \\ -->
+<!-- Error & `\(n-(q+1)\)`  & `\(SSE\)` & `\(MSE \equiv \frac{SSE}{n-q-1}\)` -->
+<!-- \end{tabular} -->
+<!-- \end{table} -->
+<!-- - Such an output is generated by the R function `aov`, which outputs `\(p\)`-values for `\(F\)` and significance levels. -->
+<!-- - If `\(r=0\)` the reduced model is `\(x_t=\beta_0+w_t\)` and the ratio -->
+<!-- `$$R^2 = \frac{SSE_0-SSE}{SSE_0}$$` -->
+<!-- is called the \alert{coefficient of determination}, which is one measure of the proportion of variation explained by all `\(q\)` variables. -->
+<!-- ## Model selection -->
+<!-- ### Motivation -->
+<!-- Note that stepwise regression presents some issues: -->
+<!-- - There are a lot of paths from the null ($q=0$) to the full ($q=n$) model, and it is not always clear which ones to investigate first, and there can be a lot of trial and error -->
+<!-- - One can compare only _nested_ models - what if we want to compare with models of a different nature? -->
+<!-- - Asymptotic results behind the hypothesis tests that are used pre-suppose normality of the errors, which is not always correct. -->
+<!-- What if one wanted to assess models based on their own merits, rather than sequentially? This leads to the idea of \alert{information criteria}. These balance the concepts of  -->
+<!-- - likelihood (the more the better), and  -->
+<!-- - parsimony, represented by the number of parameters   -->
+<!--   (the least the better). -->
+<!-- ### Preliminary -->
+<!-- First, note that the \emph{maximum likelihood estimator} for the variance is -->
+<!-- `$$\hat{\sigma}_k^2=\frac{SSE(k)}{n},$$` -->
+<!-- where `\(SSE(k)\)` denotes the residual sum of squares under the model with `\(k\)` regression coefficients, and where `\(n\)` is the sample size. -->
+<!-- ### Information criteria -->
+<!-- There are three main \alert{Information Criteria}: -->
+<!-- - \alert{Akaike's Information Criterion (AIC)}: -->
+<!-- `$$\text{AIC} =-2 \log L_k +2k\equiv  \log \hat{\sigma}_k^2 + \frac{n+2k}{n}.$$` -->
+<!-- Note that the well known AIC expression thus simplifies ("$\equiv$") in the context of a normal regression.   -->
+<!-- - \alert{AIC, Bias Corrected (AICc)}: -->
+<!-- `$$\text{AICc}=\log \hat{\sigma}_k^2 + \frac{n+k}{n-k-2}.$$` -->
+<!-- --- -->
+<!-- - \alert{Bayesian Information Criterion (BIC)} -->
+<!-- `$$\text{BIC}=\log \hat{\sigma}_k^2 + \frac{k \log n}{n}.$$` -->
+<!-- This is also called the \emph{Schwarz Information Criterion (SIC)}. -->
+<!-- Note: -->
+<!-- - The penalty in BIC is much larger than in the AIC. BIC tends to choose small models. -->
+<!-- - Generally, BIC is better for large samples, and AICc for smaller samples where the relative number of parameters is large. -->
+<!-- ## Example: Pollution, Temperature and Mortality -->
+<!-- We consider three time series (see next slide): -->
+<!-- - Average weekly cardiovascular mortality (top) -->
+<!-- - Temperature (middle)  -->
+<!-- - Particulate pollution (bottom)   -->
+<!-- in Los Angeles County. There are 508 six-day smoothed averages obtained by filtering daily values over the 10 year period 1970-1979. -->
+<!-- ``` {r mort1, echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- par(mfrow=c(3,1)) # plot the data -->
+<!-- plot(cmort, main="Cardiovascular Mortality", xlab="", ylab="",col="red",lwd=2)  -->
+<!-- plot(tempr, main="Temperature", xlab="", ylab="",col="blue",lwd=2) -->
+<!-- plot(part, main="Particulates", xlab="", ylab="",col="green",lwd=2) -->
+<!-- ``` -->
+<!-- ``` {r mort2, echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- ts.plot(cmort,tempr,part, col=c("red","blue","green")) # all on same plot (not shown) dev.new() -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r mort1, echo = FALSE, eval = TRUE,include=TRUE,fig.height=8} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r mort2, echo = FALSE, eval = TRUE,include=TRUE,fig.height=8} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- - Note: -->
+<!--     - We want to investigate the effects of temperature and pollution on weekly mortality in LA. -->
+<!--     - There are strong seasonal components in all series (winter/summer). -->
+<!--     - Downwards trend for cardiovascular mortality. -->
+<!-- - We need more analysis to choose model candidates. -->
+<!-- Here, scatterplots are informative (output on next slide): -->
+<!-- ``` {r mort3, echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- pairs(cbind(Mortality=cmort, Temperature=tempr, Particulates=part)) -->
+<!-- temp = tempr-mean(tempr) # center temperature -->
+<!-- temp2 = temp^2 -->
+<!-- trend = time(cmort) # time -->
+<!-- ``` -->
+<!-- - There is ossible linear relation between mortality and particulates -->
+<!-- - Also, there is a curvilinear shape of temperature mortality curve: temperature extremes are associated with higher mortality -->
+<!-- --- -->
+<!-- ``` {r mort3, echo = FALSE, eval = TRUE,include=TRUE,fig.height=7} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- Based on the scatterplot matrix we consider the following models: -->
+<!-- \begin{eqnarray*} -->
+<!-- M_t &=& \beta_0 + \beta_1 t + w_t \\ -->
+<!-- M_t &=& \beta_0 + \beta_1 t + \beta_2 (T_t-T_\cdot) +w_t \\ -->
+<!-- M_t &=& \beta_0 + \beta_1 t + \beta_2 (T_t-T_\cdot) +\beta_3(T_t-T_\cdot)^2+w_t \\ -->
+<!-- M_t &=& \beta_0 + \beta_1 t + \beta_2 (T_t-T_\cdot) +\beta_3(T_t-T_\cdot)^2+\beta_4 P_t+w_t \\ -->
+<!-- \end{eqnarray*} -->
+<!-- where `\(T_\cdot=74.26\)` is the temperature mean.  -->
+<!-- --- -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,output.lines=5:20} -->
+<!-- fit = lm(cmort~ trend + temp + temp2 + part, na.action=NULL) -->
+<!-- summary(fit) # regression results -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE} -->
+<!-- summary(aov(fit)) #ANOVA table (compare to next code chunk!) -->
+<!-- ``` -->
+<!-- `\(\rightarrow\)` Each addition is significant. -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE} -->
+<!-- summary(aov(lm(cmort~cbind(trend, temp, temp2, part)))) # Table 2.1  -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE} -->
+<!-- num = length(cmort) # sample size -->
+<!-- AIC(fit)/num - log(2*pi) # AIC -->
+<!-- BIC(fit)/num - log(2*pi) # BIC -->
+<!-- AICc <- log(sum(resid(fit)^2)/num) + (num+5)/(num-5-2) # AICc -->
+<!-- AICc -->
+<!-- ``` -->
+<!-- ## Example: Regression with lagged variables -->
+<!-- Recall the SOI and (fish) Recruitment series: previous data analysis suggested that SOI led Recruitment by six months. The relationship is not linear, but we consider (for now) -->
+<!-- `$$R_t=\beta_0+\beta_1 S_{t-6} + w_t,$$` -->
+<!-- which becomes, after fitting (if `\(w_t\)` is assumed white) -->
+<!-- `$$R_t=65.79-44.28_{(2.78)} S_{t-6},$$` -->
+<!-- with `\(\hat{\sigma}_w=22.5\)` (on 445 degrees of freedom): -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,output.lines=10:12,collapse=TRUE} -->
+<!-- fish = ts.intersect(rec, soiL6=lag(soi,-6), dframe=TRUE) -->
+<!-- summary(fit1 <- lm(rec~soiL6, data=fish, na.action=NULL)) -->
+<!-- ``` -->
+<!-- `\(\rightarrow\)` SOI is a strong predictor of Recruitment -->
+<!-- # Exploratory Data Analysis (TS 2.2) -->
+<!-- ## Context -->
+<!-- We distinguish two types of detrending: -->
+<!-- \begin{description} -->
+<!-- \item[via regression:] This involves fitting a regression model for `\(\hat{\mu}_t\)` (as per the previous section) -->
+<!-- \begin{itemize} -->
+<!-- \item This is a parametric approach: `\(\hat{\mu}_t\)` is known, but for parameter and model risk. -->
+<!-- \end{itemize} -->
+<!-- \item[via differencing:] This involves modifying the series by looking at differences over time, rather than absolute values. -->
+<!-- \begin{itemize} -->
+<!-- \item This is a non parametric approach: we do not need to specify a model, but `\(\hat{\mu}_t\)` is unknown. -->
+<!-- \end{itemize} -->
+<!-- \end{description} -->
+<!-- ## Detrending via regression -->
+<!-- ### Example: Chicken prices detrended via regression -->
+<!-- From before: -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,fig.height=3} -->
+<!-- fit = lm(chicken~time(chicken), na.action=NULL) # regress chicken on time -->
+<!-- plot(resid(fit), type="l", -->
+<!--      main="Price of chicken detrended via regression  -->
+<!--      (spot price, Georgia docks, 08/01-07/16)")  -->
+<!-- ``` -->
+<!-- - Note that the residuals are, by definition, equal to `\(\hat{y}_t\)` which we would like to be stationary. -->
+<!-- - Here we have `\(\mu_t=\beta_0+\beta_1 t\)` as before -->
+<!-- ## Differencing -->
+<!-- What if `\(\mu_t\)` does not look like a linear trend? -->
+<!-- - In that case detrending via (linear) regression is not adequate -->
+<!-- - This may suggest that the trend / mean is \alert{random} -->
+<!-- In this case one can look at the difference from one point to the next: -->
+<!-- `$$\nabla x_t \equiv x_t-x_{t-1}$$` -->
+<!-- If the mean is random, this should yield the difference in random means (from `\(t-1\)` to `\(t\)`), plus the difference of the _detrended_ (assumed stationary) underlying series (which we are seeking). -->
+<!-- --- -->
+<!-- As an example, consider the simplest model with a random mean: the random walk with drift -->
+<!-- `$$\mu_t=\delta+\mu_{t-1}+w_t.$$`  -->
+<!-- Using differencing yields -->
+<!-- `$$\nabla x_t \equiv x_t-x_{t-1}=(\mu_t+y_t)-(\mu_{t-1}+y_{t-1})=\delta+w_t+(y_t-y_{t+1}),$$` -->
+<!-- where `\(z_t = y_t-y_{t+1}\)` is stationary, and hence `\(x_t-x_{t-1}\)` is stationary too. -->
+<!-- Note: -->
+<!-- - a first difference removes a linear trend -->
+<!-- - a second difference ($\nabla^2$, differencing the differenced series) removes a quadratic trend -->
+<!-- - etc... -->
+<!-- ### Example: Differencing Global Temperatures -->
+<!-- Remember the Global Temperatures series: -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,fig.height=5} -->
+<!-- plot(globtemp,type="o",ylab="Global Temperature Deviations", -->
+<!--      main="Yearly average global temperature deviations (1880-2015) in degrees centigrade (base period: 1951-1980)") -->
+<!-- ``` -->
+<!-- \hspace{1cm} `mean(diff(globtemp))`$=0.0079259$ -->
+<!-- --- -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,fig.height=6} -->
+<!-- par(mfrow=c(2,1)) -->
+<!-- plot(diff(globtemp), type="l", -->
+<!--      main="Global temperature detrended via first difference") -->
+<!-- acf(diff(gtemp), 48) -->
+<!-- ``` -->
+<!-- ### How does that compare with regression? -->
+<!-- - Differencing can be seen as "without loss of generality" as compared to the regression case.   -->
+<!-- - If the regression model was appropriate, we would have  -->
+<!-- `$$\mu_t=\beta_0+\beta_1 t$$` -->
+<!-- and differencing would lead to -->
+<!-- `$$\nabla x_t=x_t-x_{t-1}=(\mu_t+y_t)-(\mu_{t-1}+y_{t-1})=\beta_1+y_t-y_{t+1},$$` -->
+<!-- which is stationary (residuals `\(y_t\)` are uncorrelated normal in a regression). -->
+<!-- ### Example: Chicken prices detrended via differencing -->
+<!-- ``` {r,eval=TRUE,echo=TRUE,include=TRUE,fig.height=4} -->
+<!-- plot(diff(chicken), type="l", -->
+<!--      main="Price of chicken detrended via first difference  -->
+<!--      (spot price, Georgia docks, 08/01-07/16)")  -->
+<!-- ``` -->
+<!-- - Although results are different, both methods can potentially work.  -->
+<!-- - The question is whether the drift is likely deterministic or random. If random, differencing could remove it without making   -->
+<!-- an assumption about it. -->
+<!-- ### Comparison of autocorrelation in the residuals -->
+<!-- ``` {r chickenacf,echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- par(mfrow=c(3,1)) # plot ACFs -->
+<!-- acf(chicken, 48, main="chicken") -->
+<!-- acf(resid(fit), 48, main="detrended via regression")  -->
+<!-- acf(diff(chicken), 48, main="detrended via first difference") -->
+<!-- ``` -->
+<!-- See next slide for those graphs: -->
+<!-- - The ACF of residuals after differencing exhibits an annual cycle that was obscured in the regressed data. -->
+<!-- --- -->
+<!-- ``` {r chickenacf,echo = FALSE, eval = TRUE,include=TRUE,fig.height=9} -->
+<!-- ``` -->
+<!-- ## Backshift operator -->
+<!-- We define the \alert{backshift operator} by -->
+<!-- `$$Bx_t = x_{t-1}$$` -->
+<!-- and extend it to powers  -->
+<!-- `\(B^2x_t = B(Bx_t) = Bx_{t-1} = x_{t-2},\)` and so on. Thus, -->
+<!-- `$$B^kx_t =x_{t-k}.$$` -->
+<!-- Note: -->
+<!-- - This notation allows for compact definition of models, and easier algebraic calculations. -->
+<!-- - The \alert{forward-shift operator} is the inverse such that -->
+<!-- `$$x_t=B^{-1}Bx_t=B^{-1}x_{t-1}.$$` -->
+<!-- - We define \alert{differences of order `\(d\)`} as -->
+<!-- `$$\nabla^d=(1-B)^d.$$` -->
+<!-- ## Transformations -->
+<!-- - Obvious aberrations and nonlinear behaviour, if present, can lead to nonstationary.  -->
+<!-- - \alert{Transformations} may be useful to \emph{equalise} the variability over the length of a single series. A particularly useful transformation is -->
+<!-- `$$y_t = \log x_t,$$` -->
+<!-- which tends to suppress larger fluctuations that occur over portions of the series where the underlying values are larger.   -->
+<!-- (Think, for instance of the Johnson \& Johnson data) -->
+<!-- - Transformations can also be used to improve the approximation to normality or to improve linearity in predicting the value of one series from another. -->
+<!-- ## Scatterplot matrices -->
+<!-- - This is another preliminary data processing technique, to visualise the relations between series at different lags. -->
+<!-- - The ACF---a _number_---focuses on \underline{linear} predictability only (since it displays correlations). -->
+<!-- - Scatterplots (one for each lag) are informative to diagnose \underline{nonlinear} relationships: they display the whole _profile_ of the relation.  -->
+<!-- - They give a visual sense of _which lag_ will lead to the best predictability -->
+<!-- - This can be done for a single series or between two series---say, `\(y_t\)` vs `\(x_{t-h}\)` -->
+<!-- - The red lines are locally weighted "scatterplot smoothing lines" (more precisely, lowess lines---see next section); they help identify non-linear relationships. -->
+<!-- ### Example: SOI vs recruitment -->
+<!-- Scatterplot for SOI only (next slide) -->
+<!-- ``` {r scatter1,echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- lag1.plot(soi,12) -->
+<!-- ``` -->
+<!-- - The red lines are more or less linear for lagged SOI `\(\rightarrow\)` sample autocorrelations are meaningful -->
+<!-- Scatterplot for  Recruitment `\(R_t\)` vs SOI `\(h\)` lags earlier `\(S_{t-h}\)` (following slide) -->
+<!-- ``` {r scatter2,echo = TRUE, eval = FALSE,include=TRUE} -->
+<!-- lag2.plot(soi,rec,8) -->
+<!-- ``` -->
+<!-- - Red lines are highly nonlinear around lag 6. However, they seem to be linear for given sign of SOI -->
+<!-- How would you model this nonlinear relationship? -->
+<!-- --- -->
+<!-- ``` {r scatter1,echo = FALSE, eval = TRUE,include=TRUE,fig.height=8.9} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r scatter2,echo = FALSE, eval = TRUE,include=TRUE,fig.height=8.9} -->
+<!-- ``` -->
+<!-- --- -->
+<!-- Using dummy variables we can model this: -->
+<!-- \begin{eqnarray*} -->
+<!-- R_t &=& \beta_0+\beta_1S_{t-6}+\beta_2D_{t-6}+\beta_3D_{t-6}S_{t-6}+w_t \\ -->
+<!-- &=& \left\{  -->
+<!-- \begin{array}{ll} -->
+<!-- \beta_0+\beta_1 S_{t-6}+w_t & \text{ if }S_{t-6}<0, \\ -->
+<!-- (\beta_0\alert{+\beta_2})+(\beta_1\alert{+\beta_3}) S_{t-6}+w_t & \text{ if }S_{t-6}\alert{\ge}0, -->
+<!-- \end{array} -->
+<!-- \right. -->
+<!-- \end{eqnarray*} -->
+<!-- where `\(D_t=0\)` if `\(S<0\)` (1 otherwise). -->
+<!-- ``` {r nonlinear1,echo = TRUE, eval = TRUE,include=TRUE,warnings=FALSE,output.lines=10:14} -->
+<!-- dummy <- ifelse(soi<0, 0, 1) # for the piecewise regression -->
+<!-- fish <- ts.intersect(rec, soiL6=stats::lag(soi,-6),  -->
+<!--                      dL6=stats::lag(dummy,-6), dframe=TRUE)  -->
+<!-- summary(fit <- lm(rec~ soiL6*dL6, data=fish, na.action=NULL)) -->
+<!-- ``` -->
+<!-- ```{r,include=TRUE,echo=TRUE,eval=TRUE,message=FALSE} -->
+<!-- attach(fish) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r nonlinear2,echo = TRUE, eval = TRUE,include=TRUE,output.lines=0:0,fig.height=5} -->
+<!-- plot(soiL6, rec, -->
+<!--      main="Recruitment (Rt) vs SOI lagged 6 months (St-6) with the fitted values  -->
+<!--      of the regression as points (+) and a lowess fit (-)") -->
+<!-- lines(lowess(soiL6, rec), col="blue", lwd=3)  -->
+<!-- points(soiL6, fitted(fit), pch='+', col=2,cex=1.5)  -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r nonlinear3,echo = TRUE, eval = TRUE,include=TRUE,fig.height=5} -->
+<!-- plot(resid(fit), -->
+<!--      main="Residuals of recruitment (Rt) vs SOI lagged 6 months (St-6)  -->
+<!--      with the fitted values of the regression as points (+) and a lowess fit (-)")  -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r nonlinear4,echo = TRUE, eval = TRUE,include=TRUE,fig.height=5} -->
+<!-- acf(resid(fit), -->
+<!--     main="ACF of the residuals") # obviously not noise -->
+<!-- ``` -->
+<!-- - residuals are not noise - we would need to model cycles next -->
+<!-- # Smoothing in the Time Series Context (TS 2.3) -->
+<!-- ## Introduction -->
+<!-- - The first difference `\(\nabla\)` is an example of _linear filter_ applied to eliminate a trend. -->
+<!-- - Other filters, formed by averaging values near `\(x_t\)`, can produce adjusted series that eliminate other kinds of unwanted fluctuations. -->
+<!-- - This can help discover certain traints in a time series, such as long-term trend and seasonal components -->
+<!-- - Here we review such filtering techniques, with illustrations -->
+<!-- ### Example: SOI -->
+<!-- ``` {r,echo = TRUE, eval = TRUE,include=TRUE,fig.height=4} -->
+<!-- ts.plot(soi,ylab="",xlab="",main="South Oscillation Index SOI  -->
+<!--         (changes in air pressure, related to sea surface temperatures, in the central Pacific Ocean)") -->
+<!-- ``` -->
+<!-- How easy is it to see the El Niño cycles, and distinguish them from the (strong) annual cycles? -->
+<!-- ## Moving Average Smoother -->
+<!-- If `\(x_t\)` represents the observations, then -->
+<!-- `$$m_t=\sum_{j=-k}^k a_j x_j,$$` -->
+<!-- where  -->
+<!-- `$$a_j=a_{-j}\ge 0,\quad\text{ and where }\quad \sum_{j=-k}^k a_j=1,$$` -->
+<!--  is a \alert{symmetric (two-sided) moving average of the data}. -->
+<!-- Note: -->
+<!-- - The weights `\(a_j\)` are sometimes referred to as ``boxcar-type'' weights. -->
+<!-- ### Example: Moving Average Smoother on SOI -->
+<!-- ``` {r soismooth1,echo = TRUE, eval = FALSE,include=TRUE,message=FALSE,results='hide'} -->
+<!-- wgts = c(.5, rep(1,11), .5)/12 -->
+<!-- soif = filter(soi, sides=2, filter=wgts) -->
+<!-- par() -->
+<!-- plot(soi,main="Moving average smoother of SOI.  -->
+<!--      The insert shows the shape of the moving average (\"boxcar\") kernel [not drawn to scale]") -->
+<!-- lines(soif, lwd=3, col="blue") -->
+<!-- par(fig = c(.65, 1, .65, 1),mar=c(5,3.5,4.1,2.1),new = TRUE) # the insert -->
+<!-- nwgts = c(rep(0,20), wgts, rep(0,20)) -->
+<!-- plot(nwgts, type="l", ylim = c(-.02,.1), xaxt='n', -->
+<!--      yaxt='n', ann=FALSE) -->
+<!-- ``` -->
+<!-- - This particular method removes (filters out) the obvious annual temperature cycles, and helps emphasize the El Niño cycles -->
+<!-- - However, it is still quite choppy, probably due to the (relatively non smooth) boxcar weights -->
+<!-- --- -->
+<!-- ``` {r soismooth1,echo = FALSE, eval = TRUE,include=TRUE,message=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ## Kernel Smoothing -->
+<!-- If `\(x_t\)` represents the observations, then -->
+<!-- `$$m_t=\sum_{i=1}^n w_i(t) x_i,\text{ where } w_i(t)=\frac{K\left(\frac{t-i}{b}\right)}{\sum_{k=1}^n K\left(\frac{t-k}{b}\right)}$$` -->
+<!-- are the weights, and where `\(K(\cdot)\)` is a kernel function. -->
+<!-- - Each `\(m_t\)` uses \underline{all} the `\(x_t\)`'s, contrary to the moving average smoother -->
+<!-- - A typical kernel is the normal kernel, -->
+<!-- `$$K(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^2}.$$` -->
+<!-- --- -->
+<!-- In R, the function to use is   -->
+<!-- `ksmooth(x, y, kernel = c("box", "normal"), bandwidth)`   -->
+<!-- Note: -->
+<!-- - The wider the `bandwidth`, the smoother the result  -->
+<!-- - Kernels are scaled such that the kernel quartiles (viewed as probability densities) are at `\(\pm 0.25\times\)``bandwidth`   -->
+<!--     - E.g., for the normal distribution, the quartiles are `\(\pm 0.674\)`---this means `\(\Phi(0.674)-0.5=25\%\)` -->
+<!-- In the next example, the `bandwidth` is 1 to correspond to approximately smoothing a little over one year: -->
+<!-- - The standard normal quartile 0.674 is scaled to be at `\(0.25\times 1=0.25\)`, so `\(\pm 0.25\)` after scaling corresponds to 50% of the original standard normal -->
+<!-- - `\(\pm 0.5\)` thus corresponds to `\(\pm 2\cdot 0.674=\pm 1.328\)` in terms of original standard normal, which corresponds to `\(2\times \left[\Phi(1.328)-0.5\right]\approx 82.2\%\)` -->
+<!-- of the density.  -->
+<!-- - Similarly, `\(\pm 0.75\)` corresponds to `\(\approx 95.6\%\)` of the density. -->
+<!-- ### Example: Kernel smoothing on SOI -->
+<!-- ``` {r soismooth2,echo = TRUE, eval = FALSE,include=TRUE,message=FALSE,results='hide'} -->
+<!-- plot(soi,main="Kernel smoother of SOI.  -->
+<!--      The insert shows the shape of the normal kernel [not drawn to scale]") -->
+<!-- lines(ksmooth(time(soi), soi, "normal", bandwidth=1), lwd=3, col="blue") -->
+<!-- par(fig = c(.65, 1, .65, 1),mar=c(5,3.5,4.1,2.1),new = TRUE) # the insert -->
+<!-- gauss = function(x) {1/sqrt(2*pi) * exp(-(x^2)/2) } -->
+<!-- x = seq(from = -3, to = 3, by = 0.001) -->
+<!-- plot(x, gauss(x), type ="l", ylim=c(-.02,.45), xaxt='n', yaxt='n', ann=FALSE) -->
+<!-- ``` -->
+<!-- --- -->
+<!-- ``` {r soismooth2,echo = FALSE, eval = TRUE,include=TRUE,message=FALSE,results='hide',fig.height=7} -->
+<!-- ``` -->
+<!-- ## Lowess -->
+<!-- - Lowess is complex, but close to the idea of `\(k\)`-nearest neighbor regression, where one uses only the data -->
+<!-- `$$(x_{t-k/2},\ldots,x_t,\ldots,x_{t+k/2})$$` -->
+<!-- to predict `\(x_t\)` via regression, and then sets `\(m_t=\hat{x}_t\)`. -->
+<!-- - In R, the function is   -->
+<!-- `lowess(x,f=2/3)`   -->
+<!-- where `f` is the smoother span with default value `\(2/3\)`  -->
+<!-- - The smoother span is the proportion of points in the plot which influence the smooth at each value. Larger values give more smoothness. -->
+<!-- - One can also smooth a time series `x` as function of another series`y`. We use then `lowess(x,y)`. -->
+<!-- ### Example: Lowess on SOI -->
+<!-- ``` {r soismooth3,echo = TRUE, eval = TRUE,include=TRUE,fig.height=5} -->
+<!-- plot(soi,main="Locally weighted scatterplot smoothers (lowess) of the SOI series.") -->
+<!-- lines(lowess(soi, f=.05), lwd=3, col="blue") # El Nino cycle -->
+<!-- lines(lowess(soi), lty=2, lwd=3, col="red") # trend (with default span) -->
+<!-- ``` -->
+<!-- ### Example: Lowess of mortality as a function of temperature -->
+<!-- ``` {r tempsmooth,echo = TRUE, eval = TRUE,include=TRUE,fig.height=5} -->
+<!-- plot(tempr, cmort, xlab="Temperature", ylab="Mortality", -->
+<!--      main="Smooth of mortality as a function of temperature using lowess") -->
+<!-- lines(lowess(tempr, cmort),lwd=3, col="blue") -->
+<!-- ``` -->
+<!-- ## Smoothing splines -->
+<!-- ### Preliminary: Polynomial regression -->
+<!-- A polynomial regression in terms of _time_ would involve setting -->
+<!-- `$$x_t=m_t+w_t,\text{ where }m_t=\beta_0+\beta_1 t+\beta_2 t^2 + \beta_3 t^3 + \ldots.$$` -->
+<!-- Then, `\(m_t\)` would be fit to data using ordinary least squares (which assumes `\(w_t\)` is normal). -->
+<!-- One possible extension is to fit polynomials to the series in a piecewise fashion: -->
+<!-- - Divide time into \alert{$k$ intervals} -->
+<!-- `$$[t_0=1,t_1],[t_{1+1},t_2],\ldots,[t_{k-1}+1,t_k=n],$$` -->
+<!-- where  \alert{$t_0, t_1, \ldots, t_k$ are called \emph{knots}}. -->
+<!-- - Then, in each interval, one fits a polynomial regression, typically of order 3 (in which case these are called \emph{cubic} splines). -->
+<!-- ### Smoothing splines -->
+<!-- Here we minimise a compromise between fit and smoothness: -->
+<!-- `$$\sum_{t=1}^n [x_t-m_t]^2+\lambda \int \left(m_t''\right)^2 dt,$$` -->
+<!-- where `\(m_t\)` is a cubic spline with a \underline{knot at each `\(t\)`}. The degree of smoothness is controlled by `\(\lambda\)`, and is an extra parameter that is useful. -->
+<!-- - if `\(\lambda=0\)` then `\(m_t=x_t\)` which is useless and smoothes nothing. -->
+<!-- - if `\(\lambda=\infty\)` we are infinitely focussed on the second derivative of `\(m_t\)`, so that `\(m_t=c+vt\)` which is extremely smooth. -->
+<!-- - `\(\lambda\)` allows thus for a spectrum between linear regression ($\infty$) and the data ($0$)---the larger the `\(\lambda\)`, the smoother the fit. -->
+<!-- The fact that one does not need to choose knots can be seen as an advantage (objective), but this is why ``$\lambda$ smoothness'' is required   -->
+<!-- to avoid overfitting. -->
+<!-- ### Example: Splines on SOI -->
+<!-- ``` {r soisplines,echo = TRUE, eval = TRUE,include=TRUE,fig.height=4} -->
+<!-- plot(soi,main="Smoothing splines fit to the SOI series  -->
+<!--      (spar=0.5 in blue to emphasise El Niño cycle, and spar=1 in red to emphasise the trend)") -->
+<!-- lines(smooth.spline(time(soi), soi, spar=.5), lwd=3, col="blue")  -->
+<!-- lines(smooth.spline(time(soi), soi, spar= 1), lty=2, lwd=3, col="red") -->
+<!-- ``` -->
+<!-- \hspace{1cm} The parameter `spar` is monotonically related to `\(\lambda\)`. -->
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/05bf3c0b5cfbeb01a4adbc3c5a5ad71560c2835c" title='Last modified by Benjamin Avanzi | 18 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>18 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-ts-20">Introduction (TS 2.0)</a>
+      <ul>
+        <li><a href="#objectives">Objectives</a></li>
+      </ul>
+    </li>
+    <li><a href="#classical-regression-in-the-time-series-context--ts-21">Classical regression in the Time Series Context  (TS 2.1)</a>
+      <ul>
+        <li><a href="#regression-with-independent-series">Regression with independent series</a></li>
+        <li><a href="#example-de-trending-with-a-linear-trend">Example: de-trending with a linear trend</a>
+          <ul>
+            <li><a href="#model">Model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

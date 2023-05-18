@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dependence and multivariate modelling #  Introduction to Dependence #  Motivation #  How does dependence arise?
+ Events affecting more than one variable (e.g., storm on building, car and business interruption covers) Underlying economic factors affecting more than one risk area (e.g., inflation, unemployment) Clustering/concentration of risks (e.g., household, geographical area)   Reasons for modelling dependence:
+ Pricing:  get adequate risk loadings (note that dependence affects quantiles, not the mean)   Solvency assessment:  bottom up: for given risks, get capital requirements (get quantiles of aggregate quantities)   Capital allocation:  top down: for given capital, allocate portions to risk (for profitability assessment)   Portfolio structure: (or strategic asset allocation)  how do assets and liability move together?">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M5 Copulas" />
+<meta property="og:description" content="Dependence and multivariate modelling #  Introduction to Dependence #  Motivation #  How does dependence arise?
+ Events affecting more than one variable (e.g., storm on building, car and business interruption covers) Underlying economic factors affecting more than one risk area (e.g., inflation, unemployment) Clustering/concentration of risks (e.g., household, geographical area)   Reasons for modelling dependence:
+ Pricing:  get adequate risk loadings (note that dependence affects quantiles, not the mean)   Solvency assessment:  bottom up: for given risks, get capital requirements (get quantiles of aggregate quantities)   Capital allocation:  top down: for given capital, allocate portions to risk (for profitability assessment)   Portfolio structure: (or strategic asset allocation)  how do assets and liability move together?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-22T21:27:58+11:00" />
+
+<title>M5 Copulas | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class=" active">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M5 Copulas</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#dependence-and-multivariate-modelling">Dependence and multivariate modelling</a>
+      <ul>
+        <li><a href="#introduction-to-dependence">Introduction to Dependence</a>
+          <ul>
+            <li><a href="#motivation">Motivation</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#example-of-real-actuarial-data-avanzi-cassar-and-wong-2011">Example of real actuarial data (Avanzi, Cassar, and Wong 2011)</a></li>
+          </ul>
+        </li>
+        <li><a href="#multivariate-normal-distributions">Multivariate Normal Distributions</a>
+          <ul>
+            <li><a href="#the-multivariate-normal-distribution">The multivariate Normal distribution</a></li>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#choleskys-decomposition">Cholesky’s decomposition</a></li>
+          </ul>
+        </li>
+        <li><a href="#measures-of-dependence">Measures of dependence</a>
+          <ul>
+            <li><a href="#pearsons-correlation-measure">Pearson’s correlation measure</a></li>
+            <li><a href="#kendalls-tau">Kendall’s tau</a></li>
+            <li><a href="#spearmans-rank-correlation">(Spearman’s) rank correlation</a></li>
+            <li><a href="#example-the-case-of-multivariate-normal">Example: the case of multivariate Normal</a></li>
+            <li><a href="#example-suva-data">Example: SUVA data</a></li>
+          </ul>
+        </li>
+        <li><a href="#limits-of-correlation">Limits of correlation</a>
+          <ul>
+            <li><a href="#correlation--dependence">Correlation = dependence?</a></li>
+            <li><a href="#common-fallacies">Common fallacies</a></li>
+            <li><a href="#example-1">Example 1</a></li>
+            <li><a href="#example-2">Example 2</a></li>
+            <li><a href="#example-2-illustration-normal-vs-cook-johnson-copulas">Example 2 illustration: Normal vs Cook-Johnson copulas</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#copula-theory">Copula theory</a>
+      <ul>
+        <li><a href="#what-is-a-copula">What is a copula?</a>
+          <ul>
+            <li><a href="#sklars-representation-theorem">Sklar’s representation theorem</a></li>
+            <li><a href="#example">Example</a></li>
+            <li><a href="#some-remarks">Some remarks</a></li>
+            <li><a href="#adv-multivariate-distribution-function"><code>\(\adv\)</code> Multivariate distribution function</a></li>
+            <li><a href="#adv-multivariate-copula"><code>\(\adv\)</code> Multivariate copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#density-associated-with-a-copula">Density associated with a copula</a>
+          <ul>
+            <li><a href="#example-3">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#survival-copulas">Survival copulas</a></li>
+        <li><a href="#invariance-property">Invariance property</a></li>
+      </ul>
+    </li>
+    <li><a href="#main-bivariate-copulas">Main bivariate copulas</a>
+      <ul>
+        <li><a href="#the-fréchet-bounds">The Fréchet bounds</a></li>
+        <li><a href="#the-normal-aka-gaussian-copula">The Normal (aka Gaussian) copula</a>
+          <ul>
+            <li><a href="#the-t-copula">The <code>\(t\)</code> copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#archimedean-copulas">Archimedean copulas</a></li>
+        <li><a href="#the-clayton-copula">The Clayton copula</a>
+          <ul>
+            <li><a href="#the-clayton-copula-for-n2">The Clayton copula for <code>\(n=2\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#the-frank-copula">The Frank copula</a></li>
+        <li><a href="#the-gumbel-hougard-copula">The Gumbel(-Hougard) copula</a></li>
+        <li><a href="#copula-models-in-r">Copula models in R</a>
+          <ul>
+            <li><a href="#the-vinecopula-package">The <code>VineCopula</code> package</a></li>
+            <li><a href="#bivariate-copulas-in-vinecopula">Bivariate copulas in <code>VineCopula</code></a></li>
+            <li><a href="#conversion-between-dependence-measures-and-parameters-for-a-given-family">Conversion between dependence measures and parameters (for a given family):</a></li>
+            <li><a href="#evaluate-functions-related-to-a-bivariate-copula">Evaluate functions related to a bivariate copula:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#adv-simulation-from-bivariate-copulas"><code>\(\adv\)</code> Simulation from bivariate copulas</a>
+      <ul>
+        <li><a href="#adv-reminder-simulation-of-a-univariate-random-variable"><code>\(\adv\)</code> Reminder: simulation of a univariate random variable</a></li>
+        <li><a href="#adv-overarching-strategy"><code>\(\adv\)</code> Overarching strategy</a></li>
+        <li><a href="#adv-preliminary-the-conditional-distribution-function"><code>\(\adv\)</code> Preliminary: the conditional distribution function</a>
+          <ul>
+            <li><a href="#adv-example"><code>\(\adv\)</code> Example</a></li>
+            <li><a href="#adv-in-r"><code>\(\adv\)</code> In R</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-the-conditional-distribution-method"><code>\(\adv\)</code> The conditional distribution method</a>
+          <ul>
+            <li><a href="#adv-example-1"><code>\(\adv\)</code> Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-specific-algorithms"><code>\(\adv\)</code> Specific algorithms</a>
+          <ul>
+            <li><a href="#adv-simulation-from-a-normal-copula"><code>\(\adv\)</code> Simulation from a Normal copula</a></li>
+            <li><a href="#adv-simulation-from-a-clayton-copula"><code>\(\adv\)</code> Simulation from a Clayton copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-example-of-simulation-in-r"><code>\(\adv\)</code> Example of simulation in R</a></li>
+      </ul>
+    </li>
+    <li><a href="#adv-fitting-bivariate-copulas"><code>\(\adv\)</code> Fitting bivariate copulas</a>
+      <ul>
+        <li><a href="#adv-using-r"><code>\(\adv\)</code> Using R</a></li>
+        <li><a href="#adv-case-study-with-vinecopula-suva-data"><code>\(\adv\)</code> Case study with <code>VineCopula</code>: SUVA data</a>
+          <ul>
+            <li><a href="#adv-kernel-density"><code>\(\adv\)</code> Kernel density</a></li>
+            <li><a href="#adv-fitting"><code>\(\adv\)</code> Fitting</a></li>
+            <li><a href="#adv-further-gof"><code>\(\adv\)</code> Further GOF</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-case-study-with-censoring-iso-data"><code>\(\adv\)</code> Case study with censoring: ISO data</a>
+          <ul>
+            <li><a href="#adv-insurance-company-losses-and-expenses"><code>\(\adv\)</code> Insurance company losses and expenses</a></li>
+            <li><a href="#adv-summary-statistics-of-data"><code>\(\adv\)</code> Summary statistics of data</a></li>
+            <li><a href="#adv-loss-vs-alae"><code>\(\adv\)</code> loss vs ALAE</a></li>
+            <li><a href="#adv-maximum-likelihood-estimation"><code>\(\adv\)</code> Maximum likelihood estimation</a></li>
+            <li><a href="#adv-choice-of-marginals-and-copulas"><code>\(\adv\)</code> Choice of marginals and copulas</a></li>
+            <li><a href="#adv-parameter-estimates"><code>\(\adv\)</code> Parameter estimates</a></li>
+            <li><a href="#adv-aic-criterion"><code>\(\adv\)</code> AIC criterion</a></li>
+            <li><a href="#adv-summary"><code>\(\adv\)</code> Summary</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#coefficients-of-tail-dependence">Coefficients of tail dependence</a>
+      <ul>
+        <li><a href="#motivation-1">Motivation</a></li>
+        <li><a href="#coefficient-of-lower-tail-dependence">Coefficient of lower tail dependence</a></li>
+        <li><a href="#coefficient-of-upper-tail-dependence">Coefficient of upper tail dependence</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="dependence-and-multivariate-modelling">
+  Dependence and multivariate modelling
+  <a class="anchor" href="#dependence-and-multivariate-modelling">#</a>
+</h1>
+<h2 id="introduction-to-dependence">
+  Introduction to Dependence
+  <a class="anchor" href="#introduction-to-dependence">#</a>
+</h2>
+<h3 id="motivation">
+  Motivation
+  <a class="anchor" href="#motivation">#</a>
+</h3>
+<p>How does dependence arise?</p>
+<ul>
+<li>Events affecting more than one variable (e.g., storm on building, car and business interruption covers)</li>
+<li>Underlying economic factors affecting more than one risk area (e.g., inflation, unemployment)</li>
+<li>Clustering/concentration of risks (e.g., household, geographical area)</li>
+</ul>
+<hr>
+<p>Reasons for modelling dependence:</p>
+<ul>
+<li>Pricing:
+<ul>
+<li>get adequate risk loadings
+(note that dependence affects quantiles, not the mean)</li>
+</ul>
+</li>
+<li>Solvency assessment:
+<ul>
+<li>bottom up: for given risks, get capital requirements
+(get quantiles of aggregate quantities)</li>
+</ul>
+</li>
+<li>Capital allocation:
+<ul>
+<li>top down: for given capital, allocate portions to risk (for profitability assessment)</li>
+</ul>
+</li>
+<li>Portfolio structure: (or strategic asset allocation)
+<ul>
+<li>how do assets and liability move together?</li>
+</ul>
+</li>
+</ul>
+<h3 id="examples">
+  Examples
+  <a class="anchor" href="#examples">#</a>
+</h3>
+<ul>
+<li>World Trade Centre (9/11) causing losses to Property, Life, Workers’ Compensation, Aviation insurers</li>
+<li>Enron causing losses to the stock market and to Surety Bonds, Errors &amp; Omissions and Directors &amp; Officers underwriters</li>
+<li>Dot.com market collapse and GFC causing losses to the stock market and to insurers of financial institutions and
+Directors &amp; Officers (D&amp;O) writers</li>
+<li>WTC / Enron / stock market losses causing impairment to reinsurers solvency, so increasing credit risk on
+payments by reinsurers</li>
+<li>Asbestos affecting many past liability years at once</li>
+<li>Australian 2019-2020 Bushfires causing losses to Property, Life, credit, etc <code>\(\ldots\)</code></li>
+<li>Covid-19 impacting financial markets, travel insurance, health, credit, D&amp;O, business interruption covers, etc <code>\(\dots\)</code></li>
+</ul>
+<h3 id="example-of-real-actuarial-data-avanzi-cassar-and-wong-2011">
+  Example of real actuarial data (Avanzi, Cassar, and Wong 2011)
+  <a class="anchor" href="#example-of-real-actuarial-data-avanzi-cassar-and-wong-2011">#</a>
+</h3>
+<ul>
+<li>Data were provided by the SUVA (Swiss workers compensation insurer)</li>
+<li>Random sample of 5% of accident claims in construction sector with accident year 1999 (developped as of 2003)</li>
+<li>1089 of those are common (!)</li>
+<li>Two types of claims: 2249 medical cost claims, et 1099 daily allowance claims</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">SUVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;SUVA.xls&#34;</span>)
+<span style="color:#75715e"># filtering and logging the common claims</span>
+SUVAcom <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">log</span>(SUVA[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;</span> SUVA<span style="color:#f92672">$</span>dailyallow <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>,
+  ])
+</code></pre></div><hr>
+<p>Scatterplot of those 1089 common claims (LHS) amd their log (RHS):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">exp</span>(SUVAcom), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">plot</span>(SUVAcom, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVA2-1.png" width="672" /></p>
+<hr>
+<p>Scatterplot of the log of the 1089 common claims (LHS) and their empirical copula (RHS):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">plot</span>(SUVAcom, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">plot</span>(copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(SUVAcom)[, <span style="color:#ae81ff">1</span>], copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(SUVAcom)[, <span style="color:#ae81ff">2</span>],
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVA3-1.png" width="672" /></p>
+<p>There is obvious right tail dependence.</p>
+<h2 id="multivariate-normal-distributions">
+  Multivariate Normal Distributions
+  <a class="anchor" href="#multivariate-normal-distributions">#</a>
+</h2>
+<h3 id="the-multivariate-normal-distribution">
+  The multivariate Normal distribution
+  <a class="anchor" href="#the-multivariate-normal-distribution">#</a>
+</h3>
+<p><code>\(\mathbf{Z}=\left( Z_{1},...Z_{n}\right) ^{\prime }\sim\)</code> <code>\(MN\left(\mathbf{0},\Sigma \right)\)</code> if its joint p.d.f. is <code>\(f\left(z_{1},...,z_{n}\right) =\dfrac{1}{\sqrt{\left( 2\pi \right)^{n}\left\vert \Sigma\right\vert }}\exp \left\{-\frac{1}{2}\mathbf{z}^{\prime } \Sigma^{-1}\mathbf{z}\right\}\)</code>.</p>
+<ul>
+<li>standard Normal marginals, i.e. <code>\(Z_{i}\sim N\left( 0,1\right)\)</code></li>
+<li>positive definite correlation matrix:</li>
+</ul>
+<p>$$
+\Sigma =
+<code>\begin{pmatrix} 1 &amp; \rho_{12} &amp; \cdots  &amp; \rho_{1n} \\\\ \rho_{21} &amp; 1 &amp; \cdots  &amp; \rho_{2n} \\\\ \vdots  &amp; \vdots  &amp; \ddots  &amp; \vdots  \\\\ \rho_{n1} &amp; \rho_{n2} &amp; \cdots  &amp; 1 \end{pmatrix}</code>
+$$</p>
+<p>where <code>\(\rho_{ij} = \rho_{ji}\)</code> is the correlation between <code>\(Z_{i}\)</code>
+and <code>\(Z_{j}\)</code>.</p>
+<ul>
+<li>if <code>\(\rho _{ij}=0\)</code> for all <code>\(i\neq j\)</code>, then we have the standard MN.</li>
+</ul>
+<h3 id="properties">
+  Properties
+  <a class="anchor" href="#properties">#</a>
+</h3>
+<p>If <code>\(\mathbf{Z}\sim MN\left(\mathbf{0},{\Sigma }\right)\)</code>, then with appropriate dimensions <code>\(\mathbf{A}\)</code> and <code>\(\mathbf{C}\)</code>, the vector</p>
+<p><code>$$\mathbf{X=AZ+C}$$</code></p>
+<p>has a multivariate Normal distribution with mean</p>
+<p><code>$$\text{E}\left( \mathbf{X}\right) =\mathbf{C}$$</code></p>
+<p>and covariance</p>
+<p><code>$$\text{Cov}\left( \mathbf{X}\right) = \mathbf{A} \Sigma\mathbf{A}^\prime.$$</code></p>
+<h3 id="choleskys-decomposition">
+  Cholesky’s decomposition
+  <a class="anchor" href="#choleskys-decomposition">#</a>
+</h3>
+<p>We can construct a lower triangular matrix</p>
+<p><code>$$B = \begin{pmatrix} b_{11} &amp; 0 &amp; \cdots &amp; 0 \\ b_{21} &amp; b_{22} &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ b_{n1} &amp; b_{n2} &amp; \cdots &amp; b_{nn} \end{pmatrix}$$</code></p>
+<p>such that <code>\(\Sigma =\mathbf{BB}^{\top}\)</code>.</p>
+<p>The matrix <code>\(\mathbf{B}\)</code> can be determined using Cholesky’s decomposition algorithm (standard function in most software—see <code>chol()</code> in R).</p>
+<p>This will be useful later on for the simulation of multivariate Gaussian random variables.</p>
+<h2 id="measures-of-dependence">
+  Measures of dependence
+  <a class="anchor" href="#measures-of-dependence">#</a>
+</h2>
+<h3 id="pearsons-correlation-measure">
+  Pearson’s correlation measure
+  <a class="anchor" href="#pearsons-correlation-measure">#</a>
+</h3>
+<p>Pearson’s correlation coefficient is defined by</p>
+<p><code>$$\rho \left( Z_{i},Z_{j}\right) =\rho _{ij}=\frac{\text{Cov}\left( Z_{i},Z_{j}\right) }{\sqrt{\text{Var}\left( Z_{i}\right) \text{Var}\left( Z_{j}\right) }}.$$</code></p>
+<p>Note:</p>
+<ul>
+<li>This measures the degree of linear relationship.</li>
+<li>It does not reveal all the information on the dependence structure of
+random couples.</li>
+</ul>
+<h3 id="kendalls-tau">
+  Kendall’s tau
+  <a class="anchor" href="#kendalls-tau">#</a>
+</h3>
+<p>Kendall’s tau correlation coefficient is defined by</p>
+<p><code>$$\begin{array}{rcl} \tau \left( Z_{i},Z_{j}\right) &amp;=&amp; \tau _{ij} \\ &amp;=&amp;P\left[ \left( Z_{i}-Z_{i}^{\prime }\right) \left( Z_{j}-Z_{j}^{\prime }\right) &gt;0\right] -P\left[ \left( Z_{i}-Z_{i}^{\prime }\right) \left( Z_{j}-Z_{j}^{\prime }\right) &lt;0\right] \end{array}$$</code></p>
+<p>where <code>\(\left( Z_{i},Z_{j}\right)\)</code> and <code>\(\left( Z_{i}^{\prime},Z_{j}^{\prime }\right)\)</code> are two independent realisations.</p>
+<p>Note:</p>
+<ul>
+<li>The first term is called the probability of concordance; the latter, probability of discordance.</li>
+<li>Its value is also between -1 and 1.</li>
+<li>It can be shown to equal: <code>\(\tau \left( Z_{i},Z_{j}\right) =4E\left[F\left( Z_{i},Z_{j}\right) \right] -1\)</code>.</li>
+<li>Concordance and discordance only depends on ranks, and this indicator is hence less affected by the marginal distributions of <code>\(Z_i\)</code> and <code>\(Z_j\)</code> than Pearson’s correlation.</li>
+</ul>
+<h3 id="spearmans-rank-correlation">
+  (Spearman’s) rank correlation
+  <a class="anchor" href="#spearmans-rank-correlation">#</a>
+</h3>
+<p>Spearman’s rank correlation coefficient is defined by</p>
+<p><code>$$r\left( Z_{i},Z_{j}\right) =r_{ij}=\rho \left( F_{i}\left( Z_{i}\right) ,F_{j}\left( Z_{j}\right) \right)$$</code></p>
+<p>where <code>\(F_{i}\)</code> and <code>\(F_{j}\)</code> are the respective marginal distributions.</p>
+<p>Note:</p>
+<ul>
+<li>It is indeed the Pearson’s correlation but applied to the transformed
+variables <code>\(F_{i}\left( Z_{i}\right)\)</code> and <code>\(F_{j}\left( Z_{j}\right)\)</code>.</li>
+<li>Its value is also between -1 and 1.</li>
+<li>It is directly formulated on ranks, and hence is less affected by the marginal distributions of <code>\(Z_i\)</code> and <code>\(Z_j\)</code> than Pearson’s correlation.</li>
+</ul>
+<h3 id="example-the-case-of-multivariate-normal">
+  Example: the case of multivariate Normal
+  <a class="anchor" href="#example-the-case-of-multivariate-normal">#</a>
+</h3>
+<ul>
+<li>Pearson’s correlation: <code>\(\rho _{ij}\)</code></li>
+<li>Kendall’s tau: <code>\(\tau _{ij}=\dfrac{2}{\pi }\arcsin \left( \rho_{ij}\right)\)</code></li>
+<li>Spearman’s rank correlation: <code>\(r_{ij}=\dfrac{6}{\pi }\arcsin \left(\dfrac{\rho _{ij}}{2}\right)\)</code></li>
+</ul>
+<h3 id="example-suva-data">
+  Example: SUVA data
+  <a class="anchor" href="#example-suva-data">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(SUVAcom, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pearson&#34;</span>)  <span style="color:#75715e"># default</span>
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.7489701
+## dailyallow 0.7489701  1.0000000
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(SUVAcom, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kendall&#34;</span>)
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.5154526
+## dailyallow 0.5154526  1.0000000
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(SUVAcom, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spearman&#34;</span>)
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.6899156
+## dailyallow 0.6899156  1.0000000
+</code></pre>
+<hr>
+<p>Repeating those on the original claims (before <code>\(\log\)</code> transformation):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">exp</span>(SUVAcom), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pearson&#34;</span>)  <span style="color:#75715e"># default</span>
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.8015752
+## dailyallow 0.8015752  1.0000000
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">exp</span>(SUVAcom), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kendall&#34;</span>)
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.5154526
+## dailyallow 0.5154526  1.0000000
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">exp</span>(SUVAcom), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spearman&#34;</span>)
+</code></pre></div><pre><code>##             medcosts dailyallow
+## medcosts   1.0000000  0.6899156
+## dailyallow 0.6899156  1.0000000
+</code></pre>
+<p>We see that Kendall’s <code>\(\tau\)</code> and Spearman’s <code>\(r\)</code> are unchanged. This is because the <code>\(\log\)</code> transformation does not affect ranks in the data. The more extreme nature of the data, however, leads to a higher Pearson’s correlation coefficient.</p>
+<h2 id="limits-of-correlation">
+  Limits of correlation
+  <a class="anchor" href="#limits-of-correlation">#</a>
+</h2>
+<h3 id="correlation--dependence">
+  Correlation = dependence?
+  <a class="anchor" href="#correlation--dependence">#</a>
+</h3>
+<p>Correlation between the consumption of cheese and deaths by becoming tangled in bedsheets (in the US, see Vigen 2015):</p>
+<!-- To include images: -->
+<p><img src="/img/module-5/TylerVigen.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>Correlation = 0.95!!</strong></p>
+<h3 id="common-fallacies">
+  Common fallacies
+  <a class="anchor" href="#common-fallacies">#</a>
+</h3>
+<p><strong>Fallacy 1</strong>: a small correlation <code>\(\rho(X_1,X_2)\)</code> implies that <code>\(X_1\)</code> and <code>\(X_2\)</code> are close to being
+independent</p>
+<ul>
+<li><strong>wrong!</strong></li>
+<li>Independence implies zero correlation BUT</li>
+<li>A correlation of zero does not always mean independence.</li>
+<li>See example 1 below.</li>
+</ul>
+<p><strong>Fallacy 2</strong>: marginal distributions and their correlation matrix uniquely determine the joint
+distribution.</p>
+<ul>
+<li>This is true only for elliptical families (including multivariate normal), <strong>but wrong in general</strong>!</li>
+<li>See example 2 below.</li>
+</ul>
+<h3 id="example-1">
+  Example 1
+  <a class="anchor" href="#example-1">#</a>
+</h3>
+<p><strong>Company’s two risks</strong> <code>\(X_1\)</code> <strong>and</strong> <code>\(X_2\)</code></p>
+<ul>
+<li>Let <code>\(Z\sim N(0,1)\)</code> and $ (U=-1)=1/2=(U=1)$</li>
+<li><code>\(U\)</code> stands for an economic stress generator, <em>independent</em> of <code>\(Z\)</code></li>
+<li>Consider: <code>$$X_1=Z\sim N(0,1)$$</code> and <code>$$X_2=UZ\sim N(0,1).$$</code> Now
+Cov$(X_1,X_2)=E(X_1X_2)=E(UZ^2)=E(U)E(Z^2)=0$ hence <code>\(\rho(X_1,X_2)=0\)</code>. However, <code>\(X_1\)</code> and <code>\(X_2\)</code> are
+<em>strongly dependent</em>, with 50% probability co-monotone and 50% counter&ndash;monotone.</li>
+</ul>
+<p>This example can be made more realistic</p>
+<h3 id="example-2">
+  Example 2
+  <a class="anchor" href="#example-2">#</a>
+</h3>
+<p>Marginals and correlations—not enough to completely determine joint
+distribution</p>
+<p>Consider the following example:</p>
+<ul>
+<li>Marginals: Gamma <code>\(\left( 5,1\right)\)</code></li>
+<li>Correlation: <code>\(\rho =0.75\)</code></li>
+<li>Different dependence structures: Normal copula vs Cook-Johnson copula</li>
+<li>More generally, check the 
+  <a href="https://copulatheque.shinyapps.io/copulas/">Copulatheque</a></li>
+</ul>
+<h3 id="example-2-illustration-normal-vs-cook-johnson-copulas">
+  Example 2 illustration: Normal vs Cook-Johnson copulas
+  <a class="anchor" href="#example-2-illustration-normal-vs-cook-johnson-copulas">#</a>
+</h3>
+<p><embed src="/img/module-5/Lecture9-Fig1_2.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" /></p>
+<h1 id="copula-theory">
+  Copula theory
+  <a class="anchor" href="#copula-theory">#</a>
+</h1>
+<h2 id="what-is-a-copula">
+  What is a copula?
+  <a class="anchor" href="#what-is-a-copula">#</a>
+</h2>
+<h3 id="sklars-representation-theorem">
+  Sklar’s representation theorem
+  <a class="anchor" href="#sklars-representation-theorem">#</a>
+</h3>
+<p>The copula couples, links, or connects the joint distribution to its marginals.</p>
+<p>Sklar (1959): There exists a copula function <code>\(C\)</code> such that
+<code>$$F\left( x_{1},x_{2},...,x_{n}\right) =C\left( F_{1}\left( x_{1}\right) ,F_{2}\left( x_{2}\right) ,...,F_{n}\left( x_{n}\right) \right)$$</code>
+where <code>\(F_{k}\)</code> is the marginal df of <code>\(X_{k}\)</code>, <code>\(k=1,2,...,n\)</code>. Equivalently,
+<code>$$\Pr\left( X_{1}\leq x_{1},...,X_{n}\leq x_{n}\right) =C\left( \Pr\left[ X_{1}\leq x_{1}\right] ,...,\Pr\left[ X_{n}\leq x_{n}\right] \right) .$$</code></p>
+<hr>
+<p>Under certain conditions, the copula</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) =F\left( F_{1}^{-1}\left( u_{1}\right) ,...,F_{n}^{-1}\left( u_{n}\right) \right)$$</code></p>
+<p>is unique, where <code>\(F_{k}^{-1}\)</code> denote the quantile functions.</p>
+<p>Note:</p>
+<ul>
+<li>This is one way of constructing copulas.</li>
+<li>These are called implicit copulas.</li>
+<li>Elliptical copulas are a prominent example (e.g., Gaussian copula)</li>
+</ul>
+<h3 id="example">
+  Example
+  <a class="anchor" href="#example">#</a>
+</h3>
+<p>Let
+<code>$$F(x,y) = \left\{\begin{array}{cl} \frac{(x+1)(e^y-1)}{x+2e^{y}-1} &amp; (x,y) \in [-1,1]\times[0,\infty] \\\\ 1-e^{-y} &amp; (x,y)\in(1,\infty]\times[0,\infty] \\\\ 0 &amp; \text{elsewhere} \end{array}\right.$$</code>
+Hence</p>
+<p><code>$$\begin{array}{rcl} F(x) &amp;=&amp; \frac{x+1}{2}, \quad x\in[-1,1] \\ F^{-1}(u) &amp;=&amp; 2u-1 = x \\ G(y) &amp;=&amp; 1-e^{-y},\quad y\ge 0 \\ G^{-1}(v) &amp;=&amp; -\ln (1-v) = y \end{array}$$</code></p>
+<hr>
+<p>Finally,</p>
+<p><code>$$\begin{array}{rcl} C(u,v) &amp;=&amp; \frac{(2u-1+1)[(1-v)^{-1}-1]}{2u-1+2(1-v)^{-1}-1} \\ &amp;=&amp; \frac{2u (1-1+v)}{(2u-2)(1-v)+2} \\ &amp;=&amp;\frac{2uv}{2u-2uv-2+2v+2} \\ &amp;=&amp;\frac{uv}{u+v-uv} \\ &amp;=&amp; uv \times \frac{1}{u+v-uv} \end{array}$$</code></p>
+<h3 id="some-remarks">
+  Some remarks
+  <a class="anchor" href="#some-remarks">#</a>
+</h3>
+<ul>
+<li>Independence copula: <code>\(C\left( u_{1},...,u_{n}\right) =u_{1}\cdot \cdot\cdot u_{n}.\)</code></li>
+<li>Other copulas generally contain parameter(s) that describe the dependence.</li>
+<li>Copula captures the dependence structure, while separating the effects of the marginals.</li>
+</ul>
+<hr>
+<p>For <code>\(n=2\)</code>, <code>\(C\)</code> is a function mapping <code>\(\left[ 0,1\right] ^{2}\)</code> to <code>\(\left[ 0,1\right]\)</code> that is non-decreasing and right continuous, and:</p>
+<ol>
+<li><code>\(\lim_{u_{k}\rightarrow 0}C\left( u_{1},u_{2}\right) =0\)</code> for <code>\(k=1,2\)</code>;</li>
+<li><code>\(\lim_{u_{1}\rightarrow 1}C\left( u_{1},u_{2}\right) =u_{2}\)</code> and <code>\(\lim_{u_{2}\rightarrow 1}C\left( u_{1},u_{2}\right) =u_{1}\)</code>; and</li>
+<li><code>\(C\)</code> satisfies the inequality <code>\(C\left( v_{1},v_{2}\right) -C\left(u_{1},v_{2}\right) -C\left( v_{1},u_{2}\right) +C\left(u_{1},u_{2}\right) \geq 0\)</code> for any <code>\(u_{1}\leq v_{1},u_{2}\leq v_{2}\)</code>.</li>
+</ol>
+<p>Corresponding heuristics are:</p>
+<ol>
+<li>If the event on one variable is impossible, the joint probability is impossible.</li>
+<li>If the event on one variable is certain, the joint probability boils down to the marginal of the other one.</li>
+<li>There cannot be negative probabilities.</li>
+</ol>
+<h3 id="adv-multivariate-distribution-function">
+  <code>\(\adv\)</code> Multivariate distribution function
+  <a class="anchor" href="#adv-multivariate-distribution-function">#</a>
+</h3>
+<p>A function <code>\(F:R^{n}\rightarrow \lbrack 0,1]\)</code> is a multivariate d.f. if
+it satisfies:</p>
+<ol>
+<li>right-continuous;</li>
+<li><code>\(\lim_{x_{i}\rightarrow -\infty }F\left( x_{1},...,x_{n}\right) =0\)</code>
+for <code>\(i=1,2,...,n;\)</code></li>
+<li><code>\(\lim_{x_{i}\rightarrow \infty ,\forall i}F\left(x_{1},...,x_{n}\right) =1;\)</code> and</li>
+<li>rectangle inequality holds: for all <code>\(\left( a_{1},...,a_{n}\right)\)</code>
+and <code>\(\left( b_{1},...,b_{n}\right)\)</code> with <code>\(a_{i}\leq b_{i}\)</code> for
+<code>\(i=1,...,n\)</code>, we have</li>
+</ol>
+<p><code>$$\sum_{i_{1}=1}^{2}\cdots \sum_{i_{n}=1}^{2}\left( -1\right) ^{i_{1}+\cdots +i_{n}}F\left( x_{1i_{1}},...,x_{ni_{n}}\right) \geq 0,$$</code></p>
+<p>where <code>\(x_{i1}=a_{i}\)</code> and <code>\(x_{i2}=b_{i}\)</code>.</p>
+<h3 id="adv-multivariate-copula">
+  <code>\(\adv\)</code> Multivariate copula
+  <a class="anchor" href="#adv-multivariate-copula">#</a>
+</h3>
+<p>A copula <code>\(C:[0,1]^{n}\rightarrow \lbrack 0,1]\)</code> is a multivariate
+distribution function whose univariate marginals are Uniform <code>\((0,1)\)</code> .</p>
+<p>Properties of a multivariate copula:</p>
+<ol>
+<li><code>\(C\left( u_{1},...,u_{k-1},0,u_{k+1},...,u_{n}\right) =0\)</code></li>
+<li><code>\(C\left( 1,...,1,u_{k},1,...,1\right) =u_{k}\)</code></li>
+<li>the rectangle inequality leads us to</li>
+</ol>
+<p><code>$$\begin{array}{rcl} &amp;&amp;P\left( a_{1}\leq U_{1}\leq b_{1},...,a_{n}\leq U_{n}\leq b_{n}\right) \\ &amp;=&amp;\sum_{i_{1}=1}^{2}\cdots \sum_{i_{n}=1}^{2}\left( -1\right) ^{i_{1}+\cdots +i_{n}}C\left( u_{1i_{1}},...,u_{ni_{n}}\right) \geq 0 \end{array}$$</code></p>
+<p>for all <code>\(u_{i}\in \lbrack 0,1]\)</code>, <code>\(\left( a_{1},...,a_{n}\right)\)</code> and <code>\(\left( b_{1},...,b_{n}\right)\)</code> with <code>\(a_{i}\leq b_{i},\)</code> and
+<code>\(u_{i1}=a_{i}\)</code> and <code>\(u_{i2}=b_{i}.\)</code></p>
+<p>Heuristics are the same as before.</p>
+<h2 id="density-associated-with-a-copula">
+  Density associated with a copula
+  <a class="anchor" href="#density-associated-with-a-copula">#</a>
+</h2>
+<p>For continuous marginals with respective pdf <code>\(f_{1},...f_{n}\)</code>, the
+joint pdf of <code>\(\mathbf{X}\)</code> can be written as</p>
+<p><code>$$f\left( x_{1},...,x_{n}\right) =f_{1}\left( x_{1}\right) \cdot \cdot \cdot f_{n}\left( x_{n}\right) \times c\left( F_{1}\left( x_{1}\right) ,...,F_{n}\left( x_{n}\right) \right)$$</code></p>
+<p>where the copula density <code>\(c\)</code> is given by</p>
+<p><code>$$c\left( u_{1},...,u_{n}\right) =\frac{\partial ^{n}C\left( u_{1},...,u_{n}\right) }{\partial u_{1}\partial u_{2}\cdot \cdot \cdot \partial u_{n}}.$$</code></p>
+<p>Note:</p>
+<ul>
+<li>The copula <code>\(c\)</code> distorts the independence to induce the actual dependence structure.</li>
+<li>If independent, <code>\(c\left( u_{1},...,u_{n}\right)=1\)</code>.</li>
+</ul>
+<h3 id="example-3">
+  Example
+  <a class="anchor" href="#example-3">#</a>
+</h3>
+<p>Let <code>\(X\)</code> and <code>\(Y\)</code> be two random variables and the copula <code>\(C\)</code> of <code>\(X\)</code> and <code>\(Y\)</code> is</p>
+<p><code>$$C(u,v)=\frac{uv}{u+v-uv}.$$</code></p>
+<p>Derive its associated density <code>\(c\)</code>.</p>
+<h2 id="survival-copulas">
+  Survival copulas
+  <a class="anchor" href="#survival-copulas">#</a>
+</h2>
+<p>What if we want to working with (model) survival functions
+<code>$$\overline{F}_i(x_i)=1-F_i(x_i)\left(=S_i(x_i)\right)$$</code>
+rather than distribution functions?</p>
+<p><code>\(\longrightarrow\)</code> We can couple <code>\(\overline{F}_i\)</code>’s with the <strong>survival copulas</strong> <code>\(\overline{C}\)</code>.</p>
+<p>In the bivariate case, this yields
+<code>$$\overline{F}(x_1,x_2)=\Pr[X_1&gt;x_1,X_2&gt;x_2]=\overline{C}\left(\overline{F}_1(x_1),\overline{F}_2(x_2)\right),$$</code>
+where
+<code>$$\overline{C}(1-u,1-v)=1-u-v+C(u,v).$$</code>
+This is because</p>
+<p><code>$$\begin{array}{rcl} \Pr[X_1&gt;x_1,X_2&gt;x_2]&amp;=&amp;1-\Pr[X_1 \le x_1]-\Pr[X_2 \le x_2] \\ &amp;&amp;+\Pr[X_1\le x_1,X_2\le x_2]. \end{array}$$</code></p>
+<h2 id="invariance-property">
+  Invariance property
+  <a class="anchor" href="#invariance-property">#</a>
+</h2>
+<ul>
+<li>Suppose random vector <code>\(\mathbf{X}\)</code> has copula <code>\(C\)</code> and suppose <code>\(T_{1},...,T_{n}\)</code> are non-decreasing continuous functions of <code>\(X_{1},...,X_{n}\)</code> , respectively.</li>
+<li>The random vector defined by <code>\(\left( T_{1}\left( X_{1}\right),...,T_{n}\left( X_{n}\right) \right)\)</code> has the same copula <code>\(C\)</code>.
+Proof: see Theorem 2.4.3 (p. 25) of Nelsen (1999)</li>
+<li>The usefulness of this property can be illustrated in many ways. If you have a copula describing joint distribution of insurance losses of various types, and you decide the quantity of interest is a transformation (e.g. logarithm) of these losses, then the multivariate distribution structure does not change.</li>
+<li>The copula is then also invariant to inflation.</li>
+<li>Only the marginals distributions change.</li>
+</ul>
+<hr>
+<p>Empirical copula of the 1089 common claims (LHS) and of their log (RHS):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">plot</span>(copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">exp</span>(SUVAcom))[, <span style="color:#ae81ff">1</span>], copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">exp</span>(SUVAcom))[,
+  <span style="color:#ae81ff">2</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">plot</span>(copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(SUVAcom)[, <span style="color:#ae81ff">1</span>], copula<span style="color:#f92672">::</span><span style="color:#a6e22e">pobs</span>(SUVAcom)[, <span style="color:#ae81ff">2</span>],
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVAinv-1.png" width="672" /></p>
+<h1 id="main-bivariate-copulas">
+  Main bivariate copulas
+  <a class="anchor" href="#main-bivariate-copulas">#</a>
+</h1>
+<h2 id="the-fréchet-bounds">
+  The Fréchet bounds
+  <a class="anchor" href="#the-fr%c3%a9chet-bounds">#</a>
+</h2>
+<p>Define the Fréchet bounds as:</p>
+<ul>
+<li>Fréchet lower bound: <code>\(L_{F}\left( u_{1},...,u_{n}\right) =\max \left(\sum_{k=1}^{n}u_{k}-\left( n-1\right) ,0\right)\)</code></li>
+<li>Fréchet upper bound: <code>\(U_{F}\left( u_{1},...,u_{n}\right) =\min \left(u_{1},...,u_{n}\right)\)</code></li>
+</ul>
+<p>Any copula function satisfies the following bounds:</p>
+<p><code>$$L_{F}\left( u_{1},...,u_{n}\right) \leq C\left(u_{1},...,u_{n}\right) \leq U_{F}\left( u_{1},...,u_{n}\right).$$</code></p>
+<p>The Fréchet upper bound satisfies the definition of a copula, but the
+Fréchet lower bound does not for dimensions <code>\(n\geq 3\)</code>.</p>
+<hr>
+<p><img src="/img/module-5/Frechet.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Source: Wikipedia (2020)</p>
+<h2 id="the-normal-aka-gaussian-copula">
+  The Normal (aka Gaussian) copula
+  <a class="anchor" href="#the-normal-aka-gaussian-copula">#</a>
+</h2>
+<p>Recall that <code>\(\mathbf{Z}=\left( Z_{1},...Z_{n}\right) ^{\prime }\sim\)</code>
+<code>\(MN\left( \mathbf{0},\Sigma \right)\)</code> if its joint p.d.f.
+is</p>
+<p><code>$$f\left(z_{1},...,z_{n}\right)=\frac{1}{\sqrt{\left( 2\pi \right) ^{n} \vert \Sigma \vert }}\exp \left[ -\frac{1}{2} \mathbf{z}^{\prime }\Sigma^{-1}\mathbf{z}\right]$$</code></p>
+<p>where <code>\(\mathbf{z}=\left( z_{1},...z_{n}\right)\)</code>.</p>
+<p>Now define its joint distribution by</p>
+<p><code>$$\Phi_{\Sigma}\left( z_{1},...,z_{n}\right) = \int_{-\infty }^{z_{n}}\int_{-\infty }^{z_{n-1}}\cdot \cdot \cdot \int_{-\infty }^{z_{1}} \frac{1}{\sqrt{\left( 2\pi \right)^{n} \vert \Sigma \vert }}\exp \left[ -\frac{1}{2}\mathbf{z}^{\prime }\Sigma^{-1}\mathbf{z}\right] dz_{1}\cdot \cdot \cdot dz_{n}$$</code></p>
+<p>Let <code>\(\Phi(\cdot)\)</code> denote the standard normal cumulative distribution function. The copula defined by</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) =\Phi _{\Sigma}\left( \Phi ^{-1}\left( u_{1}\right) ,...,\Phi ^{-1}\left( u_{n}\right) \right)$$</code></p>
+<p>is called the Normal (or Gaussian) copula.</p>
+<hr>
+<p>Illustration of the Gaussian copula:</p>
+<p><img src="/img/module-5/Gaussian.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Here <code>\(\rho=0.4\)</code>. Source: Wikipedia (2020)</p>
+<h3 id="the-t-copula">
+  The <code>\(t\)</code> copula
+  <a class="anchor" href="#the-t-copula">#</a>
+</h3>
+<p>A r vector <code>\(\mathbf{Z}=\left( Z_{1},...Z_{n}\right) ^{\prime}\sim MT \left( \mathbf{0},\Sigma;\upsilon \right)\)</code> if its joint p.d.f. is</p>
+<p><code>$$f\left( z_{1},...,z_{n}\right) = \frac{\Gamma \left( \frac{\upsilon +1}{2} \right) }{\sqrt{\left( \upsilon \pi \right) ^{n}\left\vert \Sigma \right\vert }\Gamma \left( \frac{\upsilon }{2}\right) }\left( 1+\frac{1}{ \upsilon }\mathbf{z}^{\prime }\Sigma^{-1}\mathbf{z}\right) ^{-(\upsilon +n)/2}.$$</code></p>
+<p>Now define its joint distribution by</p>
+<p><code>$$T_{\Sigma ,\upsilon }\left( z_{1},...,z_{n}\right) =\int_{-\infty }^{z_{n}}\int_{-\infty }^{z_{n-1}}\cdot \cdot \cdot \int_{-\infty }^{z_{1}} \frac{\Gamma \left( \frac{\upsilon +1}{2}\right) }{\sqrt{\left( \upsilon \pi \right) ^{n}\left\vert \Sigma\right\vert }\Gamma \left( \frac{ \upsilon }{2}\right) }\left( 1+\frac{1}{\upsilon }\mathbf{z}^{\prime } \Sigma^{-1}\mathbf{z}\right) ^{-(\upsilon +n)/2}dz_{1}\cdot \cdot \cdot dz_{n}.$$</code></p>
+<p>Let <code>\(t_{\upsilon }(\cdot)\)</code> denote the cumulative distribution function of a standard univariate <code>\(t\)</code> distribution. The copula defined by</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) =T_{\Sigma ,\upsilon }\left( t_{\upsilon }^{-1}\left( u_{1}\right) ,...,t_{\upsilon }^{-1}\left( u_{n}\right) \right)$$</code></p>
+<p>is called the <code>\(t\)</code> copula.</p>
+<h2 id="archimedean-copulas">
+  Archimedean copulas
+  <a class="anchor" href="#archimedean-copulas">#</a>
+</h2>
+<p><code>\(C\)</code> is Archimedean if it has the form</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) =\psi ^{-1}\left( \psi \left( u_{1}\right) +\cdots+\psi \left( u_{n}\right) \right)$$</code></p>
+<p>for all <code>\(0\leq u_{1},...,u_{n}\leq 1\)</code> and for some function <code>\(\psi\)</code>
+(called the generator) satisfying:</p>
+<ol>
+<li><code>\(\psi \left( 1\right) =0;\)</code></li>
+<li><code>\(\psi\)</code> is decreasing; and</li>
+<li><code>\(\psi\)</code> is convex.</li>
+</ol>
+<h2 id="the-clayton-copula">
+  The Clayton copula
+  <a class="anchor" href="#the-clayton-copula">#</a>
+</h2>
+<p>The Clayton copula is defined by</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) =\left( \sum_{k=1}^{n}u_{k}^{-\theta }-n+1\right) ^{-1/\theta },  \quad \theta \in (0,\infty)$$</code></p>
+<p>It is of Archimedean type with:</p>
+<ul>
+<li><code>\(\psi \left( t\right) =\frac{1}{\theta}(t^{-\theta }-1)\)</code></li>
+<li><code>\(\psi ^{-1}\left( s\right) =\left( 1+\theta s\right) ^{-1/\theta }\)</code></li>
+</ul>
+<p>Note the correspondance with Kendall’s <code>\(\tau\)</code> (for bivariate case):
+<code>$$\theta = \frac{2\tau}{1-\tau} \quad \Longleftrightarrow  \quad \tau = \frac{\theta}{2+\theta}$$</code>
+This copula is asymmetric with positive dependence in the left tail.</p>
+<hr>
+<h3 id="the-clayton-copula-for-n2">
+  The Clayton copula for <code>\(n=2\)</code>
+  <a class="anchor" href="#the-clayton-copula-for-n2">#</a>
+</h3>
+<p>We have</p>
+<p><code>$$C\left( u_{1},u_{2}\right) =\left( u_{1}^{-\theta }+u_{2}^{-\theta}-1\right) ^{-1/\theta }$$</code></p>
+<hr>
+<p>With parameter <code>\(\tau=0.25\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/clayton-1.png" width="672" height="90%" /></p>
+<hr>
+<p>With parameter <code>\(\tau=0.75\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/clayton2-1.png" width="672" height="90%" /></p>
+<h2 id="the-frank-copula">
+  The Frank copula
+  <a class="anchor" href="#the-frank-copula">#</a>
+</h2>
+<p>The Frank copula is defined by</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) = \dfrac{1}{\theta }\log \left( 1+\dfrac{\prod_{i=1}^n\left( e^{\theta u_{i}}-1\right) }{e^{\theta}-1}\right) , \quad \theta \in \mathbb{R} \backslash \{0\} %C\left( u_{1},...,u_{n}\right) = \dfrac{1}{\alpha }\log \left( 1+\dfrac{\left( e^{\alpha u_{1}}-1\right) \left( e^{\alpha u_{2}}-1\right) }{e^{\alpha}-1}\right) %\frac{1}{\log \theta }\log \left(1+\frac{ \prod\nolimits_{k=1}^{n}\left( \theta ^{u_{k}}-1\right)}{\left( \theta -1\right) ^{n-1}}\right) , \quad \theta \in \mathbb{R}^+ \backslash \{1\}$$</code></p>
+<p>It is of Archimedean type with:</p>
+<ul>
+<li><code>\(\psi \left( t\right) =-\log \left( \frac{e ^{-\theta t}-1}{e^{-\theta} -1}\right)\)</code></li>
+<li><code>\(\psi ^{-1}\left( s\right) =-\frac{1}{\theta }\log \left(1+e^{-s}\left( e^{-\theta}-1\right) \right)\)</code></li>
+</ul>
+<p>Note the correspondance with Kendall’s <code>\(\tau\)</code> (for bivariate case):
+<code>$$\tau = 1-\frac{4}{\theta}+\frac{4}{\theta^2}\int_0^\theta \frac{t}{e^t-1}dt.$$</code>
+This copula is symmetric.</p>
+<hr>
+<p>With parameter <code>\(\tau=0.25\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/frank-1.png" width="672" height="90%" /></p>
+<hr>
+<p>With parameter <code>\(\tau=0.75\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/frank2-1.png" width="672" height="90%" /></p>
+<h2 id="the-gumbel-hougard-copula">
+  The Gumbel(-Hougard) copula
+  <a class="anchor" href="#the-gumbel-hougard-copula">#</a>
+</h2>
+<p>The Gumbel copula is defined by</p>
+<p><code>$$C\left( u_{1},...,u_{n}\right) = \exp \left[ -\left(\sum_{i=1}^n (-\log u_i)^\theta\right)^{1/\theta}\right] \,\quad \theta \in [1,\infty)$$</code></p>
+<p>It is of Archimedean type with:</p>
+<ul>
+<li><code>\(\psi \left( t\right) = \left( -\log t \right)^\theta\)</code></li>
+<li><code>\(\psi ^{-1}\left( s\right) =\exp\left\{  -t^{1/\theta}\right\}\)</code></li>
+</ul>
+<p>Note correspondance with Kendall’s <code>\(\tau\)</code> (for bivariate case):
+<code>$$\theta = \frac{1}{1-\tau} \quad \Longleftrightarrow \quad \tau = \frac{\theta-1}{\theta}$$</code>
+This copula is asymmetric with greater dependence in the right tail,
+which makes it often a good candidate for large claims with a
+common underlying cause.</p>
+<hr>
+<p>With parameter <code>\(\tau=0.25\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/gumbel-1.png" width="672" height="90%" /></p>
+<hr>
+<p>With parameter <code>\(\tau=0.75\)</code></p>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/gumbel2-1.png" width="672" height="90%" /></p>
+<h2 id="copula-models-in-r">
+  Copula models in R
+  <a class="anchor" href="#copula-models-in-r">#</a>
+</h2>
+<h3 id="the-vinecopula-package">
+  The <code>VineCopula</code> package
+  <a class="anchor" href="#the-vinecopula-package">#</a>
+</h3>
+<ul>
+<li>The 
+  <a href="https://cran.r-project.org/web/packages/VineCopula/readme/README.html#bivariate-copula-modeling-the-bicop-family"><code>VineCopula</code> package</a> caters for many of the basic copula modelling requirements.</li>
+<li>Vine copulas (Kurowicka and Joe 2011) allow for the construction of multivariate copulas with flexible dependence structures; they are outside the scope of this Module.</li>
+<li>The package, however, has a series of modelling functions specifically designed for bivariate copula modelling via the “BiCop-family.”</li>
+</ul>
+<hr>
+<ul>
+<li><code>BiCop</code>: Creates a bivariate copula by specifying the family and parameters (or Kendall’s tau). Returns an object of class <code>BiCop.</code> The class has the following methods:
+<ul>
+<li><code>print</code>, <code>summary</code>: a brief or comprehensive overview of the bivariate copula, respectively.</li>
+<li><code>plot</code>, <code>contour</code>: surface/perspective and contour plots of the copula density. Possibly coupled with standard normal margins (default for contour).</li>
+</ul>
+</li>
+<li>For most functions, you can provide an object of class <code>BiCop</code> instead of specifying <code>family</code>, <code>par</code> and <code>par2</code> manually.</li>
+</ul>
+<h3 id="bivariate-copulas-in-vinecopula">
+  Bivariate copulas in <code>VineCopula</code>
+  <a class="anchor" href="#bivariate-copulas-in-vinecopula">#</a>
+</h3>
+<p>The following bivariate copulas are available in the 
+  <a href="https://cran.r-project.org/web/packages/VineCopula/readme/README.html#bivariate-copula-modeling-the-bicop-family"><code>VineCopula</code> package</a> within the <code>bicop</code> family:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Copula family</strong></th>
+<th style="text-align:center"><strong><code>family</code></strong></th>
+<th style="text-align:center"><strong><code>par</code></strong></th>
+<th style="text-align:center"><strong><code>par2</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Gaussian</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">(-1, 1)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Student t</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">(-1, 1)</td>
+<td style="text-align:center">(2,Inf)</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Clayton</td>
+<td style="text-align:center">3, 13</td>
+<td style="text-align:center">(0, Inf)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Clayton (90° and 270°)</td>
+<td style="text-align:center">23, 33</td>
+<td style="text-align:center">(-Inf, 0)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Gumbel</td>
+<td style="text-align:center">4, 14</td>
+<td style="text-align:center">[1, Inf)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Gumbel (90° and 270°)</td>
+<td style="text-align:center">24, 34</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Frank</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">R  {0}</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Joe</td>
+<td style="text-align:center">6, 16</td>
+<td style="text-align:center">(1, Inf)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Joe (90° and 270°)</td>
+<td style="text-align:center">26, 36</td>
+<td style="text-align:center">(-Inf, -1)</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Copula family</strong></th>
+<th style="text-align:center"><strong><code>family</code></strong></th>
+<th style="text-align:center"><strong><code>par</code></strong></th>
+<th style="text-align:center"><strong><code>par2</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">(Survival) Clayton-Gumbel (BB1)</td>
+<td style="text-align:center">7, 17</td>
+<td style="text-align:center">(0, Inf)</td>
+<td style="text-align:center">[1, Inf)</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Clayton-Gumbel (90° and 270°)</td>
+<td style="text-align:center">27, 37</td>
+<td style="text-align:center">(-Inf, 0)</td>
+<td style="text-align:center">(-Inf, -1]</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Joe-Gumbel (BB6)</td>
+<td style="text-align:center">8, 18</td>
+<td style="text-align:center">[1 ,Inf)</td>
+<td style="text-align:center">[1, Inf)</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Joe-Gumbel (90° and 270°)</td>
+<td style="text-align:center">28, 38</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">(-Inf, -1]</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Joe-Clayton (BB7)</td>
+<td style="text-align:center">9, 19</td>
+<td style="text-align:center">[1, Inf)</td>
+<td style="text-align:center">(0, Inf)</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Joe-Clayton (90° and 270°)</td>
+<td style="text-align:center">29, 39</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">(-Inf, 0)</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Joe-Frank (BB8)</td>
+<td style="text-align:center">10, 20</td>
+<td style="text-align:center">[1, Inf)</td>
+<td style="text-align:center">(0, 1]</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Joe-Frank (90° and 270°)</td>
+<td style="text-align:center">30, 40</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">[-1, 0)</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Tawn type 1</td>
+<td style="text-align:center">104, 114</td>
+<td style="text-align:center">[1, Inf)</td>
+<td style="text-align:center">[0, 1]</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Tawn type 1 (90° and 270°)</td>
+<td style="text-align:center">124, 134</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">[0, 1]</td>
+</tr>
+<tr>
+<td style="text-align:left">(Survival) Tawn type 2</td>
+<td style="text-align:center">204, 214</td>
+<td style="text-align:center">[1, Inf)</td>
+<td style="text-align:center">[0, 1]</td>
+</tr>
+<tr>
+<td style="text-align:left">Rotated Tawn type 2 (90° and 270°)</td>
+<td style="text-align:center">224, 234</td>
+<td style="text-align:center">(-Inf, -1]</td>
+<td style="text-align:center">[0, 1]</td>
+</tr>
+</tbody>
+</table>
+<p>All of these copulas are illustrated in the 
+  <a href="https://copulatheque.shinyapps.io/copulas/">copulatheque</a></p>
+<hr>
+<p>Example of Gumbel copula:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">cop <span style="color:#f92672">&lt;-</span> VineCopula<span style="color:#f92672">::</span><span style="color:#a6e22e">BiCop</span>(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">print</span>(cop)
+</code></pre></div><pre><code>## Bivariate copula: Gumbel (par = 2, tau = 0.5)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(cop)
+</code></pre></div><pre><code>## Family
+## ------ 
+## No:    4
+## Name:  Gumbel
+## 
+## Parameter(s)
+## ------------
+## par:  2
+## 
+## Dependence measures
+## -------------------
+## Kendall's tau:    0.5
+## Upper TD:         0.59 
+## Lower TD:         0
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(cop)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample2-1.png" width="672" height="80%" /></p>
+<p>Note this is for uniform margins.</p>
+<hr>
+<p>Now with a standard normal margin:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(cop, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;surface&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;norm&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample3-1.png" width="672" height="80%" /></p>
+<hr>
+<p>Contour plots are done with normal margins as standard:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(cop, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample3-2-1.png" width="672" height="80%" /></p>
+<hr>
+<p>But uniform margins are still possible:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(cop, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample3-3-1.png" width="672" height="80%" /></p>
+<hr>
+<p>And so are exponential margins in both cases:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(cop, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;exp&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample3-4-1.png" width="672" height="80%" /></p>
+<h3 id="conversion-between-dependence-measures-and-parameters-for-a-given-family">
+  Conversion between dependence measures and parameters (for a given family):
+  <a class="anchor" href="#conversion-between-dependence-measures-and-parameters-for-a-given-family">#</a>
+</h3>
+<ul>
+<li><code>BiCopPar2Tau</code>: computes the theoretical Kendall’s tau value of a bivariate copula for given parameter values.</li>
+<li><code>BiCopTau2Par</code>: computes the parameter of a (one parameter) bivariate copula for a given value of Kendall’s tau.</li>
+</ul>
+<p>Example of conversion for Clayton:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tau <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">BiCopPar2Tau</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2.5</span>)
+tau
+</code></pre></div><pre><code>## [1] 0.5555556
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">theta <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> tau<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> tau)
+theta
+</code></pre></div><pre><code>## [1] 2.5
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopTau2Par</span>(<span style="color:#ae81ff">3</span>, tau)
+</code></pre></div><pre><code>## [1] 2.5
+</code></pre>
+<h3 id="evaluate-functions-related-to-a-bivariate-copula">
+  Evaluate functions related to a bivariate copula:
+  <a class="anchor" href="#evaluate-functions-related-to-a-bivariate-copula">#</a>
+</h3>
+<ul>
+<li><code>BiCopPDF</code>/<code>BiCopCDF</code>: evaluates the pdf/cdf of a given parametric bivariate copula.</li>
+<li><code>BiCopDeriv</code>: evaluates the derivative of a given parametric bivariate copula density with respect to its parameter(s) or one of its arguments.</li>
+</ul>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">BiCopCDF</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0.75</span>, <span style="color:#ae81ff">999</span>), cop),
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">BiCopCDF</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">999</span>), cop),
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">BiCopCDF</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">999</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0.25</span>, <span style="color:#ae81ff">999</span>), cop),
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/copexample5-1.png" width="90%" /></p>
+<hr>
+<h1 id="adv-simulation-from-bivariate-copulas">
+  <code>\(\adv\)</code> Simulation from bivariate copulas
+  <a class="anchor" href="#adv-simulation-from-bivariate-copulas">#</a>
+</h1>
+<h2 id="adv-reminder-simulation-of-a-univariate-random-variable">
+  <code>\(\adv\)</code> Reminder: simulation of a univariate random variable
+  <a class="anchor" href="#adv-reminder-simulation-of-a-univariate-random-variable">#</a>
+</h2>
+<ul>
+<li>Remember that if <code>\(X \in \mathbb{R}\)</code> has distribution function <code>\(F\)</code> then
+$$ F(X) \sim \text{uniform}(0,1).$$</li>
+<li>This forms the basis of most simulation techniques, as a pseudo-uniform <code>\(u \in (0,1)\)</code> can then be mapped into a pseudo-random <code>\(x \in \mathbb{R}\)</code> with df F by applying
+$$ x = F^{-1}(u).$$</li>
+</ul>
+<h2 id="adv-overarching-strategy">
+  <code>\(\adv\)</code> Overarching strategy
+  <a class="anchor" href="#adv-overarching-strategy">#</a>
+</h2>
+<ul>
+<li>We will introduce the general <strong>conditional distribution method</strong>.</li>
+<li>The overarching idea is (for the bivariate case):
+<ul>
+<li>simulate two independent <strong>uniform</strong> random variable <code>\(u\)</code> and <code>\(t\)</code>;</li>
+<li>“tweak” <code>\(t\)</code> into a <code>\(v\in[0,1]\)</code> so that it has the right dependence structure (w.r.t. <code>\(u\)</code>) with the help of the copula;</li>
+<li>map <code>\(u\)</code> and <code>\(v\)</code> into marginal <code>\(x\)</code> and <code>\(y\)</code> using their distribution function.</li>
+</ul>
+</li>
+<li>However, there are some specific, more efficient algorithms that are available for certain types of copulas (see, e.g. Nelsen 1999).</li>
+<li>In R, the function <code>BiCopSim</code> will simulate from a given parametric bivariate copula.</li>
+</ul>
+<h2 id="adv-preliminary-the-conditional-distribution-function">
+  <code>\(\adv\)</code> Preliminary: the conditional distribution function
+  <a class="anchor" href="#adv-preliminary-the-conditional-distribution-function">#</a>
+</h2>
+<p>For the “tweak,” we will need the conditional distribution function for <code>\(V\)</code> given <code>\(U=u\)</code>, which is denoted by <code>\(c_u(v):\)</code>
+<code>\begin{align*} c_u(v)&amp;=\Pr[V\leq v|U=u] \\\       &amp;= \lim_{\Delta u \to 0}\frac{C(u+\Delta u,v)-C(u,v)}{\Delta u} \\       &amp;=\frac{\partial C(u,v)}{\partial u}. \end{align*}</code>
+In particular, we will need its inverse.</p>
+<h3 id="adv-example">
+  <code>\(\adv\)</code> Example
+  <a class="anchor" href="#adv-example">#</a>
+</h3>
+<p>For the copula
+<code>$$C(u,v)=\frac{uv}{u+v-uv}$$</code>
+we have</p>
+<p><code>$$\begin{array}{rcl} c_u(v) &amp;=&amp; \frac{v(u+v-uv)-uv(1-v)}{(u+v-uv)^2}=\left(\frac{v}{u+v-uv}\right)^2 \equiv t \\ c_u^{-1}(t) &amp;=&amp; \frac{\sqrt{t}u}{1-\sqrt{t}(1-u)} \equiv v \end{array}$$</code></p>
+<h3 id="adv-in-r">
+  <code>\(\adv\)</code> In R
+  <a class="anchor" href="#adv-in-r">#</a>
+</h3>
+<p>For copulas of the <code>BiCop</code> family:</p>
+<ul>
+<li><code>BiCopHfunc</code>: evaluates the conditional distribution function <code>\(c_u(v)\)</code> (aka h-function) of a given parametric bivariate copula.</li>
+<li><code>BiCopHinv</code>: evaluates the inverse conditional distribution function <code>\(c_u^{-1}(v)\)</code> (aka inverse h-function) of a given parametric bivariate copula.</li>
+<li><code>BiCopHfuncDeriv</code>: evaluates the derivative of a given conditional parametric bivariate copula (h-function) with respect to its parameter(s) or one of its arguments.</li>
+</ul>
+<h2 id="adv-the-conditional-distribution-method">
+  <code>\(\adv\)</code> The conditional distribution method
+  <a class="anchor" href="#adv-the-conditional-distribution-method">#</a>
+</h2>
+<p><strong>Goal</strong>: generate a pair of pseudo-random variables <code>\((X,Y)\)</code> with d.f.’s <code>\(F\)</code> and <code>\(G\)</code>, respectively, with dependence structure described by the copula <code>\(C\)</code>.</p>
+<p>Algorithm</p>
+<ol>
+<li>Generate two independent uniform <code>\((0,1)\)</code> pseudo-random variables <code>\(u\)</code> and <code>\(t\)</code>;</li>
+<li>Set <code>\(v=c_u^{-1}(t)\)</code>;</li>
+<li>Map <code>\((u,v)\)</code> into <code>\((x,y)\)</code>:</li>
+</ol>
+<p><code>$$\begin{array}{rcl} x &amp;=&amp; F^{-1}(u); \\ y &amp;=&amp; G^{-1}(v). \end{array}$$</code></p>
+<h3 id="adv-example-1">
+  <code>\(\adv\)</code> Example
+  <a class="anchor" href="#adv-example-1">#</a>
+</h3>
+<p>Let <code>\(X\)</code> and <code>\(Y\)</code> be exponential with mean 1 and standard Normal, respectively. Furthermore, the copula describing their dependence is such as in the previous example:
+<code>$$C(u,v)=\frac{uv}{u+v-uv}$$</code>
+Furthermore, you are given the following pseudo-random (independent) uniforms:
+<code>$$0.3726791, 0.6189313, 0.75949099, 0.01801882$$</code>
+Simulate two pairs of outcomes for <code>\((X,Y)\)</code>.</p>
+<hr>
+<p>Use of the conditional distribution method yields</p>
+<ol>
+<li>We can use the uniforms given in the question such that</li>
+</ol>
+<p><code>$$\begin{array}{rcl} (u_1,t_1) &amp;=&amp; (0.3726791, 0.6189313) \\ (u_2,t_2) &amp;=&amp; (0.75949099, 0.01801882) \end{array}$$</code></p>
+<ol>
+<li>Set <code>\(v_i=\frac{u_i\sqrt{t_i}}{1-(1-u_i)\sqrt{t_i}}\)</code> for <code>\(i=1,2\)</code>:</li>
+</ol>
+<p><code>$$\begin{array}{rcl} v_1&amp;=&amp;0.5788953 \\ v_2&amp;=&amp;0.1053509 \end{array}$$</code></p>
+<ol>
+<li>Mapping <code>\((u_i,v_i)\)</code> into <code>\((x_i,y_i)\)</code> using
+<code>$$x_i=F^{-1}(u_i)=-\ln (1-u_i) \text{ and } y_i=\Phi^{-1}(v_i)\text{ we have}$$</code>
+<code>$$\begin{array}{rcl} (x_1,y_1) &amp;=&amp; (0.466297,  0.199068) \\ (x_2,y_2) &amp;=&amp; (1.424998, -1.251638) \end{array}$$</code></li>
+</ol>
+<h2 id="adv-specific-algorithms">
+  <code>\(\adv\)</code> Specific algorithms
+  <a class="anchor" href="#adv-specific-algorithms">#</a>
+</h2>
+<p>The following algorithms are provided for illustration purposes. They are not assessable.</p>
+<h3 id="adv-simulation-from-a-normal-copula">
+  <code>\(\adv\)</code> Simulation from a Normal copula
+  <a class="anchor" href="#adv-simulation-from-a-normal-copula">#</a>
+</h3>
+<p>Let <code>\(C\)</code> be a Normal copula. The following algorithm generates <code>\(\left( x_{1},...,x_{n}\right)\)</code>
+from a random vector <code>\((X_1,\cdots, X_n)\)</code> with marginal distribution functions <code>\(F_{X_1}(\cdot),\cdots, F_{X_n}(\cdot)\)</code>, and copula <code>\(C\)</code>, i.e. <code>\(Pr(X_1\le x_1,\cdots,X_n\le x_n)=C(F_{X_1}(x_1),\cdots,F_{X_n}(x_n))\)</code>:</p>
+<p>The following algorithm generates <code>\(\left( x_{1},...,x_{n}\right)\)</code> from the Normal copula:</p>
+<ol>
+<li>construct the lower triangular matrix <code>\(\mathbf{B}\)</code> so that the
+correlation matrix <code>\(\Sigma\mathbf{=BB}^{\top}\)</code> using
+Cholesky’s.</li>
+<li>generate a column vector of independent standard Normal rv’s <code>\(\mathbf{Z}=\left(z_{1},...,z_{n}\right)\)</code>.</li>
+<li>take the matrix product of <code>\(\mathbf{B}\)</code> and <code>\(\mathbf{Z}\)</code>, i.e. <code>\(\mathbf{Y=BZ}\)</code>.</li>
+<li>set <code>\(u_{k}=\Phi \left( u_{k}\right)\)</code> for <code>\(k=1,2,...,n.\)</code></li>
+<li>set <code>\(x_{k}=F_{X_{k}}^{-1}\left( u_{k}\right)\)</code> for <code>\(k=1,2,...,n.\)</code></li>
+<li><code>\(\left( x_{1},...,x_{n}\right)\)</code> is the desired vector with marginals <code>\(F_{X_{k}}\)</code>
+for <code>\(k=1,...,n\)</code> and Normal copula <code>\(C\)</code>.</li>
+</ol>
+<h3 id="adv-simulation-from-a-clayton-copula">
+  <code>\(\adv\)</code> Simulation from a Clayton copula
+  <a class="anchor" href="#adv-simulation-from-a-clayton-copula">#</a>
+</h3>
+<p>Let <code>\(C\)</code> be the Clayton copula. The following algorithm generates <code>\(\left( x_{1},...,x_{n}\right)\)</code>
+from a random vector <code>\((X_1,\cdots, X_n)\)</code> with marginal distribution functions <code>\(F_{X_1}(\cdot),\cdots, F_{X_n}(\cdot)\)</code>, and copula <code>\(C\)</code>:</p>
+<ol>
+<li>generate a column vector of independent <code>\(Exp\left( 1\right)\)</code> rv’s <code>\(\mathbf{Y}=\left( y_{1},...,y_{n}\right)\)</code>.</li>
+<li>generate <code>\(z\)</code> from a Gamma$\left( 1/\theta ,1\right)$ distribution.</li>
+<li>set <code>\(u_{k}=\left( 1+y_{k}/z\right) ^{-1/\theta }\)</code> for <code>\(k=1,2,...,n.\)</code></li>
+<li>set <code>\(x_{k}=F_{X_{k}}^{-1}\left( u_{k}\right)\)</code> for <code>\(k=1,2,...,n.\)</code></li>
+<li><code>\(\left( x_{1},...,x_{n}\right)\)</code> is the desired vector with marginals <code>\(F_{X_{k}}\)</code> for <code>\(k=1,...,n\)</code> and Clayton copula <code>\(C\)</code>.</li>
+</ol>
+<h2 id="adv-example-of-simulation-in-r">
+  <code>\(\adv\)</code> Example of simulation in R
+  <a class="anchor" href="#adv-example-of-simulation-in-r">#</a>
+</h2>
+<p>We simulate 4000 pairs <code>\((u_1,u_2)\)</code> from the Gumbel copula (with parameter 2) defined above:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Simul.u <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">BiCopSim</span>(<span style="color:#ae81ff">4000</span>, cop)
+<span style="color:#a6e22e">head</span>(Simul.u, <span style="color:#ae81ff">15</span>)
+</code></pre></div><pre><code>##            [,1]       [,2]
+##  [1,] 0.8668961 0.81666324
+##  [2,] 0.8550531 0.74222541
+##  [3,] 0.3563844 0.45048881
+##  [4,] 0.5360519 0.38322601
+##  [5,] 0.8295606 0.79429320
+##  [6,] 0.4242030 0.06711167
+##  [7,] 0.8307603 0.28355200
+##  [8,] 0.1084427 0.35247699
+##  [9,] 0.7967743 0.81204251
+## [10,] 0.6488776 0.69449227
+## [11,] 0.8273833 0.79759802
+## [12,] 0.3718999 0.16774458
+## [13,] 0.4303679 0.10838483
+## [14,] 0.7364492 0.44447288
+## [15,] 0.5441401 0.19479543
+</code></pre>
+<hr>
+<p>We then need to map them into the correct margins, say two gammas of shape parameter 10 and mean 100 and 50, respectively:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Simul.x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#a6e22e">qgamma</span>(Simul.u[, <span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0.1</span>), <span style="color:#a6e22e">qgamma</span>(Simul.u[,
+  <span style="color:#ae81ff">2</span>], <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0.2</span>))
+<span style="color:#a6e22e">head</span>(Simul.x, <span style="color:#ae81ff">15</span>)
+</code></pre></div><pre><code>##            [,1]     [,2]
+##  [1,] 135.38638 63.72408
+##  [2,] 133.32633 59.13820
+##  [3,]  85.71913 46.44033
+##  [4,]  99.52009 43.88456
+##  [5,] 129.30685 62.22275
+##  [6,]  90.88140 28.69370
+##  [7,] 129.48515 40.00710
+##  [8,]  63.29170 42.70960
+##  [9,] 124.76622 63.40319
+## [10,] 109.03066 56.66416
+## [11,] 128.98570 62.43667
+## [12,]  86.90599 34.91303
+## [13,]  91.34963 31.64224
+## [14,] 117.64726 46.21116
+## [15,] 100.16557 36.20670
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Simul.x, pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;.&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simul3-1.png" width="672" height="90%" /></p>
+<hr>
+<p>If we use the packages <code>ggplot2</code>, <code>ggpubr</code> and <code>ggExtra</code> one can superimpose density plots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(x1 <span style="color:#f92672">=</span> Simul.x[, <span style="color:#ae81ff">1</span>], x2 <span style="color:#f92672">=</span> Simul.x[, <span style="color:#ae81ff">2</span>])
+sp <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatter</span>(data, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x1&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x2&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
+<span style="color:#a6e22e">ggMarginal</span>(sp, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;density&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simulgg-1.png" width="672" height="65%" /></p>
+<hr>
+<p>… or boxplots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">sp2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatter</span>(data, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x1&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x2&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
+<span style="color:#a6e22e">ggMarginal</span>(sp2, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;boxplot&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simulgg1-1.png" width="672" height="65%" /></p>
+<hr>
+<p>… or violin plots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">sp3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatter</span>(data, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x1&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x2&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
+<span style="color:#a6e22e">ggMarginal</span>(sp3, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;violin&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simulgg2-1.png" width="672" height="65%" /></p>
+<hr>
+<p>… or densigram plots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">sp4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatter</span>(data, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x1&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x2&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
+<span style="color:#a6e22e">ggMarginal</span>(sp4, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;densigram&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simulgg3-1.png" width="672" height="65%" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">pobs</span>(Simul.x[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(Simul.x[, <span style="color:#ae81ff">2</span>]), pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;.&#34;</span>)
+<span style="color:#a6e22e">plot</span>(cop, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simul4-1.png" width="672" height="90%" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">data2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(x1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">pobs</span>(Simul.x[, <span style="color:#ae81ff">1</span>]), x2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">pobs</span>(Simul.x[,
+  <span style="color:#ae81ff">2</span>]))
+sp3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatter</span>(data2, x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x1&#34;</span>, y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x2&#34;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>)
+<span style="color:#a6e22e">ggMarginal</span>(sp3, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;densigram&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/simul5-1.png" width="672" height="65%" /></p>
+<p>Ranks have uniform margins as expected.</p>
+<h1 id="adv-fitting-bivariate-copulas">
+  <code>\(\adv\)</code> Fitting bivariate copulas
+  <a class="anchor" href="#adv-fitting-bivariate-copulas">#</a>
+</h1>
+<h2 id="adv-using-r">
+  <code>\(\adv\)</code> Using R
+  <a class="anchor" href="#adv-using-r">#</a>
+</h2>
+<p>The 
+  <a href="https://cran.r-project.org/web/packages/VineCopula/readme/README.html#bivariate-copula-modeling-the-bicop-family"><code>VineCopula</code> package</a> offers many functions for fitting copulas:</p>
+<ul>
+<li><code>BiCopKDE</code>: A kernel density estimate of the copula density is visualised.</li>
+<li><code>BiCopSelect</code>: Estimates the parameters of a bivariate copula for a set of families and selects the best fitting model (using either AIC or BIC). Returns an object of class <code>BiCop</code>.</li>
+<li><code>BiCopEst</code>: Estimates parameters of a bivariate copula with a prespecified family. Returns an object of class <code>BiCop</code>. Estimation can be done by
+<ul>
+<li>maximum likelihood (method = “mle”) or</li>
+<li>inversion of the empirical Kendall’s tau (method = “itau,” only available for one-parameter families).</li>
+</ul>
+</li>
+<li><code>BiCopGofTest</code>: Goodness-of-Fit tests for bivariate copulas.</li>
+</ul>
+<h2 id="adv-case-study-with-vinecopula-suva-data">
+  <code>\(\adv\)</code> Case study with <code>VineCopula</code>: SUVA data
+  <a class="anchor" href="#adv-case-study-with-vinecopula-suva-data">#</a>
+</h2>
+<h3 id="adv-kernel-density">
+  <code>\(\adv\)</code> Kernel density
+  <a class="anchor" href="#adv-kernel-density">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]))
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVAfit1-1.png" width="672" height="80%" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVAfit2-1.png" width="672" height="80%" /></p>
+<h3 id="adv-fitting">
+  <code>\(\adv\)</code> Fitting
+  <a class="anchor" href="#adv-fitting">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">SUVAselect <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">BiCopSelect</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[,
+  <span style="color:#ae81ff">2</span>]), selectioncrit <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;BIC&#34;</span>)
+<span style="color:#a6e22e">summary</span>(SUVAselect)
+</code></pre></div><pre><code>## Family
+## ------ 
+## No:    10
+## Name:  BB8
+## 
+## Parameter(s)
+## ------------
+## par:  3.08
+## par2: 0.99
+## Dependence measures
+## -------------------
+## Kendall's tau:    0.52 (empirical = 0.52, p value &lt; 0.01)
+## Upper TD:         0 
+## Lower TD:         0 
+## 
+## Fit statistics
+## --------------
+## logLik:  488.99 
+## AIC:    -973.98 
+## BIC:    -964
+</code></pre>
+<p>For comparison:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">SUVAsurvClayton <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">BiCopEst</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[,
+  <span style="color:#ae81ff">2</span>]), family <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>)
+<span style="color:#a6e22e">summary</span>(SUVAsurvClayton)
+</code></pre></div><pre><code>## Family
+## ------ 
+## No:    13
+## Name:  Survival Clayton
+## 
+## Parameter(s)
+## ------------
+## par:  2.07
+## 
+## Dependence measures
+## -------------------
+## Kendall's tau:    0.51 (empirical = 0.52, p value &lt; 0.01)
+## Upper TD:         0.72 
+## Lower TD:         0 
+## 
+## Fit statistics
+## --------------
+## logLik:  478.14 
+## AIC:    -954.28 
+## BIC:    -949.29
+</code></pre>
+<h3 id="adv-further-gof">
+  <code>\(\adv\)</code> Further GOF
+  <a class="anchor" href="#adv-further-gof">#</a>
+</h3>
+<p>White’s test:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopGofTest</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), SUVAselect)
+</code></pre></div><pre><code>## Error in BiCopGofTest(pobs(SUVAcom[, 1]), pobs(SUVAcom[, 2]), SUVAselect): The goodness-of-fit test based on White's information matrix equality is not implemented for the BB copulas.
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopGofTest</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), SUVAsurvClayton)
+</code></pre></div><pre><code>## $statistic
+##          [,1]
+## [1,] 1.343252
+## 
+## $p.value
+## [1] 0.23
+</code></pre>
+<p>We cannot perform the test on the <code>BB8</code> copula (R informs us that <code>The goodness-of-fit test based on White's information matrix equality is not implemented for the BB copulas.</code>), but also cannot reject the null on the Survival Clayton.</p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopGofTest</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), SUVAselect,
+  method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kendall&#34;</span>)
+</code></pre></div><pre><code>## $p.value.CvM
+## [1] 0.16
+## 
+## $p.value.KS
+## [1] 0.22
+## 
+## $statistic.CvM
+## [1] 0.08458458
+## 
+## $statistic.KS
+## [1] 0.738938
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">BiCopGofTest</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), SUVAsurvClayton,
+  method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kendall&#34;</span>)
+</code></pre></div><pre><code>## $p.value.CvM
+## [1] 0.21
+## 
+## $p.value.KS
+## [1] 0.18
+## 
+## $statistic.CvM
+## [1] 0.08144334
+## 
+## $statistic.KS
+## [1] 0.7731786
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+<span style="color:#a6e22e">plot</span>(SUVAselect, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVAfit8-1.png" width="672" height="70%" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">pobs</span>(SUVAcom[, <span style="color:#ae81ff">2</span>]), margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+<span style="color:#a6e22e">plot</span>(SUVAsurvClayton, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;contour&#34;</span>, margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/SUVAfit9-1.png" width="672" height="70%" /></p>
+<h2 id="adv-case-study-with-censoring-iso-data">
+  <code>\(\adv\)</code> Case study with censoring: ISO data
+  <a class="anchor" href="#adv-case-study-with-censoring-iso-data">#</a>
+</h2>
+<h3 id="adv-insurance-company-losses-and-expenses">
+  <code>\(\adv\)</code> Insurance company losses and expenses
+  <a class="anchor" href="#adv-insurance-company-losses-and-expenses">#</a>
+</h3>
+<ul>
+<li>Data consists of 1,500 general liability claims.</li>
+<li>Provided by the Insurance Services Office, Inc.</li>
+<li><code>\(X_{1}\)</code> is the loss, or amount of claims paid.</li>
+<li><code>\(X_{2}\)</code> are the ALAE, or Allocated Loss Adjustment Expenses.</li>
+<li>Policy contains policy limits, and hence, censoring.</li>
+<li><code>\(\delta\)</code> is the indicator for censoring so that the observed data
+consists of</li>
+</ul>
+<p><code>$$\left( x_{1i},x_{2i},\delta _{i}\right) \text{ for }i=1,2,...,1500.$$</code></p>
+<p>We will fit this data mostly “by hand” for transparency (and since we need to allow for censoring). R codes are provided separately.</p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Loss.ALAE <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_csv</span>(<span style="color:#e6db74">&#34;LossData-FV.csv&#34;</span>)
+</code></pre></div><pre><code>## Rows: 1500 Columns: 4
+
+## -- Column specification ----------------------------------------------
+## Delimiter: &quot;,&quot;
+## dbl (4): LOSS, ALAE, LIMIT, CENSOR
+
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">as_tibble</span>(Loss.ALAE)
+</code></pre></div><pre><code>## # A tibble: 1,500 x 4
+##     LOSS  ALAE   LIMIT CENSOR
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1    10  3806  500000      0
+##  2    24  5658 1000000      0
+##  3    45   321 1000000      0
+##  4    51   305  500000      0
+##  5    60   758  500000      0
+##  6    74  8768 2000000      0
+##  7    75  1805  500000      0
+##  8    78    78  500000      0
+##  9    87 46534  500000      0
+## 10   100   489  300000      0
+## # ... with 1,490 more rows
+</code></pre>
+<h3 id="adv-summary-statistics-of-data">
+  <code>\(\adv\)</code> Summary statistics of data
+  <a class="anchor" href="#adv-summary-statistics-of-data">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Loss</th>
+<th>ALAE</th>
+<th>Policy Limit</th>
+<th>Loss (Uncensored)</th>
+<th>Loss (Censored)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>1,500</td>
+<td>1,500</td>
+<td>1,352</td>
+<td>1,466</td>
+<td>34</td>
+</tr>
+<tr>
+<td>Mean</td>
+<td>41,208</td>
+<td>12,588</td>
+<td>559,098</td>
+<td>37,110</td>
+<td>217,491</td>
+</tr>
+<tr>
+<td>Median</td>
+<td>12,000</td>
+<td>5,471</td>
+<td>500,000</td>
+<td>11,048</td>
+<td>100,000</td>
+</tr>
+<tr>
+<td>Std Deviation</td>
+<td>102,748</td>
+<td>28,146</td>
+<td>418,649</td>
+<td>92,513</td>
+<td>258,205</td>
+</tr>
+<tr>
+<td>Minimum</td>
+<td>10</td>
+<td>15</td>
+<td>5,000</td>
+<td>10</td>
+<td>5,000</td>
+</tr>
+<tr>
+<td>Maximum</td>
+<td>2,173,595</td>
+<td>501,863</td>
+<td>7,500,000</td>
+<td>2,173,595</td>
+<td>1,000,000</td>
+</tr>
+<tr>
+<td>25th quantile</td>
+<td>4,000</td>
+<td>2,333</td>
+<td>300,000</td>
+<td>3,750</td>
+<td>50,000</td>
+</tr>
+<tr>
+<td>75th quantile</td>
+<td>35,000</td>
+<td>12,577</td>
+<td>1,000,000</td>
+<td>32,000</td>
+<td>300,000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="adv-loss-vs-alae">
+  <code>\(\adv\)</code> loss vs ALAE
+  <a class="anchor" href="#adv-loss-vs-alae">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>LOSS), <span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>ALAE), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;LOSS vs ALAE on a log scale&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>LOSS)), <span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>ALAE)), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Empirical copula of LOSS vs ALAE&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/lossALAE1-1.png" width="672" height="60%" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), pty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>)
+<span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>LOSS)), <span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>ALAE)))
+<span style="color:#a6e22e">BiCopKDE</span>(<span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>LOSS)), <span style="color:#a6e22e">pobs</span>(<span style="color:#a6e22e">log</span>(Loss.ALAE<span style="color:#f92672">$</span>ALAE)),
+  margins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unif&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/index_files/figure-html/lossALAE2-1.png" width="672" height="80%" /></p>
+<h3 id="adv-maximum-likelihood-estimation">
+  <code>\(\adv\)</code> Maximum likelihood estimation
+  <a class="anchor" href="#adv-maximum-likelihood-estimation">#</a>
+</h3>
+<ul>
+<li>Case 1: loss variable is not censored, i.e. <code>\(\delta =0.\)</code></li>
+</ul>
+<p><code>$$f\left( x_{1},x_{2}\right) =f_{1}\left( x_{1}\right) f_{2}\left( x_{2}\right) C_{12}\left( F_{1}\left( x_{1}\right) ,F_{2}\left( x_{2}\right) \right)$$</code></p>
+<p>where <code>\(C_{12}(u_1,u_2)=\frac{\partial C(u_1,u_2)}{\partial u_1\partial u_2}\)</code>.</p>
+<ul>
+<li>Case 2: loss variable is censored, i.e. <code>\(\delta =1.\)</code></li>
+</ul>
+<p><code>$$\begin{array}{rcl} \frac{\partial }{\partial x_{2}}P\left( X_{1}&gt;x_{1},X_{2}\leq x_{2}\right) &amp;=&amp;\frac{\partial }{\partial x_{2}}\left[ F_{2}\left( x_{2}\right) -F\left(x_{1},x_{2}\right) \right] \\\\ &amp;=&amp;f_{2}\left( x_{2}\right) -\frac{\partial}{\partial x_2}F\left( x_{1},x_{2}\right) \\\\ &amp;=&amp;f_{2}\left( x_{2}\right) \left[ 1-C_2\left( F_{1}\left(x_{1}\right) ,F_{2}\left( x_{2}\right) \right) \right] \end{array}$$</code></p>
+<p>where <code>\(C_i(u_1,u_2)=\frac{\partial C(u_1,u_2)}{\partial u_i}\)</code>.</p>
+<h3 id="adv-choice-of-marginals-and-copulas">
+  <code>\(\adv\)</code> Choice of marginals and copulas
+  <a class="anchor" href="#adv-choice-of-marginals-and-copulas">#</a>
+</h3>
+<ul>
+<li>Pareto marginals: <code>\(F_{k}\left( x_{k}\right) =1-\left( \frac{\lambda_{k}}{\lambda _{k}+x_{k}}\right) ^{\theta _{k}}\)</code> for <code>\(k=1,2.\)</code> and <code>\(x&gt;0\)</code>.</li>
+<li>For the copulas, several candidates were used:</li>
+</ul>
+<p><img src="/img/module-5/marginals_and_copulas.PNG" width="100%" style="display: block; margin: auto;" /></p>
+<!-- \begin{equation*} -->
+<!-- \resizebox{\textwidth}{!}{ -->
+<!-- \begin{tabular}{lrrrr} -->
+<!-- \hline Copula &  & $C\left( u_{1},u_{2}\right) $ & $C_{2}\left( -->
+<!-- u_{1},u_{2}\right) = \dfrac{\partial C\left( u_{1},u_{2}\right) -->
+<!-- }{\partial u_{2}}$ & $ C_{12}\left( u_{1},u_{2}\right) -->
+<!-- =\dfrac{\partial ^{2}C\left( u_{1},u_{2}\right) }{\partial -->
+<!-- u_{1}\partial u_{2}}$ \\ \hline\hline -->
+<!-- &  &  &  &  \\ -->
+<!-- Independence &  & `\(u_{1}\times u_{2}\)` & `\(u_{1}\)` & `\(1\)` \\ -->
+<!-- &  &  &  &  \\ -->
+<!-- Clayton &  & $\left( u_{1}^{-\alpha }+u_{2}^{-\alpha }-1\right) -->
+<!-- ^{-1/\alpha } $ & `\(\left( C/u_{2}\right) ^{\alpha +1}\)` & $\left( -->
+<!-- \alpha +1\right) -->
+<!-- C^{\alpha }\cdot \left( C/u_{1}u_{2}\right) ^{\alpha +1}$ \\ -->
+<!-- &  &  &  &  \\ -->
+<!-- Gumbel-Hougaard &  & $\exp \left[ -\left( \left( -\log u_{1}\right) -->
+<!-- ^{\alpha }+\left( -\log u_{2}\right) ^{\alpha }\right) ^{1/\alpha -->
+<!-- }\right] $ & $ \left( \dfrac{\log u_{2}}{\log C}\right) ^{\alpha -->
+<!-- -1}\dfrac{C}{u_{2}}$ & $ \dfrac{1}{C}C_{1}C_{2}\left[ 1+\left( -->
+<!-- \alpha -1\right) /\left( -\log -->
+<!-- C\right) \right] $ \\ -->
+<!-- &  &  &  &  \\ -->
+<!-- Frank &  & $\dfrac{1}{\alpha }\log \left( 1+\dfrac{\left( e^{\alpha -->
+<!-- u_{1}}-1\right) \left( e^{\alpha u_{2}}-1\right) }{e^{\alpha -->
+<!-- }-1}\right) $ & $\dfrac{e^{\alpha u_{1}}\left( e^{\alpha -->
+<!-- u_{2}}-1\right) }{\left( e^{\alpha }-1\right) +\left( e^{\alpha -->
+<!-- u_{1}}-1\right) \left( e^{\alpha u_{2}}-1\right) }$ & $\dfrac{\alpha -->
+<!-- \left( e^{\alpha }-1\right) e^{\alpha \left( u_{1}+u_{2}\right) -->
+<!-- }}{\left[ \left( e^{\alpha }-1\right) +\left( -->
+<!-- e^{\alpha u_{1}}-1\right) \left( e^{\alpha u_{2}}-1\right) \right] ^{2}}$ \\ -->
+<!-- &  &  &  &  \\ \hline -->
+<!-- \end{tabular}} -->
+<!-- \end{equation*} -->
+<h3 id="adv-parameter-estimates">
+  <code>\(\adv\)</code> Parameter estimates
+  <a class="anchor" href="#adv-parameter-estimates">#</a>
+</h3>
+<p><img src="/img/module-5/marginals_and_copulas.PNG" width="100%" style="display: block; margin: auto;" /></p>
+<!-- \begin{equation*} -->
+<!-- \resizebox{\textwidth}{!}{ -->
+<!-- \begin{tabular}{lrrrrrrrrr} -->
+<!-- \hline &  & \multicolumn{2}{r}{Independence} & -->
+<!-- \multicolumn{2}{r}{Clayton} & \multicolumn{2}{r}{Gumbel-Hougaard} & -->
+<!-- \multicolumn{2}{r}{Frank} \\ \hline & Parameter & Estimate & s.e. & -->
+<!-- Estimate & s.e & Estimate & s.e. & Estimate & s.e. \\ \hline\hline -->
+<!-- &  &  &  &  &  &  &  &  &  \\ -->
+<!-- Loss $\left( X_{1}\right) $ & `\(\lambda _{1}\)` & 14\,552 & 1\,404 & -->
+<!-- 14\,000 & -->
+<!-- 2\,033 & 14\,001 & 1\,292 & 14\,323 & 1\,359 \\ -->
+<!-- & `\(\theta _{1}\)` & 1.139 & 0.067 & 1.143 & 0.093 & 1.120 & 0.062 & -->
+<!-- 1.106 & -->
+<!-- 0.064 \\ -->
+<!-- ALAE $\left( X_{2}\right) $ & `\(\lambda _{2}\)` & 15\,210 & 1\,661 & -->
+<!-- 16\,059 & -->
+<!-- 2\,603 & 14\,122 & 1\,409 & 16\,306 & 1\,762 \\ -->
+<!-- & `\(\theta _{2}\)` & 2.231 & 0.178 & 2.315 & 0.261 & 2.108 & 0.151 & -->
+<!-- 2.274 & -->
+<!-- 0.181 \\ -->
+<!-- Dependence & $\alpha $ & na & na & 1.563 & 0.047 & 1.454 & 0.034 & -->
+<!-- -3.162 & -->
+<!-- 0.175 \\ -->
+<!-- &  &  &  &  &  &  &  &  &  \\ -->
+<!-- Loglik &  & -31\,950.81 &  & -32\,777.89 &  & -31\,748.81 &  & -->
+<!-- -31\,778.45 & -->
+<!-- \\ -->
+<!-- AIC &  & 42.61 &  & 43.71 &  & 42.34 &  & 42.38 &  \\ -->
+<!-- &  &  &  &  &  &  &  &  &  \\ \hline -->
+<!-- \end{tabular}} -->
+<!-- \end{equation*} -->
+<h3 id="adv-aic-criterion">
+  <code>\(\adv\)</code> AIC criterion
+  <a class="anchor" href="#adv-aic-criterion">#</a>
+</h3>
+<ul>
+<li>
+<p>Akaike Information Criterion (AIC)</p>
+</li>
+<li>
+<p>In the absence of a better way to choosing/selecting a copula model,
+one may use the AIC criterion defined by</p>
+</li>
+</ul>
+<p><code>$$\text{AIC}=\left( -2\ell +2m\right)$$</code></p>
+<p>where <code>\(\ell\)</code> is the value of maximised log-likelihood, <code>\(m\)</code> is the
+number of parameters estimated, and <code>\(n\)</code> is the sample size.</p>
+<ul>
+<li>Lower AIC generally is preferred.</li>
+</ul>
+<h3 id="adv-summary">
+  <code>\(\adv\)</code> Summary
+  <a class="anchor" href="#adv-summary">#</a>
+</h3>
+<p>To find the distribution of the sum of dependent random variables with copulas (one approach):</p>
+<ol>
+<li>Fit marginals independently</li>
+<li>Describe/fit dependence with a copula (roughly)
+<ul>
+<li>Get a sense of data (scatterplots, dependence measures)</li>
+<li>Choose candidate copulas</li>
+<li>For each candidate, estimate parameters via MLE</li>
+<li>Choose a copula based on nll(highest) or AIC(lowest)</li>
+</ul>
+</li>
+<li>If focusing on the sum, one might do simulations to look at the distributions of aggregates, and how they compare with the original data.</li>
+</ol>
+<h1 id="coefficients-of-tail-dependence">
+  Coefficients of tail dependence
+  <a class="anchor" href="#coefficients-of-tail-dependence">#</a>
+</h1>
+<h2 id="motivation-1">
+  Motivation
+  <a class="anchor" href="#motivation-1">#</a>
+</h2>
+<ul>
+<li>In insurance and investment applications it is the large outcomes (losses) that particularly tend to occur together, whereas small claims tend to be fairly independent</li>
+<li>This is one of the reasons why tails (especially right tails) tend to be fatter in financial applications.</li>
+<li>A good understanding of tail behaviour is hence very important.</li>
+<li>It is possible to derive tail properties due to dependence from a copula model.</li>
+<li>The indicator we are considering here is the <strong>coefficient of tail dependence</strong>.</li>
+<li>Tail dependence can take values between 0 (no dependence) and 1 (full dependence).</li>
+<li><code>VineCopula::BiCopPar2TailDep</code> computes the theoretical tail dependence coefficients for copulas of the <code>BiCop</code> family.</li>
+</ul>
+<h2 id="coefficient-of-lower-tail-dependence">
+  Coefficient of lower tail dependence
+  <a class="anchor" href="#coefficient-of-lower-tail-dependence">#</a>
+</h2>
+<p>The coefficient of <strong>lower tail dependence</strong> is defined as
+<code>$$\lambda_L=\lim_{u\rightarrow 0^+} \Pr\left[ X_1 \le F_{X_1}^{-1}(u) \left| X_2\le F_{X_2}^{-1}(u)\right.\right] = \lim_{u\rightarrow 0^+} \frac{C(u,u)}{u}.$$</code>
+Examples (note the extensive use of de l’Hospital rule):</p>
+<p><code>$$\begin{array}{rcl} \lambda_L^{\text{ind}}&amp;=&amp;\lim_{u\rightarrow 0^+} \frac{u\cdot u}{u} =\lim_{u\rightarrow 0^+} u = 0 \\ \lambda_L^{\text{Clayton}}&amp;=&amp;\lim_{u\rightarrow 0^+} \frac{\left( 2 u^{-\theta}-1\right)^{-1/\theta}}{u} = \lim_{u\rightarrow 0^+} \frac{\left( 2 -u^\theta\right)^{-1/\theta}u}{u}\\ &amp;=&amp;\lim_{u\rightarrow 0^+} \left( 2 -u^\theta\right)^{-1/\theta}=2^{-1/\theta} = \left(\frac{1}{2}\right)^{\frac{1}{\theta}} \end{array}$$</code></p>
+<!-- \lambda_L^{\text{Frank}}&=&\lim_{u\rightarrow 0^+} \frac{1}{u \log \theta} \log \left( 1+ \frac{(\theta^u-1)^2}{(\theta-1)}\right) = 0 \\ -->
+<p>The lower tail of the Clayton copula is <strong>comprehensive</strong> in that
+it allows for tail coefficients of 0 (as <code>\(\theta \rightarrow 0\)</code> ) to 1 (as <code>\(\theta \rightarrow \infty\)</code> )</p>
+<h2 id="coefficient-of-upper-tail-dependence">
+  Coefficient of upper tail dependence
+  <a class="anchor" href="#coefficient-of-upper-tail-dependence">#</a>
+</h2>
+<p>The coefficient of <strong>upper tail dependence</strong> is defined similarly but using the survival copula, which yields</p>
+<p><code>$$\begin{array}{rcl} \lambda_U&amp;=&amp;\lim_{u\rightarrow 1^-} \Pr\left[ X_1 \ge F_{X_1}^{-1}(u) \left| X_2\ge F_{X_2}^{-1}(u)\right.\right] \\ &amp;=&amp; \lim_{u\rightarrow 1^-} \frac{\overline{C}(1-u,1-u)}{1-u}  = \lim_{u\rightarrow 0^+} \frac{\overline{C}(u,u)}{u}. \end{array}$$</code></p>
+<p>Note <code>\(\overline{C}(u,u)=2u-1+C(1-u,1-u).\)</code> Examples:</p>
+<p><code>$$\begin{array}{rcl} \lambda_U^{\text{ind}}&amp;=&amp;\lim_{u\rightarrow 1^-} \frac{1-2u+u^2}{1-u} = \lim_{u\rightarrow 1^-} 1-u =0 \\ \lambda_U^{\text{Frank}}&amp;=&amp;\lim_{u\rightarrow 1^-}  \frac{1-2u+1/\theta\left[\log(e^{2\theta u}-2e^{\theta u}+e^\theta)-\log(e^\theta-1)\right]}{1-u} \\ &amp;=&amp;\lim_{u\rightarrow 1^-}  \frac{-2+1/\theta\cdot(2\theta e^{2\theta u}-2\theta e^{\theta u})/(e^{2\theta u}-2e^{\theta u}+e^\theta)}{-1} \\ &amp;=&amp;0 \end{array}$$</code></p>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AvCaWo11" class="csl-entry">
+<p>Avanzi, Benjamin, Luke C. Cassar, and Bernard Wong. 2011. “Modelling Dependence in Insurance Claims Processes with Lévy Copulas.” <em>ASTIN Bulletin</em> 41 (2): 575–609.</p>
+</div>
+<div id="ref-KuJo11" class="csl-entry">
+<p>Kurowicka, D., and H. Joe. 2011. <em>Dependence Modeling Vine Copula Handbook</em>.</p>
+</div>
+<div id="ref-Nel99" class="csl-entry">
+<p>Nelsen, R. B. 1999. <em>An Introduction to Copulas</em>. Springer.</p>
+</div>
+<div id="ref-Skla59" class="csl-entry">
+<p>Sklar, A. 1959. “Fonctions de répartition à $n$ Dimensions Et Leurs Marges.” <em>Publications de l’Institut de Statistique de l’Université de Paris</em> 8: 229–31.</p>
+</div>
+<div id="ref-Vig15" class="csl-entry">
+<p>Vigen, Tyler. 2015. “Spurious Correlations (Last Accessed on 18 March 2015 on <code>http://www.tylervigen.com</code>).”</p>
+</div>
+<div id="ref-Wikicop20" class="csl-entry">
+<p>Wikipedia. 2020. “Copula: Probability Theory.”</p>
+</div>
+</div>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/98dbb98f6562ac57b3bd488d2bb7de1bf2edcf4f" title='Last modified by William Ho | 22 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>22 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#dependence-and-multivariate-modelling">Dependence and multivariate modelling</a>
+      <ul>
+        <li><a href="#introduction-to-dependence">Introduction to Dependence</a>
+          <ul>
+            <li><a href="#motivation">Motivation</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#example-of-real-actuarial-data-avanzi-cassar-and-wong-2011">Example of real actuarial data (Avanzi, Cassar, and Wong 2011)</a></li>
+          </ul>
+        </li>
+        <li><a href="#multivariate-normal-distributions">Multivariate Normal Distributions</a>
+          <ul>
+            <li><a href="#the-multivariate-normal-distribution">The multivariate Normal distribution</a></li>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#choleskys-decomposition">Cholesky’s decomposition</a></li>
+          </ul>
+        </li>
+        <li><a href="#measures-of-dependence">Measures of dependence</a>
+          <ul>
+            <li><a href="#pearsons-correlation-measure">Pearson’s correlation measure</a></li>
+            <li><a href="#kendalls-tau">Kendall’s tau</a></li>
+            <li><a href="#spearmans-rank-correlation">(Spearman’s) rank correlation</a></li>
+            <li><a href="#example-the-case-of-multivariate-normal">Example: the case of multivariate Normal</a></li>
+            <li><a href="#example-suva-data">Example: SUVA data</a></li>
+          </ul>
+        </li>
+        <li><a href="#limits-of-correlation">Limits of correlation</a>
+          <ul>
+            <li><a href="#correlation--dependence">Correlation = dependence?</a></li>
+            <li><a href="#common-fallacies">Common fallacies</a></li>
+            <li><a href="#example-1">Example 1</a></li>
+            <li><a href="#example-2">Example 2</a></li>
+            <li><a href="#example-2-illustration-normal-vs-cook-johnson-copulas">Example 2 illustration: Normal vs Cook-Johnson copulas</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#copula-theory">Copula theory</a>
+      <ul>
+        <li><a href="#what-is-a-copula">What is a copula?</a>
+          <ul>
+            <li><a href="#sklars-representation-theorem">Sklar’s representation theorem</a></li>
+            <li><a href="#example">Example</a></li>
+            <li><a href="#some-remarks">Some remarks</a></li>
+            <li><a href="#adv-multivariate-distribution-function"><code>\(\adv\)</code> Multivariate distribution function</a></li>
+            <li><a href="#adv-multivariate-copula"><code>\(\adv\)</code> Multivariate copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#density-associated-with-a-copula">Density associated with a copula</a>
+          <ul>
+            <li><a href="#example-3">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#survival-copulas">Survival copulas</a></li>
+        <li><a href="#invariance-property">Invariance property</a></li>
+      </ul>
+    </li>
+    <li><a href="#main-bivariate-copulas">Main bivariate copulas</a>
+      <ul>
+        <li><a href="#the-fréchet-bounds">The Fréchet bounds</a></li>
+        <li><a href="#the-normal-aka-gaussian-copula">The Normal (aka Gaussian) copula</a>
+          <ul>
+            <li><a href="#the-t-copula">The <code>\(t\)</code> copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#archimedean-copulas">Archimedean copulas</a></li>
+        <li><a href="#the-clayton-copula">The Clayton copula</a>
+          <ul>
+            <li><a href="#the-clayton-copula-for-n2">The Clayton copula for <code>\(n=2\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#the-frank-copula">The Frank copula</a></li>
+        <li><a href="#the-gumbel-hougard-copula">The Gumbel(-Hougard) copula</a></li>
+        <li><a href="#copula-models-in-r">Copula models in R</a>
+          <ul>
+            <li><a href="#the-vinecopula-package">The <code>VineCopula</code> package</a></li>
+            <li><a href="#bivariate-copulas-in-vinecopula">Bivariate copulas in <code>VineCopula</code></a></li>
+            <li><a href="#conversion-between-dependence-measures-and-parameters-for-a-given-family">Conversion between dependence measures and parameters (for a given family):</a></li>
+            <li><a href="#evaluate-functions-related-to-a-bivariate-copula">Evaluate functions related to a bivariate copula:</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#adv-simulation-from-bivariate-copulas"><code>\(\adv\)</code> Simulation from bivariate copulas</a>
+      <ul>
+        <li><a href="#adv-reminder-simulation-of-a-univariate-random-variable"><code>\(\adv\)</code> Reminder: simulation of a univariate random variable</a></li>
+        <li><a href="#adv-overarching-strategy"><code>\(\adv\)</code> Overarching strategy</a></li>
+        <li><a href="#adv-preliminary-the-conditional-distribution-function"><code>\(\adv\)</code> Preliminary: the conditional distribution function</a>
+          <ul>
+            <li><a href="#adv-example"><code>\(\adv\)</code> Example</a></li>
+            <li><a href="#adv-in-r"><code>\(\adv\)</code> In R</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-the-conditional-distribution-method"><code>\(\adv\)</code> The conditional distribution method</a>
+          <ul>
+            <li><a href="#adv-example-1"><code>\(\adv\)</code> Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-specific-algorithms"><code>\(\adv\)</code> Specific algorithms</a>
+          <ul>
+            <li><a href="#adv-simulation-from-a-normal-copula"><code>\(\adv\)</code> Simulation from a Normal copula</a></li>
+            <li><a href="#adv-simulation-from-a-clayton-copula"><code>\(\adv\)</code> Simulation from a Clayton copula</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-example-of-simulation-in-r"><code>\(\adv\)</code> Example of simulation in R</a></li>
+      </ul>
+    </li>
+    <li><a href="#adv-fitting-bivariate-copulas"><code>\(\adv\)</code> Fitting bivariate copulas</a>
+      <ul>
+        <li><a href="#adv-using-r"><code>\(\adv\)</code> Using R</a></li>
+        <li><a href="#adv-case-study-with-vinecopula-suva-data"><code>\(\adv\)</code> Case study with <code>VineCopula</code>: SUVA data</a>
+          <ul>
+            <li><a href="#adv-kernel-density"><code>\(\adv\)</code> Kernel density</a></li>
+            <li><a href="#adv-fitting"><code>\(\adv\)</code> Fitting</a></li>
+            <li><a href="#adv-further-gof"><code>\(\adv\)</code> Further GOF</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-case-study-with-censoring-iso-data"><code>\(\adv\)</code> Case study with censoring: ISO data</a>
+          <ul>
+            <li><a href="#adv-insurance-company-losses-and-expenses"><code>\(\adv\)</code> Insurance company losses and expenses</a></li>
+            <li><a href="#adv-summary-statistics-of-data"><code>\(\adv\)</code> Summary statistics of data</a></li>
+            <li><a href="#adv-loss-vs-alae"><code>\(\adv\)</code> loss vs ALAE</a></li>
+            <li><a href="#adv-maximum-likelihood-estimation"><code>\(\adv\)</code> Maximum likelihood estimation</a></li>
+            <li><a href="#adv-choice-of-marginals-and-copulas"><code>\(\adv\)</code> Choice of marginals and copulas</a></li>
+            <li><a href="#adv-parameter-estimates"><code>\(\adv\)</code> Parameter estimates</a></li>
+            <li><a href="#adv-aic-criterion"><code>\(\adv\)</code> AIC criterion</a></li>
+            <li><a href="#adv-summary"><code>\(\adv\)</code> Summary</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#coefficients-of-tail-dependence">Coefficients of tail dependence</a>
+      <ul>
+        <li><a href="#motivation-1">Motivation</a></li>
+        <li><a href="#coefficient-of-lower-tail-dependence">Coefficient of lower tail dependence</a></li>
+        <li><a href="#coefficient-of-upper-tail-dependence">Coefficient of upper tail dependence</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

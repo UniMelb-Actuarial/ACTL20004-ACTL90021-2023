@@ -1,0 +1,92 @@
+baseURL: "https://gim-am3.netlify.app"
+title: Topics in Actuarial, Insurance and Finance
+theme: hugo-book
+sectionPagesMenu: main
+
+ignoreFiles: ["\\.template.Rmd$", 
+"\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
+disablePathToLower: yes
+enableGitInfo: yes
+markup:
+  goldmark:
+    renderer:
+      unsafe: yes
+  tableOfContents:
+    startLevel: 1
+languages:
+  en:
+    contentDir: content
+    languageName: English
+    weight: 1
+menu:
+  # before:
+  #   - name: Name
+  #     url: https://google.com
+  #     weight: 10
+
+  after:
+    - name: ___Websites and forums___
+      url: 
+      weight: 13
+    - name: Ed discussion forum
+      url: https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless
+      weight: 15
+    - name: ACTL20004 Canvas
+      url: https://canvas.lms.unimelb.edu.au/courses/150824
+      weight: 16
+    - name: ACTL90021 Canvas
+      url: https://canvas.lms.unimelb.edu.au/courses/150864
+      weight: 17
+    - name: Community Canvas
+      url: https://canvas.lms.unimelb.edu.au/courses/173733
+      weight: 18
+    - name: _______Exercises__________
+      url: 
+      weight: 19
+    - name: List of exercises (Excel)
+      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801
+      weight: 21
+    - name: Pre-tutorial exercises
+      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391
+      weight: 22
+    - name: Tutorial exercises
+      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392
+      weight: 25
+    - name: Additional and Out-of-Scope exercises
+      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464393
+      weight: 27
+    - name: __________Links___________
+      url: 
+      weight: 35
+    - name: Benjamin Avanzi
+      url: https://bavanzicv.netlify.app/
+      weight: 36
+    - name: Yuyu Chen
+      url: https://yuyuchen-uw.github.io
+      weight: 40
+    - name: Let's connect on LinkedIn!
+      url: https://www.linkedin.com/in/benjaminavanzi/
+      weight: 41
+    - name: Introduction to Actuarial Studies 2021
+      url: https://actl10001.netlify.app/
+      weight: 42
+    - name: Communicate Data with R
+      url: https://communicate-data-with-r.netlify.app/
+      weight: 45
+    - name: Actuaries Institute info
+      url: https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber
+      weight: 50
+params:
+  # BookMenuBundle: /menu
+  BookComments: yes
+  BookLogo: 'img/PRIMARY_A_Vertical_Housed_RGB.png'
+  BookDateFormat: "2 January 2006"
+  # BookEditPath: edit/main/exampleSite
+  BookPortableLinks: yes
+  BookRepo: https://github.com/UniMelb-Actuarial
+  BookSearch: true
+  BookSection: docs
+  BookServiceWorker: yes
+  BookTheme: light
+  BookToC: yes
+  BookTranslatedOnly: no

@@ -1,0 +1,25 @@
+---
+weight: 10
+bookCollapseSection: true 
+title: Subject Guide
+author: ''
+date: []
+slug: []
+categories: []
+tags: []
+---
+
+
+
+**<p style="font-size:18px;">Subject guide information</p>** 
+
+In this section we outline the main elements of the **full subject guide** [UG](https://canvas.lms.unimelb.edu.au/courses/123529/modules/items/3619312),[PG](https://canvas.lms.unimelb.edu.au/courses/123552/modules/items/3619315), which you should read as it includes additional relevant information (such as for special consideration) which is not included here but might be relevant to you, and which we will assume you are aware of.
+
+Note that **consultation hours** with Professor Avanzi will be:
+
+- [UG] during semester on Fridays, 10:00-11:00, in FBE 323
+- [PG] during semester on Fridays, 13:00-14:00, after the tutorial in the tutorial room
+
+Note that there won’t be consultation during the non-teaching week, and exam consultation will be advertised later.
+
+**Students should ask all course content questions in [Ed](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless)**, during tutorials, or during consultation hours. E-mail queries should be restricted to those of an administrative and personal nature. Any query that could be of relevance to other students will only be answered during face-to-face tutorial and consultation time, or in [Ed](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless).

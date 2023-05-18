@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Introduction #  Extreme events #   financial (and claims) data is often leptokurtic severity (more peaked - heavy tailed - than normal) reasons include heteroscedasticity (stochastic volatility) almost by definition, extreme events happen with low frequency but extreme events are the ones causing to financial distress, possibly ruin accurate fitting is crucial for capital and risk management (risk based capital, reinsurance, ART such as securitisation via CAT bonds) fitting presents specific issues:  there is little data to work from when fitting a whole distribution, the big bulk of the data (around the mode) overpowers observations in the tails in the optimisation routine (MLE), leading to poor fit in the tail sometimes (in fact, almost always as we will see) a good distribution for the far tail is different from that for the more common outcomes    Framework #   Consider iid random variables \(X_i\), \(i=1,\ldots,n\), with df \(F\) We denote the order statistics $$X_{n,n} \le X_{n-1,n} \le \ldots \le X_{1,n}$$ such that $$X_{n,n}=\min(X_1,\ldots,X_n) \text{ and }X_{1,n}=\max(X_1,\ldots,X_n).">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M6 Extreme Value Theory" />
+<meta property="og:description" content="Introduction #  Extreme events #   financial (and claims) data is often leptokurtic severity (more peaked - heavy tailed - than normal) reasons include heteroscedasticity (stochastic volatility) almost by definition, extreme events happen with low frequency but extreme events are the ones causing to financial distress, possibly ruin accurate fitting is crucial for capital and risk management (risk based capital, reinsurance, ART such as securitisation via CAT bonds) fitting presents specific issues:  there is little data to work from when fitting a whole distribution, the big bulk of the data (around the mode) overpowers observations in the tails in the optimisation routine (MLE), leading to poor fit in the tail sometimes (in fact, almost always as we will see) a good distribution for the far tail is different from that for the more common outcomes    Framework #   Consider iid random variables \(X_i\), \(i=1,\ldots,n\), with df \(F\) We denote the order statistics $$X_{n,n} \le X_{n-1,n} \le \ldots \le X_{1,n}$$ such that $$X_{n,n}=\min(X_1,\ldots,X_n) \text{ and }X_{1,n}=\max(X_1,\ldots,X_n)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-22T21:27:58+11:00" />
+
+<title>M6 Extreme Value Theory | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class=" active">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M6 Extreme Value Theory</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#extreme-events">Extreme events</a></li>
+            <li><a href="#framework">Framework</a></li>
+            <li><a href="#motivating-example-p-embrechts-resnick-and-samorodnitsky-1999">Motivating example (P. Embrechts, Resnick, and Samorodnitsky 1999)</a></li>
+            <li><a href="#a-limiting-argument">A limiting argument</a></li>
+            <li><a href="#general-result-for-x-exponential-lambda">General result for <code>\(X\)</code> exponential <code>\((\lambda)\)</code></a></li>
+            <li><a href="#questions">Questions</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#generalised-extreme-value-distribution">Generalised Extreme Value distribution</a>
+      <ul>
+        <li><a href="#the-gev-distribution">The GEV distribution</a>
+          <ul>
+            <li><a href="#extreme-value-distributions">Extreme Value Distributions</a></li>
+            <li><a href="#three-cases">Three cases</a></li>
+            <li><a href="#estimation-block-maxima">Estimation: Block Maxima</a></li>
+          </ul>
+        </li>
+        <li><a href="#case-study">Case study</a>
+          <ul>
+            <li><a href="#block-maxima">Block maxima</a></li>
+            <li><a href="#convergence-with-increasing-block-sizes">Convergence with increasing block sizes</a></li>
+            <li><a href="#fitting-results">Fitting results</a></li>
+          </ul>
+        </li>
+        <li><a href="#moments-and-quantiles">Moments and quantiles</a>
+          <ul>
+            <li><a href="#moments">Moments</a></li>
+            <li><a href="#t-year-events"><code>\(t\)</code>-year events</a></li>
+            <li><a href="#quantiles">Quantiles</a></li>
+            <li><a href="#case-study-quantiles">Case study: quantiles</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#generalised-pareto-distribution">Generalised Pareto distribution</a>
+      <ul>
+        <li><a href="#asymptotic-properties-of-the-tails">Asymptotic properties of the tails</a>
+          <ul>
+            <li><a href="#main-result-asymptotic-properties-of-the-tails">Main result: Asymptotic properties of the tails</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-gp-distribution">The GP distribution</a>
+          <ul>
+            <li><a href="#generalised-pareto-distribution-1">Generalised Pareto distribution</a></li>
+            <li><a href="#gp-df">GP df</a></li>
+            <li><a href="#gp-pdf">GP pdf</a></li>
+            <li><a href="#moments-1">Moments</a></li>
+          </ul>
+        </li>
+        <li><a href="#estimation">Estimation</a>
+          <ul>
+            <li><a href="#estimation-choice-of-threshold-u">Estimation: choice of threshold <code>\(u\)</code></a></li>
+            <li><a href="#estimation-choice-of-threshold-u-1">Estimation: choice of threshold <code>\(u\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#case-study-1">Case study</a>
+          <ul>
+            <li><a href="#case-study-workers-compensation-medical-costs">Case study: workers compensation medical costs</a></li>
+            <li><a href="#data-exploration">Data exploration</a></li>
+            <li><a href="#size-of-tail">Size of tail</a></li>
+            <li><a href="#mean-excess-plot">Mean-excess plot</a></li>
+            <li><a href="#empirical-overlinef-on-log-log-scale">Empirical <code>\(\overline{F}\)</code> on log log scale</a></li>
+            <li><a href="#hill-plot">Hill plot</a></li>
+            <li><a href="#stability-of-hatgamma">Stability of <code>\(\hat{\gamma}\)</code></a></li>
+            <li><a href="#estimation-results-for-u500">Estimation results for <code>\(u=500\)</code></a></li>
+            <li><a href="#estimation-results-for-u5000">Estimation results for <code>\(u=5000\)</code></a></li>
+            <li><a href="#estimation-results-for-u10000">Estimation results for <code>\(u=10000\)</code></a></li>
+            <li><a href="#estimation-results-for-u12000">Estimation results for <code>\(u=12000\)</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#measures-of-tail-weight">Measures of tail weight</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#limiting-density-ratios-gamma-example">Limiting density ratios: gamma example</a></li>
+            <li><a href="#hazard-rates-gamma-example-with-fixed-mean">Hazard rates: gamma example with fixed mean</a></li>
+            <li><a href="#hazard-rates-gamma-example-with-fixed-mean-1">Hazard rates: gamma example with fixed mean</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h1>
+<h3 id="extreme-events">
+  Extreme events
+  <a class="anchor" href="#extreme-events">#</a>
+</h3>
+<ul>
+<li>financial (and claims) data is often leptokurtic severity (more peaked - heavy tailed - than normal)</li>
+<li>reasons include heteroscedasticity (stochastic volatility)</li>
+<li>almost by definition, extreme events happen with low frequency</li>
+<li>but extreme events are the ones causing to financial distress, possibly ruin</li>
+<li>accurate fitting is crucial for capital and risk management (risk based capital, reinsurance, ART such as securitisation via CAT bonds)</li>
+<li>fitting presents specific issues:
+<ul>
+<li>there is little data to work from</li>
+<li>when fitting a whole distribution, the big bulk of the data (around the mode) overpowers observations in the tails in the optimisation routine (MLE), leading to poor fit in the tail</li>
+<li>sometimes (in fact, almost always as we will see) a good distribution for the far tail is different from that for the more common outcomes</li>
+</ul>
+</li>
+</ul>
+<h3 id="framework">
+  Framework
+  <a class="anchor" href="#framework">#</a>
+</h3>
+<ul>
+<li>Consider iid random variables <code>\(X_i\)</code>, <code>\(i=1,\ldots,n\)</code>, with df <code>\(F\)</code></li>
+<li>We denote the order statistics
+<code>$$X_{n,n} \le X_{n-1,n} \le \ldots \le X_{1,n}$$</code>
+such that
+<code>$$X_{n,n}=\min(X_1,\ldots,X_n) \text{ and }X_{1,n}=\max(X_1,\ldots,X_n).$$</code></li>
+<li>Specifically, we may be interested in</li>
+</ul>
+<p><code>$$\begin{array}{rcl} \text{average of }k\text{ largest losses} &amp;=&amp; \sum_{r=1}^k\frac{X_{r,n}}{k} \\ \text{empirical mean excess function above }u &amp;=&amp; \sum_{r=1}^{n_u}\frac{(X_{r,n}-u)}{n_u},\text{where} \end{array}$$</code></p>
+<p><code>\(n_u = \# \left\{ 1\le r\le n:X_r&gt;u\right\}\)</code></p>
+<h3 id="motivating-example-p-embrechts-resnick-and-samorodnitsky-1999">
+  Motivating example (P. Embrechts, Resnick, and Samorodnitsky 1999)
+  <a class="anchor" href="#motivating-example-p-embrechts-resnick-and-samorodnitsky-1999">#</a>
+</h3>
+<p>Consider the following situation:</p>
+<ul>
+<li>Let <code>\(X_i\)</code> be exponential mean <code>\(1/\lambda=10\)</code></li>
+<li>We have <code>\(n=100\)</code> observations</li>
+<li>The maximum observed was 50. How likely is it if the model is correct? What if the maximum had been 100?</li>
+</ul>
+<p>We have
+<code>$$\Pr[X_{1,n}&gt;x] =1-\left( \Pr[X\le x]\right)^{100} = 1-\left( 1-e^{-x/10}\right)^{100},$$</code>
+and hence</p>
+<p><code>$$\begin{array}{rcl} \Pr[X_{1,n}&gt;50] &amp;=&amp; 0.4919, \\ \Pr[X_{1,n}&gt;100] &amp;=&amp; 0.00453. \end{array}$$</code></p>
+<h3 id="a-limiting-argument">
+  A limiting argument
+  <a class="anchor" href="#a-limiting-argument">#</a>
+</h3>
+<p>We now perform the following calculations:
+<code>$$\Pr\left[ \frac{X_{1,n}}{\alert{10}}-\alert{\log n}\le x\right] = \Pr [X_{1,n} \le 10(x+\log n)] = \left(1-\frac{e^{-x}}{n}\right)^n,$$</code>
+where the elements in red were chosen based on an educated guess, so that
+<code>$$\lim_{n\rightarrow\infty} \Pr\left[\frac{X_{1,n}}{\alert{10}}-\alert{\log n} \le x\right]=\lim_{n\rightarrow\infty} \left(1-\frac{e^{-x}}{n}\right)^n=e^{-e^{-x}} \equiv \Lambda(x),$$</code>
+which is the df of a Gumbel (or double exponential) random variable.</p>
+<h3 id="general-result-for-x-exponential-lambda">
+  General result for <code>\(X\)</code> exponential <code>\((\lambda)\)</code>
+  <a class="anchor" href="#general-result-for-x-exponential-lambda">#</a>
+</h3>
+<p>We can easily generalise the previous result to any <code>\(\lambda\)</code> and <code>\(n\)</code>. Noting that 10 was actually <code>\(1/\lambda\)</code> before,
+<code>$$\Pr[X_{1,n}\le x] \approx \Lambda \left( \lambda x -\log n\right).$$</code>
+In the limit <code>\((n \rightarrow \infty)\)</code>, the approximation is exact.</p>
+<p>This means that for large <code>\(n\)</code>, one can approximate the distribution of the maximum of a set of iid exponentially distributed <code>\(X_i\)</code>’s (with parameter <code>\(\lambda\)</code>) with a Gumbel distribution.</p>
+<p>Indeed, this works well for our example, especially in the tail:</p>
+<p><code>$$\begin{array}{rcl} \Pr[X_{1,n}&gt;50] &amp;\approx&amp; 1-e^{-e^{-(50/10-\log 100)}}=0.4902, \\ \Pr[X_{1,n}&gt;100] &amp;\approx&amp; 0.00453. \end{array}$$</code></p>
+<h3 id="questions">
+  Questions
+  <a class="anchor" href="#questions">#</a>
+</h3>
+<ul>
+<li>This is nice, but not all random variables are exponential.</li>
+<li>Can we generalise such a limiting approach to any df?</li>
+</ul>
+<p><strong>Yes!</strong></p>
+<ul>
+<li>How do we find the norming constants (such as <code>\(\lambda\)</code> and <code>\(\log n\)</code> in the exponential case) in general, that is, how do we find <code>\(a_n\)</code> and <code>\(b_n\)</code> so that
+<code>$$\lim_{n\rightarrow \infty} \Pr \left[ \frac{X_{1,n}-b_n}{a_n} \le x\right]$$</code>
+exists?</li>
+</ul>
+<p>We can (there are only three cases to consider), but we won’t discuss that here (see, e.g., C. A. M. Embrechts P. AND Klüppelberg 1997 for the proofs)</p>
+<p><strong>This results in an extreme value complement or homologue, for the tails, of the CLT approximation (which works only around the middle of the distribution).</strong></p>
+<h1 id="generalised-extreme-value-distribution">
+  Generalised Extreme Value distribution
+  <a class="anchor" href="#generalised-extreme-value-distribution">#</a>
+</h1>
+<h2 id="the-gev-distribution">
+  The GEV distribution
+  <a class="anchor" href="#the-gev-distribution">#</a>
+</h2>
+<h3 id="extreme-value-distributions">
+  Extreme Value Distributions
+  <a class="anchor" href="#extreme-value-distributions">#</a>
+</h3>
+<p>The Gumbel distribution <code>\(\Lambda(x)\)</code> derived earlier is a special case of a general distribution family
+<code>$$H_{\gamma;\mu,\sigma}(x)=\exp \left\{ - \left(1+\gamma\frac{x-\mu}{\sigma}\right)_+^{-\frac{1}{\gamma}}\right\},\;\gamma \in \mathbb{R}, \mu\in\mathbb{R}, \sigma&gt;0.$$</code>
+This Generalised Extreme Value distribution (GEV) encompasses <strong>all</strong> extreme value distributions, of which we distinguish three cases:</p>
+<ul>
+<li><code>\(\gamma&lt;0\)</code>: upper bounded Weibull (Sometimes referred to as the reverse or reflected Weibull) df with <code>\(x&lt;\mu-\sigma/\gamma\)</code></li>
+<li><code>\(\gamma=0\)</code>: Gumbel df with <code>\(x\in \mathbb{R}\)</code></li>
+<li><code>\(\gamma&gt;0\)</code>: Fr&rsquo;echet-type df with <code>\(x&gt;\mu- \sigma/\gamma\)</code></li>
+</ul>
+<p>The last one relates to the heavy tailed distributions (typically with moments existing only up to a certain order, infinite afterwards), and
+is the most relevant to actuarial applications.</p>
+<h3 id="three-cases">
+  Three cases
+  <a class="anchor" href="#three-cases">#</a>
+</h3>
+<p><img src="/img/module-6/EVMtable.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>(Unit 4, Page 4, IoA 2020) Note <code>\(\alpha \equiv \mu\)</code> and <code>\(\beta \equiv \sigma\)</code></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">GenEV <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x, alpha, beta, gamma) {
+  <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>beta <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> gamma <span style="color:#f92672">*</span> (x <span style="color:#f92672">-</span> alpha)<span style="color:#f92672">/</span>beta)<span style="color:#a6e22e">^</span>(<span style="color:#f92672">-</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>gamma)) <span style="color:#f92672">*</span>
+    <span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span>((<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> gamma <span style="color:#f92672">*</span> (x <span style="color:#f92672">-</span> alpha)<span style="color:#f92672">/</span>beta)<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span>gamma)))
+}
+<span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), oma <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">-4000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">GenEV</span>(<span style="color:#ae81ff">-4000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-0.5</span>), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density with gamma=-0.5 (Weibull)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-4</span>, <span style="color:#ae81ff">4</span>), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">-4000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">GenEV</span>(<span style="color:#ae81ff">-4000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1e-05</span>), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of GEV with gamma=0 (Gumbel)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-4</span>, <span style="color:#ae81ff">4</span>), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">-2000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">GenEV</span>(<span style="color:#ae81ff">-2000</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0.5</span>), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of GEV with gamma=0.5 (Fréchet)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-4</span>, <span style="color:#ae81ff">4</span>), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">mtext</span>(<span style="color:#e6db74">&#34;Density of GEV with mu=0, sigma=1, and various values of gamma&#34;</span>,
+  outer <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/3cases-1.png" width="672" /></p>
+<h3 id="estimation-block-maxima">
+  Estimation: Block Maxima
+  <a class="anchor" href="#estimation-block-maxima">#</a>
+</h3>
+<ul>
+<li>The EVD is a distribution of maxima</li>
+<li>To fit it we need a sample of maxima</li>
+<li>To achieve this, the data is transformed into block maxima
+<ol>
+<li>assume we have <code>\(n\)</code> data points</li>
+<li>consider blocks of length <code>\(m\)</code></li>
+<li>the block maxima are the equal to the maximum observation within a block</li>
+<li>we have then a sample size of <code>\(n/m\)</code></li>
+</ol>
+</li>
+<li>The block maxima are then fitted to the EVD</li>
+<li>The larger the block size, the closer to the asymptotic distribution we get, but the less data we have: conflicting requirements</li>
+<li>In R, this can be done efficiently with the function <code>fevd</code> of the package <code>extRemes</code> (Gilleland and Katz 2016)</li>
+</ul>
+<h2 id="case-study">
+  Case study
+  <a class="anchor" href="#case-study">#</a>
+</h2>
+<p>We consider three simulated data sets with <code>\(n=12000\)</code>, expected value $ <code>\(10,000\)</code> and variance $ <code>\(9,000^2\)</code>:</p>
+<table>
+<thead>
+<tr>
+<th>month</th>
+<th>beta</th>
+<th>gamm</th>
+<th>logg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\(\vdots\)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>61</td>
+<td>12862.84</td>
+<td>33493.02</td>
+<td>18773.47</td>
+</tr>
+<tr>
+<td>62</td>
+<td>408.64</td>
+<td>6070.20</td>
+<td>7564.21</td>
+</tr>
+<tr>
+<td>63</td>
+<td>2404.87</td>
+<td>26093.36</td>
+<td>5083.10</td>
+</tr>
+<tr>
+<td>64</td>
+<td>4753.73</td>
+<td>3773.61</td>
+<td>2070.88</td>
+</tr>
+<tr>
+<td>65</td>
+<td>594.57</td>
+<td>3885.25</td>
+<td>43601.62</td>
+</tr>
+<tr>
+<td>66</td>
+<td>16805.64</td>
+<td>6881.97</td>
+<td>6163.90</td>
+</tr>
+<tr>
+<td>67</td>
+<td>4335.52</td>
+<td>5163.38</td>
+<td>8158.35</td>
+</tr>
+<tr>
+<td>68</td>
+<td>5575.15</td>
+<td>24401.76</td>
+<td>19172.13</td>
+</tr>
+<tr>
+<td><code>\(\vdots\)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>\(\quad\)</code> Simulated data sets are provided along with the lecture notes.</p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">claims <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(<span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;simulated-claims.xlsx&#34;</span>))
+<span style="color:#a6e22e">summary</span>(claims<span style="color:#f92672">$</span>beta)
+</code></pre></div><pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0    2102    7585   10078   16532   33287
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(claims<span style="color:#f92672">$</span>gamm)
+</code></pre></div><pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##     6.12  3566.46  7668.73 10107.70 14070.25 90712.14
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(claims<span style="color:#f92672">$</span>logg)
+</code></pre></div><pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##    432.7   4611.7   7374.7   9931.9  12124.2 157377.1
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(claims<span style="color:#f92672">$</span>beta)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/casestudy2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(claims<span style="color:#f92672">$</span>gamm)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/casestudy3-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(claims<span style="color:#f92672">$</span>logg)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/casestudy4-1.png" width="672" /></p>
+<h3 id="block-maxima">
+  Block maxima
+  <a class="anchor" href="#block-maxima">#</a>
+</h3>
+<p>Creating block maxima</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># block maxima</span>
+claims<span style="color:#f92672">$</span>block <span style="color:#f92672">&lt;-</span> (claims<span style="color:#f92672">$</span>month <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">%/%</span><span style="color:#ae81ff">12</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+<span style="color:#75715e"># %/% gives the integer part of the result of the division</span>
+blockmax <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(betablock <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(beta <span style="color:#f92672">~</span> block, claims,
+  max)<span style="color:#f92672">$</span>beta, gammblock <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(gamm <span style="color:#f92672">~</span> block, claims, max)<span style="color:#f92672">$</span>gamm,
+  loggblock <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(logg <span style="color:#f92672">~</span> block, claims, max)<span style="color:#f92672">$</span>logg)
+</code></pre></div><p>We now have a sample of <code>\(12000/12=1000\)</code> block maxima.</p>
+<p>What do these look like in comparison with the original data?</p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">claims <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(<span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;simulated-claims.xlsx&#34;</span>))
+<span style="color:#a6e22e">summary</span>(blockmax<span style="color:#f92672">$</span>betablock)
+</code></pre></div><pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   11376   23803   27155   26606   30035   33287
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(blockmax<span style="color:#f92672">$</span>gammblock)
+</code></pre></div><pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    9521   21036   27278   28479   34299   90712
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(blockmax<span style="color:#f92672">$</span>loggblock)
+</code></pre></div><pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    9326   18618   24590   28587   33259  157377
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(blockmax<span style="color:#f92672">$</span>betablock)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima3-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(blockmax<span style="color:#f92672">$</span>gammblock)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima4-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(blockmax<span style="color:#f92672">$</span>loggblock)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima5-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(claims<span style="color:#f92672">$</span>beta), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the beta claims&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Claim amounts ($)&#34;</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>beta)))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>betablock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the beta block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>beta)))
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima6-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(claims<span style="color:#f92672">$</span>gamm), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the gammormal claims&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Claim amounts ($)&#34;</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>gamm)))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>gammblock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the gammormal block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>gamm)))
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima7-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(claims<span style="color:#f92672">$</span>logg), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the log-gamma claims&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Claim amounts ($)&#34;</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>logg)))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>loggblock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the log-gamma block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>,
+  xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">max</span>(claims<span style="color:#f92672">$</span>logg)))
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima8-1.png" width="672" /></p>
+<!-- --- -->
+<!-- ```{r blockmaxima9,fig.height=5} -->
+<!-- par(mfrow=c(1,2)) -->
+<!-- plot(density(log(claims$logg)),main="Density of the log-gamma claims",xlab="Claim amounts ($)",xlim=c(0,max(log(claims$logg)))) -->
+<!-- plot(density(log(blockmax$loggblock)),main="Density of the log-gamma block maxima",xlab="Maximums over consecutive periods of 12 months ($)",xlim=c(0,max(log(claims$logg)))) -->
+<!-- ``` -->
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>betablock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the beta block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>gammblock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the gammormal block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">density</span>(blockmax<span style="color:#f92672">$</span>loggblock), main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Density of the loggamma block maxima&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Maximums over consecutive periods of 12 months ($)&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockmaxima10-1.png" width="672" /></p>
+<h3 id="convergence-with-increasing-block-sizes">
+  Convergence with increasing block sizes
+  <a class="anchor" href="#convergence-with-increasing-block-sizes">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># block sizes</span>
+blocksizes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">60</span>, <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">120</span>))
+results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+<span style="color:#a6e22e">for </span>(i in blocksizes) {
+  <span style="color:#75715e"># number of full blocks to work with</span>
+  numbers <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">length</span>(claims<span style="color:#f92672">$</span>beta)<span style="color:#f92672">/</span><span style="color:#a6e22e">max</span>(blocksizes))
+  <span style="color:#75715e"># trimming claims vector</span>
+  claims_trimmed <span style="color:#f92672">&lt;-</span> claims[1<span style="color:#f92672">:</span>(numbers <span style="color:#f92672">*</span> i), ]
+  <span style="color:#75715e"># block maxima</span>
+  claims_trimmed<span style="color:#f92672">$</span>block <span style="color:#f92672">&lt;-</span> (claims_trimmed<span style="color:#f92672">$</span>month <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">%/%</span>i <span style="color:#f92672">+</span>
+    <span style="color:#ae81ff">1</span>
+  blockmax2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(betablock2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(beta <span style="color:#f92672">~</span> block,
+    claims_trimmed, max)<span style="color:#f92672">$</span>beta, gammblock2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(gamm <span style="color:#f92672">~</span>
+    block, claims_trimmed, max)<span style="color:#f92672">$</span>gamm, loggblock2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">aggregate</span>(logg <span style="color:#f92672">~</span>
+    block, claims_trimmed, max)<span style="color:#f92672">$</span>logg)
+  <span style="color:#75715e"># fitting</span>
+  fit.beta2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax2<span style="color:#f92672">$</span>betablock2)
+  fit.gamm2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax2<span style="color:#f92672">$</span>gammblock2)
+  fit.logg2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax2<span style="color:#f92672">$</span>loggblock2)
+  results <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rbind</span>(results, <span style="color:#a6e22e">c</span>(i, <span style="color:#a6e22e">as.double</span>(fit.beta2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]),
+    <span style="color:#a6e22e">as.double</span>(fit.gamm2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]), <span style="color:#a6e22e">as.double</span>(fit.logg2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])))
+}
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">2</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of mu (betablock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">3</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of sigma (betablock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">4</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of gamma (betablock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">5</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of mu (gammblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">6</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of sigma (gammblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">7</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of gamma (gammblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">8</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of mu (loggblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">9</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of sigma (loggblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+<span style="color:#a6e22e">plot</span>(results[, <span style="color:#ae81ff">1</span>], results[, <span style="color:#ae81ff">10</span>], pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Convergence of gamma (loggblock)&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Block size&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockfit1-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockfit2-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/blockfit3-1.png" width="672" /></p>
+<h3 id="fitting-results">
+  Fitting results
+  <a class="anchor" href="#fitting-results">#</a>
+</h3>
+<p>For example for the <code>logg</code> BM we use the following code:</p>
+<ul>
+<li><code>fit.logg &lt;- fevd(blockmax$loggblock)</code> will perform the fit</li>
+<li><code>fit.logg</code> will display the results of the fitting</li>
+<li><code>plot(fit.logg)</code> will plot goodness of fit graphical analysis</li>
+<li><code>plot(fit.logg,&quot;trace&quot;)</code> will plot the likelihood function around the chosen parameters</li>
+</ul>
+<p>More details can be found in Gilleland and Katz (2016).</p>
+<hr>
+<p>Results (MLE with standard errors in parentheses) are</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>location <code>\(\mu\)</code></th>
+<th>scale <code>\(\sigma\)</code></th>
+<th>shape <code>\(\gamma\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beta</td>
+<td>25644.93 (163.26)</td>
+<td>4695.76 (130.07)</td>
+<td>-0.6012 (0.0212)</td>
+</tr>
+<tr>
+<td>gamma</td>
+<td>24069.68 (288.51)</td>
+<td>8225.98 (215.80)</td>
+<td>-0.0243 (0.0222)</td>
+</tr>
+<tr>
+<td>loggamma</td>
+<td>21466.22 (305.26)</td>
+<td>8496.86 (251.97)</td>
+<td>0.2299 (0.0278)</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ul>
+<li>These correspond to the three distinct cases introduced before as expected (look at the sign of <code>\(\gamma\)</code>)</li>
+<li>Whether <code>\(\gamma\neq 0\)</code> for gamma can be formally tested in different ways (see Gilleland and Katz 2016), but the standard error for <code>\(\gamma^{\text{gamm}}\)</code> suggests a null hypothesis of <code>\(\gamma^{\text{gamm}} = 0\)</code> would not be rejected.</li>
+</ul>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.beta <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax<span style="color:#f92672">$</span>betablock)
+fit.beta
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##      location         scale         shape </span>
+<span style="color:#75715e">## 25644.9318770  4695.7556362    -0.6011579 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##     location        scale        shape </span>
+<span style="color:#75715e">## 163.26448100 130.06953700   0.02120487 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##              location        scale         shape</span>
+<span style="color:#75715e">## location 26655.290757 -8463.804100 -1.2827274803</span>
+<span style="color:#75715e">## scale    -8463.804100 16918.084456 -1.7746705470</span>
+<span style="color:#75715e">## shape       -1.282727    -1.774671  0.0004496465</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 19385.23 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 19399.96</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.beta)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitbeta2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.beta, <span style="color:#e6db74">&#34;trace&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitbeta3-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.gamm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax<span style="color:#f92672">$</span>gammblock)
+fit.gamm
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##      location         scale         shape </span>
+<span style="color:#75715e">##  2.406968e+04  8.225984e+03 -2.428561e-02 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##     location        scale        shape </span>
+<span style="color:#75715e">## 288.51126800 215.80132748   0.02220903 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##              location        scale         shape</span>
+<span style="color:#75715e">## location 83238.751764 21650.966827 -2.0732936569</span>
+<span style="color:#75715e">## scale    21650.966827 46570.212942 -1.4944274045</span>
+<span style="color:#75715e">## shape       -2.073294    -1.494427  0.0004932409</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 21127.17 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 21141.89</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.gamm)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitgamm2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.gamm, <span style="color:#e6db74">&#34;trace&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitgamm3-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.logg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(blockmax<span style="color:#f92672">$</span>loggblock)
+fit.logg
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##     location        scale        shape </span>
+<span style="color:#75715e">## 21466.224267  8496.863050     0.229869 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##     location        scale        shape </span>
+<span style="color:#75715e">## 305.26319626 251.96813338   0.02779193 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##              location        scale         shape</span>
+<span style="color:#75715e">## location 93185.618989 45516.589594 -2.5704729001</span>
+<span style="color:#75715e">## scale    45516.589594 63487.940241 -0.5065090268</span>
+<span style="color:#75715e">## shape       -2.570473    -0.506509  0.0007723913</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 21491.68 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 21506.4</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.logg)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitlogg2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.logg, <span style="color:#e6db74">&#34;trace&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/block-fitlogg3-1.png" width="672" /></p>
+<h2 id="moments-and-quantiles">
+  Moments and quantiles
+  <a class="anchor" href="#moments-and-quantiles">#</a>
+</h2>
+<h3 id="moments">
+  Moments
+  <a class="anchor" href="#moments">#</a>
+</h3>
+<p>Let <code>\(Z\)</code> follow a GEV( <code>\(\mu\)</code> , <code>\(\sigma\)</code> , <code>\(\gamma\)</code> ). We have then
+<code>$$E[Z]=\left\{ \begin{array}{rc} \mu+\sigma\left( \Gamma(1-\gamma)-1\right)/\gamma, &amp;\gamma\neq 0, \gamma &lt;1, \\ \mu+\sigma \cdot e,&amp;\gamma =0, \\ \infty , &amp;\gamma \ge 1. \end{array} \right.$$</code>
+<code>$$Var(Z) = \left\{ \begin{array}{rc} \sigma^2\left[ \Gamma(1-2\gamma)-\Gamma(1-\gamma)^2\right]/\gamma^2, &amp;\gamma\neq 0, \gamma &lt;1/2, \\ \sigma^2 \cdot\pi/6,&amp;\gamma =0, \\ \infty , &amp;\gamma \ge 1/2. \end{array} \right.$$</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Empirical Mean</th>
+<th>Empirical Variance</th>
+<th>Empirical Mean</th>
+<th>Empirical Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beta</td>
+<td>26606.41</td>
+<td>18381480</td>
+<td>26475.58</td>
+<td>18584454</td>
+</tr>
+<tr>
+<td>gamm</td>
+<td>28141.08</td>
+<td>222758930</td>
+<td>28242.00</td>
+<td>249582072</td>
+</tr>
+<tr>
+<td>logg</td>
+<td>28586.58</td>
+<td>239426765</td>
+<td>28842.05</td>
+<td>280329757</td>
+</tr>
+</tbody>
+</table>
+<p>(Empirical moments are calculated from the data,
+Theoretical are calculated with parameters estimates as per above)</p>
+<h3 id="t-year-events">
+  <code>\(t\)</code>-year events
+  <a class="anchor" href="#t-year-events">#</a>
+</h3>
+<ul>
+<li>Imagine you are focused on yearly outcomes, and want to obtain the outcome that should occur no more often than 200 years (such as in solvency requirements in Australia)</li>
+<li>This is a “one-in-200-years” event, and is referred to as “$t$-year event” (where <code>\(t=200\)</code> above), or outcome with a <code>\(t\)</code>-year “return period.”</li>
+<li>This is obviously impossible to estimate from data for large <code>\(t\)</code>, as it is simply not available - there is not enough information about the tail</li>
+<li>Although it is possible to get <code>\(t\)</code>-year quantiles from the GEV, it is not obvious how to relate those to the above problem as the GEV provides the distribution of a <em>maximum</em> over a certain period (not total losses, unless we are fitting portfolio level data).</li>
+<li>The interpretation is more natural with climate data, where you have daily maximum temperatures, and you may want to get a maximum with 200 day return period (and the R package allows for seasonality).</li>
+</ul>
+<h3 id="quantiles">
+  Quantiles
+  <a class="anchor" href="#quantiles">#</a>
+</h3>
+<p>For <code>\(t\)</code>-year events we seek <code>\(u_t\)</code> such that <code>\(H_{\gamma;\mu,\sigma}(u_t)=1-1/t\)</code>, that is,
+<code>$$u_t = H_{\gamma;\mu,\sigma}^{-1}\left(1-1/t\right).$$</code>
+We have
+$$
+u_t= \begin{cases}
+\mu+\frac{\sigma}{\gamma}\left[ \left(-\frac{1}{\log (1-1/t)}\right)^\gamma -1 \right]\quad &amp; \text{ for }\gamma \neq 0. \\<br>
+\mu+\sigma \log  \left(-\frac{1}{\log (1-1/t)}\right) &amp; \text{ for }\gamma = 0.
+\end{cases}
+$$</p>
+<hr>
+<p>Close examination of those formulas tells us that the curvature of <code>\(u_t\)</code> as a function of <code>\(\log  \left(-1/\log (1-1/t)\right)\)</code> depends on the distribution:</p>
+<ul>
+<li><code>\(\gamma&lt;0\)</code> (Weibull): concave with asymptotic upper limit as <code>\(t\rightarrow \infty\)</code> at its upper bound <code>\(\mu-\sigma/\gamma\)</code></li>
+<li><code>\(\gamma=0\)</code> (Gumbel): linear</li>
+<li><code>\(\gamma&gt;0\)</code> (Fr&rsquo;echet) convex with no finite upper bound</li>
+</ul>
+<h3 id="case-study-quantiles">
+  Case study: quantiles
+  <a class="anchor" href="#case-study-quantiles">#</a>
+</h3>
+<p>First, note that empirical <code>\((1-1/t)\)</code>-th quantiles in the data ($X_{n(1/t),n}$) are</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">ret.per <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">500</span>)
+Xnn <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(beta <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(claims<span style="color:#f92672">$</span>beta, decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), gamm <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(claims<span style="color:#f92672">$</span>gamm,
+  decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), logg <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(claims<span style="color:#f92672">$</span>logg, decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+empquant <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Xnn<span style="color:#a6e22e">[length</span>(claims<span style="color:#f92672">$</span>beta) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>ret.per, ])
+<span style="color:#a6e22e">rownames</span>(empquant) <span style="color:#f92672">&lt;-</span> ret.per
+empquant
+</code></pre></div><pre><code>##         beta     gamm     logg
+## 10  24308.60 21986.51 19253.06
+## 50  30526.74 35395.89 35621.35
+## 100 31753.68 40474.56 44351.62
+## 200 32235.67 45118.02 54439.08
+## 500 32790.91 53731.02 71437.34
+</code></pre>
+<p>These are <strong>not</strong> to be compared with the quantiles of the GEV.
+The GEV models the distribution of <strong>maxima</strong>.</p>
+<hr>
+<p>Empirical quantiles in the blocks:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Xnn2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(betablock <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(blockmax<span style="color:#f92672">$</span>betablock, decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>),
+  gammblock <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(blockmax<span style="color:#f92672">$</span>gammblock, decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>),
+  loggblock <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(blockmax<span style="color:#f92672">$</span>loggblock, decreasing <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+empquantblock <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Xnn2<span style="color:#a6e22e">[length</span>(blockmax<span style="color:#f92672">$</span>betablock) <span style="color:#f92672">*</span>
+  <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>ret.per, ])
+<span style="color:#a6e22e">rownames</span>(empquantblock) <span style="color:#f92672">&lt;-</span> ret.per
+empquantblock
+</code></pre></div><pre><code>##     betablock gammblock loggblock
+## 10   31845.47  41496.29  45836.54
+## 50   32869.52  55387.21  74562.03
+## 100  33042.45  59653.57  88275.45
+## 200  33186.66  63289.25  99494.12
+## 500  33249.33  78734.31 138514.02
+</code></pre>
+<hr>
+<p>Theoretical quantiles in the blocks (maxima):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">parm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#a6e22e">as.double</span>(fit.beta<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]), <span style="color:#a6e22e">as.double</span>(fit.gamm<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]),
+  <span style="color:#a6e22e">as.double</span>(fit.logg<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>par[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]))
+ut.theo <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">cbind</span>(beta <span style="color:#f92672">=</span> parm[1, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> parm[2, <span style="color:#ae81ff">1</span>]<span style="color:#f92672">/</span>parm[3,
+  <span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span>(<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>ret.per)))^parm[3, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>), gamm <span style="color:#f92672">=</span> parm[1,
+  <span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> parm[2, <span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>parm[3, <span style="color:#ae81ff">2</span>] <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span>(<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>ret.per)))^parm[3,
+  <span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>), logg <span style="color:#f92672">=</span> parm[1, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> parm[2, <span style="color:#ae81ff">3</span>]<span style="color:#f92672">/</span>parm[3, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span> ((<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span>(<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>ret.per)))^parm[3, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)))
+<span style="color:#a6e22e">rownames</span>(ut.theo) <span style="color:#f92672">&lt;-</span> ret.per
+ut.theo
+</code></pre></div><pre><code>##         beta     gamm      logg
+## 10  31436.86 42084.41  46508.37
+## 50  32707.95 54693.10  75140.65
+## 100 32964.40 59873.26  90920.27
+## 200 33132.46 64947.90 109373.87
+## 500 33269.71 71513.08 138703.54
+</code></pre>
+<hr>
+<p>Now this can be done with <code>extRemes</code> (with confidence intervals!)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">return.level</span>(fit.beta, return.period <span style="color:#f92672">=</span> ret.per, do.ci <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</code></pre></div><pre><code>...
+##                       95% lower CI Estimate 95% upper CI
+## 10-year return level      31263.52 31436.86     31610.19
+## 50-year return level      32573.09 32707.95     32842.81
+## 100-year return level     32821.90 32964.40     33106.90
+## 200-year return level     32978.01 33132.46     33286.90
+## 500-year return level     33099.84 33269.71     33439.57
+...
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">return.level</span>(fit.gamm, return.period <span style="color:#f92672">=</span> ret.per, do.ci <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</code></pre></div><pre><code>...
+##                       95% lower CI Estimate 95% upper CI
+## 10-year return level      40867.26 42084.41     43301.56
+## 50-year return level      52139.71 54693.10     57246.48
+## 100-year return level     56484.68 59873.26     63261.84
+## 200-year return level     60578.48 64947.90     69317.31
+## 500-year return level     65635.36 71513.08     77390.81
+...
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">return.level</span>(fit.logg, return.period <span style="color:#f92672">=</span> ret.per, do.ci <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</code></pre></div><pre><code>...
+##                       95% lower CI  Estimate 95% upper CI
+## 10-year return level      44199.82  46508.37     48816.91
+## 50-year return level      68082.59  75140.65     82198.71
+## 100-year return level     80241.17  90920.27    101599.36
+## 200-year return level     93750.30 109373.87    124997.45
+## 500-year return level    113913.35 138703.54    163493.72
+...
+</code></pre>
+<p>Theoretical figures are close (as they should!), but obviously the theoretical versions are smoothed and will be less likely to underestimate extreme events (see, e.g., the big difference in the gamma and log-gamma high return period figures).</p>
+<h1 id="generalised-pareto-distribution">
+  Generalised Pareto distribution
+  <a class="anchor" href="#generalised-pareto-distribution">#</a>
+</h1>
+<h2 id="asymptotic-properties-of-the-tails">
+  Asymptotic properties of the tails
+  <a class="anchor" href="#asymptotic-properties-of-the-tails">#</a>
+</h2>
+<h3 id="main-result-asymptotic-properties-of-the-tails">
+  Main result: Asymptotic properties of the tails
+  <a class="anchor" href="#main-result-asymptotic-properties-of-the-tails">#</a>
+</h3>
+<ul>
+<li>Let us now consider a distribution <code>\(F\)</code> of losses <code>\(Y\)</code>. We are interested in the asymptotic behaviour of the tail so that we can approximate it due to lack of data [see also Chapter 4 of Wuthrich (2020); <code>\(S_{sc}\)</code> vs <code>\(S_{lc}\)</code>]</li>
+<li>If we were pricing an excess of loss (or stop loss on a portfolio), the <em>attachment point</em> or <em>retention level</em> or <em>limit</em> could be expressed as a <code>\(t\)</code>-year event or quantile
+$$ u_t =F^{-1}\left( 1-\frac{1}{t}\right).$$</li>
+<li>The tail is the distribution beyond this point. We characterise the tail with the help of the distribution function of the excess over threshold <code>\(u\)</code>
+<code>$$F_{u}(x) = \Pr[Y-u\le x|Y&gt;u].$$</code></li>
+<li>The <strong>main result is that, <em>for high <code>\(u\)</code></em>, <code>\(F_{u}(x)\)</code> can be <em>approximated</em> by a Generalised Pareto</strong>.
+(technically, as <code>\(u\)</code> increases to the maximum possible value of <code>\(x\)</code> then the absolute difference between both distributions is asymptotically zero)</li>
+</ul>
+<h2 id="the-gp-distribution">
+  The GP distribution
+  <a class="anchor" href="#the-gp-distribution">#</a>
+</h2>
+<h3 id="generalised-pareto-distribution-1">
+  Generalised Pareto distribution
+  <a class="anchor" href="#generalised-pareto-distribution-1">#</a>
+</h3>
+<ul>
+<li>The Generalised Pareto distribution function is given by
+<code>$$G_{\gamma,\sigma}(x) = \left\{ \begin{array}{cc} \displaystyle 1-\left( 1+ \gamma \frac{x}{\sigma}\right)_+^{-\frac{1}{\gamma}} &amp; \gamma \neq 0 \\ \\ \displaystyle 1-\exp \left( -\frac{x}{\sigma}\right) &amp; \gamma = 0 \end{array}\right.$$</code>
+for a scale parameter <code>\(\sigma&gt;0\)</code>.</li>
+<li>We distinguish again three cases:
+<ul>
+<li><code>\(\gamma&lt;0\)</code> (upper bound, also referred to as “Pareto Type II”): light tail, <code>\(X \in (0,\sigma/|\gamma|)\)</code></li>
+<li><code>\(\gamma=0\)</code> (exponential): base case <code>\(X \in \mathbb{R}\)</code></li>
+<li><code>\(\gamma&gt;0\)</code> (Pareto): heavy tail, <code>\(X \in \mathbb{R}^+\)</code></li>
+</ul>
+</li>
+</ul>
+<!-- - If `\(G_{\gamma,\sigma}(x)\)` is the limiting df of standardised maxima---that is, a GEV$(\mu,\sigma,\gamma)$, then the GP has the same \\ shape parameter `\(\gamma\)` and modified scale parameter `\(\sigma -\gamma \mu\)`. -->
+<h3 id="gp-df">
+  GP df
+  <a class="anchor" href="#gp-df">#</a>
+</h3>
+<p><img src="/img/module-6/GPdf.png" width="100%" style="display: block; margin: auto;" /></p>
+<h3 id="gp-pdf">
+  GP pdf
+  <a class="anchor" href="#gp-pdf">#</a>
+</h3>
+<p><img src="/img/module-6/GPpdf.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>
+  <a href="https://en.wikipedia.org/wiki/Generalized_Pareto_distribution">From Wikipedia</a></p>
+<ul>
+<li>note <code>\(\xi \equiv \gamma\)</code></li>
+</ul>
+<h3 id="moments-1">
+  Moments
+  <a class="anchor" href="#moments-1">#</a>
+</h3>
+<p>The first central moments of <code>\(X\)</code>, the excess of <code>\(u\)</code>, are</p>
+<p><code>$$\begin{array}{rcl} E[X] &amp;=&amp; \frac{\sigma}{1-\gamma}, \quad \gamma &lt;1, \\ Var(X) &amp;=&amp; \frac{\sigma^2}{(1-\gamma)^2(1-2\gamma)}, \quad \gamma &lt;1/2. \end{array}$$</code></p>
+<p>Note:</p>
+<ul>
+<li>The first four <code>\(k\)</code> moments exist only for <code>\(\gamma&lt;1/k\)</code>.</li>
+<li><code>\(E[X]\)</code> is the stop loss premium (since <code>\(X\)</code> is the excess over threshold <code>\(u\)</code>)</li>
+</ul>
+<h2 id="estimation">
+  Estimation
+  <a class="anchor" href="#estimation">#</a>
+</h2>
+<h3 id="estimation-choice-of-threshold-u">
+  Estimation: choice of threshold <code>\(u\)</code>
+  <a class="anchor" href="#estimation-choice-of-threshold-u">#</a>
+</h3>
+<p>We seek to estimate the tail
+<code>$$\overline{F}(u+x)=\overline{F}(u)\overline{F}_u(x)$$</code>
+for a fixed large value <code>\(u\)</code> and all <code>\(x\ge 0\)</code>. To do so, we need to estimate:</p>
+<ul>
+<li>Probability of exceeding <code>\(u\)</code>
+$$ \widehat{\overline{F}(u)} = \frac{n_u}{n}$$
+which will be more accurate for <code>\(u\)</code> not too large.</li>
+<li>Then for given value of <code>\(u\)</code>
+<code>$$\widehat{\overline{F}_u(x)}=G_{\gamma,\sigma}(x)$$</code>
+where <code>\(\hat{\gamma}\)</code> and <code>\(\hat{\sigma}(u)\)</code> are estimated from the data in the tail (via MLE). This approximation will work only for large <code>\(u\)</code>
+(as the result is an asymptotic result for <code>\(u\rightarrow \infty\)</code>).</li>
+</ul>
+<h3 id="estimation-choice-of-threshold-u-1">
+  Estimation: choice of threshold <code>\(u\)</code>
+  <a class="anchor" href="#estimation-choice-of-threshold-u-1">#</a>
+</h3>
+<p>The choice of <code>\(u\)</code> presents conflicting requirements for <code>\(u\)</code>:</p>
+<ul>
+<li>larger <code>\(u\)</code> will lead to a better approximation from a distributional perspective</li>
+<li>but larger <code>\(u\)</code> reduces the amount of data to estimate <code>\(\overline{F}(u)\)</code> , <code>\(\gamma\)</code> and <code>\(\sigma\)</code></li>
+</ul>
+<p>The choice is often also based on the following further considerations:</p>
+<ul>
+<li>mean-excess plot: Pareto should be linear (slope same sign as <code>\(\gamma\)</code>)</li>
+<li>empirical df on a doubly logarithmic scale: Pareto should be linear</li>
+<li>Hill plot (Wuthrich 2020, 76): stability of Pareto parameter</li>
+<li>stability of <code>\(\hat{\gamma}\)</code> for different choices of <code>\(u\)</code> (note this requires a full fit for each value of <code>\(u\)</code> but the <code>extRemes</code> package does that automatically)</li>
+<li>goodness of fit for different choices of <code>\(u\)</code></li>
+</ul>
+<p>Unfortunately there is no “optimal” (or “automatic”) procedure for choosing <code>\(u\)</code>.</p>
+<h2 id="case-study-1">
+  Case study
+  <a class="anchor" href="#case-study-1">#</a>
+</h2>
+<h3 id="case-study-workers-compensation-medical-costs">
+  Case study: workers compensation medical costs
+  <a class="anchor" href="#case-study-workers-compensation-medical-costs">#</a>
+</h3>
+<ul>
+<li>Example of real actuarial data from Avanzi, Cassar, and Wong (2011)</li>
+<li>Data were provided by the SUVA (Swiss workers compensation insurer)</li>
+<li>Random sample of 5% of accident claims in construction sector with accident year 1999 (developped as of 2003)</li>
+<li>Claims are medical costs</li>
+<li>In Avanzi, Cassar, and Wong (2011) we model those claims with a Gumbel distribution, which suggests heavy tails, which is confirmed by the following graphs. This, however, wasn’t the main objective of the paper, but was good enough for our purposes.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">SUVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;SUVA.xls&#34;</span>)
+<span style="color:#a6e22e">as_tibble</span>(SUVA)
+</code></pre></div><pre><code>...
+## # A tibble: 2,326 x 2
+##    medcosts dailyallow
+##       &lt;dbl&gt;      &lt;dbl&gt;
+##  1      407          0
+##  2    12591      13742
+...
+</code></pre>
+<h3 id="data-exploration">
+  Data exploration
+  <a class="anchor" href="#data-exploration">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(SUVA<span style="color:#f92672">$</span>medcosts, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Medical costs (CHF)&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.25</span>,
+  cex.lab <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.25</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;darkblue&#34;</span>, bg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lightblue&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-CHF-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">log</span>(SUVA<span style="color:#f92672">$</span>medcosts), ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Medical costs (log CHF)&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.25</span>,
+  cex.lab <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.25</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;darkblue&#34;</span>, bg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lightblue&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-logCHF-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">extRemes<span style="color:#f92672">::</span><span style="color:#a6e22e">qqnorm</span>(<span style="color:#a6e22e">log</span>(SUVA<span style="color:#f92672">$</span>medcosts), cex.lab <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.25</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-logCHF-QQ-1.png" width="672" /></p>
+<h3 id="size-of-tail">
+  Size of tail
+  <a class="anchor" href="#size-of-tail">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+<span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">250</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20000</span>) {
+  numbexc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(numbexc, <span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span>
+    i]))
+}
+<span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>))
+<span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">250</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20000</span>, numbexc, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Threshold ($)&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Number of claims exceeding the threshold&#34;</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;darkblue&#34;</span>, bg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lightblue&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>)
+<span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">250</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20000</span>, numbexc<span style="color:#f92672">/</span><span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Threshold ($)&#34;</span>,
+  ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Proportion of claims above threshold&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;darkblue&#34;</span>,
+  bg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lightblue&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">21</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-propclaims-1.png" width="672" /></p>
+<h3 id="mean-excess-plot">
+  Mean-excess plot
+  <a class="anchor" href="#mean-excess-plot">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">extRemes<span style="color:#f92672">::</span><span style="color:#a6e22e">mrlplot</span>(SUVA<span style="color:#f92672">$</span>medcosts, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">250</span>, <span style="color:#ae81ff">20000</span>))
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-threshold2-1.png" width="672" /></p>
+<h3 id="empirical-overlinef-on-log-log-scale">
+  Empirical <code>\(\overline{F}\)</code> on log log scale
+  <a class="anchor" href="#empirical-overlinef-on-log-log-scale">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">evir<span style="color:#f92672">::</span><span style="color:#a6e22e">emplot</span>(SUVA<span style="color:#f92672">$</span>medcosts, alog <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xy&#34;</span>, labels <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-loglog-1.png" width="672" /></p>
+<h3 id="hill-plot">
+  Hill plot
+  <a class="anchor" href="#hill-plot">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">evir<span style="color:#f92672">::</span><span style="color:#a6e22e">hill</span>(SUVA<span style="color:#f92672">$</span>medcosts)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-Hill-1.png" width="672" /></p>
+<h3 id="stability-of-hatgamma">
+  Stability of <code>\(\hat{\gamma}\)</code>
+  <a class="anchor" href="#stability-of-hatgamma">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">extRemes<span style="color:#f92672">::</span><span style="color:#a6e22e">threshrange.plot</span>(SUVA<span style="color:#f92672">$</span>medcosts, r <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">250</span>, <span style="color:#ae81ff">20000</span>),
+  nint <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-threshold1-1.png" width="672" /></p>
+<h3 id="estimation-results-for-u500">
+  Estimation results for <code>\(u=500\)</code>
+  <a class="anchor" href="#estimation-results-for-u500">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.SUVA.500 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(SUVA<span style="color:#f92672">$</span>medcosts, threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GP&#34;</span>,
+  time.units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1/year&#34;</span>)
+fit.SUVA.500
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##        scale        shape </span>
+<span style="color:#75715e">## 1272.3550452    0.9193739 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##       scale       shape </span>
+<span style="color:#75715e">## 126.8004198   0.0849976 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##              scale        shape</span>
+<span style="color:#75715e">## scale 16078.346449 -6.336002009</span>
+<span style="color:#75715e">## shape    -6.336002  0.007224592</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 11006.09 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 11014.93</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[501 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]  <span style="color:#75715e"># n_u</span>
+</code></pre></div><pre><code>## [1] 616
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[501 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts)
+</code></pre></div><pre><code>## [1] 0.2648323
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.SUVA.500)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-fit-500-2-1.png" width="672" /></p>
+<h3 id="estimation-results-for-u5000">
+  Estimation results for <code>\(u=5000\)</code>
+  <a class="anchor" href="#estimation-results-for-u5000">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.SUVA.5000 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(SUVA<span style="color:#f92672">$</span>medcosts, threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GP&#34;</span>,
+  time.units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1/year&#34;</span>)
+fit.SUVA.5000
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##      scale      shape </span>
+<span style="color:#75715e">## 8696.13321    0.37075 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##        scale        shape </span>
+<span style="color:#75715e">## 1433.7846731    0.1389474 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##              scale         shape</span>
+<span style="color:#75715e">## scale 2055738.4888 -135.87231048</span>
+<span style="color:#75715e">## shape    -135.8723    0.01930639</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 2633.894 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 2639.566</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[5001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]  <span style="color:#75715e"># n_u</span>
+</code></pre></div><pre><code>## [1] 126
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[5001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts)
+</code></pre></div><pre><code>## [1] 0.05417025
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.SUVA.5000)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-fit-5000-2-1.png" width="672" /></p>
+<h3 id="estimation-results-for-u10000">
+  Estimation results for <code>\(u=10000\)</code>
+  <a class="anchor" href="#estimation-results-for-u10000">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.SUVA.10000 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(SUVA<span style="color:#f92672">$</span>medcosts, threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GP&#34;</span>,
+  time.units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1/year&#34;</span>)
+fit.SUVA.10000
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##        scale        shape </span>
+<span style="color:#75715e">## 1.633393e+04 7.885925e-02 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##        scale        shape </span>
+<span style="color:#75715e">## 3536.9225104    0.1633972 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##               scale         shape</span>
+<span style="color:#75715e">## scale 12509820.8444 -446.98853032</span>
+<span style="color:#75715e">## shape     -446.9885    0.02669863</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 1408.892 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 1413.24</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[10001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]  <span style="color:#75715e"># n_u</span>
+</code></pre></div><pre><code>## [1] 65
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[10001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts)
+</code></pre></div><pre><code>## [1] 0.02794497
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.SUVA.10000)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-fit-10000-2-1.png" width="672" /></p>
+<h3 id="estimation-results-for-u12000">
+  Estimation results for <code>\(u=12000\)</code>
+  <a class="anchor" href="#estimation-results-for-u12000">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.SUVA.12000 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(SUVA<span style="color:#f92672">$</span>medcosts, threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">12000</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GP&#34;</span>,
+  time.units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1/year&#34;</span>)
+fit.SUVA.12000
+<span style="color:#66d9ef">...</span>
+<span style="color:#75715e">##  Estimated parameters:</span>
+<span style="color:#75715e">##         scale         shape </span>
+<span style="color:#75715e">##  1.904175e+04 -4.859538e-03 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Standard Error Estimates:</span>
+<span style="color:#75715e">##        scale        shape </span>
+<span style="color:#75715e">## 4264.9534894    0.1600393 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  Estimated parameter covariance matrix.</span>
+<span style="color:#75715e">##               scale         shape</span>
+<span style="color:#75715e">## scale 18189828.2668 -534.46782297</span>
+<span style="color:#75715e">## shape     -534.4678    0.02561257</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  AIC = 1238.267 </span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">##  BIC = 1242.353</span>
+<span style="color:#66d9ef">...</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[12001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]  <span style="color:#75715e"># n_u</span>
+</code></pre></div><pre><code>## [1] 57
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">numbexc[12001 <span style="color:#f92672">-</span> <span style="color:#ae81ff">250</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">length</span>(SUVA<span style="color:#f92672">$</span>medcosts)
+</code></pre></div><pre><code>## [1] 0.02450559
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fit.SUVA.12000)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/SUVA-fit-12000-2-1.png" width="672" /></p>
+<h1 id="measures-of-tail-weight">
+  Measures of tail weight
+  <a class="anchor" href="#measures-of-tail-weight">#</a>
+</h1>
+<ul>
+<li>Existence of moments (e.g. gamma vs Pareto)</li>
+<li>Limiting density ratios: relative value of density functions at the far end of the upper tail of two distributions</li>
+<li>Hazard rates <code>\(\lambda(x)=f(x)/(1-F(x))\)</code>: constant for exponential, decreasing for heavy tails</li>
+<li>Log-log plot: linear decrease for heavy tails</li>
+<li>Mean excess function: linear increase for heavy tails</li>
+</ul>
+<h3 id="limiting-density-ratios-gamma-example">
+  Limiting density ratios: gamma example
+  <a class="anchor" href="#limiting-density-ratios-gamma-example">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.75</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.75</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">dexp</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>,
+  <span style="color:#ae81ff">1</span>), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x&#34;</span>, main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ratio of densities gamma(alpha,beta) to exponential(1)&#34;</span>,
+  ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3.5</span>), xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,
+    <span style="color:#ae81ff">6</span>), lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;alpha=beta=0.75&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">dexp</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>,
+  <span style="color:#ae81ff">1</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">1.2</span>, <span style="color:#e6db74">&#34;alpha=beta=1&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">dexp</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>,
+  <span style="color:#ae81ff">1</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#e6db74">&#34;alpha=beta=2&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">dexp</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>,
+  <span style="color:#ae81ff">1</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.8</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#e6db74">&#34;alpha=beta=10&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">dexp</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>,
+  <span style="color:#ae81ff">1</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">3.5</span>, <span style="color:#e6db74">&#34;alpha=beta=0.5&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/EVT-gammatoexp-1.png" width="672" /></p>
+<h3 id="hazard-rates-gamma-example-with-fixed-mean">
+  Hazard rates: gamma example with fixed mean
+  <a class="anchor" href="#hazard-rates-gamma-example-with-fixed-mean">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x&#34;</span>,
+  main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;failure rates for gamma(alpha,beta)&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>), xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>),
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">0.75</span>, <span style="color:#e6db74">&#34;alpha=beta=0.5&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">1.2</span>, <span style="color:#e6db74">&#34;alpha=beta=1&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;alpha=beta=2&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">3.6</span>, <span style="color:#e6db74">&#34;alpha=beta=4&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">0.35</span>, <span style="color:#e6db74">&#34;alpha=beta=0.1&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/EVT-gammafailure-1.png" width="672" /></p>
+<h3 id="hazard-rates-gamma-example-with-fixed-mean-1">
+  Hazard rates: gamma example with fixed mean
+  <a class="anchor" href="#hazard-rates-gamma-example-with-fixed-mean-1">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.75</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.75</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x&#34;</span>,
+  main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;failure rates for gamma(alpha,beta=1)&#34;</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2.5</span>), xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>),
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">1.15</span>, <span style="color:#e6db74">&#34;alpha=0.75&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0.9</span>, <span style="color:#e6db74">&#34;alpha=1&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#e6db74">&#34;alpha=2&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">0.15</span>, <span style="color:#e6db74">&#34;alpha=4&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">dgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+  <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, shape <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01</span>, rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+<span style="color:#a6e22e">text</span>(<span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">1.45</span>, <span style="color:#e6db74">&#34;alpha=0.01&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/index_files/figure-html/EVT-gammafailure2-1.png" width="672" /></p>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AvCaWo11" class="csl-entry">
+<p>Avanzi, Benjamin, Luke C. Cassar, and Bernard Wong. 2011. “Modelling Dependence in Insurance Claims Processes with Lévy Copulas.” <em>ASTIN Bulletin</em> 41 (2): 575–609.</p>
+</div>
+<div id="ref-EmKlMi97" class="csl-entry">
+<p>Embrechts, C. AND Mikosch, P. AND Klüppelberg. 1997. <em>Modelling Extremal Events for Insurance and Finance</em>. Springer, Berlin.</p>
+</div>
+<div id="ref-EmReSa99" class="csl-entry">
+<p>Embrechts, Paul, Sidney I. Resnick, and Gennady Samorodnitsky. 1999. “Extreme Value Theory as a Risk Management Tool.” <em>North American Actuarial Journal</em> 3 (2): 30–41.</p>
+</div>
+<div id="ref-GiKa16" class="csl-entry">
+<p>Gilleland, Eric, and Richard W. Katz. 2016. “<span class="nocase">extRemes</span> 2.0: An Extreme Value Analysis Package in R.” <em>Journal of Statistical Software</em> 72 (8).</p>
+</div>
+<div id="ref-IoA20" class="csl-entry">
+<p>IoA. 2020. <em>Course Notes and Core Reading for Subject Cs2 Models</em>. The Institute of Actuaries.</p>
+</div>
+<div id="ref-Wut20" class="csl-entry">
+<p>Wuthrich, Mario V. 2020. “Non-Life Insurance: Mathematics &amp; Statistics.” Lecture notes. RiskLab, ETH Zurich; Swiss Finance Institute.</p>
+</div>
+</div>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/98dbb98f6562ac57b3bd488d2bb7de1bf2edcf4f" title='Last modified by William Ho | 22 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>22 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#extreme-events">Extreme events</a></li>
+            <li><a href="#framework">Framework</a></li>
+            <li><a href="#motivating-example-p-embrechts-resnick-and-samorodnitsky-1999">Motivating example (P. Embrechts, Resnick, and Samorodnitsky 1999)</a></li>
+            <li><a href="#a-limiting-argument">A limiting argument</a></li>
+            <li><a href="#general-result-for-x-exponential-lambda">General result for <code>\(X\)</code> exponential <code>\((\lambda)\)</code></a></li>
+            <li><a href="#questions">Questions</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#generalised-extreme-value-distribution">Generalised Extreme Value distribution</a>
+      <ul>
+        <li><a href="#the-gev-distribution">The GEV distribution</a>
+          <ul>
+            <li><a href="#extreme-value-distributions">Extreme Value Distributions</a></li>
+            <li><a href="#three-cases">Three cases</a></li>
+            <li><a href="#estimation-block-maxima">Estimation: Block Maxima</a></li>
+          </ul>
+        </li>
+        <li><a href="#case-study">Case study</a>
+          <ul>
+            <li><a href="#block-maxima">Block maxima</a></li>
+            <li><a href="#convergence-with-increasing-block-sizes">Convergence with increasing block sizes</a></li>
+            <li><a href="#fitting-results">Fitting results</a></li>
+          </ul>
+        </li>
+        <li><a href="#moments-and-quantiles">Moments and quantiles</a>
+          <ul>
+            <li><a href="#moments">Moments</a></li>
+            <li><a href="#t-year-events"><code>\(t\)</code>-year events</a></li>
+            <li><a href="#quantiles">Quantiles</a></li>
+            <li><a href="#case-study-quantiles">Case study: quantiles</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#generalised-pareto-distribution">Generalised Pareto distribution</a>
+      <ul>
+        <li><a href="#asymptotic-properties-of-the-tails">Asymptotic properties of the tails</a>
+          <ul>
+            <li><a href="#main-result-asymptotic-properties-of-the-tails">Main result: Asymptotic properties of the tails</a></li>
+          </ul>
+        </li>
+        <li><a href="#the-gp-distribution">The GP distribution</a>
+          <ul>
+            <li><a href="#generalised-pareto-distribution-1">Generalised Pareto distribution</a></li>
+            <li><a href="#gp-df">GP df</a></li>
+            <li><a href="#gp-pdf">GP pdf</a></li>
+            <li><a href="#moments-1">Moments</a></li>
+          </ul>
+        </li>
+        <li><a href="#estimation">Estimation</a>
+          <ul>
+            <li><a href="#estimation-choice-of-threshold-u">Estimation: choice of threshold <code>\(u\)</code></a></li>
+            <li><a href="#estimation-choice-of-threshold-u-1">Estimation: choice of threshold <code>\(u\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#case-study-1">Case study</a>
+          <ul>
+            <li><a href="#case-study-workers-compensation-medical-costs">Case study: workers compensation medical costs</a></li>
+            <li><a href="#data-exploration">Data exploration</a></li>
+            <li><a href="#size-of-tail">Size of tail</a></li>
+            <li><a href="#mean-excess-plot">Mean-excess plot</a></li>
+            <li><a href="#empirical-overlinef-on-log-log-scale">Empirical <code>\(\overline{F}\)</code> on log log scale</a></li>
+            <li><a href="#hill-plot">Hill plot</a></li>
+            <li><a href="#stability-of-hatgamma">Stability of <code>\(\hat{\gamma}\)</code></a></li>
+            <li><a href="#estimation-results-for-u500">Estimation results for <code>\(u=500\)</code></a></li>
+            <li><a href="#estimation-results-for-u5000">Estimation results for <code>\(u=5000\)</code></a></li>
+            <li><a href="#estimation-results-for-u10000">Estimation results for <code>\(u=10000\)</code></a></li>
+            <li><a href="#estimation-results-for-u12000">Estimation results for <code>\(u=12000\)</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#measures-of-tail-weight">Measures of tail weight</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#limiting-density-ratios-gamma-example">Limiting density ratios: gamma example</a></li>
+            <li><a href="#hazard-rates-gamma-example-with-fixed-mean">Hazard rates: gamma example with fixed mean</a></li>
+            <li><a href="#hazard-rates-gamma-example-with-fixed-mean-1">Hazard rates: gamma example with fixed mean</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

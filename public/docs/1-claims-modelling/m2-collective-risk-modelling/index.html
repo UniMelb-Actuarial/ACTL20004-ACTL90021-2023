@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Introduction: Models for aggregate losses #  A portfolio of contracts or a contract will potentially experience a sequence of losses: $$Y_1, Y_2, Y_3, \ldots$$ We are interested in the aggregate sum \(S\) of these losses over a certain period of time.
+ How many losses will occur?  if deterministic \((n)\) \(\longrightarrow\) individual risk model if random \((N)\) \(\longrightarrow\) collective risk model   How do they relate to each other?">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M2 Collective Risk Modelling" />
+<meta property="og:description" content="Introduction: Models for aggregate losses #  A portfolio of contracts or a contract will potentially experience a sequence of losses: $$Y_1, Y_2, Y_3, \ldots$$ We are interested in the aggregate sum \(S\) of these losses over a certain period of time.
+ How many losses will occur?  if deterministic \((n)\) \(\longrightarrow\) individual risk model if random \((N)\) \(\longrightarrow\) collective risk model   How do they relate to each other?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-22T07:50:15+11:00" />
+
+<title>M2 Collective Risk Modelling | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class=" active">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M2 Collective Risk Modelling</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-models-for-aggregate-losses">Introduction: Models for aggregate losses</a></li>
+    <li><a href="#the-individual-risk-model">The Individual Risk Model</a>
+      <ul>
+        <li><a href="#definition">Definition</a>
+          <ul>
+            <li><a href="#the-individual-risk-model-1">The Individual Risk Model</a></li>
+          </ul>
+        </li>
+        <li><a href="#convolutions-of-random-variables">Convolutions of random variables</a>
+          <ul>
+            <li><a href="#formulas">Formulas</a></li>
+            <li><a href="#numerical-example">Numerical example</a></li>
+            <li><a href="#solution">Solution</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-generating-functions">Using generating functions</a>
+          <ul>
+            <li><a href="#example">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-r">Using R</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-collective-risk-model-compound-distributions-mw-21">The Collective Risk Model (Compound distributions, MW 2.1)</a>
+      <ul>
+        <li><a href="#definition-1">Definition</a>
+          <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#definition-2">Definition</a></li>
+          </ul>
+        </li>
+        <li><a href="#moments-of-s">Moments of <code>\(S\)</code></a></li>
+        <li><a href="#moment-generating-function-of-s">Moment generating function of <code>\(S\)</code></a>
+          <ul>
+            <li><a href="#example-bowers-et-al-1997-1221">Example (Bowers et al. (1997), 12.2.1)</a></li>
+          </ul>
+        </li>
+        <li><a href="#distribution-of-s">Distribution of <code>\(S\)</code></a>
+          <ul>
+            <li><a href="#distribution-of-s-if-x-is-continuous">Distribution of <code>\(S\)</code> if <code>\(X\)</code> is continuous</a></li>
+            <li><a href="#example-continued-bowers-et-al-1997-1223">Example, continued (Bowers et al. (1997), 12.2.3)</a></li>
+            <li><a href="#distribution-of-s-if-y-is-mixed">Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is mixed</a></li>
+            <li><a href="#distribution-of-s-if-y-is-discrete">Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is discrete</a></li>
+            <li><a href="#example-with-tabular-approach">Example with tabular approach</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-r-1">Using R</a></li>
+      </ul>
+    </li>
+    <li><a href="#explicit-claims-count-distributions-mw-22">Explicit claims count distributions (MW 2.2)</a>
+      <ul>
+        <li><a href="#introduction-1">Introduction</a>
+          <ul>
+            <li><a href="#exposure">Exposure</a></li>
+            <li><a href="#basic-models-for-claims-frequency">Basic models for claims frequency</a></li>
+          </ul>
+        </li>
+        <li><a href="#binomial-distribution">Binomial distribution</a>
+          <ul>
+            <li><a href="#compound-binomial-model">Compound binomial model</a></li>
+          </ul>
+        </li>
+        <li><a href="#poisson-distribution">Poisson distribution</a>
+          <ul>
+            <li><a href="#compound-poisson-model">Compound Poisson model</a></li>
+          </ul>
+        </li>
+        <li><a href="#mixed-poisson-distribution">Mixed Poisson distribution</a>
+          <ul>
+            <li><a href="#inhomogeneous-portfolio">Inhomogeneous portfolio</a></li>
+            <li><a href="#the-mixed-poisson-distribution">The mixed Poisson distribution</a></li>
+            <li><a href="#example-1">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#negative-binomial-distribution">Negative-binomial distribution</a>
+          <ul>
+            <li><a href="#interpretation">Interpretation</a></li>
+            <li><a href="#compound-negative-binomial-model">Compound negative-binomial model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#additional-properties-and-applications-of-poisson-frequencies">Additional properties and applications of Poisson frequencies</a>
+      <ul>
+        <li><a href="#theorem-212-aggregation-property-uparrow">Theorem 2.12: Aggregation property <code>\(\uparrow\)</code></a>
+          <ul>
+            <li><a href="#proof">Proof</a></li>
+            <li><a href="#example-1241-of-bowers-et-al-1997">Example 12.4.1 of Bowers et al. (1997)</a></li>
+          </ul>
+        </li>
+        <li><a href="#theorem-214-disjoint-decomposition-property-downarrow">Theorem 2.14: Disjoint decomposition property <code>\(\downarrow\)</code></a>
+          <ul>
+            <li><a href="#preliminary-1-add-lobs-in-the-comppoi-formulation">Preliminary 1: Add LoBs in the CompPoi formulation</a></li>
+            <li><a href="#preliminary-2-partition">Preliminary 2: Partition</a></li>
+            <li><a href="#theorem-214-disjoint-decomposition-downarrow">Theorem 2.14: Disjoint decomposition <code>\(\downarrow\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-thinning-of-the-poisson-process"><code>\(\adv\)</code> Thinning of the Poisson process</a></li>
+        <li><a href="#adv-sparse-vector-algorithm"><code>\(\adv\)</code> Sparse vector algorithm</a>
+          <ul>
+            <li><a href="#adv-the-sparse-vector-algorithm"><code>\(\adv\)</code> The sparse vector algorithm</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-example-216-large-claim-separation"><code>\(\adv\)</code> Example 2.16: Large claim separation</a></li>
+      </ul>
+    </li>
+    <li><a href="#adv-parameter-estimation-mw-23"><code>\(\adv\)</code> Parameter estimation (MW 2.3)</a>
+      <ul>
+        <li><a href="#adv-introduction"><code>\(\adv\)</code> Introduction</a>
+          <ul>
+            <li><a href="#adv-estimation-methods"><code>\(\adv\)</code> Estimation methods</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-what-to-do-with-volumes-lemma-226"><code>\(\adv\)</code> What to do with volumes? Lemma 2.26</a></li>
+        <li><a href="#adv-method-of-moments"><code>\(\adv\)</code> Method of moments</a>
+          <ul>
+            <li><a href="#adv-binomial-and-poisson-cases"><code>\(\adv\)</code> Binomial and Poisson cases</a></li>
+            <li><a href="#adv-negative-binomial-case"><code>\(\adv\)</code> Negative binomial case</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-maximum-likelihood-estimators"><code>\(\adv\)</code> Maximum likelihood estimators</a>
+          <ul>
+            <li><a href="#adv-binomial-and-poisson-cases-1"><code>\(\adv\)</code> Binomial and Poisson cases</a></li>
+            <li><a href="#adv-negative-binomial-case-1"><code>\(\adv\)</code> Negative binomial case</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#adv-the-ab0-and-ab1-classes-of-distributions"><code>\(\adv\)</code> The <code>\((a,b,0)\)</code> and <code>\((a,b,1)\)</code> classes of distributions</a>
+      <ul>
+        <li><a href="#adv-the-ab-class-of-panjer-distributions-421"><code>\(\adv\)</code> The <code>\((a,b)\)</code> class of Panjer distributions (4.2.1)</a>
+          <ul>
+            <li><a href="#adv-first-three-cumulants-of-the-ab-family"><code>\(\adv\)</code> First three cumulants of the <code>\((a,b)\)</code> family</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-actuar-and-the-ab1-class"><code>\(\adv\)</code> <code>actuar</code> and the <code>\((a,b,1)\)</code> class</a></li>
+        <li><a href="#adv-the-ab1-class-of-distributions"><code>\(\adv\)</code> The <code>\((a,b,1)\)</code> class of distributions</a>
+          <ul>
+            <li><a href="#adv-zero-truncated-distributions"><code>\(\adv\)</code> Zero-truncated distributions</a></li>
+            <li><a href="#adv-zero-modified-distributions"><code>\(\adv\)</code> Zero-modified distributions</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="introduction-models-for-aggregate-losses">
+  Introduction: Models for aggregate losses
+  <a class="anchor" href="#introduction-models-for-aggregate-losses">#</a>
+</h1>
+<p>A portfolio of contracts or a contract will potentially experience a sequence of losses:
+<code>$$Y_1, Y_2, Y_3, \ldots$$</code>
+We are interested in the aggregate sum <code>\(S\)</code> of these losses over a certain period of time.</p>
+<ul>
+<li>How many losses will occur?
+<ul>
+<li>if deterministic <code>\((n)\)</code> <code>\(\longrightarrow\)</code> individual risk model</li>
+<li>if random <code>\((N)\)</code> <code>\(\longrightarrow\)</code> collective risk model</li>
+</ul>
+</li>
+<li>How do they relate to each other?
+<ul>
+<li>usual assumption: iid</li>
+</ul>
+</li>
+<li>When do these losses occur?
+<ul>
+<li>usual assumption: no time value of money<br>
+<code>\(\longrightarrow\)</code> short term models</li>
+</ul>
+</li>
+<li>How big are these losses?</li>
+</ul>
+<h1 id="the-individual-risk-model">
+  The Individual Risk Model
+  <a class="anchor" href="#the-individual-risk-model">#</a>
+</h1>
+<h2 id="definition">
+  Definition
+  <a class="anchor" href="#definition">#</a>
+</h2>
+<h3 id="the-individual-risk-model-1">
+  The Individual Risk Model
+  <a class="anchor" href="#the-individual-risk-model-1">#</a>
+</h3>
+<p>In the Individual Risk Model
+<code>$$S=Y_{1}+\cdots +Y_{n}=\sum_{i=1}^{n}Y_{i},$$</code>
+where <code>\(Y_{i}\)</code>, <code>\(i=1,2,...,n\)</code>, are iid claims.
+There are several methods to get probabilities about <code>\(S\)</code>:</p>
+<ul>
+<li>get the whole distribution of <code>\(S\)</code> (if possible)
+<ul>
+<li>Convolutions</li>
+<li>Generating functions</li>
+</ul>
+</li>
+<li><code>\(\adv\)</code> approximate with the help of the moments of <code>\(S\)</code> (Module 4)</li>
+</ul>
+<h2 id="convolutions-of-random-variables">
+  Convolutions of random variables
+  <a class="anchor" href="#convolutions-of-random-variables">#</a>
+</h2>
+<p>In probability, the operation of determining the distribution of the sum of two random variables is called a <strong>convolution</strong>. It is denoted by
+<code>$$F_{X+Y}=F_X*F_Y.$$</code>
+The result can then be convolved with the distribution of another random variable. For instance,
+<code>$$F_{X+Y+Z}=F_Z*F_{X+Y}.$$</code>
+This can be done for both discrete and continuous random variables. It is also possible for mixed rv’s, but it is more complicated.</p>
+<h3 id="formulas">
+  Formulas
+  <a class="anchor" href="#formulas">#</a>
+</h3>
+<p>In short</p>
+<ul>
+<li>Discrete case:</li>
+<li>df: <code>\(F_{X+Y}\left( s\right) = \sum_{x}F_{Y}\left( s-x\right)f_{X}\left( x\right)\)</code></li>
+<li>pmf: <code>\(f_{X+Y}\left( s\right) = \sum_{x}f_{Y}\left(s-x\right) f_{X}\left( x\right)\)</code></li>
+<li>Continuous case:</li>
+<li>cdf: <code>\(F_{X+Y}\left( s\right) = \int_{-\infty }^{s}F_{Y}\left( s-x\right) f_{X}\left( x\right) dx\)</code></li>
+<li>pdf: <code>\(f_{X+Y}\left( s\right) = \int_{-\infty }^{s}f_{Y}\left( s-x\right) f_{X}\left( x\right) dx\)</code></li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>discrete case: Bowers et al. (1997) Example 2.3.1 on page 35</li>
+<li>continuous case: Bowers et al. (1997) Example 2.3.2 on page 36</li>
+</ul>
+<h3 id="numerical-example">
+  Numerical example
+  <a class="anchor" href="#numerical-example">#</a>
+</h3>
+<p>Consider 3 discrete r.v.’s with probability mass functions</p>
+<p><code>$$\begin{array}{rcll} f_{1} \left( y \right)  &amp; = &amp; \frac{1}{4}, \frac{1}{2},\frac{1}{4} &amp; \text{ for } y=0,1,2 \\ f_{2} \left( y \right)  &amp;=&amp; \frac{1}{2}, \frac{1}{2} &amp; \text{ for } y=0,2 \\ f_{3} \left( y \right)  &amp;=&amp; \frac{1}{4}, \frac{1}{2},\frac{1}{4} &amp; \text{ for } y=0,2,4 \end{array}$$</code></p>
+<p>Calculate the pmf <code>\(f_{1+2+3}\)</code> and the df <code>\(F_{1+2+3}\)</code> of the sum of the three random variables.</p>
+<h3 id="solution">
+  Solution
+  <a class="anchor" href="#solution">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th><code>\(y\)</code></th>
+<th><code>\(f_{1}\left( y\right)\)</code></th>
+<th><code>\(f_{2}\left( y\right)\)</code></th>
+<th><code>\(f_{1+2}\left(y\right)\)</code></th>
+<th><code>\(f_{3}\left( y\right)\)</code></th>
+<th><code>\(f_{1+2+3}\left( y\right)\)</code></th>
+<th><code>\(F_{1+2+3}\left( y\right)\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\(0\)</code></td>
+<td><code>\(1/4\)</code></td>
+<td><code>\(1/2\)</code></td>
+<td><code>\(1/8\)</code></td>
+<td><code>\(1/4\)</code></td>
+<td><code>\(1/32\)</code></td>
+<td><code>\(1/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(1\)</code></td>
+<td><code>\(1/2\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(2/8\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(2/32\)</code></td>
+<td><code>\(3/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(2\)</code></td>
+<td><code>\(1/4\)</code></td>
+<td><code>\(1/2\)</code></td>
+<td><code>\(2/8\)</code></td>
+<td><code>\(1/2\)</code></td>
+<td><code>\(4/32\)</code></td>
+<td><code>\(7/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(3\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(2/8\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(6/32\)</code></td>
+<td><code>\(13/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(4\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(1/8\)</code></td>
+<td><code>\(1/4\)</code></td>
+<td><code>\(6/32\)</code></td>
+<td><code>\(19/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(5\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(6/32\)</code></td>
+<td><code>\(25/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(6\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(4/32\)</code></td>
+<td><code>\(29/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(7\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(2/32\)</code></td>
+<td><code>\(31/32\)</code></td>
+</tr>
+<tr>
+<td><code>\(8\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(1/32\)</code></td>
+<td><code>\(32/32\)</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>$$\begin{array}{rcl} f_{1+2}(2) &amp;=&amp; 1/4 \cdot 1/2+1/2 \cdot 0+1/4 \cdot 1/2 \\ f_{1+2+3}(4) &amp;=&amp; 1/8 \cdot 1/4+2/8 \cdot 0+2/8 \cdot 1/2+2/8 \cdot 0+1/8 \cdot 1/4 \end{array}$$</code></p>
+<h2 id="using-generating-functions">
+  Using generating functions
+  <a class="anchor" href="#using-generating-functions">#</a>
+</h2>
+<p>There is a 1-1 relation between a distribution and its mgf or pgf.</p>
+<p>Because
+<code>$$M_S(t)=E\left[e^{tS}\right]=E\left[e^{t(Y_1+\ldots+Y_n)}\right]=E\left[e^{tY_1}\cdots e^{tY_n}\right]$$</code>
+and if losses are independent then we have
+<code>$$M_S(t)=E\left[e^{tS}\right]=E\left[e^{tY_1}\right]\cdots E\left[e^{tY_n}\right]=M_{Y_1}(t)\cdots M_{Y_n}(t).$$</code>
+The same argument holds for the pgf’s.</p>
+<ul>
+<li>Sometimes, <code>\(M_S(t)\)</code> or <code>\(p_S(t)\)</code> can be recognised: this is the case for infinitely divisible distributions (Normal, Poisson, Inverse Gaussian, ) and certain other distributions (Binomial, Negative binomial).</li>
+<li>Otherwise, <code>\(M_S(t)\)</code> or <code>\(p_S(t)\)</code> can be expanded numerically to get moments and/or probabilities.</li>
+</ul>
+<h3 id="example">
+  Example
+  <a class="anchor" href="#example">#</a>
+</h3>
+<p>Consider a portfolio of 10 contracts. The losses <code>\(Y_i\)</code>’s for these contracts are iid rv’s with mean 100 and variance 100. Determine the distribution, the expected value and the variance of <code>\(S\)</code> if these losses are</p>
+<ol>
+<li>Normal;</li>
+<li>Gamma;</li>
+<li>Poisson.</li>
+</ol>
+<h2 id="using-r">
+  Using R
+  <a class="anchor" href="#using-r">#</a>
+</h2>
+<ul>
+<li>Contrary to Excel, convolutions are extremely easy to implement in R using vectors.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">f1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+f2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+f12 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(f1[1] <span style="color:#f92672">*</span> f2[1], <span style="color:#a6e22e">sum</span>(f1[1<span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">*</span> f2[2<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">sum</span>(f1[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span>
+  f2[3<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">sum</span>(f1[1<span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#f92672">*</span> f2[4<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]), <span style="color:#a6e22e">sum</span>(f1[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>] <span style="color:#f92672">*</span> f2[5<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]))
+f12
+</code></pre></div><pre><code>## [1] 0.125 0.250 0.250 0.250 0.125
+</code></pre>
+<ul>
+<li>The example above is generalised in Exercise <strong>los9R8</strong>.</li>
+<li>A more advanced R function is <code>convolve</code>. It actually involves the Fast Fourier Transform (a method that is related to that of the mgf’s) for efficiency. We do not discuss this here, but it is used in the implementation of convolutions in the function <code>aggregateDist</code> of the package <code>actuar</code> (introduced later).</li>
+</ul>
+<h1 id="the-collective-risk-model-compound-distributions-mw-21">
+  The Collective Risk Model (Compound distributions, MW 2.1)
+  <a class="anchor" href="#the-collective-risk-model-compound-distributions-mw-21">#</a>
+</h1>
+<h2 id="definition-1">
+  Definition
+  <a class="anchor" href="#definition-1">#</a>
+</h2>
+<h3 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h3>
+<p>Two models, depending on the assumption on the number of losses:</p>
+<ul>
+<li>deterministic - <code>\(n\)</code>
+<ul>
+<li>main focus on the claims of <strong>individual policies</strong>
+(whose number is a priori known)</li>
+<li><code>\(\longrightarrow\)</code> <strong>Individual</strong> Risk Model</li>
+<li>discussed in previous sections</li>
+</ul>
+</li>
+<li>random - <code>\(N\)</code>
+<ul>
+<li>main focus on claims of a <strong>whole portfolio</strong>
+(whose number is a priori unknown)</li>
+<li><code>\(\longrightarrow\)</code> <strong>Collective</strong> Risk Model</li>
+<li>this is another way of separating frequency and severity</li>
+</ul>
+</li>
+</ul>
+<p>In this section we focus on the Collective Risk Model.</p>
+<h3 id="definition-2">
+  Definition
+  <a class="anchor" href="#definition-2">#</a>
+</h3>
+<p>In the Collective Risk Model, aggregate losses become
+<code>$$S=Y_{1}+\ldots +Y_{N}=\sum_{i=1}^{N}Y_{i}.$$</code>
+This is a random sum. We make the following assumptions:</p>
+<ul>
+<li><code>\(N\)</code> is the number of claims</li>
+<li><code>\(Y_i\)</code> is the amount of the <code>\(i\)</code>th claim</li>
+<li>the <code>\(Y_i\)</code>’s are <strong>iid</strong> with
+<ul>
+<li>(c)df <code>\(G(y)\)</code></li>
+<li>p(d/m)f <code>\(g(y)\)</code></li>
+</ul>
+</li>
+<li>the <code>\(Y_i\)</code>’s and <code>\(N\)</code> are mutually independent</li>
+</ul>
+<h2 id="moments-of-s">
+  Moments of <code>\(S\)</code>
+  <a class="anchor" href="#moments-of-s">#</a>
+</h2>
+<p>We have
+<code>$$E[S]=E\left[ E[S|N] \right] = E\left[ N E[Y] \right]= E[N]E[Y],$$</code>
+and</p>
+<p><code>$$\begin{array}{rcl} Var(S) &amp; = &amp; E\left[ Var(S|N) \right] + Var\left( E[S|N] \right) \\   &amp; = &amp; E\left[ N Var(Y) \right] + Var(E[Y] N) \\   &amp; = &amp; E[N] Var(Y) + E[Y]^2 Var(N) \\   &amp; = &amp; E[N] (E[Y^2] - E[Y]^2)+ E[Y]^2 Var(N) \\   &amp; = &amp;  E[N]E[Y^2] + E[Y]^2 \left( Var(N)-E[N] \right). \end{array}$$</code></p>
+<h2 id="moment-generating-function-of-s">
+  Moment generating function of <code>\(S\)</code>
+  <a class="anchor" href="#moment-generating-function-of-s">#</a>
+</h2>
+<p>It is possible to get <code>\(M_S(t)\)</code> as a function of <code>\(M_Y(t)\)</code> and <code>\(M_N(t)\)</code>:</p>
+<p><code>$$\begin{array}{rcl} M_S(t) &amp;=&amp; E\left[e^{tS}\right]= E\left[ E\left[ \left.e^{t(Y_1+Y_2+\ldots+Y_N)}\right|N \right]\right] \\   &amp;=&amp;   E\left[ M_Y(t)^N\right]=E\left[ e^{N \ln M_Y(t)} \right]  \\   &amp;=&amp;    M_N\left(\ln M_Y(t)\right) \end{array}$$</code></p>
+<h3 id="example-bowers-et-al-1997-1221">
+  Example (Bowers et al. (1997), 12.2.1)
+  <a class="anchor" href="#example-bowers-et-al-1997-1221">#</a>
+</h3>
+<p>Assume that <code>\(N\)</code> is geometric with probability of success <code>\(p\)</code>:
+<code>$$\Pr[N=n]=pq^n, \quad n=0,1,\ldots,$$</code>
+where <code>\(0&lt;q&lt;1\)</code> and <code>\(p=1-q\)</code>.
+We have then
+<code>$$M_N(t)=E[e^{tN}]=\sum_{n=0}^\infty pq^ne^{tn}=\frac{p}{1-qe^t},$$</code>
+and thus
+<code>$$M_S(t)=M_N\left(\ln M_Y(t)\right)=\frac{p}{1-qe^{\ln M_Y(t)}}=\frac{p}{1-qM_Y(t)}.$$</code></p>
+<h2 id="distribution-of-s">
+  Distribution of <code>\(S\)</code>
+  <a class="anchor" href="#distribution-of-s">#</a>
+</h2>
+<p>It is possible to get a fairly <strong>general expression for the df of <code>\(S\)</code></strong> by conditioning on the number of claims:</p>
+<p>where <code>\(G^{*n}(y)\)</code> is the <code>\(n\)</code>-th convolution of <code>\(G\)</code>.</p>
+<p>Note that</p>
+<ul>
+<li><code>\(N\)</code> will always be discrete, so this works for any type of rv <code>\(Y\)</code>. (continuous, discrete or mixed)</li>
+<li>However, the type of <code>\(S\)</code> will depend on the type of <code>\(Y\)</code>.</li>
+</ul>
+<h3 id="distribution-of-s-if-x-is-continuous">
+  Distribution of <code>\(S\)</code> if <code>\(X\)</code> is continuous
+  <a class="anchor" href="#distribution-of-s-if-x-is-continuous">#</a>
+</h3>
+<p><strong>If <code>\(X\)</code> is continuous</strong>, <code>\(S\)</code> will generally be mixed:</p>
+<ul>
+<li>with a mass at 0 because of <code>\(\Pr[N=0]\)</code> (if positive)</li>
+<li>continuous elsewhere, but with a density integrating to <code>\(1-\Pr[N=0]\)</code></li>
+</ul>
+<h3 id="example-continued-bowers-et-al-1997-1223">
+  Example, continued (Bowers et al. (1997), 12.2.3)
+  <a class="anchor" href="#example-continued-bowers-et-al-1997-1223">#</a>
+</h3>
+<p>Assume now that
+<code>$$G(y)=1-e^{-y}\;\text{ and hence }\;M_Y(t)=\frac1{1-t} \text{ for } t&lt;1.$$</code>
+Now, we have that (remember <code>\(\Pr[N=0]=p\)</code>)
+$$ M_S(t)=\frac{p}{1-qm_Y(t)}.$$
+It follows that
+$$ M_S(t)=\frac{p}{1-q\frac1{1-t}}=p+q\frac{p}{p-t}=pE\left[e^{t\cdot 0}\right]+(1-p)E\left[e^{t Z}\right],$$
+where <code>\(Z\)</code> is an exponential rv with parameter <code>\(p\)</code>. Therefore,
+<code>$$f_S(s)=\begin{cases} p=\Pr[N=0] \mbox{ (probability mass)}&amp;s=0;\\ (1-p)(pe^{-ps}) \mbox{ (probability density)}&amp;s&gt;0. \end{cases}$$</code></p>
+<h3 id="distribution-of-s-if-y-is-mixed">
+  Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is mixed
+  <a class="anchor" href="#distribution-of-s-if-y-is-mixed">#</a>
+</h3>
+<p><strong>If <code>\(Y\)</code> is mixed</strong>, <code>\(S\)</code> will generally be mixed:</p>
+<ul>
+<li>with a mass at 0 because of <code>\(\Pr[N=0]\)</code> and <code>\(\Pr[Y=0]\)</code> (if positive)</li>
+<li>mixed (if <code>\(Y\)</code> is not continuous for <code>\(x&gt;0\)</code>) or continuous elsewhere</li>
+<li>with a density integrating to something <code>\(\le 1-\Pr[N=0]\)</code></li>
+</ul>
+<h3 id="distribution-of-s-if-y-is-discrete">
+  Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is discrete
+  <a class="anchor" href="#distribution-of-s-if-y-is-discrete">#</a>
+</h3>
+<p><strong>For discrete <code>\(Y\)</code>’s</strong> we can get a similar expression to for the pmf of <code>\(S\)</code>:</p>
+<p>where <code>\(g^{*0}(0)=1\)</code> (and thus 0 anywhere else).</p>
+<ul>
+<li>This can be implemented in a table and/or in a program.</li>
+<li>However, if the range of <code>\(N\)</code> goes really to infinity, calculating <code>\(f_S(s)\)</code> may require an infinity of convolutions of <code>\(Y\)</code>.</li>
+<li>This formula is more efficient if the number of possible outcomes for <code>\(N\)</code> is small.</li>
+<li><code>\(\adv\)</code> The pmf <code>\(g^{*n}(s)\)</code> can be calculated using de Pril’s algorithm. (see Module 4)</li>
+</ul>
+<h3 id="example-with-tabular-approach">
+  Example with tabular approach
+  <a class="anchor" href="#example-with-tabular-approach">#</a>
+</h3>
+<p>From Bowers et al. (1997), 12.2.2:</p>
+<!-- To include images: -->
+<p><img src="/img/module-2/12_2_2_table.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>The convolutions are in done the usual way.</li>
+<li>The number of columns depends on the range of <code>\(N\)</code>.</li>
+<li>The <code>\(f_S(x)\)</code> are the sumproduct of the row <code>\(x\)</code> and row <code>\(\Pr[N=n]\)</code>:</li>
+</ul>
+<p><code>$$f_S(3)=0 \cdot 0.1 + 0.1\cdot0.3 + 0.4 \cdot 0.4 + 0.125 \cdot 0.2.$$</code></p>
+<h2 id="using-r-1">
+  Using R
+  <a class="anchor" href="#using-r-1">#</a>
+</h2>
+<p>We will make extensive use of the function <code>aggregateDist</code> from the package <code>actuar</code> (Dutang, Goulet, and Pigeon 2008):</p>
+<ul>
+<li>This function allows for several different aggregate distribution approaches, which will be introduced here ($$\maltese$$ and in Module 4 as the associated theory is presented).</li>
+<li>Here, we show how the function can be used to implement formulas and (using the function <code>convolve</code> in the background).
+This corresponds to the <code>method=&quot;convolution&quot;</code> approach.</li>
+</ul>
+<hr>
+<p><code>actuar::aggregateDist(method=&quot;convolution&quot;)</code>:</p>
+<ul>
+<li>A discrete distribution is required. Note that discretisation methods are discussed in Module 4.
+This is input as a vector of claim amount probability <em>masses</em> after the argument <code>model.sev=</code>. The first element must be <code>\(\Pr[Y=0]\)</code>.</li>
+<li>There is no restriction on the shape of the frequency distribution, but it must have a finite range.
+This is input as a vector of claim number probability masses after the argument <code>model.freq=</code>. The first element must be <code>\(\Pr[N=0]\)</code>.</li>
+<li>The outcome of the function is . Additional outputs:
+<ul>
+<li><code>plot</code>: to get a pretty plot of the df</li>
+<li><code>summary</code>: to get summary statistics</li>
+<li><code>mean</code>: to get the mean</li>
+<li><code>diff</code>: to get the pmf</li>
+</ul>
+</li>
+<li>Additional options are:
+<ul>
+<li><code>x.scale</code>: value of an amount 1 in the severity model
+(this allows calculations on multiples of $1)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Bowers 12.2.2</span>
+fy <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.1</span>)
+fn <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.2</span>)
+Fs <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(<span style="color:#e6db74">&#34;convolution&#34;</span>, model.freq <span style="color:#f92672">=</span> fn, model.sev <span style="color:#f92672">=</span> fy)
+<span style="color:#a6e22e">mean</span>(Fs)
+<span style="color:#75715e">## [1] 2.72</span>
+pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">Fs</span>(<span style="color:#ae81ff">0</span>), <span style="color:#a6e22e">diff</span>(<span style="color:#a6e22e">Fs</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>)))
+<span style="color:#a6e22e">cbind</span>(s <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>), fs <span style="color:#f92672">=</span> pmf, Fs <span style="color:#f92672">=</span> <span style="color:#a6e22e">Fs</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9</span>))
+<span style="color:#75715e">##       s     fs     Fs</span>
+<span style="color:#75715e">##  [1,] 0 0.1000 0.1000</span>
+<span style="color:#75715e">##  [2,] 1 0.1500 0.2500</span>
+<span style="color:#75715e">##  [3,] 2 0.2200 0.4700</span>
+<span style="color:#75715e">##  [4,] 3 0.2150 0.6850</span>
+<span style="color:#75715e">##  [5,] 4 0.1640 0.8490</span>
+<span style="color:#75715e">##  [6,] 5 0.0950 0.9440</span>
+<span style="color:#75715e">##  [7,] 6 0.0408 0.9848</span>
+<span style="color:#75715e">##  [8,] 7 0.0126 0.9974</span>
+<span style="color:#75715e">##  [9,] 8 0.0024 0.9998</span>
+<span style="color:#75715e">## [10,] 9 0.0002 1.0000</span>
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(Fs)
+<span style="color:#75715e">## Aggregate Claim Amount Empirical CDF:</span>
+<span style="color:#75715e">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+<span style="color:#75715e">##    0.00    2.00    3.00    2.72    4.00    9.00</span>
+<span style="color:#a6e22e">plot</span>(Fs)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/index_files/figure-html/aggrConv2-1.png" width="672" /></p>
+<h1 id="explicit-claims-count-distributions-mw-22">
+  Explicit claims count distributions (MW 2.2)
+  <a class="anchor" href="#explicit-claims-count-distributions-mw-22">#</a>
+</h1>
+<h2 id="introduction-1">
+  Introduction
+  <a class="anchor" href="#introduction-1">#</a>
+</h2>
+<h3 id="exposure">
+  Exposure
+  <a class="anchor" href="#exposure">#</a>
+</h3>
+<ul>
+<li>It makes no sense to talk about frequency in an insurance portfolio without considering <strong>exposure</strong>. Chapter 4 of Werner and Modlin (2010) defines <em>exposure</em> as “the basic unit that measures a policy’s exposure to loss.”</li>
+<li>One primary criterion for choosing an exposure base is that it “should be directly proportional to expected loss.” Here we are focussing on frequency, so exposure should be something directly proportional to the expected frequency.</li>
+<li>Wuthrich (2020) calls exposure “volume,” denoted <code>\(v\)</code>, and defines the <strong>claims frequency</strong> as
+$$ \frac{N}{v}.$$</li>
+</ul>
+<h3 id="basic-models-for-claims-frequency">
+  Basic models for claims frequency
+  <a class="anchor" href="#basic-models-for-claims-frequency">#</a>
+</h3>
+<ul>
+<li>In our case, we will assume that it directly affects the likelihood of a claim to occur - the frequency - such that <code>\(N/v\)</code> is normalised</li>
+<li>MW defines
+<code>$$p_k = \Pr[N=k], \quad \text{for }k \in \mathcal{A} \subset \mathbb{N}_0.$$</code></li>
+<li>There are three main assumptions for <code>\(p_k\)</code>:
+<ul>
+<li>binomial (with variance less than mean)</li>
+<li>Poisson (with variance equal to the mean)</li>
+<li>negative-binomial (a Poisson with random mean, so that variance is more than the mean)</li>
+</ul>
+</li>
+<li>A summary table of those distributions is also given in Bowers et al. (1997), see Table 12.3.1 on page 376.</li>
+<li><code>\(\adv\)</code> These all belong to a class of distributions called <code>\((a,b)\)</code></li>
+</ul>
+<!-- ### Overview -->
+<!-- There are several popular options for the distribution of `\(N\)`: -->
+<!-- - Poisson$(\lambda)$: `$$\Pr[N=n]=\frac{\lambda^n e^{-\lambda}}{n!}, \quad n=0,1,2,\cdots$$` -->
+<!--     - `\(E[N]=Var(N)=\lambda\)` -->
+<!--     - `\(S\)` is compound Poisson with parameters `\((\lambda,G(y))\)` -->
+<!-- `$$E[S]=\lambda E[X] \quad Var(S)=\lambda E[X^2] \quad M_S(t)=e^{\lambda(M_X(t)-1)}$$` -->
+<!--     - In R: `dpois`, `ppois`, `qpois`, `rpois`, where `lambda` is `\(\lambda\)` -->
+<!-- --- -->
+<!-- - Negative Binomial$(r,p)$: `$$\Pr(N=n)={\binom {r+n-1} n} p^r(1-p)^{n}, \quad n=0,1,2,\cdots$$` -->
+<!--     - `\(N\)` is the number of failures (of probability `\(1-p\)`) until `\(r\)` successes (of probability `\(p\)`) -->
+<!--     - `\(E[N]<Var(N)\)` -->
+<!--     - `\(E[N]=\frac{r(1-p)}{p}<Var(N)=\frac{r(1-p)}{p^2}\)` -->
+<!--     - `\(S\)` is compound Negative Binomial with parameters `\((r,p,G(y))\)` -->
+<!--     - In R: `dnbinom`, `pnbinom`, `qnbinom`, `rnbinom`, where `size` is `\(r\)` and `prob` is `\(p\)` -->
+<!-- --- -->
+<!-- - Binomial$(m,p)$: `$$\Pr(N=n)={\binom m n} p^n(1-p)^{m-n}, \quad n=0,1,2,\cdots$$` -->
+<!--     - `\(n\)` is the number of successes (with probability `\(p\)`) out of `\(m\)` trials -->
+<!--     - `\(E[N]>Var(N)\)` -->
+<!--     - `\(E[N]=mp>Var(N)=mp(1-p)\)` -->
+<!--     - `\(S\)` is compound Binomial with parameters `\((m,p,G(y))\)` -->
+<!--     - less popular in GI -->
+<!--     - In R: `dbinom`, `pbinom`, `qbinom`, `rbinom`, where `size` is `\(m\)`, and where `prob` is `\(p\)` -->
+<!--     - Note that `\({\binom m n}\)` can be computed with the R function `choose` -->
+<!-- A summary table is given in @BoGeHiJoNe97, Table 12.3.1 on page 376. -->
+<h2 id="binomial-distribution">
+  Binomial distribution
+  <a class="anchor" href="#binomial-distribution">#</a>
+</h2>
+<ul>
+<li>fixed volume <code>\(v \in \mathbb{N}\)</code></li>
+<li>fixed default probability <code>\(p \in (0, 1)\)</code> (expected claims frequency)</li>
+<li>pmf of <code>\(N\sim\text{Binom}(v, p)\)</code> is
+<code>$$p_k =\Pr[N=k]={v \choose k}p^k(1-p)^{v-k},  \quad \text{for all } k \in \{0,\ldots,v\} = \mathcal{A}.$$</code></li>
+<li>same as a sum of Bernoulli (which is the case <code>\(v=1\)</code>)</li>
+<li>makes sense for homogenous portfolio with unique possible events, such as credit defaults, or deaths in a life insurance model</li>
+<li>In R: <code>dbinom</code>, <code>pbinom</code>, <code>qbinom</code>, <code>rbinom</code>, where <code>size</code> is <code>\(v\)</code>, and where <code>prob</code> is <code>\(p\)</code></li>
+<li>Note that <code>\({\binom v k}\)</code> can be computed with the R function <code>choose</code>.</li>
+</ul>
+<h3 id="compound-binomial-model">
+  Compound binomial model
+  <a class="anchor" href="#compound-binomial-model">#</a>
+</h3>
+<p>The total claim amount <code>\(S\)</code> has a <strong>compound binomial distribution</strong>
+<code>$$S \sim \text{CompBinom}(v,p,G)$$</code>
+if <code>\(S\)</code> has a compound distribution with <code>\(N \sim \text{Binom}(v,p)\)</code> for given <code>\(v\in \mathbb{N}\)</code> and <code>\(p\in (0,1)\)</code> and individual claim size distribution <code>\(G\)</code>.</p>
+<p>Corollary 2.7: Assume <code>\(S_1,\ldots,S_n\)</code> are independent with <code>\(S_j \sim \text{CompBinom}(v_j,p,G)\)</code> for all <code>\(j=1,\ldots,n\)</code>. The aggregated claim has a compound binomial distribution with
+<code>$$S=\sum_{j=1}^n S_j \sim \text{CompBinom}\left( \sum_{j=1}^n v_j, p,G   \right).$$</code>
+Exercise <strong>NLI3</strong> considers the decomposition of <code>\(S\)</code> into small and large
+claims. It shows that <code>\(S_{\text{lc}}\)</code>—the sum of those claims exceeding a
+certain threshold <code>\(M\)</code> only—is compound binomial again.</p>
+<h2 id="poisson-distribution">
+  Poisson distribution
+  <a class="anchor" href="#poisson-distribution">#</a>
+</h2>
+<ul>
+<li>
+<p>fixed volume <code>\(v &gt; 0\)</code></p>
+</li>
+<li>
+<p>expected claims frequency <code>\(\lambda &gt;0\)</code></p>
+</li>
+<li>
+<p>pmf of <code>\(N\sim\text{Poi}(\lambda v)\)</code> is
+<code>$$p_k =\Pr[N=k]=e^{-\lambda v}\frac{(\lambda v)^k}{k!}\quad \text{for all }k\in \mathcal{A}=\mathbb{N}_0.$$</code></p>
+</li>
+<li>
+<p>Lemma 2.9: increase volume while keeping <code>\(E[N]\)</code> fixed in a binomial model leads to a Poisson distribution (more so for small <code>\(p\)</code> compared to <code>\(v\)</code>).</p>
+</li>
+<li>
+<p>In R: <code>dpois</code>, <code>ppois</code>, <code>qpois</code>, <code>rpois</code>, where <code>lambda</code> is <code>\(\lambda v\)</code></p>
+</li>
+</ul>
+<h3 id="compound-poisson-model">
+  Compound Poisson model
+  <a class="anchor" href="#compound-poisson-model">#</a>
+</h3>
+<p>The total claim amount <code>\(S\)</code> has a <strong>compound Poisson distribution</strong>
+<code>$$S \sim \text{CompPoi}(\lambda v,G)$$</code>
+if <code>\(S\)</code> has a compound distribution with <code>\(N \sim \text{Poi}(\lambda v)\)</code> for given <code>\(\lambda,v&gt;0\)</code> and individual claim size distribution <code>\(G\)</code>.</p>
+<ul>
+<li>The compound Poisson distribution has nice properties such as:
+<ul>
+<li>The aggregation property <code>\(\uparrow\)</code></li>
+<li>The disjoint decomposition property <code>\(\downarrow\)</code></li>
+</ul>
+</li>
+<li>These are reviewed in the next section, along with related new techniques for computing the distribution of <code>\(S\)</code>.</li>
+</ul>
+<!-- ### Cumulants -->
+<!-- Let -->
+<!-- `$$\kappa_k=\left. \frac{d^k}{dt^k} \kappa_S(t) \right|_{t=0}$$` -->
+<!-- be the `\(k\)`-th cumulant of the random variable `\(S\)`. In the case of a compound Poisson random variable we have -->
+<!-- `$$**\kappa_k**=\left. \frac{d^k}{dt^k} \lambda(m_X(t)-1) \right|_{t=0}=\lambda \left.\frac{d^k}{dt^k} m_X(t)\right|_{t=0}=**\lambda p_k**.$$` -->
+<!-- Thus -->
+<!-- \begin{eqnarray} -->
+<!-- E[S]&=&\lambda p_1 \quad\text{ and }\quad Var(S)=\lambda p_2 \\ -->
+<!-- \gamma_1(S)&=&\frac{p_3}{\sqrt{\lambda}p_2^{3/2}} \\ -->
+<!-- \gamma_2(S)&=&\frac{p_4}{\lambda p_2^2} -->
+<!-- \end{eqnarray} -->
+<h2 id="mixed-poisson-distribution">
+  Mixed Poisson distribution
+  <a class="anchor" href="#mixed-poisson-distribution">#</a>
+</h2>
+<h3 id="inhomogeneous-portfolio">
+  Inhomogeneous portfolio
+  <a class="anchor" href="#inhomogeneous-portfolio">#</a>
+</h3>
+<ul>
+<li>So far we have seen distributions with variance less (binomial) or exactly equal (Poisson) to the mean.</li>
+<li>In reality, actuarial data is often <strong>overdispersed</strong>, that is, variance is larger than mean.</li>
+<li>This could be due to frequency or severity, but it makes sense that some of this extra variability would come from frequency.</li>
+<li>If we believe in a Poisson frequency for known frequency parameter, then additional uncertainty such as heterogeneity of risks in a portfolio, uncertain conditions (weather, for instance) could be modelled with a random Poisson parameter, and could explain the extra variability.</li>
+<li>This is the idea of a mixed Poisson.</li>
+</ul>
+<h3 id="the-mixed-poisson-distribution">
+  The mixed Poisson distribution
+  <a class="anchor" href="#the-mixed-poisson-distribution">#</a>
+</h3>
+<ul>
+<li>Assume <code>\(\Lambda \sim H\)</code> with <code>\(H(0)=0\)</code>, <code>\(E[\Lambda]=\lambda\)</code>, and <code>\(Var(\Lambda)&gt;0\)</code>.</li>
+<li>Conditionally, given <code>\(\Lambda\)</code>, <code>\(N\sim \text{Poi}(\Lambda v)\)</code> for fixed volume <code>\(v&gt;0\)</code>.</li>
+</ul>
+<p>We have then</p>
+<p><code>$$\begin{array}{rcl} \Pr[N=n]&amp;=&amp;\int_0^\infty \Pr[N=n|\Lambda=\lambda]  d H(\lambda)=\int_0^\infty \frac{e^{-\lambda v}(\lambda v)^n}{n!} d H(\lambda); \\ E[N] &amp;=&amp; E\left[E[N|\Lambda]\right] = E[\Lambda]v=\lambda v; \\ Var(N) &amp;=&amp; E\left[Var(N|\Lambda)\right] + Var\left(E[N|\Lambda]\right)= \lambda v+v^2 Var(\Lambda) &gt; \lambda v; \\ M_N(t) &amp;=&amp;E\left[e^{tN}\right] = E\left[E\left[e^{tN}|\Lambda\right]\right]=E\left[e^{\Lambda v (e^t-1)}\right]=M_\Lambda(v[e^t-1]). \end{array}$$</code></p>
+<h3 id="example-1">
+  Example
+  <a class="anchor" href="#example-1">#</a>
+</h3>
+<p>If <code>\(\Lambda \sim \text{inverse Gaussian}(\alpha,\beta)\)</code> (Example 12.3.2):</p>
+<ul>
+<li><code>\(N\)</code> is Poisson Inverse Gaussian.</li>
+<li><code>\(\adv\)</code> This distribution is the <code>pig</code> distribution in <code>actuar</code>, so that you can use <code>dpig</code>, <code>ppig</code>, etc…); see Section 5 of the 
+  <a href="https://cran.csiro.au/web/packages/actuar/vignettes/distributions.pdf">vignette “distribution” of <code>actuar</code></a>.</li>
+<li><code>\(\longrightarrow\)</code> <code>\(S\)</code> will be compound inverse Gaussian.</li>
+</ul>
+<p>Another example, which is very famous, is <code>\(\Lambda \sim \Gamma\)</code>, which leads to the negative-binomial distribution.</p>
+<h2 id="negative-binomial-distribution">
+  Negative-binomial distribution
+  <a class="anchor" href="#negative-binomial-distribution">#</a>
+</h2>
+<ul>
+<li>Define <code>\(\Lambda = \lambda \Theta\)</code>.</li>
+<li>Now, <code>\(\Theta \sim \Gamma(\gamma,\gamma)\)</code> such that
+$$ E[\Theta]=1 \quad \text{and} \quad Var(\Theta)=\frac{1}{\gamma}$$
+and
+$$ E[\Lambda]=\lambda \quad \text{and} \quad Var(\Lambda)=\frac{\lambda^2}{\gamma}.$$</li>
+<li>If conditionally, given <code>\(\Theta\)</code>, <code>\(N\sim \text{Poi}(\Theta \lambda v)\)</code>, then
+<code>$$N \sim \text{NegBin}(\lambda v, \gamma)$$</code>
+with volume <code>\(v&gt;0\)</code>, expected claims frequency <code>\(\lambda&gt;0\)</code>, and dispersion parameter <code>\(\gamma &gt;0\)</code>.</li>
+</ul>
+<hr>
+<p>Proof:</p>
+<p><code>$$\begin{array}{rcl} M_N(t) &amp;=&amp; E[e^{tN}]=E\left[  E[e^{tN} | \Theta] \right] = E\left[ e^{\Theta \lambda v (e^t-1)} \right] \\\\ &amp;=&amp; \left( \frac{\gamma}{\gamma-\lambda v (e^t-1)}  \right)^\gamma  = \left( \frac{\gamma}{\gamma +\lambda v -\lambda v e^t}  \right)^\gamma  = \left( \frac{\frac{\gamma}{\lambda v +\gamma}}{1 -\frac{\lambda v}{\lambda v +\gamma} e^t}  \right)^\gamma, \end{array}$$</code></p>
+<p>which can be recognised as a negative-binomial with probability of “failure”
+<code>$$p = \frac{\lambda v}{\lambda v +\gamma}$$</code>
+so that
+<code>$$p_k =\Pr[N=k]={k+\gamma -1 \choose k}p^k(1-p)^{\gamma}$$</code>
+In R, use <code>dnbinom</code>, <code>pnbinom</code>, <code>qnbinom</code>, <code>rnbinom</code>, where <code>size</code> is <code>\(\gamma\)</code> and <code>prob</code> is probability of success <code>\(1-p\)</code> (note volume is hidden in <code>\(p\)</code>
+and will affect the scale of the distribution).</p>
+<h3 id="interpretation">
+  Interpretation
+  <a class="anchor" href="#interpretation">#</a>
+</h3>
+<ul>
+<li><code>\(\Theta\)</code> reflects the uncertainty about the `true’ parameter of the Poisson distribution.</li>
+<li>In the end we have</li>
+</ul>
+<p><code>$$\begin{array}{rcl} E[N] &amp;=&amp; \lambda v, \\ Var(N) &amp;=&amp; \lambda v \left(1+\frac{\lambda v}{\gamma}\right) &gt; \lambda v,\\ \text{Vco}\left( \frac{N}{v} \right) &amp;=&amp; \sqrt{(\lambda v)^{-1} + \gamma^{-1}}. \end{array}$$</code></p>
+<ul>
+<li>This additional uncertainty is not diversifiable (remains even for large <code>\(v\)</code>):
+<code>$$\text{Vco}\left( \frac{N}{v} \right) = \sqrt{(\lambda v)^{-1} + \gamma^{-1}} \rightarrow \gamma^{-1/2} &gt; 0\quad \text{ for } v \rightarrow \infty.$$</code></li>
+</ul>
+<h3 id="compound-negative-binomial-model">
+  Compound negative-binomial model
+  <a class="anchor" href="#compound-negative-binomial-model">#</a>
+</h3>
+<p>The total claim amount <code>\(S\)</code> has a <strong>compound negative-binomial distribution</strong>
+<code>$$S \sim \text{CompNB}(\lambda v,\gamma,G)$$</code>
+if <code>\(S\)</code> has a compound distribution with <code>\(N \sim \text{NegBin}(\lambda v,\gamma)\)</code> for given <code>\(\lambda,v,\gamma&gt;0\)</code> and individual claim size distribution <code>\(G\)</code>.</p>
+<h1 id="additional-properties-and-applications-of-poisson-frequencies">
+  Additional properties and applications of Poisson frequencies
+  <a class="anchor" href="#additional-properties-and-applications-of-poisson-frequencies">#</a>
+</h1>
+<h2 id="theorem-212-aggregation-property-uparrow">
+  Theorem 2.12: Aggregation property <code>\(\uparrow\)</code>
+  <a class="anchor" href="#theorem-212-aggregation-property-uparrow">#</a>
+</h2>
+<p>Assume <code>\(S_1,\ldots,S_n\)</code> are independent with <code>\(S_j \sim \text{CompPoi}(\lambda_j v_j,G_j)\)</code> for all <code>\(j=1,\ldots,n\)</code>. The aggregated claim has a compound Poisson distribution
+<code>$$S = \sum_{j=1}^n S_j \sim \text{CompPoi}(\lambda v,G),\text{ with}$$</code>
+<code>$$v= \sum_{j=1}^n v_j,\quad \lambda = \sum_{j=1}^n \frac{v_j}{v} \lambda_j,\quad G = \sum_{j=1}^n \frac{\lambda_j v_j}{\lambda v} G_j.$$</code>
+So what?</p>
+<ul>
+<li>Independent <code>\(n\)</code> portfolios of losses can be easily aggregated.</li>
+<li>Alternatively (or in addition), total claims paid over <code>\(n\)</code> years are compound Poisson, even if the severity and frequency of losses vary across years.</li>
+<li>“Bottom-up” modelling</li>
+<li>In Bowers et al. (1997), this is Theorem 12.4.1.</li>
+</ul>
+<h3 id="proof">
+  Proof
+  <a class="anchor" href="#proof">#</a>
+</h3>
+<p>Let <code>\(m_{X_i}(t)\)</code> as the mgf of <code>\(X_i\)</code> (with df <code>\(P_i(t)\)</code>). Then
+<code>$$m_{S_i}(t)=\exp\{\lambda_i(m_{X_i}(t)-1)\}$$</code>
+and</p>
+<p><code>$$\begin{array}{rcl} m_S(t)&amp;=&amp;\prod_{i=1}^m m_{S_i}(t)=\exp\left( \sum_{i=1}^m\lambda_i(m_{X_i}(t)-1)\right) \\ &amp;=&amp;\exp\left(\lambda\left(\sum_{i=1}^m \frac{\lambda_i}{\lambda}m_{X_i}(t)-1\right)\right) \end{array}$$</code></p>
+<p>Thus, <code>\(S\)</code> has the mgf of a compound Poisson rv with intensity <code>\(\lambda\)</code>, iff <code>\(\sum_{i=1}^m\frac{\lambda_i}{\lambda}m_{X_i}(t)\)</code> is a mgf. Indeed, it is the mgf of
+<code>$$P(x)=\sum_{i=1}^m\frac{\lambda_i}{\lambda}P_i(x)$$</code></p>
+<h3 id="example-1241-of-bowers-et-al-1997">
+  Example 12.4.1 of Bowers et al. (1997)
+  <a class="anchor" href="#example-1241-of-bowers-et-al-1997">#</a>
+</h3>
+<p>Suppose that <code>\(N_1, N_2,\cdots, N_m\)</code> are independent random variables. Further, suppose that <code>\(N_i\)</code> follows Poisson($\lambda_i$). Let <code>\(x_1,x_2,\cdots, x_m\)</code> be deterministic numbers. What is the distribution of
+<code>$$x_1N_1+\cdots+x_mN_m?$$</code></p>
+<h2 id="theorem-214-disjoint-decomposition-property-downarrow">
+  Theorem 2.14: Disjoint decomposition property <code>\(\downarrow\)</code>
+  <a class="anchor" href="#theorem-214-disjoint-decomposition-property-downarrow">#</a>
+</h2>
+<h3 id="preliminary-1-add-lobs-in-the-comppoi-formulation">
+  Preliminary 1: Add LoBs in the CompPoi formulation
+  <a class="anchor" href="#preliminary-1-add-lobs-in-the-comppoi-formulation">#</a>
+</h3>
+<p>Let us introduce Lines of Business (“LoB”) in the notation:</p>
+<ul>
+<li>Let <code>\(\left(p_j^+\right)_{j=1,\ldots,m}\)</code> be a discrete probability distribution on the finite set <code>\(\{1,\ldots,m\}\)</code>.</li>
+<li>We can interpret the set <code>\(\{1,\ldots,m\}\)</code> as different sub-portfolios, or different lines of business (“LoB” thereafter). For instance, we could have <code>\(j\in\{1,2,3\}\)</code> for car <code>\((j=1)\)</code>, building <code>\((j=2)\)</code> and liability <code>\((j=3)\)</code> LoBs.</li>
+<li>We assume
+$$ p_j^+ &gt;0 \text{ for all }j,$$
+that is, the probability of having claims in any of the <code>\(m\)</code> LoBs is strictly positive.</li>
+<li>We further assume that <code>\(G_j\)</code> is the claim size distribution of LoB <code>\(j\)</code>, with <code>\(G_j(0)=0\)</code>.</li>
+</ul>
+<hr>
+<ul>
+<li>Finally, we define the mixture distribution by
+<code>$$G(y)= \sum_{j=1}^m p_j^+ G_j(y)\quad \text{ for }y \in \mathbb{R}.$$</code></li>
+<li>Note that this matches the formulation in the aggregation property Theorem 2.12 with
+<code>$$p_j^+ = \frac{\lambda_j v_j}{\lambda v}.$$</code></li>
+<li>Now, define a discrete random variable <code>\(I\)</code> which indicates which sub-portfolio a randomly selected claim <code>\(Y\)</code> belongs to:
+<code>$$\Pr [I=j]= p_j^+ \quad \text{ for all }j\in \{1,\ldots,m\}.$$</code></li>
+</ul>
+<hr>
+<p>We are now ready to define the following extended compound Poisson model:</p>
+<ul>
+<li>The total claims <code>\(S = \sum_{i=1}^N Y_i\)</code> has a compound Poisson distribution as defined earlier.</li>
+<li>In addition, we assume that
+$$ (Y_i,I_i)_{i\ge 1}$$
+are
+<ul>
+<li>i.i.d. and independent of <code>\(N\)</code>,</li>
+<li>with <code>\(Y_i\)</code> having marginal distribution function <code>\(G\)</code> with <code>\(G(0)=0\)</code>, and</li>
+<li><code>\(I_i\)</code> having marginal distribution function given by <code>\(\Pr [I=j]= p_j^+ \quad \text{ for all }j\in \{1,\ldots,n\}\)</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="preliminary-2-partition">
+  Preliminary 2: Partition
+  <a class="anchor" href="#preliminary-2-partition">#</a>
+</h3>
+<ul>
+<li>The random vector <code>\((Y_1,I_1)\)</code> takes values in <code>\(\mathbb{R}_+ \times \{1,\ldots,m\}\)</code>.</li>
+<li>On this set we choose a finite sequence of sets
+<code>$$A_1, \ldots, A_n$$</code>
+such that</li>
+</ul>
+<p><code>$$\begin{array}{rcl} A_k \cap A_l &amp;=&amp; \emptyset \text{ for all }k\neq l\quad \text{(no overlap)}; \\ \cup_{k=1}^n A_k &amp;=&amp; \mathbb{R}_+ \times \{1,\ldots,m\} \quad \text{(all-inclusive)}. \end{array}$$</code></p>
+<ul>
+<li>Such a sequence is called a “measurable disjoint decomposition” or <strong>“partition”</strong> of <code>\(\mathbb{R}_+ \times \{1,\ldots,m\}\)</code>.</li>
+<li>This partition is called “admissible” for <code>\((Y_1,I_1)\)</code> if for all <code>\(k=1,\ldots,n\)</code>
+<code>$$p^{(k)} = \Pr[(Y_1,I_1)\in A_k]&gt;0.$$</code>
+Note that <code>\(\sum_{k=1}^n p^{(k)}=1\)</code> due to the properties of
+the partition above (no overlap and all-inclusive).</li>
+</ul>
+<h3 id="theorem-214-disjoint-decomposition-downarrow">
+  Theorem 2.14: Disjoint decomposition <code>\(\downarrow\)</code>
+  <a class="anchor" href="#theorem-214-disjoint-decomposition-downarrow">#</a>
+</h3>
+<ul>
+<li>Assume that <code>\(S\)</code> fulfills the extended compound Poisson model assumptions above (Preliminary 1).</li>
+<li>We choose an admissible partition <code>\(A_1, \ldots,A_n\)</code> for <code>\((Y_1,I_1)\)</code> (Preliminary 2).</li>
+</ul>
+<p>Then the random variable (sum of claims for partition <code>\(k\)</code>):
+<code>$$S_k=\sum_{i=1}^N Y_i 1_{\{(Y_i,I_i)\in A_k\}} \sim  \text{CompPoi}(\lambda_k v_k,G_k),$$</code>
+for <code>\(k=1,\ldots,n\)</code>, with
+<code>$$\lambda_k v_k = \lambda v p^{(k)} &gt; 0,\quad G_k(y) = \Pr[Y_1 \le y | (Y_1,I_1) \in A_k].$$</code>
+Furthermore, the <code>\(S_k\)</code>’s are independent (over <code>\(k\)</code>).</p>
+<h2 id="adv-thinning-of-the-poisson-process">
+  <code>\(\adv\)</code> Thinning of the Poisson process
+  <a class="anchor" href="#adv-thinning-of-the-poisson-process">#</a>
+</h2>
+<ul>
+<li>Assume that <code>\(m=1\)</code> (only one LoB)</li>
+<li>The disjoint decomposition theorem implies that
+$$ Y_i = Y_i 1_{{Y_i\in A_1}} + \ldots + Y_i 1_{{Y_i\in A_n}}.$$</li>
+<li>For for each partition <code>\(A_k\)</code> (defined on the claims) a natural choice is
+<ul>
+<li><code>\(v_k=v\)</code></li>
+<li><code>\(\lambda_k = \lambda p^{(k)}\)</code></li>
+</ul>
+</li>
+<li>This means that the volume remains constant in each partition, but the expected claims frequencies <code>\(\lambda_k\)</code> change proportionally to the probabilities of falling in partition <code>\(A_k\)</code>, <code>\(k=1,\ldots,n\)</code>.</li>
+<li>This is called <strong>thinning</strong> of the Poisson process.</li>
+</ul>
+<h2 id="adv-sparse-vector-algorithm">
+  <code>\(\adv\)</code> Sparse vector algorithm
+  <a class="anchor" href="#adv-sparse-vector-algorithm">#</a>
+</h2>
+<p>If <code>\(S\sim\text{compound Poisson}(\lambda,g(y_i)=\pi_i)\)</code>, <code>\(i=1,\ldots,m\)</code> then
+<code>$$S=y_1N_1+\ldots+y_mN_m,$$</code>
+where the <code>\(N_i\)</code>’s</p>
+<ul>
+<li>represent the number of claims of amount <code>\(y_i\)</code>;</li>
+<li>are mutually independent;</li>
+<li>are Poi <code>\((\lambda_i=\lambda \pi_i).\)</code></li>
+</ul>
+<p>Proof: see tutorial exercise <code>los18</code>. Note also that this is a special case of Theorem 2.14, and is Theorem 12.4.2 of Bowers et al. (1997).</p>
+<p>So what?</p>
+<ul>
+<li><strong>Sparse vector algorithm</strong>: allows to develop an alternative method for tabulating the distribution of <code>\(S\)</code> that is more efficient as <code>\(m\)</code> is small.</li>
+<li><code>\(S\)</code> can be used to approximate the Individual Risk Model
+if <code>\(X=Ib\)</code> (see Module 3).</li>
+</ul>
+<h3 id="adv-the-sparse-vector-algorithm">
+  <code>\(\adv\)</code> The sparse vector algorithm
+  <a class="anchor" href="#adv-the-sparse-vector-algorithm">#</a>
+</h3>
+<p>(Bowers et al. 1997, Example 12.4.2) Suppose <code>\(S\)</code> has a compound Poisson distribution with <code>\(\lambda =0.8\)</code> and individual claim amount distribution</p>
+<table>
+<thead>
+<tr>
+<th>$y_i$</th>
+<th></th>
+<th><code>\(\Pr\left[ Y=y_i\right]\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td>0.250</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>0.375</td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>0.375</td>
+</tr>
+</tbody>
+</table>
+<p>Compute <code>\(f_{S}\left( s\right) =\Pr\left[ S=s\right]\)</code> for <code>\(s=0,1,...,6\)</code>.</p>
+<p>This can be done in two ways:</p>
+<ul>
+<li>Basic method (seen earlier in the lecture): requires to calculate up to the 6th convolution of <code>\(Y\)</code>.</li>
+<li>Sparse vector algorithm: requires no convolution of <code>\(Y\)</code>.</li>
+</ul>
+<hr>
+<p><strong>Solution - Basic Method</strong></p>
+<table>
+<thead>
+<tr>
+<th><code>\(x\)</code></th>
+<th><code>\(g^{*0}\left(x \right)\)</code></th>
+<th><code>\(g\left( x\right)\)</code></th>
+<th><code>\(g^{* 2}\left(x\right)\)</code></th>
+<th><code>\(g^{* 3}\left( x\right)\)</code></th>
+<th><code>\(g^{* 4}\left( x\right)\)</code></th>
+<th><code>\(g^{* 5}\left( x\right)\)</code></th>
+<th><code>\(g^{* 6}\left( x\right)\)</code></th>
+<th><code>\(f_{S}\left( x\right)\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>0.4493</td>
+</tr>
+<tr>
+<td>1</td>
+<td>-</td>
+<td>0.250</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>0.0899</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-</td>
+<td>0.375</td>
+<td>0.0625</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>0.1438</td>
+</tr>
+<tr>
+<td>3</td>
+<td>-</td>
+<td>0.375</td>
+<td>0.1875</td>
+<td>0.0156</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>0.1624</td>
+</tr>
+<tr>
+<td>4</td>
+<td>-</td>
+<td>-</td>
+<td>0.3281</td>
+<td>0.0703</td>
+<td>0.0039</td>
+<td>-</td>
+<td>-</td>
+<td>0.0499</td>
+</tr>
+<tr>
+<td>5</td>
+<td>-</td>
+<td>-</td>
+<td>0.2813</td>
+<td>0.1758</td>
+<td>0.0234</td>
+<td>0.0010</td>
+<td>-</td>
+<td>0.0474</td>
+</tr>
+<tr>
+<td>6</td>
+<td>-</td>
+<td>-</td>
+<td>0.1406</td>
+<td>0.2637</td>
+<td>0.0762</td>
+<td>0.0073</td>
+<td>0.0002</td>
+<td>0.0309</td>
+</tr>
+<tr>
+<td><code>\(n\)</code></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td></td>
+</tr>
+<tr>
+<td><code>\(\Pr[N=n]=e^{-0.8}\frac{\left( 0.8\right) ^{n}}{n!}\)</code></td>
+<td>0.4493</td>
+<td>0.3595</td>
+<td>0.1438</td>
+<td>0.0383</td>
+<td>0.0077</td>
+<td>0.0012</td>
+<td>0.0002</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The convolutions are done in the usual way.</li>
+<li>The <code>\(f_S(x)\)</code> are the sumproduct of the row <code>\(x\)</code> and row <code>\(\Pr[N=n]\)</code>.</li>
+<li>The number of convolutions (and thus of columns) will increase by 1 for each new value of <code>\(f_S(x)\)</code>, without bound!</li>
+</ul>
+<hr>
+<p><strong>Solution - Sparse vector algorithm</strong></p>
+<p>Thanks to Theorem 2.12, we can write <code>\(S=N_1+2N_2+3N_3\)</code></p>
+<table>
+<thead>
+<tr>
+<th><code>\(x\)</code></th>
+<th><code>\(\Pr\left[ N_{1}=x\right]\)</code></th>
+<th><code>\(\Pr\left[ 2N_{2}=x\right]\)</code></th>
+<th><code>\(\Pr\left[ 3N_{3}=x\right]\)</code></th>
+<th><code>\(\Pr\left[ N_{1}+2N_{2}=x\right]\)</code></th>
+<th><code>\(f_{S}\left( x\right)\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.818731</td>
+<td>0.740818</td>
+<td>0.740818</td>
+<td>0.606531</td>
+<td>0.449329</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.163746</td>
+<td>0</td>
+<td>0</td>
+<td>0.121306</td>
+<td>0.089866</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.016375</td>
+<td>0.222245</td>
+<td>0</td>
+<td>0.194090</td>
+<td>0.143785</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.001092</td>
+<td>0</td>
+<td>0.222245</td>
+<td>0.037201</td>
+<td>0.162358</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.000055</td>
+<td>0.033337</td>
+<td>0</td>
+<td>0.030974</td>
+<td>0.049906</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.000002</td>
+<td>0</td>
+<td>0</td>
+<td>0.005703</td>
+<td>0.047360</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.000000</td>
+<td>0.003334</td>
+<td>0.033337</td>
+<td>0.003288</td>
+<td>0.030923</td>
+</tr>
+<tr>
+<td><code>\(x_i\)</code></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>\(\lambda _{i}=\lambda \pi_i\)</code></td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>\(\Pr[N_i=x/i]\)</code></td>
+<td><code>\(e^{-0.2}\frac{\left( 0.2\right) ^{x}}{x!}\)</code></td>
+<td><code>\(e^{-0.3}\frac{\left(0.3\right) ^{x/2}}{(x/2)!}\)</code></td>
+<td><code>\(e^{-0.3}\frac{\left( 0.3\right) ^{x/3}}{(x/3)!}\)</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>\(f_S(x)\)</code> are convolution, e.g.:
+<code>$$(5)[3]=.818731\cdot0+.163746\cdot.222245+.016375\cdot0+.001092\cdot.740818$$</code>
+<code>$$(6)[3]=.740818\cdot.037201+0\cdot.194090+0\cdot.121306+.222245\cdot.606531$$</code></p>
+<p>Note that only two convolutions are needed: columns (5) and (6).</p>
+<h2 id="adv-example-216-large-claim-separation">
+  <code>\(\adv\)</code> Example 2.16: Large claim separation
+  <a class="anchor" href="#adv-example-216-large-claim-separation">#</a>
+</h2>
+<ul>
+<li>This is a very important (and convenient) application of the Disjoint decomposition property (Theorem 2.14).</li>
+<li>Attritional and catastrophic claims often have very different distributions (different <code>\(G\)</code>’s).</li>
+<li>Idea here is to divide the claims into different layers with different distributions:
+<ul>
+<li>Small claims are modelled using a parametric distribution for which it is easy to obtain the distribution of the compound distribution, potentially even approximated with a normal distribution thanks to volume and light right tail;</li>
+<li>Large claims are typically modelled with a Pareto distribution with threshold <code>\(M\)</code> and tail parameter <code>\(\alpha&gt;1\)</code> (see Module 6 for a justification of this, and for the choice of an appropriate <code>\(M\)</code>).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><code>\(\adv\)</code> Assuming two layers:</p>
+<ul>
+<li>We choose a large claims threshold <code>\(M&gt;0\)</code> such that
+<code>$$0 &lt; G(M) &lt; 1,$$</code>
+that is, there is probability mass on either size of <code>\(M\)</code>.</li>
+<li>We define the partition
+<code>$$A = A_1 = \{Y_1 \le M\} \quad \text{and} \quad A^c = A_2 = \{Y_1&gt;M\}.$$</code></li>
+<li>Assume that
+<code>$$S \sim \text{CompPoi}(\lambda v, G).$$</code></li>
+<li>We now define the small and large claims layers as
+<code>$$\begin{array}{rcl} S_{\text{sc}} &amp;=&amp; \sum_{i=1}^N Y_i 1_{\{Y_i\le M\}}, \text{ and}\\ S_{\text{lc}} &amp;=&amp; \sum_{i=1}^N Y_i 1_{\{Y_i &gt; M\}}, \end{array}$$</code>
+respectively.</li>
+</ul>
+<hr>
+<ul>
+<li><code>\(\adv\)</code> Theorem 2.14 implies that <code>\(S_{\text{sc}}\)</code> and <code>\(S_{\text{lc}}\)</code> are and compound Poisson distributed with</li>
+</ul>
+<p><code>$$\begin{array}{rcl} S_{\text{sc}} &amp;\sim &amp; \text{CompPoi}(\lambda_{\text{sc}}v = \lambda G(M)v, \\ &amp;&amp;\quad\quad\quad\quad G_{\text{sc}}(y)=\Pr[Y_1\le y|Y_1\le M]), \text{ and} \\ S_{\text{lc}} &amp;\sim &amp; \text{CompPoi}(\lambda_{\text{lc}}v = \lambda (1-G(M))v, \\ &amp;&amp;\quad\quad\quad\quad G_{\text{lc}}(y)=\Pr[Y_1\le y|Y_1&gt; M]), \end{array}$$</code></p>
+<p>respectively.</p>
+<ul>
+<li>The distribution of
+<code>$$S=S_{\text{sc}} + S_{\text{lc}}$$</code>
+can then be obtained by a simple convolution of distributions of <code>\(S_{\text{sc}}\)</code> and <code>\(S_{\text{lc}}\)</code> (thanks to independence); see Module 4 for examples.</li>
+</ul>
+<h1 id="adv-parameter-estimation-mw-23">
+  <code>\(\adv\)</code> Parameter estimation (MW 2.3)
+  <a class="anchor" href="#adv-parameter-estimation-mw-23">#</a>
+</h1>
+<h2 id="adv-introduction">
+  <code>\(\adv\)</code> Introduction
+  <a class="anchor" href="#adv-introduction">#</a>
+</h2>
+<h3 id="adv-estimation-methods">
+  <code>\(\adv\)</code> Estimation methods
+  <a class="anchor" href="#adv-estimation-methods">#</a>
+</h3>
+<p>You should be familiar with the main estimation methods:</p>
+<ul>
+<li>Method of moments</li>
+<li>Maximum likelihood estimation</li>
+</ul>
+<p>Here the problem is slightly complicated because our observations may not be directly comparable due to varying exposures <code>\(v\)</code>’s.</p>
+<p>Assume that <code>\((N_1,\ldots,N_T)'\)</code> is the vector of observations.</p>
+<h2 id="adv-what-to-do-with-volumes-lemma-226">
+  <code>\(\adv\)</code> What to do with volumes? Lemma 2.26
+  <a class="anchor" href="#adv-what-to-do-with-volumes-lemma-226">#</a>
+</h2>
+<ul>
+<li>The key idea here is to find the minimum variance method of moments estimator, when the volumes across the observations can vary.</li>
+<li>This is what is different from a straight method of moments estimator, and explains why we need to think it through: how to deal with those volumes?</li>
+<li>Assume there exist strictly positive volumes <code>\(v_1,\ldots, v_T\)</code> such that the components of <code>\((N_1/v_1,\ldots,N_T/v_T)\)</code> are independent with
+<code>$$\lambda = E\left[\frac{N_t}{v_t}\right]\text{ and } \tau_t^2 = Var\left(\frac{N_t}{v_t}\right) \in (0,\infty),$$</code>
+for all <code>\(t = 1,\ldots,T\)</code>.</li>
+</ul>
+<hr>
+<p>Lemma 2.26 states that the unbiased, linear estimator for <code>\(\lambda\)</code> with minimal variance is given by
+<code>$$\widehat{\lambda}^{\text{MV}}_T = \left( \sum_{t=1}^T \frac{1}{\tau_t^2}\right)^{-1} \sum_{t=1}^T \frac{N_t/v_t}{\tau_t^2},$$</code>
+with variance
+<code>$$Var(\widehat{\lambda}^{\text{MV}}_T) = \left( \sum_{t=1}^T \frac{1}{\tau_t^2}  \right)^{-1}.$$</code></p>
+<p>Note:</p>
+<ul>
+<li>We haven’t made any distributional
+assumption yet - this estimates <code>\(E\left[\frac{N_t}{v_t}\right]\)</code> via method of moments, taking the <code>\(v_t\)</code>’s into account in an optimal way (in the sense that it minimises the variance of the estimator).</li>
+<li>The superscript “MV” stands for “minimal variance.”</li>
+</ul>
+<h2 id="adv-method-of-moments">
+  <code>\(\adv\)</code> Method of moments
+  <a class="anchor" href="#adv-method-of-moments">#</a>
+</h2>
+<h3 id="adv-binomial-and-poisson-cases">
+  <code>\(\adv\)</code> Binomial and Poisson cases
+  <a class="anchor" href="#adv-binomial-and-poisson-cases">#</a>
+</h3>
+<p>Unbiased, minimal variance estimators:</p>
+<ul>
+<li>binomial case for <code>\(p\)</code>:
+<code>$$\widehat{p}_T^{\text{MV}} = \frac{1}{\sum_{s=1}^T v_s} \sum_{t=1}^T N_t = \sum_{t=1}^T \frac{v_t}{\sum_{s=1}^T v_s}  \frac{N_t}{v_t} \sim$$</code>
+Furthermore, <code>\(\sum_{t=1}^T N_t\sim\text{Binom}(\sum_{s=1}^T v_s,p)\)</code>, which means we know the distribution of <code>\(\widehat{p}_T^{\text{MV}}\)</code>.</li>
+<li>Poisson case for <code>\(\lambda\)</code>:
+<code>$$\widehat{\lambda}_T^{\text{MV}} = \frac{1}{\sum_{s=1}^T v_s} \sum_{t=1}^T N_t = \sum_{t=1}^T \frac{v_t}{\sum_{s=1}^T v_s}  \frac{N_t}{v_t}$$</code>
+Here, <code>\(\sum_{t=1}^T N_t\sim\text{Poi}(\lambda \sum_{s=1}^T v_s)\)</code>.</li>
+</ul>
+<h3 id="adv-negative-binomial-case">
+  <code>\(\adv\)</code> Negative binomial case
+  <a class="anchor" href="#adv-negative-binomial-case">#</a>
+</h3>
+<p>More complicated, because:
+<code>$$E\left[\frac{N_t}{v_t}\right] = \lambda \text{ and }  Var\left(\frac{N_t}{v_t}\right) = \lambda/v_t + \lambda^2/\gamma= \tau_t^2,$$</code>
+Unbiased (but not guaranteed minimal variance):
+<code>$$\widehat{\lambda}^{\text{NB}}_T = \frac{1}{\sum_{s=1}^T v_s} \sum_{t=1}^T N_t = \sum_{t=1}^T \frac{v_t}{\sum_{s=1}^T v_s}  \frac{N_t}{ v_t}$$</code></p>
+<hr>
+<p><code>\(\adv\)</code> We need a sense of the dispersion for estimating the dispersion parameter <code>\(\gamma\)</code>.</p>
+<p>Let the weighted sample variance
+<code>$$\widehat{V}_T^2 = \frac{1}{T-1} \sum_{t=1}^T v_t \left( \frac{N_t}{v_t} - \widehat{\lambda}^{\text{NB}}_T \right) ^2.$$</code>
+Then we have
+<code>$$\widehat{\gamma}^{\text{NB}}_T = \frac{(\widehat{\lambda}^{\text{NB}}_T)^2}{\widehat{V}_T^2 -\widehat{\lambda}^{\text{NB}}_T}\frac{1}{T-1} \left( \sum_{t=1}^T v_t - \frac{ \sum_{t=1}^T v_t^2}{ \sum_{t=1}^T v_t} \right),$$</code>
+ONLY if <code>\(\widehat{V}_T^2 &gt;\widehat{\lambda}^{\text{NB}}_T\)</code>. Otherwise use Poisson or binomial.</p>
+<h2 id="adv-maximum-likelihood-estimators">
+  <code>\(\adv\)</code> Maximum likelihood estimators
+  <a class="anchor" href="#adv-maximum-likelihood-estimators">#</a>
+</h2>
+<h3 id="adv-binomial-and-poisson-cases-1">
+  <code>\(\adv\)</code> Binomial and Poisson cases
+  <a class="anchor" href="#adv-binomial-and-poisson-cases-1">#</a>
+</h3>
+<p>Estimators are identical to method of moments estimators. Or conversely, the MLE estimators are actually unbiased.</p>
+<ul>
+<li>binomial case for <code>\(p\)</code>:
+<code>$$\widehat{p}_T^{\text{MLE}} = \frac{1}{\sum_{s=1}^T v_s} \sum_{t=1}^T N_t = \sum_{t=1}^T \frac{v_t}{\sum_{s=1}^T v_s}  \frac{N_t}{v_t}=\widehat{p}_T^{\text{MV}}$$</code></li>
+<li>Poisson case for <code>\(\lambda\)</code>:
+<code>$$\widehat{\lambda}_T^{\text{MLE}} = \frac{1}{\sum_{s=1}^T v_s} \sum_{t=1}^T N_t = \sum_{t=1}^T \frac{v_t}{\sum_{s=1}^T v_s}  \frac{N_t}{v_t}= \widehat{\lambda}_T^{\text{MV}}$$</code></li>
+</ul>
+<h3 id="adv-negative-binomial-case-1">
+  <code>\(\adv\)</code> Negative binomial case
+  <a class="anchor" href="#adv-negative-binomial-case-1">#</a>
+</h3>
+<p>Assume <code>\(N_1,\ldots, N_T\)</code> are independent and <code>\(\text{NegBin}(\lambda v_t,\gamma)\)</code>. The MLE <code>\((\widehat{\lambda}_T^{\text{MLE}},\widehat{\gamma}^{\text{MLE}}_T)\)</code> are the solution of
+<code>$$\frac{\partial}{\partial (\lambda, \gamma)} \sum_{t=1}^T \log {N_t +\gamma -1 \choose N_t} + \gamma \log (1-p_t) + N_t \log p_t = 0,$$</code>
+with <code>\(p_t = \lambda v_t / (\gamma + \lambda v_t) \in (0,1)\)</code>.</p>
+<h1 id="adv-the-ab0-and-ab1-classes-of-distributions">
+  <code>\(\adv\)</code> The <code>\((a,b,0)\)</code> and <code>\((a,b,1)\)</code> classes of distributions
+  <a class="anchor" href="#adv-the-ab0-and-ab1-classes-of-distributions">#</a>
+</h1>
+<h2 id="adv-the-ab-class-of-panjer-distributions-421">
+  <code>\(\adv\)</code> The <code>\((a,b)\)</code> class of Panjer distributions (4.2.1)
+  <a class="anchor" href="#adv-the-ab-class-of-panjer-distributions-421">#</a>
+</h2>
+<p>A class of distributions has the following property</p>
+<p>$$
+\Pr[N=n]=\left(a+\frac{b}{n}\right)\Pr[N=n-1], \text{ or } \frac{p_k}{p_{k-1}}=\left(a+\frac{b}{k}\right).
+$$</p>
+<p>This is the <code>\((a,b)\)</code> class of “Panjer distributions.” This means that <code>\(\Pr[N=n]\)</code> can be obtained recursively with initial value <code>\(\Pr[N=0]\)</code>; see Wuthrich (2020), Definition 4.6.</p>
+<p>The exhaustive list of its members (see Wuthrich 2020 Lemma 4.7) is</p>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th><code>\(a\)</code></th>
+<th><code>\(b\)</code></th>
+<th><code>\(\Pr[N=0]\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Poisson <code>\(\left( \lambda \right)\)</code></td>
+<td><code>\(0\)</code></td>
+<td><code>\(\lambda\)</code></td>
+<td><code>\(e^{-\lambda}\)</code></td>
+</tr>
+<tr>
+<td>Neg Bin <code>\(\left( r,p\right)\)</code></td>
+<td><code>\(1-p\)</code></td>
+<td><code>\((r-1)(1-p)\)</code></td>
+<td><code>\(p^r\)</code></td>
+</tr>
+<tr>
+<td>Binomial <code>\(\left( m,p\right)\)</code></td>
+<td><code>\(-p/(1-p)\)</code></td>
+<td><code>\((m+1)p/(1-p)\)</code></td>
+<td><code>\((1-p)^m\)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Exercise: prove the results in the above table!
+(Note <code>\(p\)</code> is the probability of success for the Negative Binomial)</p>
+<h3 id="adv-first-three-cumulants-of-the-ab-family">
+  <code>\(\adv\)</code> First three cumulants of the <code>\((a,b)\)</code> family
+  <a class="anchor" href="#adv-first-three-cumulants-of-the-ab-family">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th><code>\(E[N]\)</code></th>
+<th><code>\(Var(N)\)</code></th>
+<th><code>\(E\left[(N-E[N])^3\right]\)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Poisson <code>\(\left( \lambda \right)\)</code></td>
+<td><code>\(\lambda\)</code></td>
+<td><code>\(\lambda\)</code></td>
+<td><code>\(\lambda\)</code></td>
+</tr>
+<tr>
+<td>Neg Bin <code>\(\left( r,p\right)\)</code></td>
+<td><code>\(\displaystyle\frac{rq}{p}\)</code></td>
+<td><code>\(\displaystyle \frac{rq}{p^2}\)</code></td>
+<td><code>\(\displaystyle \frac{rq(1+q)}{p^3}\)</code></td>
+</tr>
+<tr>
+<td>Binomial <code>\(\left( m,p\right)\)</code></td>
+<td><code>\(mp\)</code></td>
+<td><code>\(mpq\)</code></td>
+<td><code>\(mpq(q-p)\)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Exercise:</p>
+<ul>
+<li>check these results using the cgf</li>
+<li>find the first 3 cumulants of <code>\(S\)</code>, as well as <code>\(\varsigma_S\)</code>
+for each member of the family</li>
+</ul>
+<h2 id="adv-actuar-and-the-ab1-class">
+  <code>\(\adv\)</code> <code>actuar</code> and the <code>\((a,b,1)\)</code> class
+  <a class="anchor" href="#adv-actuar-and-the-ab1-class">#</a>
+</h2>
+<ul>
+<li>The package <code>actuar</code> extends the definition above to allow for <strong>zero-truncated</strong> and <strong>zero-modified</strong> distributions.</li>
+<li>The Poisson, binomial and negative-binomial (and special case geometric) are all well supported in Base R with the <code>d</code>, <code>p</code>, <code>q</code> and <code>r</code> functions.</li>
+<li>If one takes the Panjer equation for granted, then we can think of <code>\(p_0\)</code> as the mass that will make the pmf add up to one:
+<code>$$\text{given Panjer}: p_0 \text{ is such that } \sum_{k=0}^\infty p_k = 1.$$</code></li>
+<li>We introduce here the <code>\((a,b,1)\)</code> class which extends the idea above so that we have more freedom on the mass at 0.</li>
+<li>The reference for this section is Section 4 of the 
+  <a href="https://cran.csiro.au/web/packages/actuar/vignettes/distributions.pdf">vignette “distribution” of <code>actuar</code></a></li>
+</ul>
+<h2 id="adv-the-ab1-class-of-distributions">
+  <code>\(\adv\)</code> The <code>\((a,b,1)\)</code> class of distributions
+  <a class="anchor" href="#adv-the-ab1-class-of-distributions">#</a>
+</h2>
+<p>A discrete random variable is a member of the ** <code>\((a,b,1)\)</code> class of distributions** if there exist constants <code>\(a\)</code> and <code>\(b\)</code> such that
+<code>$$\frac{p_k}{p_{k-1}}=a+\frac{b}{k},\quad **k=2,3,\ldots**.$$</code>
+Note:</p>
+<ul>
+<li>The recursion starts at <code>\(k=2\)</code> for the <code>\((a,b,1)\)</code> class.</li>
+<li>The extra freedom allows the probability at zero to be set to any arbitrary number <code>\(0\le p_0 \le 1\)</code></li>
+</ul>
+<h3 id="adv-zero-truncated-distributions">
+  <code>\(\adv\)</code> Zero-truncated distributions
+  <a class="anchor" href="#adv-zero-truncated-distributions">#</a>
+</h3>
+<ul>
+<li>Setting <code>\(p_0=0\)</code> in the <code>\((a,b,1)\)</code> class defines the subclass of <strong>zero-truncated distributions</strong></li>
+<li>Members are the zero-truncated Poisson (<code>actuar::ztpois</code>), zero-truncated binomial (<code>actuar::ztbinom</code>), zero-truncated negative-binomial (<code>actuar::ztnbinom</code>), and the zero-truncated geometric (<code>actuar::ztgeom</code>).</li>
+<li>Let <code>\(p_k^T\)</code> denote the probability mass at <code>\(k\)</code> for a zero-truncated distribution (“$T$” for truncated). We have
+<code>$$p_k^T = \left\{ \begin{array}{ll} 0, &amp; k=0; \\ \frac{p_k}{1-p_0}, &amp; k=1,2,\ldots. \end{array}\right.,$$</code>
+where <code>\(p_k\)</code> is the probability mass of the corresponding member of the <code>\((a,b,0)\)</code> — that is, <code>\((a,b)\)</code> — class.</li>
+<li><code>actuar</code> provides the <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> functions of the zero-truncated distributions mentioned above.</li>
+</ul>
+<h3 id="adv-zero-modified-distributions">
+  <code>\(\adv\)</code> Zero-modified distributions
+  <a class="anchor" href="#adv-zero-modified-distributions">#</a>
+</h3>
+<ul>
+<li>Setting <code>\(p_0\equiv p_0^M\)</code> <code>\((0&lt;p_0^M&lt;1)\)</code> in the <code>\((a,b,1)\)</code> class defines the subclass of <strong>zero-modified distributions</strong> (“$M$” for “modified”)</li>
+<li>These distributions are discrete mixtures between a degenerate distribution at zero, and the corresponding distribution from the <code>\((a,b,0)\)</code> class.</li>
+<li>Let <code>\(p_k^M\)</code> denote the probability mass at <code>\(k\)</code> for a zero-modified distribution. We have then
+<code>$$p_k^M = \left( 1-\frac{1-p_0^M}{1-p_0}\right)1_{\{k=0\}} + \frac{1-p_0^M}{1-p_0}p_k.$$</code>
+Alternatively,
+<code>$$p_k^M = \left\{ \begin{array}{ll} p_0^M, &amp; k=0; \\ \frac{1-p_0^M}{1-p_0}p_k, &amp; k=1,2,\ldots. \end{array}\right.,$$</code>
+where <code>\(p_k\)</code> is the probability mass of the corresponding member of the <code>\((a,b,0)\)</code> class.</li>
+</ul>
+<hr>
+<ul>
+<li>Quite obviously, zero-truncated distributions are zero-modified distributions with <code>\(p_0^M=0\)</code>, and
+<code>$$p_k^M = p_0^M 1_{\{k=0\}}+(1-p_0^M)p_k^T.$$</code></li>
+<li>Members are the zero-modified Poisson (<code>actuar::zmpois</code>), zero-modified binomial (<code>actuar::zmbinom</code>), zero-modified negative-binomial (<code>actuar::zmnbinom</code>), and the zero-modified geometric (<code>actuar::zmgeom</code>). <code>actuar</code> provides the <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> functions of the zero-truncated distributions mentioned above.</li>
+</ul>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">dpois</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2.5</span>), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.3</span>),
+  cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
+<span style="color:#a6e22e">points</span>(<span style="color:#a6e22e">dztpois</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2.5</span>), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
+<span style="color:#a6e22e">points</span>(<span style="color:#a6e22e">dzmpois</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2.5</span>, <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">dpois</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2.5</span>)), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>,
+  type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/index_files/figure-html/zero-1.png" width="672" /></p>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-BoGeHiJoNe97" class="csl-entry">
+<p>Bowers, Newton L. Jr, Hans U. Gerber, James C. Hickman, Donald A. Jones, and Cecil J. Nesbitt. 1997. <em>Actuarial Mathematics</em>. Second. Schaumburg, Illinois: The Society of Actuaries.</p>
+</div>
+<div id="ref-DiGoPi08" class="csl-entry">
+<p>Dutang, Christophe, Vincent Goulet, and Mathieu Pigeon. 2008. “Actuar: An r Package for Actuarial Science.” <em>Journal of Statistical Software</em> 25 (7).</p>
+</div>
+<div id="ref-WeMo10" class="csl-entry">
+<p>Werner, Geoff, and Claudine Modlin. 2010. <em>Basic Ratemaking</em>. Casualty Actuarial Society.</p>
+</div>
+<div id="ref-Wut20" class="csl-entry">
+<p>Wuthrich, Mario V. 2020. “Non-Life Insurance: Mathematics &amp; Statistics.” Lecture notes. RiskLab, ETH Zurich; Swiss Finance Institute.</p>
+</div>
+</div>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/7283c0a4c689e24cb7f5b7540d56f29280f8b175" title='Last modified by Benjamin Avanzi | 22 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>22 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-models-for-aggregate-losses">Introduction: Models for aggregate losses</a></li>
+    <li><a href="#the-individual-risk-model">The Individual Risk Model</a>
+      <ul>
+        <li><a href="#definition">Definition</a>
+          <ul>
+            <li><a href="#the-individual-risk-model-1">The Individual Risk Model</a></li>
+          </ul>
+        </li>
+        <li><a href="#convolutions-of-random-variables">Convolutions of random variables</a>
+          <ul>
+            <li><a href="#formulas">Formulas</a></li>
+            <li><a href="#numerical-example">Numerical example</a></li>
+            <li><a href="#solution">Solution</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-generating-functions">Using generating functions</a>
+          <ul>
+            <li><a href="#example">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-r">Using R</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-collective-risk-model-compound-distributions-mw-21">The Collective Risk Model (Compound distributions, MW 2.1)</a>
+      <ul>
+        <li><a href="#definition-1">Definition</a>
+          <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#definition-2">Definition</a></li>
+          </ul>
+        </li>
+        <li><a href="#moments-of-s">Moments of <code>\(S\)</code></a></li>
+        <li><a href="#moment-generating-function-of-s">Moment generating function of <code>\(S\)</code></a>
+          <ul>
+            <li><a href="#example-bowers-et-al-1997-1221">Example (Bowers et al. (1997), 12.2.1)</a></li>
+          </ul>
+        </li>
+        <li><a href="#distribution-of-s">Distribution of <code>\(S\)</code></a>
+          <ul>
+            <li><a href="#distribution-of-s-if-x-is-continuous">Distribution of <code>\(S\)</code> if <code>\(X\)</code> is continuous</a></li>
+            <li><a href="#example-continued-bowers-et-al-1997-1223">Example, continued (Bowers et al. (1997), 12.2.3)</a></li>
+            <li><a href="#distribution-of-s-if-y-is-mixed">Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is mixed</a></li>
+            <li><a href="#distribution-of-s-if-y-is-discrete">Distribution of <code>\(S\)</code> if <code>\(Y\)</code> is discrete</a></li>
+            <li><a href="#example-with-tabular-approach">Example with tabular approach</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-r-1">Using R</a></li>
+      </ul>
+    </li>
+    <li><a href="#explicit-claims-count-distributions-mw-22">Explicit claims count distributions (MW 2.2)</a>
+      <ul>
+        <li><a href="#introduction-1">Introduction</a>
+          <ul>
+            <li><a href="#exposure">Exposure</a></li>
+            <li><a href="#basic-models-for-claims-frequency">Basic models for claims frequency</a></li>
+          </ul>
+        </li>
+        <li><a href="#binomial-distribution">Binomial distribution</a>
+          <ul>
+            <li><a href="#compound-binomial-model">Compound binomial model</a></li>
+          </ul>
+        </li>
+        <li><a href="#poisson-distribution">Poisson distribution</a>
+          <ul>
+            <li><a href="#compound-poisson-model">Compound Poisson model</a></li>
+          </ul>
+        </li>
+        <li><a href="#mixed-poisson-distribution">Mixed Poisson distribution</a>
+          <ul>
+            <li><a href="#inhomogeneous-portfolio">Inhomogeneous portfolio</a></li>
+            <li><a href="#the-mixed-poisson-distribution">The mixed Poisson distribution</a></li>
+            <li><a href="#example-1">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#negative-binomial-distribution">Negative-binomial distribution</a>
+          <ul>
+            <li><a href="#interpretation">Interpretation</a></li>
+            <li><a href="#compound-negative-binomial-model">Compound negative-binomial model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#additional-properties-and-applications-of-poisson-frequencies">Additional properties and applications of Poisson frequencies</a>
+      <ul>
+        <li><a href="#theorem-212-aggregation-property-uparrow">Theorem 2.12: Aggregation property <code>\(\uparrow\)</code></a>
+          <ul>
+            <li><a href="#proof">Proof</a></li>
+            <li><a href="#example-1241-of-bowers-et-al-1997">Example 12.4.1 of Bowers et al. (1997)</a></li>
+          </ul>
+        </li>
+        <li><a href="#theorem-214-disjoint-decomposition-property-downarrow">Theorem 2.14: Disjoint decomposition property <code>\(\downarrow\)</code></a>
+          <ul>
+            <li><a href="#preliminary-1-add-lobs-in-the-comppoi-formulation">Preliminary 1: Add LoBs in the CompPoi formulation</a></li>
+            <li><a href="#preliminary-2-partition">Preliminary 2: Partition</a></li>
+            <li><a href="#theorem-214-disjoint-decomposition-downarrow">Theorem 2.14: Disjoint decomposition <code>\(\downarrow\)</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-thinning-of-the-poisson-process"><code>\(\adv\)</code> Thinning of the Poisson process</a></li>
+        <li><a href="#adv-sparse-vector-algorithm"><code>\(\adv\)</code> Sparse vector algorithm</a>
+          <ul>
+            <li><a href="#adv-the-sparse-vector-algorithm"><code>\(\adv\)</code> The sparse vector algorithm</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-example-216-large-claim-separation"><code>\(\adv\)</code> Example 2.16: Large claim separation</a></li>
+      </ul>
+    </li>
+    <li><a href="#adv-parameter-estimation-mw-23"><code>\(\adv\)</code> Parameter estimation (MW 2.3)</a>
+      <ul>
+        <li><a href="#adv-introduction"><code>\(\adv\)</code> Introduction</a>
+          <ul>
+            <li><a href="#adv-estimation-methods"><code>\(\adv\)</code> Estimation methods</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-what-to-do-with-volumes-lemma-226"><code>\(\adv\)</code> What to do with volumes? Lemma 2.26</a></li>
+        <li><a href="#adv-method-of-moments"><code>\(\adv\)</code> Method of moments</a>
+          <ul>
+            <li><a href="#adv-binomial-and-poisson-cases"><code>\(\adv\)</code> Binomial and Poisson cases</a></li>
+            <li><a href="#adv-negative-binomial-case"><code>\(\adv\)</code> Negative binomial case</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-maximum-likelihood-estimators"><code>\(\adv\)</code> Maximum likelihood estimators</a>
+          <ul>
+            <li><a href="#adv-binomial-and-poisson-cases-1"><code>\(\adv\)</code> Binomial and Poisson cases</a></li>
+            <li><a href="#adv-negative-binomial-case-1"><code>\(\adv\)</code> Negative binomial case</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#adv-the-ab0-and-ab1-classes-of-distributions"><code>\(\adv\)</code> The <code>\((a,b,0)\)</code> and <code>\((a,b,1)\)</code> classes of distributions</a>
+      <ul>
+        <li><a href="#adv-the-ab-class-of-panjer-distributions-421"><code>\(\adv\)</code> The <code>\((a,b)\)</code> class of Panjer distributions (4.2.1)</a>
+          <ul>
+            <li><a href="#adv-first-three-cumulants-of-the-ab-family"><code>\(\adv\)</code> First three cumulants of the <code>\((a,b)\)</code> family</a></li>
+          </ul>
+        </li>
+        <li><a href="#adv-actuar-and-the-ab1-class"><code>\(\adv\)</code> <code>actuar</code> and the <code>\((a,b,1)\)</code> class</a></li>
+        <li><a href="#adv-the-ab1-class-of-distributions"><code>\(\adv\)</code> The <code>\((a,b,1)\)</code> class of distributions</a>
+          <ul>
+            <li><a href="#adv-zero-truncated-distributions"><code>\(\adv\)</code> Zero-truncated distributions</a></li>
+            <li><a href="#adv-zero-modified-distributions"><code>\(\adv\)</code> Zero-modified distributions</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

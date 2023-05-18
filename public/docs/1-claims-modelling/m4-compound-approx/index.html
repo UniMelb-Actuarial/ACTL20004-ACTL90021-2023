@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="\(\adv\) Module 4 Out of Scope #  Please note that this entire module is out of scope for Semester 1, 2022.
+Algorithms for compound distributions #  Preliminary: Discretisation #   In the algorithms considered in this module (and in real life..!), severity distributions are discrete. In Module 3 we discussed how to fit parametric distributions to real data, but these were continuous (which often allows to define a whole df easily with just a few parameters).">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M4 Approximations for Compound Distributions" />
+<meta property="og:description" content="\(\adv\) Module 4 Out of Scope #  Please note that this entire module is out of scope for Semester 1, 2022.
+Algorithms for compound distributions #  Preliminary: Discretisation #   In the algorithms considered in this module (and in real life..!), severity distributions are discrete. In Module 3 we discussed how to fit parametric distributions to real data, but these were continuous (which often allows to define a whole df easily with just a few parameters)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-22T01:48:24+11:00" />
+
+<title>M4 Approximations for Compound Distributions | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class="">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class=" active">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M4 Approximations for Compound Distributions</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#adv-module-4-out-of-scope"><code>\(\adv\)</code> Module 4 Out of Scope</a></li>
+    <li><a href="#algorithms-for-compound-distributions">Algorithms for compound distributions</a>
+      <ul>
+        <li><a href="#preliminary-discretisation">Preliminary: Discretisation</a>
+          <ul>
+            <li><a href="#method-of-rounding-mass-dispersal">Method of rounding (mass dispersal)</a></li>
+            <li><a href="#unbiased-method">Unbiased method</a></li>
+            <li><a href="#method-of-lower-and-upper-bounds">Method of lower and upper bounds</a></li>
+            <li><a href="#examples">Examples</a></li>
+          </ul>
+        </li>
+        <li><a href="#panjers-recursion-algorithm">Panjer’s recursion algorithm</a></li>
+        <li><a href="#panjers-recursion-in-r">Panjer’s recursion in R</a>
+          <ul>
+            <li><a href="#example">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#panjers-recursion-for-compound-poisson">Panjer’s recursion for compound Poisson</a>
+          <ul>
+            <li><a href="#example-a-1242-recomputed">Example A 12.4.2 (recomputed)</a></li>
+          </ul>
+        </li>
+        <li><a href="#de-prils-recursion-algorithm">de Pril’s recursion algorithm</a>
+          <ul>
+            <li><a href="#numerical-example">Numerical example</a></li>
+          </ul>
+        </li>
+        <li><a href="#fast-fourier-transform">Fast Fourier Transform</a></li>
+      </ul>
+    </li>
+    <li><a href="#approximations">Approximations</a>
+      <ul>
+        <li><a href="#approximations-assuming-a-symmetrical-distribution">Approximations assuming a symmetrical distribution</a>
+          <ul>
+            <li><a href="#the-normal-approximation">The Normal approximation</a></li>
+            <li><a href="#normal-power">Normal Power</a></li>
+          </ul>
+        </li>
+        <li><a href="#approximations-using-a-skewed-distribution">Approximations using a skewed distribution</a>
+          <ul>
+            <li><a href="#the-translated-gamma-and-ln-approximations">The translated gamma and LN approximations</a></li>
+          </ul>
+        </li>
+        <li><a href="#edgeworths-approximation">Edgeworth’s approximation</a></li>
+        <li><a href="#approximating-the-individual-model-with-the-collective-model">Approximating the Individual Model with the Collective Model</a>
+          <ul>
+            <li><a href="#two-possible-assumptions-for-lambda_i">Two possible assumptions for <code>\(\lambda_i\)</code></a></li>
+            <li><a href="#example-1">Example</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#bringing-it-all-together-suva-case-study">Bringing it all together: SUVA case study</a>
+      <ul>
+        <li><a href="#preliminaries">Preliminaries</a></li>
+        <li><a href="#split-claims">Split claims</a></li>
+        <li><a href="#modelling-the-small-claims">Modelling the small claims</a>
+          <ul>
+            <li><a href="#s_textsc-using-the-empirical-distribution-of-x_textsc-and-panjer"><code>\(S_{\text{sc}}\)</code> using the empirical distribution of <code>\(X_{\text{sc}}\)</code> and Panjer</a></li>
+            <li><a href="#s_textsc-using-an-translated-gamma-approximation"><code>\(S_{\text{sc}}\)</code> using an translated gamma approximation</a></li>
+            <li><a href="#comparison">Comparison</a></li>
+          </ul>
+        </li>
+        <li><a href="#modelling-the-large-claims">Modelling the large claims</a></li>
+        <li><a href="#getting-the-overall-distribution">Getting the overall distribution</a>
+          <ul>
+            <li><a href="#getting-ready">Getting ready</a></li>
+            <li><a href="#performing-the-convolutions">Performing the convolutions</a></li>
+            <li><a href="#examining-the-ecdf-approach-fit">Examining the ECDF approach fit</a></li>
+            <li><a href="#examining-the-translated-gamma-approach-fit">Examining the translated gamma approach fit</a></li>
+            <li><a href="#moments">Moments</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="adv-module-4-out-of-scope">
+  <code>\(\adv\)</code> Module 4 Out of Scope
+  <a class="anchor" href="#adv-module-4-out-of-scope">#</a>
+</h1>
+<p>Please note that this entire module is out of scope for Semester 1, 2022.</p>
+<h1 id="algorithms-for-compound-distributions">
+  Algorithms for compound distributions
+  <a class="anchor" href="#algorithms-for-compound-distributions">#</a>
+</h1>
+<h2 id="preliminary-discretisation">
+  Preliminary: Discretisation
+  <a class="anchor" href="#preliminary-discretisation">#</a>
+</h2>
+<ul>
+<li>In the algorithms considered in this module (and in real life..!), severity distributions are discrete.</li>
+<li>In Module 3 we discussed how to fit parametric distributions to real data, but these were continuous (which often allows to define a whole df easily with just a few parameters).</li>
+<li>This is not a restriction as the distribution of <code>\(Y\)</code> can easily be discretised to an arbirary level of precision.</li>
+<li>Different methods have different properties and are used for different purposes.</li>
+<li>A number of those methods are easily implemented, thanks to the function <code>discretise</code> of <code>actuar</code>.</li>
+</ul>
+<hr>
+<p>There are three (four) methods, all covered by the R function <code>actuar::discretise</code>:</p>
+<ul>
+<li>Mass dispersal (<code>method=&quot;rounding&quot;</code>): a first try to allocate weights in a rather `unbiased’ way. In this case, the true cdf passes through the midpoints of the discretisation intervals.</li>
+<li>Unbiased (<code>method=&quot;unbiased&quot;</code>): this method matches the first moment of the discretised and the true distributions.</li>
+<li>Lower (<code>method=&quot;lower&quot;</code>) and Upper (<code>method=&quot;upper&quot;</code>) bounds, which sandwich the correct distribution between two arbitrarily close bounds. Here the idea is to intentionally underestimate and overestimate the distribution. However, the gap in-between can be chosen to be arbitrarily small.</li>
+</ul>
+<hr>
+<p><embed src="/img/module-4/discretisation.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" /></p>
+<hr>
+<p>in <code>discretise</code>, we will also need to specify:</p>
+<ul>
+<li><code>step</code> <code>\(=h\)</code> : a currency span (say, $10 or $100)</li>
+<li><code>from</code> <code>\(=0\)</code> : the left limit of discretisation (we set this to 0 here, a natural bound for positive claims distributions)</li>
+<li><code>to</code> <code>\(=m\)</code> : the right limit of discretisation</li>
+<li><code>cdf</code>: the distribution to discretise (in cumulative, cdf form—the <code>pfoo</code> function)</li>
+</ul>
+<h3 id="method-of-rounding-mass-dispersal">
+  Method of rounding (mass dispersal)
+  <a class="anchor" href="#method-of-rounding-mass-dispersal">#</a>
+</h3>
+<ul>
+<li>apportion the probability mass to a finite set of points <code>\(0, h, 2h, \ldots, mh\)</code></li>
+<li>if the range of <code>\(X\)</code> is not finite, <code>\(m\)</code> has to be chosen in order to have a good representation of the right tail</li>
+<li>the span <code>\(h\)</code> should be carefully chosen as to be relatively small compared to the mean (beware of units!)</li>
+<li>Let <code>\(g_j\)</code> be the probability mass placed at <code>\(jh\)</code>, <code>\(j=0,1,\ldots,m\)</code>. We have</li>
+</ul>
+<p><code>$$\begin{array}{rcl} g_0 &amp;=&amp; G\left( h/2 \right) \\ g_j &amp;=&amp; G\left( jh + h/2\right)-G\left( jh - h/2\right),\quad g=1,2,\ldots,m-1 \\ g_m &amp;=&amp; 1-G\left(mh-h/2\right) \end{array}$$</code></p>
+<p>such that <code>\(\sum_{j=0}^m g_j=1\)</code>.</p>
+<p>(Note that if <code>\(G\)</code> is mixed and a mass happens to be at an interval threshold, it is customary—for conservativeness—to allocate it to the next
+interval, so that <code>\(G\)</code> would be understood as càglàd here.)</p>
+<h3 id="unbiased-method">
+  Unbiased method
+  <a class="anchor" href="#unbiased-method">#</a>
+</h3>
+<ul>
+<li>Let <code>\(g_j\)</code> be the probability mass placed at <code>\(jh\)</code>, <code>\(j=0,1,\ldots,m\)</code>. We have</li>
+</ul>
+<p><code>$$\begin{array}{rcl} g_0 &amp;=&amp; 1 - E[\min(X,h)]/h \\ g_j &amp;=&amp; (2 E[\min(X,j)]-E[\min(X,j-h)]-E[\min(X,j+h)])/h,\\ &amp;&amp;j=1,2,\ldots,m-1 \\ g_m &amp;=&amp; (E[\min(X,m)]-E[\min(X,m-h)])/h-(1-G(m)) \end{array}$$</code></p>
+<p>such that <code>\(\sum_{j=0}^m g_j=G(m)\)</code>.</p>
+<ul>
+<li>Note that in this case the parameter <code>lev</code> must be specified. This is an expression that computes the limited expected value of the distribution corresponding to <code>cdf</code>. This is readily available in <code>actuar</code> for many distributions.</li>
+</ul>
+<h3 id="method-of-lower-and-upper-bounds">
+  Method of lower and upper bounds
+  <a class="anchor" href="#method-of-lower-and-upper-bounds">#</a>
+</h3>
+<p>Define:</p>
+<p><code>$$G((k+1)d)-G(kd) = \left\{ \begin{array}{ll} \Pr[Y_1^+=(k+1)d]  \equiv g_{k+1}^+ &amp; \text{(shifted to the right)}  \\  \Pr[Y_1^-=k d]  \equiv g_{k}^- &amp; \text{(shifted to the left)} \end{array} \right.$$</code>
+Note that from a stochastic dominance point of view</p>
+<ul>
+<li><code>\(Y_1^+\)</code> (<code>method=&quot;lower&quot;</code>) overestimates (is larger than) <code>\(Y_1\)</code>, whereas</li>
+<li><code>\(Y_1^-\)</code> (<code>method=&quot;upper&quot;</code>) underestimates (is smaller than) <code>\(Y_1\)</code>.</li>
+</ul>
+<p>This means that we can sandwich the <strong>true</strong> distribution:
+<code>$$\Pr[Y^- &gt; y] \le \Pr[Y&gt;y] \le \Pr[Y^+ &gt; y], \text{ or}$$</code>
+<code>$$\Pr[Y^- \le  y] \ge \Pr[Y\le y] \ge \Pr[Y^+ \le y] \Longleftrightarrow G^+(y)\le G(y) \le G^-(y).$$</code>
+This can be the best option, especially for patchwork distributions;
+see Example 4.12 in Wuthrich (2020).</p>
+<h3 id="examples">
+  Examples
+  <a class="anchor" href="#examples">#</a>
+</h3>
+<p>Let us discretise</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">stp <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">5</span>
+final <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">80</span>
+<span style="color:#75715e"># these are pmf&#39;s</span>
+gamma.discr.round <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rounding&#34;</span>)
+gamma.discr.unbia <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unbiased&#34;</span>, lev <span style="color:#f92672">=</span> <span style="color:#a6e22e">levgamma</span>(x,
+    <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>))
+gamma.discr.lower <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lower&#34;</span>)
+gamma.discr.upper <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;upper&#34;</span>)
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">length</span>(gamma.discr.round)
+</code></pre></div><pre><code>## [1] 16
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">length</span>(gamma.discr.unbia)
+</code></pre></div><pre><code>## [1] 17
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">length</span>(gamma.discr.lower)
+</code></pre></div><pre><code>## [1] 17
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">length</span>(gamma.discr.upper)
+</code></pre></div><pre><code>## [1] 16
+</code></pre>
+<p>Note the different lengths (either <code>\(m\)</code> or <code>\(m+1\)</code>), although they all start with <code>\(g_0\)</code>.</p>
+<hr>
+<p>Furthermore, the masses don’t add up to 1 necessarily:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sum</span>(gamma.discr.round)
+</code></pre></div><pre><code>## [1] 0.996231
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">pgamma</span>(final <span style="color:#f92672">-</span> stp<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>)
+</code></pre></div><pre><code>## [1] 0.996231
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sum</span>(gamma.discr.unbia)
+</code></pre></div><pre><code>## [1] 0.9969808
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sum</span>(gamma.discr.lower)
+</code></pre></div><pre><code>## [1] 0.9969808
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sum</span>(gamma.discr.upper)
+</code></pre></div><pre><code>## [1] 0.9969808
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">pgamma</span>(final, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>)
+</code></pre></div><pre><code>## [1] 0.9969808
+</code></pre>
+<hr>
+<p>This is because the algorithm does not adjust for the tail:</p>
+<ul>
+<li><code>rounding</code> has <code>\(g_m = G(m+h/2)-G(m-h/2)\)</code> rather than <code>\(g_m = 1-G(m-h/2)\)</code> so that <code>\(1-G(m+h/2)\)</code> is missing.</li>
+<li><code>unbiased</code> has that correction <code>\(-(1-G(m))\)</code> (due to the fact that this mass does not correspond to this interval) which is then missing.</li>
+<li><code>lower</code> has <code>\(g_0=0\)</code> and then the mass <code>\(G(m)\)</code> is apportioned to the end of the <code>\(m\)</code> intervals. <code>\(1-G(m)\)</code> remains unallocated.</li>
+<li><code>upper</code> has its first allocation from <code>\(G(m)\)</code> at 0, so has one less mass in the vector. <code>\(1-G(m)\)</code> remains unallocated.</li>
+</ul>
+<p>In practice one would choose <code>\(m\)</code> sufficiently large so that these are issues are not present. If they are, then, an adjustment might be necessary, and <code>rounding</code> becomes the most natural one to use (just add the missing mass at <code>\(g_m\)</code> as per the definition above).</p>
+<!-- ```{r discret4} -->
+<!-- curve(log(1-pgamma(x,2,.1)),log="x",from=1,to=final) -->
+<!-- #,xlim=c(10/stp,120/stp),ylim=c(-9.5,0)) -->
+<!-- lines((0:(final/stp-1))*stp,log(1-gamma.discr.round.df),type="b",pch=20,col="red") -->
+<!-- lines((0:(final/stp))*stp,log(1-gamma.discr.unbia.df),type="b",pch=20,col="green") -->
+<!-- lines((0:(final/stp))*stp,log(1-gamma.discr.lower.df),type="b",pch=20,col="blue") -->
+<!-- lines((0:(final/stp-1))*stp,log(1-gamma.discr.upper.df),type="b",pch=20,col="magenta") -->
+<!-- ``` -->
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># getting df&#39;s</span>
+gamma.discr.round.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(gamma.discr.round)
+gamma.discr.unbia.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(gamma.discr.unbia)
+gamma.discr.lower.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(gamma.discr.lower)
+gamma.discr.upper.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(gamma.discr.upper)
+<span style="color:#75715e"># comparing discretisation techniques</span>
+<span style="color:#a6e22e">curve</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, to <span style="color:#f92672">=</span> final)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(final<span style="color:#f92672">/</span>stp <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> stp, gamma.discr.round.df, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(final<span style="color:#f92672">/</span>stp)) <span style="color:#f92672">*</span> stp, gamma.discr.unbia.df, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(final<span style="color:#f92672">/</span>stp)) <span style="color:#f92672">*</span> stp, gamma.discr.lower.df, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(final<span style="color:#f92672">/</span>stp <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> stp, gamma.discr.upper.df, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;s&#34;</span>,
+  pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>)
+</code></pre></div><hr>
+<!-- ```{r discrplot,fig.height=8,echo=FALSE} -->
+<!-- ``` -->
+<h2 id="panjers-recursion-algorithm">
+  Panjer’s recursion algorithm
+  <a class="anchor" href="#panjers-recursion-algorithm">#</a>
+</h2>
+<ul>
+<li>The remarkable property of the <code>\((a,b)\)</code> class of (frequency) distributions allows us to develop a recursive method to get the distribution of <code>\(S\)</code> for discrete <code>\(Y\)</code>’s.</li>
+<li>When <code>\(Y\)</code> is continuous, simply discretise its cdf first.</li>
+<li>The algorithm is very stable when <code>\(N\)</code> is Poisson and Negative Binomial, but less stable when <code>\(N\)</code> is Binomial.</li>
+</ul>
+<hr>
+<p>Let <code>\(S\)</code> have a compound distribution on <code>\(Y\)</code>, where the following are mutually independent:</p>
+<ul>
+<li><code>\(N\)</code> belongs to the <code>\((a,b)\)</code> class of distributions;</li>
+<li><code>\(Y\)</code> are identically distributed, non-negative and discrete.</li>
+</ul>
+<p>We have then
+<code>$$f_{S}\left( s\right) =\frac{1}{1-a g_0 }\sum_{j=1}^{s}\left( a+b\frac{j}{s}\right) g_j f_{S}\left( s-j\right),\quad s=1,2,\ldots,$$</code>
+with starting value</p>
+<p><code>$$f_{S}\left( 0\right) =\left\{ \begin{array}{ll} \Pr\left[ N=0\right] , &amp; \text{if }g_0 =0 \\ m_{N}\left[ \ln g_0 \right] , &amp; \text{if }g_0 &gt;0. \end{array} \right.$$</code></p>
+<p>Note that if <code>\(g_y=0\)</code> for <code>\(y&gt;y_{\text{max}}\)</code> then the upper bound of the sum can be reduced to <code>\(\min(s,y_{\text{max}}).\)</code></p>
+<h2 id="panjers-recursion-in-r">
+  Panjer’s recursion in R
+  <a class="anchor" href="#panjers-recursion-in-r">#</a>
+</h2>
+<p>Panjer’s recursion can be performed using the <code>aggregateDist</code> function using the <code>method=&quot;recursive&quot;</code>.</p>
+<ul>
+<li>The frequency distribution can be any of the <code>\((a,b,0)\)</code> or <code>\((a,b,1)\)</code> class of distributions (that is, with arbitrary masses at 0).</li>
+<li>The severity distribution must be discrete on <code>\(0,1,\ldots,m\)</code> for some monetary unit.</li>
+</ul>
+<p>Important parameters include:</p>
+<ul>
+<li><code>model.freq</code>: name of the distribution (e.g. <code>=&quot;poisson&quot;</code>)</li>
+<li><code>model.sev</code>: df of the discrete (-ised) distribution of <code>\(Y\)</code></li>
+<li><code>x.scale</code>: value of an amount 1 in the severity model (monetary unit)</li>
+<li><code>maxit</code>: maximum number of iterations, which often needs to be increased (if it is too small then the df of <code>\(S\)</code> does not reach 1, leading to an error message)</li>
+</ul>
+<h3 id="example">
+  Example
+  <a class="anchor" href="#example">#</a>
+</h3>
+<p>We want to calculate the distribution of
+<code>$$S=\sum_{i=1}^N Y_i,$$</code>
+where <code>\(N\sim\text{Poi}(10)\)</code> and <code>\(Y_1\sim\text{gamma}(2,0.1)\)</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">stp <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span>
+final <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">200</span>
+<span style="color:#75715e"># these are pmf&#39;s</span>
+gamma.discr.unbia <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;unbiased&#34;</span>, lev <span style="color:#f92672">=</span> <span style="color:#a6e22e">levgamma</span>(x,
+    <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>))
+gamma.discr.lower <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lower&#34;</span>)
+gamma.discr.upper <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretise</span>(<span style="color:#a6e22e">pgamma</span>(x, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0.1</span>), from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+  to <span style="color:#f92672">=</span> final, step <span style="color:#f92672">=</span> stp, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;upper&#34;</span>)
+</code></pre></div><hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">S.unbia.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  lambda <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, model.sev <span style="color:#f92672">=</span> gamma.discr.unbia, x.scale <span style="color:#f92672">=</span> stp,
+  maxit <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>)
+S.lower.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  lambda <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, model.sev <span style="color:#f92672">=</span> gamma.discr.lower, x.scale <span style="color:#f92672">=</span> stp,
+  maxit <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>)
+S.upper.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  lambda <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, model.sev <span style="color:#f92672">=</span> gamma.discr.upper, x.scale <span style="color:#f92672">=</span> stp,
+  maxit <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>)
+<span style="color:#a6e22e">plot</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">500</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>,
+  cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<!-- ```{r Panjerexo2,echo=FALSE,fig.height=8} -->
+<!-- ``` -->
+<h2 id="panjers-recursion-for-compound-poisson">
+  Panjer’s recursion for compound Poisson
+  <a class="anchor" href="#panjers-recursion-for-compound-poisson">#</a>
+</h2>
+<p>If <code>\(S\sim\text{compound Poisson}(\lambda,g_x)\)</code> the algorithm reduces to
+<code>$$f_{S}\left( s\right) =\frac{\lambda}{s}\sum_{j=1}^{s} \, j\,g_j f_{S}\left( s-j\right) \text{.}$$</code>
+with starting value
+<code>$$f_{S}\left( 0\right) =e^{\lambda(g_0-1)}$$</code>
+(whether <code>\(g_0\)</code> is positive or not).</p>
+<h3 id="example-a-1242-recomputed">
+  Example A 12.4.2 (recomputed)
+  <a class="anchor" href="#example-a-1242-recomputed">#</a>
+</h3>
+<p>Effectively, the recursion formula boils down to
+<code>$$f_{S}\left( s\right) =\frac{1}{s}\left[ 0.2f_{S}\left( s-1\right)+0.6f_{S}\left( s-2\right) +0.9f_{S}\left( s-3\right) \right], \;\; (\text{for }s&gt;2)$$</code>
+with starting value
+<code>$$f_{S}\left( 0\right) =\Pr\left[ N=0\right]=e^{-0.8}=0.44933.$$</code>
+We have then</p>
+<p><code>$$\begin{array}{rcl} f_{S}\left( 1\right) &amp;=&amp; 0.2f_{S}\left( 0\right) =0.2e^{-0.8}=0.089866 \\ f_{S}\left( 2\right) &amp;=&amp;\frac{1}{2}\left[ 0.2f_{S}\left( 1\right)+0.6f_{S}\left( 0\right) \right] =0.32e^{-0.8}=0.14379 \\ f_{S}\left( 3\right) &amp;=&amp;\frac{1}{3}\left[ 0.2f_{S}\left( 2\right)+0.6f_{S}\left( 1\right) +0.9f_{S}\left( 0\right) \right]=0.3613e^{-0.8}=0.16236 \\ &amp;&amp; etc \ldots \end{array}$$</code></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fs <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  lambda <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>, model.sev <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.25</span>, <span style="color:#ae81ff">0.375</span>, <span style="color:#ae81ff">0.375</span>), x.scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">diff</span>(fs)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><pre><code>## [1] 0.44932896 0.08986579 0.14378527 0.16235753
+</code></pre>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(fs)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/1242-2-1.png" width="672" /></p>
+<h2 id="de-prils-recursion-algorithm">
+  de Pril’s recursion algorithm
+  <a class="anchor" href="#de-prils-recursion-algorithm">#</a>
+</h2>
+<p>As a corollary, a recursion algorithm can be developed for the <code>\(n\)</code>-th convolution of a non-negative and discrete random variable <code>\(Y\)</code> with positive mass of probability at 0. Let <code>\(g_k\)</code> be its pmf.</p>
+<p>First let us rewrite</p>
+<p><code>$$\begin{array}{rcl} M_Y(t)&amp;=&amp;\sum_{k=0}^\infty g_k e^{tk}=g_0+\sum_{k=1}^\infty  g_k e^{tk} \\ &amp;=&amp;g_0 + [1-g_0]\sum_{k=1}^\infty  \frac{g_k}{1-g_0} e^{tk} \\ &amp;=&amp; q + p m_{\widetilde{Y}}(t). \end{array}$$</code></p>
+<p>where</p>
+<ul>
+<li><code>\(q=g_0\)</code>,</li>
+<li><code>\(p=1-g_0\)</code>, and</li>
+<li>the pmf of <code>\(\widetilde{Y}\)</code> is: <code>\(\widetilde{g}_0=0\)</code>, <code>\(\widetilde{g}_k=\frac{g_k}{1-g_0}\)</code>, <code>\(k=1,2,\cdots\)</code>.</li>
+</ul>
+<hr>
+<p>Thus
+<code>$$E\left[e^{t(Y_1+\ldots+Y_n)}\right]=\left(M_Y(t)\right)^n=\left(q + p m_{\widetilde{Y}}(t)\right)^n,$$</code>
+which means that the <code>\(n\)</code>-th convolution of <code>\(Y\)</code> is compound Binomial with parameters <code>\((m=n,p=1-g_0,\widetilde{G}(y))\)</code>, a member of the <code>\((a,b)\)</code> class with</p>
+<p><code>$$\begin{array} a&amp;=&amp;-\frac{p}{1-p} \\ &amp;=&amp; -\frac{1-g_0}{g_0}, \\ b&amp;=&amp;\frac{(m+1)p}{1-p} \\ &amp;=&amp; \frac{(n+1)(1-g_0)}{g_0}. \end{array}$$</code></p>
+<hr>
+<p>Applying Panjer’s algorithm yields
+with
+<code>$$g^{*n}_0=g_0^n.$$</code>
+Note that the <code>\(g_j\)</code>’s are indeed the original ones.</p>
+<h3 id="numerical-example">
+  Numerical example
+  <a class="anchor" href="#numerical-example">#</a>
+</h3>
+<p>Let <code>\(g_k=(1+k)/10\)</code>, <code>\(k=0,1,2\)</code> and <code>\(3\)</code>. We have
+<code>$$g^{*2}_k=\sum_{j=1}^{\min(k,3)}\left[3\frac{j}{k}-1\right](1+j)g^{*2}_{k-j}\:\text{ with }\:g^{*2}_0=[g_0]^2$$</code></p>
+<p><code>$$\begin{array}{rcl} g^{*2}_0&amp;=&amp;(0.1)^2=0.01\\ g^{*2}_1&amp;=&amp;[3/1-1] \cdot 2 \cdot 0.01=0.04 \\ g^{*2}_2&amp;=&amp;[3/2-1] \cdot 2 \cdot 0.04+[6/2-1] \cdot 3 \cdot 0.01=0.10 \\ g^{*2}_3&amp;=&amp;[3/3-1] \cdot 2 \cdot 0.10+[6/3-1] \cdot 3 \cdot 0.04+[9/3-1] \cdot 4 \cdot 0.01=0.20 \\ g^{*2}_4&amp;=&amp;[3/4-1] \cdot 2 \cdot 0.20+[6/4-1] \cdot 3 \cdot 0.10+[9/4-1] \cdot 4 \cdot 0.04=0.25 \\ g^{*2}_5&amp;=&amp;[3/5-1] \cdot 2 \cdot 0.25+[6/5-1] \cdot 3 \cdot 0.20+[9/5-1] \cdot 4 \cdot 0.10=0.24 \\ g^{*2}_6&amp;=&amp;[3/6-1] \cdot 2 \cdot 0.24+[6/6-1] \cdot 3 \cdot 0.25+[9/6-1] \cdot 4 \cdot 0.20=0.16  \end{array}$$</code></p>
+<hr>
+<p>brute force convolution:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">4</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>)
+range <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(pmf)
+range2 <span style="color:#f92672">&lt;-</span> (range <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(pmf, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, (range2 <span style="color:#f92672">-</span> range)))
+ps2.conv <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+<span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>range2) {
+  ps2.conv <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(ps2.conv, <span style="color:#a6e22e">sum</span>(pmf[1<span style="color:#f92672">:</span>i] <span style="color:#f92672">*</span> pmf[i<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]))
+}
+ps2.conv
+</code></pre></div><pre><code>## [1] 0.01 0.04 0.10 0.20 0.25 0.24 0.16
+</code></pre>
+<hr>
+<p>Using de Pril’s algorithm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">ps2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;binomial&#34;</span>,
+  size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, prob <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, model.sev <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">4</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span>
+    <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>), x.scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>))
+<span style="color:#a6e22e">diff</span>(ps2)
+</code></pre></div><pre><code>## [1] 0.01 0.04 0.10 0.20 0.25 0.24 0.16
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(ps2)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/depril2-1.png" width="672" /></p>
+<h2 id="fast-fourier-transform">
+  Fast Fourier Transform
+  <a class="anchor" href="#fast-fourier-transform">#</a>
+</h2>
+<p>Not covered this year.</p>
+<h1 id="approximations">
+  Approximations
+  <a class="anchor" href="#approximations">#</a>
+</h1>
+<p>Possible motivations:</p>
+<ul>
+<li>It is not possible to compute the distribution of <code>\(S\)</code>:
+<ul>
+<li>no detailed data is available except for the moments of <code>\(S\)</code></li>
+<li>technical issues (impossible to fit a tractable model to data)</li>
+</ul>
+</li>
+<li>The risk of having a sophisticated—but wrong—model is too high
+<ul>
+<li>Only limited data is available to fit the model</li>
+<li>It may be argued that the approximation is very accurate</li>
+</ul>
+</li>
+<li>A quick approximation is needed.</li>
+<li>A higher level of accuracy is not required (does not justify the resources necessary to calculate an exact probability)</li>
+</ul>
+<p>Note: let <code>\(\varsigma_S\equiv\gamma_1\)</code> and <code>\(\gamma_2(S)\equiv\gamma_2\)</code> in this section.</p>
+<h2 id="approximations-assuming-a-symmetrical-distribution">
+  Approximations assuming a symmetrical distribution
+  <a class="anchor" href="#approximations-assuming-a-symmetrical-distribution">#</a>
+</h2>
+<h3 id="the-normal-approximation">
+  The Normal approximation
+  <a class="anchor" href="#the-normal-approximation">#</a>
+</h3>
+<ul>
+<li>The Central Limit Theorem suggests that</li>
+</ul>
+<p><code>$$\begin{array}{rcl} \Pr\left[ S\leq s\right]  &amp;=&amp; =\Pr\left[ \frac{S-E[S] }{\sqrt{Var(S)} }\leq \frac{s-E[S] }{\sqrt{Var(S)} }\right]  \\ &amp;\approx &amp;\Pr\left[ Z\leq \frac{s-E[S] }{\sqrt{Var(S)} }\right]=\Phi \left( \frac{s-E[S] }{\sqrt{Var(S)} }\right) , \end{array}$$</code></p>
+<p>where <code>\(Z\)</code> is a standard Normal random variable and where <code>\(\Phi \left( \cdot \right)\)</code> denotes its cdf</p>
+<ul>
+<li>The classical CLT approximation holds for a fixed number of claims. Here, we typically have a random number of claims.</li>
+</ul>
+<hr>
+<ul>
+<li>Assuming <code>\(S\sim\text{CompPoi}(\lambda v,G)\)</code>, Theorem 4.1 of Wuthrich (2020) states that
+$$ \frac{S-\lambda v E[Y]}{\sqrt{\lambda v E[Y^2]}} \Longrightarrow \mathcal{N}(0,1)\quad \text{as }v\rightarrow \infty.$$</li>
+<li>This leads to the approximation
+<code>$$\Pr[S\le s] = \Pr \left[\frac{S-\lambda v E[Y]}{\sqrt{\lambda v E[Y^2]}} \le \frac{s-\lambda v E[Y]}{\sqrt{\lambda v E[Y^2]}}\right] \approx \Phi\left(\frac{s-\lambda v E[Y]}{\sqrt{\lambda v E[Y^2]}}\right).$$</code></li>
+<li>Note that this holds only when <code>\(G\)</code> has a finite second moment, which suggests that this should be used only for <code>\(S_{\text{sc}}\)</code>.</li>
+</ul>
+<p>Note that this approximation performs poorly</p>
+<ul>
+<li>individual model: for small <code>\(n\)</code> (CLT not effective)</li>
+<li>collective model: for small <code>\(\lambda\)</code> (compound Poisson) and small <code>\(r\)</code> (compound negative binomial)</li>
+<li>for highly skewed distributions</li>
+</ul>
+<h3 id="normal-power">
+  Normal Power
+  <a class="anchor" href="#normal-power">#</a>
+</h3>
+<p>Two levels:</p>
+<ul>
+<li><strong>NP1</strong>: this is the CLT approximation</li>
+<li><strong>NP2</strong>: the same idea, but with a correction taking the skewness into account. We have
+<code>$$\Pr\left[ \frac{S-E[S] }{\sqrt{Var(S)} }\leq s\right] \approx \Phi \left( z\right)$$</code>
+with
+<code>$$s(z)=z+\frac{\gamma_1}{6} \left(z^{2}-1\right)\quad\text{ or }\quad z(s)=\sqrt{\frac{9}{\gamma_1 ^{2}}+\frac{6s}{\gamma_1 }+1}-\frac{3}{\gamma_1 }$$</code>
+NP2 is effective for <code>\(S&gt;E[S]+\sqrt{Var(S)}\)</code>.</li>
+</ul>
+<hr>
+<ul>
+<li>NP1 and NP2 approximations are available with the <code>aggregateDist</code> function</li>
+<li>For instance here use on a compound Poisson random variable with gamma distributed claims:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">gamma <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">2</span>
+c <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.1</span>
+lambda <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
+moments <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(lambda <span style="color:#f92672">*</span> gamma<span style="color:#f92672">/</span>c, lambda <span style="color:#f92672">*</span> (gamma<span style="color:#f92672">/</span>c^2 <span style="color:#f92672">+</span> (gamma<span style="color:#f92672">/</span>c)^2),
+  gamma <span style="color:#f92672">*</span> (gamma <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (gamma <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>)<span style="color:#f92672">/</span>c^3<span style="color:#f92672">/</span>lambda<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">/</span>(gamma<span style="color:#f92672">/</span>c^2 <span style="color:#f92672">+</span>
+    (gamma<span style="color:#f92672">/</span>c)^2)<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">3</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>))
+Fs.NP1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(<span style="color:#e6db74">&#34;normal&#34;</span>, moments <span style="color:#f92672">=</span> moments)
+<span style="color:#a6e22e">curve</span>(Fs.NP1, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">450</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.9</span>, <span style="color:#ae81ff">1</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#a6e22e">lines</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/NP1-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Fs.NP2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(<span style="color:#e6db74">&#34;npower&#34;</span>, moments <span style="color:#f92672">=</span> moments)
+<span style="color:#a6e22e">curve</span>(Fs.NP2, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">450</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.9</span>, <span style="color:#ae81ff">1</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#a6e22e">lines</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/NP2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">curve</span>(Fs.NP2, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">450</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">1</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#a6e22e">lines</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/NP2-2-1.png" width="672" /></p>
+<h2 id="approximations-using-a-skewed-distribution">
+  Approximations using a skewed distribution
+  <a class="anchor" href="#approximations-using-a-skewed-distribution">#</a>
+</h2>
+<h3 id="the-translated-gamma-and-ln-approximations">
+  The translated gamma and LN approximations
+  <a class="anchor" href="#the-translated-gamma-and-ln-approximations">#</a>
+</h3>
+<p><strong>Idea:</strong> Rather than correcting the CLT approximation, we use here a distribution that is naturally (positively) skewed, and use the third moment (skewness), which will be fitted thanks to a translation of the distribution (a third parameter to match the third moment).</p>
+<p>We have then
+<code>$$Y = k+Z, \text{ where }Z\sim \left\{ \begin{array}{l} \Gamma(\gamma,c), \text{ or}\\\text{LN}(\mu,\sigma^2)\end{array}\right. .$$</code>
+Then match expected value, variance and skewness.</p>
+<p>Note: <code>\(k\)</code> appears only in the expected value. It allows to shift the distribution without affecting its scale (and central moments).</p>
+<hr>
+<p>As an example, fitting a translated gamma <code>\((k,\gamma,c)\)</code> to a compPois$(\lambda v,G(y))$ boils down to solving</p>
+<p><code>$$\begin{array}{rcl} \lambda v E[Y] &amp;=&amp; k+\gamma/c; \\ \lambda v E[Y^2]&amp;=&amp; \gamma/c^2; \\ \frac{E[Y^3]}{(\lambda v)^{1/2} E[Y^2]^{3/2}} &amp;=&amp; 2\gamma^{-1/2}; \end{array}$$</code></p>
+<p>such that</p>
+<p><code>$$\begin{array}{rcl} \gamma &amp;=&amp; \left(\frac{2(\lambda v)^{1/2} E[Y^2]^{3/2}}{E[Y^3]}\right)^2; \\ c &amp;=&amp; \left(\frac{\gamma}{\lambda v E[Y^2]}\right)^{1/2}; \\ k &amp;=&amp; \lambda v E[Y] - \frac{\gamma}{c}. \end{array}$$</code></p>
+<hr>
+<p>Properties of the translated gamma approximation:</p>
+<ul>
+<li>If <code>\(\gamma\rightarrow\infty\)</code>, <code>\(c\rightarrow\infty\)</code> and <code>\(k\rightarrow -\infty\)</code> such that
+<code>$$E[S]=k+\frac{\gamma}{c}=\mu\text{ (constant)}\quad\text{and}\quad \frac{\gamma}{c^2}=\sigma^2\text{ (constant)}$$</code>
+then the translated gamma converges to the Normal <code>\((\mu,\sigma^2)\)</code> distribution. In this sense, this approximation is a <strong>generalisation of the CLT approximation</strong>.</li>
+<li>The distribution of a <strong>compound binomial random variable approaches the gamma distribution</strong> if the expected number of claims is large and the claim amount distribution has relatively small dispersion (see Theorem 12.A.1 in the Appendix of Chapter 12 of Bowers et al. (1997)).</li>
+<li>This approximation should be used for distributions with a positive skewness only.</li>
+</ul>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># matching moments:</span>
+gamma <span style="color:#f92672">&lt;-</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>moments[3])^2
+c <span style="color:#f92672">&lt;-</span> (gamma<span style="color:#f92672">/</span>moments[2])<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+k <span style="color:#f92672">&lt;-</span> moments[1] <span style="color:#f92672">-</span> gamma<span style="color:#f92672">/</span>c
+<span style="color:#75715e"># check:</span>
+<span style="color:#a6e22e">c</span>(gamma<span style="color:#f92672">/</span>c <span style="color:#f92672">+</span> k, moments[1])
+</code></pre></div><pre><code>## [1] 200 200
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">c</span>((gamma<span style="color:#f92672">/</span>c^2), moments[2])
+</code></pre></div><pre><code>## [1] 6000 6000
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> gamma<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>), moments[3])
+</code></pre></div><pre><code>## [1] 0.5163978 0.5163978
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">200</span><span style="color:#f92672">:</span><span style="color:#ae81ff">450</span>, <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">200</span><span style="color:#f92672">:</span><span style="color:#ae81ff">450</span> <span style="color:#f92672">-</span> k, shape <span style="color:#f92672">=</span> gamma, rate <span style="color:#f92672">=</span> c), xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">200</span>,
+  <span style="color:#ae81ff">450</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">1</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>,
+  xlab <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;&#34;</span>))
+<span style="color:#a6e22e">lines</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/translgam-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">curve</span>(Fs.NP2, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">320</span>, <span style="color:#ae81ff">390</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.93</span>, <span style="color:#ae81ff">0.98</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>,
+  lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#ae81ff">300</span><span style="color:#f92672">:</span><span style="color:#ae81ff">450</span>, <span style="color:#a6e22e">pgamma</span>(<span style="color:#ae81ff">300</span><span style="color:#f92672">:</span><span style="color:#ae81ff">450</span> <span style="color:#f92672">-</span> k, shape <span style="color:#f92672">=</span> gamma, rate <span style="color:#f92672">=</span> c),
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>)
+<span style="color:#a6e22e">lines</span>(S.unbia.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.upper.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+<span style="color:#a6e22e">lines</span>(S.lower.pmf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;magenta&#34;</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/translgam2-1.png" width="672" /></p>
+<hr>
+<p>When approximating a discrete distribution with a continuous one, a half-integer discontinuity correction needs to be applied. Let <code>\(S\sim\text{Poisson}(\lambda=16)\)</code>. Possible approximations are</p>
+<ul>
+<li>Translated gamma with <code>\(\gamma=64\)</code>, <code>\(c=2\)</code> and <code>\(k=-16\)</code>.</li>
+<li>CLT with <code>\(E[S]=Var(S)=16\)</code></li>
+</ul>
+<p>Results are below:</p>
+<!-- To include images: -->
+<p><img src="/img/module-4/Example_12_5_1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Note that the discretisation techniques take this into account.</p>
+<h2 id="edgeworths-approximation">
+  Edgeworth’s approximation
+  <a class="anchor" href="#edgeworths-approximation">#</a>
+</h2>
+<p>Let
+<code>$$\Phi^{(k)}(x)=\frac{d^k}{dx^k}\Phi(x).$$</code>
+We have then (each term improves the accuracy)
+<code>$$\Pr\left[ \frac{S-E[S] }{\sqrt{Var(S)} }\leq z\right] \approx\Phi(z)-\frac{\gamma_1}{6}\Phi^{(3)}(z)+\frac{\gamma_2}{24}\Phi^{(4)}(z)+\frac{\gamma_1^2}{72}\Phi^{(6)}(z).$$</code>
+Note</p>
+<p><code>$$\begin{array}{rcl} \Phi^{(1)}(x)&amp;=&amp;\varphi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} \\ \Phi^{(2)}(x)&amp;=&amp;-x\varphi(x) \\ \Phi^{(3)}(x)&amp;=&amp;(x^2-1)\varphi(x) \\ &amp; \text{etc} \ldots &amp; \end{array}$$</code></p>
+<p><code>\(\qquad\)</code> Problem is: it sometimes leads to negative probabilities…</p>
+<h2 id="approximating-the-individual-model-with-the-collective-model">
+  Approximating the Individual Model with the Collective Model
+  <a class="anchor" href="#approximating-the-individual-model-with-the-collective-model">#</a>
+</h2>
+<p>Mainly motivated by the properties of compound distributions, in particular the compound Poisson:</p>
+<ul>
+<li>aggregation</li>
+<li>recursive methods</li>
+</ul>
+<p>We want to approximate <code>\(\widetilde{S}\)</code> (IRM) by <code>\(S\)</code> (CRM):
+<code>$$\widetilde{S}=\sum_{i=1}^{n}I_{i}b_{i}\approx S=\sum_{i=1}^{n}N_{i}b_{i},$$</code>
+where <code>\(N_i\sim\text{Poisson}(\lambda_i)\)</code> represents the number of claims of amount <code>\(b_i\)</code>. <code>\(S\)</code> is then compound Poisson with parameters
+<code>$$\lambda =\sum_{i=1}^{n}\lambda _{i}\text{ \ and \ }P\left(x\right) =\sum_{i=1}^{n}\frac{\lambda _{i}}{\lambda }I_{\left[b_{i},\infty \right) }\left( x\right).$$</code></p>
+<h3 id="two-possible-assumptions-for-lambda_i">
+  Two possible assumptions for <code>\(\lambda_i\)</code>
+  <a class="anchor" href="#two-possible-assumptions-for-lambda_i">#</a>
+</h3>
+<ul>
+<li><code>\(\lambda_i=E[I_i]=q_i\)</code>: the canonical collective model
+<ul>
+<li>expected number of claims of size <code>\(b_{i}\)</code> will be the same between the two models</li>
+<li>also implies equal expected claim numbers in both <code>\(\widetilde{S}\)</code> and <code>\(S\)</code></li>
+<li>finally
+<code>$$\begin{array}{rcl} E\left( \widetilde{S}\right)=\sum_{i=1}^{n}q_{i}b_{i} &amp;=&amp;\lambda \sum_{i=1}^{n}\frac{q_{i}}{\lambda }b_{i}=E\left( S\right),\text{ but} \\ Var\left( \widetilde{S}\right) =\sum_{i=1}^{n}q_{i}\left(1-q_{i}\right) b_{i}^{2} &amp; &lt; &amp; \sum_{i=1}^{n}q_{i}b_{i}^{2}=Var\left( S\right). \end{array}$$</code></li>
+</ul>
+</li>
+<li><code>\(\lambda_i=-\ln (1-q_i) &gt;q_i\)</code>
+<ul>
+<li><code>\(\Pr[S=0]=\Pr[\widetilde{S}=0]\)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="example-1">
+  Example
+  <a class="anchor" href="#example-1">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">qi <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.02</span>, <span style="color:#ae81ff">0.03</span>, <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.05</span>)
+bi <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>)
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">10052021</span>)
+nsim <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1e+07</span>
+simulated <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rbinom</span>(nsim, <span style="color:#ae81ff">1</span>, qi[1]) <span style="color:#f92672">*</span> bi[1]), <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rbinom</span>(nsim,
+  <span style="color:#ae81ff">1</span>, qi[2]) <span style="color:#f92672">*</span> bi[2]), <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rbinom</span>(nsim, <span style="color:#ae81ff">1</span>, qi[3]) <span style="color:#f92672">*</span> bi[3]), <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rbinom</span>(nsim,
+  <span style="color:#ae81ff">1</span>, qi[4]) <span style="color:#f92672">*</span> bi[4]), <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rbinom</span>(nsim, <span style="color:#ae81ff">1</span>, qi[5]) <span style="color:#f92672">*</span> bi[5]))
+simul <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rowSums</span>(simulated)
+<span style="color:#a6e22e">mean</span>(simul)
+</code></pre></div><pre><code>## [1] 2.497127
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">ecdf</span>(simul))
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/approxIRMCRM-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">lambdai.1 <span style="color:#f92672">&lt;-</span> qi
+lambda.1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(lambdai.1)
+pmf.1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>), (lambdai.1[1] <span style="color:#f92672">+</span> lambdai.1[3])<span style="color:#f92672">/</span>lambda.1,
+  <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>), (lambdai.1[2] <span style="color:#f92672">+</span> lambdai.1[4])<span style="color:#f92672">/</span>lambda.1, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>,
+    <span style="color:#ae81ff">9</span>), lambdai.1[5]<span style="color:#f92672">/</span>lambda.1)
+fs.1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(<span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>, model.sev <span style="color:#f92672">=</span> pmf.1,
+  lambda <span style="color:#f92672">=</span> lambda.1)
+<span style="color:#a6e22e">plot</span>(fs.1, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">1</span>), pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(simul), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/approxIRMCRM2-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">lambdai.2 <span style="color:#f92672">&lt;-</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> qi)
+lambda.2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(lambdai.2)
+pmf.2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>), (lambdai.2[1] <span style="color:#f92672">+</span> lambdai.2[3])<span style="color:#f92672">/</span>lambda.2,
+  <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>), (lambdai.2[2] <span style="color:#f92672">+</span> lambdai.2[4])<span style="color:#f92672">/</span>lambda.2, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>,
+    <span style="color:#ae81ff">9</span>), lambdai.2[5]<span style="color:#f92672">/</span>lambda.2)
+fs.2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(<span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>, model.sev <span style="color:#f92672">=</span> pmf.2,
+  lambda <span style="color:#f92672">=</span> lambda.2)
+<span style="color:#a6e22e">plot</span>(fs.2, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.85</span>, <span style="color:#ae81ff">1</span>), pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(simul), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/approxIRMCRM3-1.png" width="672" /></p>
+<h1 id="bringing-it-all-together-suva-case-study">
+  Bringing it all together: SUVA case study
+  <a class="anchor" href="#bringing-it-all-together-suva-case-study">#</a>
+</h1>
+<ul>
+<li>We come back to the SUVA data; see Avanzi, Cassar, and Wong (2011).</li>
+<li>The right tail of the medical costs will be best modelled using an Extreme Value distribution (see Module 6), but this will result in a poor fit in the left tail.</li>
+<li>As a consequence we will fit the SUVA medical costs using two layers, <code>\(S_{\text{sc}}\)</code> and <code>\(S_{\text{lc}}\)</code>. If <code>\(S\)</code> is one medical cost claim (which can be scaled up easily), then
+<code>$$S = S_{\text{sc}}+S_{\text{lc}}= \sum_{i=1}^{N_{\text{sc}}} X_{i,\text{sc}} + \sum_{j=1}^{N_{\text{lc}}} X_{j,\text{lc}},$$</code>
+where <code>\(N_{\text{sc}}\sim\text{Poi}(\lambda_{\text{sc}})\)</code> and <code>\(N_{\text{lc}}\sim\text{Poi}(\lambda_{\text{lc}})\)</code>, all mutually independent with the <code>\(X_{\text{sc}}\)</code> and <code>\(X_{\text{lc}}\)</code>.</li>
+</ul>
+<hr>
+<ul>
+<li>The small claims layer can be tackled in different ways:
+<ul>
+<li>use the empirical distribution for <code>\(X_{\text{sc}}\)</code> and get the distribution of <code>\(S_{\text{sc}}\)</code> with Panjer. This is OK if the data is smooth enough and we don’t necessarily want the smoothing effect of a parametric distribution.</li>
+<li>use an approximation such as translated gamma or normal power on <code>\(S_{\text{sc}}\)</code>. This has the potential of smoothing out a coarse empirical distribution.</li>
+</ul>
+</li>
+<li>The large claims layer fits <code>\(X_{\text{lc}}\)</code> using EVT and then uses Panjer to get the distribution of <code>\(S_{\text{lc}}\)</code>.
+<ul>
+<li>A threshold of $10,000 is chosen; see Module 6 for a justification.</li>
+</ul>
+</li>
+</ul>
+<h2 id="preliminaries">
+  Preliminaries
+  <a class="anchor" href="#preliminaries">#</a>
+</h2>
+<p>Basic parameters:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">M <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10000</span>
+data.scale <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">100</span>
+</code></pre></div><p>Loading data:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">SUVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;SUVA.xls&#34;</span>)
+<span style="color:#a6e22e">as_tibble</span>(SUVA)
+</code></pre></div><pre><code>## # A tibble: 2,326 x 2
+##    medcosts dailyallow
+##       &lt;dbl&gt;      &lt;dbl&gt;
+##  1      407          0
+##  2    12591      13742
+##  3      269          0
+##  4      142          0
+##  5      175          0
+##  6      298        839
+##  7       47          0
+##  8       59          0
+##  9      191       7446
+## 10      159          0
+## # ... with 2,316 more rows
+</code></pre>
+<h2 id="split-claims">
+  Split claims
+  <a class="anchor" href="#split-claims">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Xsc <span style="color:#f92672">&lt;-</span> SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&lt;=</span> M]
+Xsc <span style="color:#f92672">&lt;-</span> Xsc[Xsc <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]
+Xlc <span style="color:#f92672">&lt;-</span> SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> M]
+lambda.sc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(Xsc)<span style="color:#f92672">/</span>(<span style="color:#a6e22e">length</span>(Xsc) <span style="color:#f92672">+</span> <span style="color:#a6e22e">length</span>(Xlc))
+lambda.lc <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">length</span>(Xlc)<span style="color:#f92672">/</span>(<span style="color:#a6e22e">length</span>(Xsc) <span style="color:#f92672">+</span> <span style="color:#a6e22e">length</span>(Xlc))
+<span style="color:#a6e22e">c</span>(lambda.sc, lambda.lc)
+</code></pre></div><pre><code>## [1] 0.97109827 0.02890173
+</code></pre>
+<h2 id="modelling-the-small-claims">
+  Modelling the small claims
+  <a class="anchor" href="#modelling-the-small-claims">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plotdist</span>(Xsc)
+</code></pre></div><p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA4-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Xsc.cullen <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">descdist</span>(Xsc, boot <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Xsc.cullen
+</code></pre></div><pre><code>## summary statistics
+## ------
+## min:  15   max:  9854 
+## median:  240 
+## mean:  699.1978 
+## estimated sd:  1390.096 
+## estimated skewness:  4.010796 
+## estimated kurtosis:  20.79387
+</code></pre>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA5-1.png" width="672" /></p>
+<h3 id="s_textsc-using-the-empirical-distribution-of-x_textsc-and-panjer">
+  <code>\(S_{\text{sc}}\)</code> using the empirical distribution of <code>\(X_{\text{sc}}\)</code> and Panjer
+  <a class="anchor" href="#s_textsc-using-the-empirical-distribution-of-x_textsc-and-panjer">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Xsc.emp <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ecdf</span>(Xsc)
+Xsc.emp.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretize</span>(Xsc.emp, from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, to <span style="color:#f92672">=</span> M, step <span style="color:#f92672">=</span> data.scale,
+  method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rounding&#34;</span>)
+<span style="color:#a6e22e">sum</span>(Xsc.emp.pmf)
+</code></pre></div><pre><code>## [1] 1
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># and this the cdf</span>
+Xsc.emp.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(Xsc.emp.pmf)
+<span style="color:#75715e"># Panjer</span>
+Ssc.emp.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  model.sev <span style="color:#f92672">=</span> Xsc.emp.pmf, lambda <span style="color:#f92672">=</span> lambda.sc, x.scale <span style="color:#f92672">=</span> data.scale,
+  maxit <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>)
+<span style="color:#75715e"># Ssc pmf</span>
+Ssc.emp.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diff</span>(Ssc.emp.df)
+<span style="color:#75715e"># plotting the fit</span>
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">Xsc.emp</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale) <span style="color:#f92672">*</span> data.scale), <span style="color:#a6e22e">Ssc.emp.df</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale) <span style="color:#f92672">*</span>
+  data.scale)), pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-emp-1.png" width="672" /></p>
+<h3 id="s_textsc-using-an-translated-gamma-approximation">
+  <code>\(S_{\text{sc}}\)</code> using an translated gamma approximation
+  <a class="anchor" href="#s_textsc-using-an-translated-gamma-approximation">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Moments of Xsc:</span>
+moments <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(Xsc.cullen<span style="color:#f92672">$</span>mean, Xsc.cullen<span style="color:#f92672">$</span>sd^2, Xsc.cullen<span style="color:#f92672">$</span>skewness)
+<span style="color:#75715e"># getting parameters of translated gamma:</span>
+gamma <span style="color:#f92672">&lt;-</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>moments[3])^2
+c <span style="color:#f92672">&lt;-</span> (gamma<span style="color:#f92672">/</span>moments[2])<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+k <span style="color:#f92672">&lt;-</span> moments[1] <span style="color:#f92672">-</span> gamma<span style="color:#f92672">/</span>c
+<span style="color:#75715e"># checking moments match:</span>
+<span style="color:#a6e22e">c</span>(gamma<span style="color:#f92672">/</span>c <span style="color:#f92672">+</span> k, moments[1])
+</code></pre></div><pre><code>## [1] 699.1978 699.1978
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">c</span>((gamma<span style="color:#f92672">/</span>c^2), moments[2])
+</code></pre></div><pre><code>## [1] 1932366 1932366
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> gamma<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>), moments[3])
+</code></pre></div><pre><code>## [1] 4.010796 4.010796
+</code></pre>
+<hr>
+<p>No Panjer here - just discretisation of the gamma:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Ssc.tlg.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretize</span>(<span style="color:#a6e22e">pgamma</span>(x <span style="color:#f92672">-</span> k, shape <span style="color:#f92672">=</span> gamma, rate <span style="color:#f92672">=</span> c),
+  from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, to <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> M, step <span style="color:#f92672">=</span> data.scale, method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;rounding&#34;</span>)
+Ssc.tlg.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(Ssc.tlg.pmf)
+<span style="color:#a6e22e">plot</span>(<span style="color:#a6e22e">Xsc.emp</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>)
+<span style="color:#a6e22e">lines</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale) <span style="color:#f92672">*</span> data.scale), Ssc.tlg.df[1<span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale <span style="color:#f92672">+</span>
+  <span style="color:#ae81ff">1</span>)], pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><p>One can see with this graph that the right tail is good (as expected), but the left tail not so much. It will be interesting to compare final results with the ecdf version (which would have a better match on this graph obviously)</p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-tslg2-1.png" width="672" /></p>
+<h3 id="comparison">
+  Comparison
+  <a class="anchor" href="#comparison">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale) <span style="color:#f92672">*</span> data.scale), Ssc.tlg.df[1<span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale <span style="color:#f92672">+</span>
+  <span style="color:#ae81ff">1</span>)], pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10000</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,
+  <span style="color:#ae81ff">1</span>), ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;df&#34;</span>)
+<span style="color:#a6e22e">lines</span>(Ssc.emp.df, pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">Xsc.emp</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-Ssccomp-1.png" width="672" /></p>
+<hr>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>((<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale) <span style="color:#f92672">*</span> data.scale), Ssc.tlg.df[1<span style="color:#f92672">:</span>(M<span style="color:#f92672">/</span>data.scale <span style="color:#f92672">+</span>
+  <span style="color:#ae81ff">1</span>)], pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">10000</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.9</span>,
+  <span style="color:#ae81ff">1</span>), ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;df&#34;</span>)
+<span style="color:#a6e22e">lines</span>(Ssc.emp.df, pch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>)
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">Xsc.emp</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10000</span>), type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-Ssccomp2-1.png" width="672" /></p>
+<h2 id="modelling-the-large-claims">
+  Modelling the large claims
+  <a class="anchor" href="#modelling-the-large-claims">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">fit.SUVA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">fevd</span>(SUVA<span style="color:#f92672">$</span>medcosts, threshold <span style="color:#f92672">=</span> M, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GP&#34;</span>, time.units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1/year&#34;</span>)
+<span style="color:#75715e"># do we have mass below M?</span>
+<span style="color:#a6e22e">pextRemes</span>(fit.SUVA, M, lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</code></pre></div><pre><code>## [1] 0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># getting the pmf:</span>
+Xlc.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">discretize</span>(<span style="color:#a6e22e">pextRemes</span>(fit.SUVA, x, lower.tail <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>),
+  from <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, to <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e+06</span>, step <span style="color:#f92672">=</span> data.scale)
+<span style="color:#a6e22e">sum</span>(Xlc.pmf)
+</code></pre></div><pre><code>## [1] 1
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># distribution of Slc</span>
+Slc.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregateDist</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;recursive&#34;</span>, model.freq <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;poisson&#34;</span>,
+  model.sev <span style="color:#f92672">=</span> Xlc.pmf, lambda <span style="color:#f92672">=</span> lambda.lc, x.scale <span style="color:#f92672">=</span> data.scale,
+  maxit <span style="color:#f92672">=</span> <span style="color:#ae81ff">50000</span>)
+<span style="color:#a6e22e">plot</span>(Slc.df, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(lambda.sc, <span style="color:#ae81ff">1</span>))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># pmf of Slc</span>
+Slc.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diff</span>(Slc.df)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-Slc1-1.png" width="672" /></p>
+<h2 id="getting-the-overall-distribution">
+  Getting the overall distribution
+  <a class="anchor" href="#getting-the-overall-distribution">#</a>
+</h2>
+<h3 id="getting-ready">
+  Getting ready
+  <a class="anchor" href="#getting-ready">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># we&#39;ll put the masses in here</span>
+Stotal.emp.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+Stotal.tlg.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>()
+<span style="color:#75715e"># working out vector sizes</span>
+lastpoint <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1e+06</span>
+masses <span style="color:#f92672">&lt;-</span> lastpoint<span style="color:#f92672">/</span>data.scale <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+<span style="color:#75715e"># adding 0&#39;s as required for the convolutions to work</span>
+Ssc.emp.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(Ssc.emp.pmf, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, masses <span style="color:#f92672">-</span> <span style="color:#a6e22e">length</span>(Ssc.emp.pmf)))
+Ssc.tlg.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(Ssc.tlg.pmf, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, masses <span style="color:#f92672">-</span> <span style="color:#a6e22e">length</span>(Ssc.tlg.pmf)))
+Slc.pmf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(Slc.pmf, <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, masses <span style="color:#f92672">-</span> <span style="color:#a6e22e">length</span>(Slc.pmf)))
+</code></pre></div><h3 id="performing-the-convolutions">
+  Performing the convolutions
+  <a class="anchor" href="#performing-the-convolutions">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># and the convolutions</span>
+<span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) {
+  Stotal.emp.pmf[i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(Ssc.emp.pmf[1<span style="color:#f92672">:</span>i] <span style="color:#f92672">*</span> Slc.pmf[i<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>])
+  Stotal.tlg.pmf[i] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(Ssc.tlg.pmf[1<span style="color:#f92672">:</span>i] <span style="color:#f92672">*</span> Slc.pmf[i<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>])
+}
+<span style="color:#a6e22e">sum</span>(Stotal.emp.pmf)
+</code></pre></div><pre><code>## [1] 0.999998
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sum</span>(Stotal.tlg.pmf)
+</code></pre></div><pre><code>## [1] 0.9999981
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Stotal.emp.cdf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(Stotal.emp.pmf)
+Stotal.tlg.cdf <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cumsum</span>(Stotal.tlg.pmf)
+</code></pre></div><h3 id="examining-the-ecdf-approach-fit">
+  Examining the ECDF approach fit
+  <a class="anchor" href="#examining-the-ecdf-approach-fit">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.emp.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1100</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.98</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.emp.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">500</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.95</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.emp.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">500</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.9</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.emp.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-emp1-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-emp2-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-emp3-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-emp4-1.png" width="672" /></p>
+<h3 id="examining-the-translated-gamma-approach-fit">
+  Examining the translated gamma approach fit
+  <a class="anchor" href="#examining-the-translated-gamma-approach-fit">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.tlg.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1100</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.98</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.tlg.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">500</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.95</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.tlg.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">500</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.9</span>,
+  <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(Stotal.tlg.cdf, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>, xlim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">20</span>), ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">lines</span>(<span style="color:#a6e22e">ecdf</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span>data.scale), pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>,
+  col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>)
+</code></pre></div><hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-tlg1-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-tlg2-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-tlg3-1.png" width="672" /></p>
+<hr>
+<p><img src="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/index_files/figure-html/SUVA-final-tlg4-1.png" width="672" /></p>
+<h3 id="moments">
+  Moments
+  <a class="anchor" href="#moments">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">em1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">emm</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span>), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale) <span style="color:#f92672">*</span> (Stotal.emp.pmf)), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale) <span style="color:#f92672">*</span> (Stotal.tlg.pmf)))
+em2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">emm</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">2</span>), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale)^2 <span style="color:#f92672">*</span> (Stotal.emp.pmf)), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale)^2 <span style="color:#f92672">*</span> (Stotal.tlg.pmf)))
+em3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">emm</span>(SUVA<span style="color:#f92672">$</span>medcosts[SUVA<span style="color:#f92672">$</span>medcosts <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">3</span>), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale)^3 <span style="color:#f92672">*</span> (Stotal.emp.pmf)), <span style="color:#a6e22e">sum</span>((((<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>masses) <span style="color:#f92672">-</span>
+  <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> data.scale)^3 <span style="color:#f92672">*</span> (Stotal.tlg.pmf)))
+sd <span style="color:#f92672">&lt;-</span> (em2 <span style="color:#f92672">-</span> em1^2)^0.5
+skew <span style="color:#f92672">&lt;-</span> (em3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> em1 <span style="color:#f92672">*</span> sd^2 <span style="color:#f92672">-</span> em1^3)<span style="color:#f92672">/</span>sd^3
+Smoments <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">rbind</span>(em1, sd, skew))
+<span style="color:#a6e22e">names</span>(Smoments) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;SUVA&#34;</span>, <span style="color:#e6db74">&#34;Emp&#34;</span>, <span style="color:#e6db74">&#34;Tlg&#34;</span>)
+Smoments
+</code></pre></div><pre><code>##             SUVA         Emp         Tlg
+## em1  1492.765229 1478.788445 1494.851875
+## sd   5763.108871 5932.145105 5897.220298
+## skew    8.885693    9.739098    9.893872
+</code></pre>
+<h1 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AvCaWo11" class="csl-entry">
+<p>Avanzi, Benjamin, Luke C. Cassar, and Bernard Wong. 2011. “Modelling Dependence in Insurance Claims Processes with Lévy Copulas.” <em>ASTIN Bulletin</em> 41 (2): 575–609.</p>
+</div>
+<div id="ref-BoGeHiJoNe97" class="csl-entry">
+<p>Bowers, Newton L. Jr, Hans U. Gerber, James C. Hickman, Donald A. Jones, and Cecil J. Nesbitt. 1997. <em>Actuarial Mathematics</em>. Second. Schaumburg, Illinois: The Society of Actuaries.</p>
+</div>
+<div id="ref-Wut20" class="csl-entry">
+<p>Wuthrich, Mario V. 2020. “Non-Life Insurance: Mathematics &amp; Statistics.” Lecture notes. RiskLab, ETH Zurich; Swiss Finance Institute.</p>
+</div>
+</div>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/e55c944374dcdb5489e667095daeaeec9d754366" title='Last modified by William Ho | 22 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>22 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#adv-module-4-out-of-scope"><code>\(\adv\)</code> Module 4 Out of Scope</a></li>
+    <li><a href="#algorithms-for-compound-distributions">Algorithms for compound distributions</a>
+      <ul>
+        <li><a href="#preliminary-discretisation">Preliminary: Discretisation</a>
+          <ul>
+            <li><a href="#method-of-rounding-mass-dispersal">Method of rounding (mass dispersal)</a></li>
+            <li><a href="#unbiased-method">Unbiased method</a></li>
+            <li><a href="#method-of-lower-and-upper-bounds">Method of lower and upper bounds</a></li>
+            <li><a href="#examples">Examples</a></li>
+          </ul>
+        </li>
+        <li><a href="#panjers-recursion-algorithm">Panjer’s recursion algorithm</a></li>
+        <li><a href="#panjers-recursion-in-r">Panjer’s recursion in R</a>
+          <ul>
+            <li><a href="#example">Example</a></li>
+          </ul>
+        </li>
+        <li><a href="#panjers-recursion-for-compound-poisson">Panjer’s recursion for compound Poisson</a>
+          <ul>
+            <li><a href="#example-a-1242-recomputed">Example A 12.4.2 (recomputed)</a></li>
+          </ul>
+        </li>
+        <li><a href="#de-prils-recursion-algorithm">de Pril’s recursion algorithm</a>
+          <ul>
+            <li><a href="#numerical-example">Numerical example</a></li>
+          </ul>
+        </li>
+        <li><a href="#fast-fourier-transform">Fast Fourier Transform</a></li>
+      </ul>
+    </li>
+    <li><a href="#approximations">Approximations</a>
+      <ul>
+        <li><a href="#approximations-assuming-a-symmetrical-distribution">Approximations assuming a symmetrical distribution</a>
+          <ul>
+            <li><a href="#the-normal-approximation">The Normal approximation</a></li>
+            <li><a href="#normal-power">Normal Power</a></li>
+          </ul>
+        </li>
+        <li><a href="#approximations-using-a-skewed-distribution">Approximations using a skewed distribution</a>
+          <ul>
+            <li><a href="#the-translated-gamma-and-ln-approximations">The translated gamma and LN approximations</a></li>
+          </ul>
+        </li>
+        <li><a href="#edgeworths-approximation">Edgeworth’s approximation</a></li>
+        <li><a href="#approximating-the-individual-model-with-the-collective-model">Approximating the Individual Model with the Collective Model</a>
+          <ul>
+            <li><a href="#two-possible-assumptions-for-lambda_i">Two possible assumptions for <code>\(\lambda_i\)</code></a></li>
+            <li><a href="#example-1">Example</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#bringing-it-all-together-suva-case-study">Bringing it all together: SUVA case study</a>
+      <ul>
+        <li><a href="#preliminaries">Preliminaries</a></li>
+        <li><a href="#split-claims">Split claims</a></li>
+        <li><a href="#modelling-the-small-claims">Modelling the small claims</a>
+          <ul>
+            <li><a href="#s_textsc-using-the-empirical-distribution-of-x_textsc-and-panjer"><code>\(S_{\text{sc}}\)</code> using the empirical distribution of <code>\(X_{\text{sc}}\)</code> and Panjer</a></li>
+            <li><a href="#s_textsc-using-an-translated-gamma-approximation"><code>\(S_{\text{sc}}\)</code> using an translated gamma approximation</a></li>
+            <li><a href="#comparison">Comparison</a></li>
+          </ul>
+        </li>
+        <li><a href="#modelling-the-large-claims">Modelling the large claims</a></li>
+        <li><a href="#getting-the-overall-distribution">Getting the overall distribution</a>
+          <ul>
+            <li><a href="#getting-ready">Getting ready</a></li>
+            <li><a href="#performing-the-convolutions">Performing the convolutions</a></li>
+            <li><a href="#examining-the-ecdf-approach-fit">Examining the ECDF approach fit</a></li>
+            <li><a href="#examining-the-translated-gamma-approach-fit">Examining the translated gamma approach fit</a></li>
+            <li><a href="#moments">Moments</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

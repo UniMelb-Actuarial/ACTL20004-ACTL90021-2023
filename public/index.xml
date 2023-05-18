@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homepage on General Insurance Modelling - AM3</title>
+    <link>https://gim-am3.netlify.app/</link>
+    <description>Recent content in Homepage on General Insurance Modelling - AM3</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://gim-am3.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Eligibility and Requirements</title>
+      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/</guid>
+      <description>To view the eligibility and requirements, including prerequisites, corequisites, recommended background knowledge and core participation requirements for this subject, please see the University Handbook: https://handbook.unimelb.edu.au/2022/subjects/actl30007/eligibility-and-requirements https://handbook.unimelb.edu.au/2022/subjects/actl90020/eligibility-and-requirements
+Prerequisites #  Relevant knowledge from ACTL20003 Stochastic Techniques in Insurance (or MAST20004 Probability) includes in particular:
+ Distributions of random variables Expectations and conditional expectations Moment and probability generating functions Law of Large Numbers, and the Central Limit Theorem  Relevant knowledge from MAST20005 Statistics includes in particular:</description>
+    </item>
+    
+    <item>
+      <title>Week 1 Study Plan</title>
+      <link>https://gim-am3.netlify.app/docs/0-study-plan/week-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-study-plan/week-1/</guid>
+      <description>Week 1 Overview #  This week, we will cover the following topics:
+ Introduction to the course (Module 1): what are the broader questions we will answer in this subject, and how are they connected? Collective Risk Modelling (Module 2): how do you work out the distribution of the sum of claims if you can make assumptions about their frequency and severity, and what are typical assumptions for claims frequency?</description>
+    </item>
+    
+    <item>
+      <title>Learning Outcomes</title>
+      <link>https://gim-am3.netlify.app/docs/0-subject-guide/SILO/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/SILO/</guid>
+      <description>Subject Intended Learning Outcomes (SILO) #  To view the subject objectives and the generic skills you will develop through successful completion of this subject, please see the University Handbook.
+ACTL30007 SILO #  The ACTL30007 subject intended learning outcomes (SILO) are as follows:
+ Apply relevant pre-requisite knowledge of mathematics, probability theory and statistics in the solution of a range of practical problems. Derive and calculate probabilities for, and moments of, loss distributions both with and without simple reinsurance arrangements.</description>
+    </item>
+    
+    <item>
+      <title>Activities</title>
+      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Activities/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Activities/</guid>
+      <description>Lectures #  Lecture Times #  Lectures will be delivered live, in dual mode (both on Zoom and in person) in the following venue:
+ PAR-The Spot-3008, Mondays, from 2.15pm to 4.15pm Recordings will be made available on the Canvas website https://canvas.lms.unimelb.edu.au/courses/123529  Notes:
+ The tutorials on Friday 15 April 2022 won&amp;rsquo;t run (Good Friday holiday). Students with a tutorial on 13 April 2022 will review the mid-semester exam questions.</description>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Resources/</guid>
+      <description>Website #  The current website contains (or links) to all the resources you need for the course (compare the following list with left hand side menu):
+  Subject guide (you are reading it!)  Study Plan: this will outline our recommended study plan for the course, week by week. This will include a link to the video lectures / recordings, too.  Claims modelling: the contents covering Section 1 of the CS2 syllabus.</description>
+    </item>
+    
+    <item>
+      <title>Assessment</title>
+      <link>https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/</guid>
+      <description>Assessment Overview #  Assessment structure #  Your assessment for this subject comprises the following:
+  a 50-in-75-minute mid-semester exam (15%)  individual assignment (25%)  a 2-in-3 hour final exam (60%)  Hurdle requirement: To pass this subject students must pass the end of semester examination.
+In the following sections, details are provided (and will be populated throughout semester) about those assessments.
+Examinations:
+Canvas Quiz will automatically submit the exam when the time limit (comprised of reading time &amp;amp; writing time) has been reached (for example, after 60 minutes for an exam with 30 minutes of writing time and 30 minutes of reading time).</description>
+    </item>
+    
+    <item>
+      <title>M7 Characteristics of Time Series</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m7-characteristics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m7-characteristics/</guid>
+      <description>–&amp;gt;
+Introduction (TS 1.0) #  Definition #   Consider data of the same nature that have been observed at different points in time The mere fact that they are of the same nature means that they are likely related in one way or another - let’s call those `correlations’
+(an acceptable term in this context as we focus on this measure, at least in this course) This is in contrast with the usual ``i.</description>
+    </item>
+    
+    <item>
+      <title>M2 Collective Risk Modelling</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/</guid>
+      <description>Introduction: Models for aggregate losses #  A portfolio of contracts or a contract will potentially experience a sequence of losses: $$Y_1, Y_2, Y_3, \ldots$$ We are interested in the aggregate sum \(S\) of these losses over a certain period of time.
+ How many losses will occur?  if deterministic \((n)\) \(\longrightarrow\) individual risk model if random \((N)\) \(\longrightarrow\) collective risk model   How do they relate to each other?</description>
+    </item>
+    
+    <item>
+      <title>M8 Time Series Regression and Exploratory Data Analysis</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m8-regressions-eda/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m8-regressions-eda/</guid>
+      <description>-- Introduction (TS 2.0) #  Objectives #   In the previous module we discussed how important it is to have stationary time series, and started to hint at methods to render time series stationary and/or white noise. In this module we discuss those techniques more precisely and more comprehensively. This includes:  regression in the context of time series de-trending via regression de-trending via differencing nonparametric smoothing of time series   We will also introduce the \alert{backshift operator}, which we will use extensively in Module 9.</description>
+    </item>
+    
+    <item>
+      <title>M3 Individual Claim Size Modelling</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/</guid>
+      <description>Introduction #   How to fit loss models to insurance data? Peculiar characteristics of insurance data:  complete vs incomplete set of observations left-truncated observations right-censored observations heavy tailed risks   Parametric distribution models  model parameter estimation judging quality of fit model selection criteria
+(graphical, score-based approaches, information criteria)   Concepts and R functions are demonstrated with the help of some data sets  Steps in fitting loss models to data #   explore and summarise data  graphical explorations empirical moments and quantiles   select a set of candidate distributions  Pareto, Log-Normal, Inverse Gaussian, Gamma, etc.</description>
+    </item>
+    
+    <item>
+      <title>M9 Time Series Models</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m9-time-series-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m9-time-series-models/</guid>
+      <description>-- Introduction (TS 3.1, 3.3, 3.6, S6) #  Overview of main models #  We are now ready to introduce the main models with full generality, and to discuss an overall estimation, fitting, and forecasting approach. The main models we will review are:
+q\)` -- p\)`. -- 0\)`. -- 1\)` for all `\(j\)`.} -- 1\)`, `\(i=1,\ldots,r\)` ($r\le p$ distinct roots) due to causality. -- p\)` the regression of `\(x_{t+h}\)` on `\(\{x_{t+1},\ldots,x_{t+h-1}\}\)` is -- p\)`.</description>
+    </item>
+    
+    <item>
+      <title>Prerequisite Knowledge</title>
+      <link>https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/</guid>
+      <description>Summary of some of the prerequisite knowledge required for this subject: The first two parts ( Mathematics and Probability) below are basic reminders, and could probably be skipped by most students.
+The third part is more advanced and corresponds to Section 1.2 of the prescribed textbook MW.
+Students are recommended to review all those concepts prior to week 1, and to ask questions at the week 1 tutorial if needed.</description>
+    </item>
+    
+    <item>
+      <title>M1 Introduction</title>
+      <link>https://gim-am3.netlify.app/docs/m1-introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/m1-introduction/</guid>
+      <description>The nature of general insurance (MW 1.1) #  General insurance #   also called non-life, or property and casualty  Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …   efficient because of the (weak) law of large numbers (Bernoulli):  $$\lim_{n\rightarrow \infty} \Pr \left[ \left| \frac{1}{n} \sum_{i=1}^n Y_i - E[Y_i]\right| \ge \epsilon\right] = 0$$      for more background:  see general insurance practice for further details about the general insurance area see Pooling and Insurance for further details about the law of large numbers mechanism    Risk components #  Insurance organises a risk transfer:</description>
+    </item>
+    
+    <item>
+      <title>M10 Estimation and Forecasting</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m10-estimation-and-forecasting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m10-estimation-and-forecasting/</guid>
+      <description>-- Estimation #  Summary: analysing the ACF and PACF #  Behaviour of the ACF and PACF for ARMA Models #  \centering \begin{tabular}{rccc} &amp;amp; AR$(p)$ &amp;amp; MA$(q)$ &amp;amp; ARMA$(p,q)$ \ \hline ACF &amp;amp; Tails off &amp;amp; Cuts off after lag \(q\) &amp;amp; Tails off \
+PACF &amp;amp; Cuts off after lag \(p\) &amp;amp; Tails off &amp;amp; Tails off \end{tabular} \vspace{1cm}
+ The PACF for MA models behaves much like the ACF for AR models.</description>
+    </item>
+    
+    <item>
+      <title>M4 Approximations for Compound Distributions</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/</guid>
+      <description>\(\adv\) Module 4 Out of Scope #  Please note that this entire module is out of scope for Semester 1, 2022.
+Algorithms for compound distributions #  Preliminary: Discretisation #   In the algorithms considered in this module (and in real life..!), severity distributions are discrete. In Module 3 we discussed how to fit parametric distributions to real data, but these were continuous (which often allows to define a whole df easily with just a few parameters).</description>
+    </item>
+    
+    <item>
+      <title>M5 Copulas</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/</guid>
+      <description>Dependence and multivariate modelling #  Introduction to Dependence #  Motivation #  How does dependence arise?
+ Events affecting more than one variable (e.g., storm on building, car and business interruption covers) Underlying economic factors affecting more than one risk area (e.g., inflation, unemployment) Clustering/concentration of risks (e.g., household, geographical area)   Reasons for modelling dependence:
+ Pricing:  get adequate risk loadings (note that dependence affects quantiles, not the mean)   Solvency assessment:  bottom up: for given risks, get capital requirements (get quantiles of aggregate quantities)   Capital allocation:  top down: for given capital, allocate portions to risk (for profitability assessment)   Portfolio structure: (or strategic asset allocation)  how do assets and liability move together?</description>
+    </item>
+    
+    <item>
+      <title>M6 Extreme Value Theory</title>
+      <link>https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/</guid>
+      <description>Introduction #  Extreme events #   financial (and claims) data is often leptokurtic severity (more peaked - heavy tailed - than normal) reasons include heteroscedasticity (stochastic volatility) almost by definition, extreme events happen with low frequency but extreme events are the ones causing to financial distress, possibly ruin accurate fitting is crucial for capital and risk management (risk based capital, reinsurance, ART such as securitisation via CAT bonds) fitting presents specific issues:  there is little data to work from when fitting a whole distribution, the big bulk of the data (around the mode) overpowers observations in the tails in the optimisation routine (MLE), leading to poor fit in the tail sometimes (in fact, almost always as we will see) a good distribution for the far tail is different from that for the more common outcomes    Framework #   Consider iid random variables \(X_i\), \(i=1,\ldots,n\), with df \(F\) We denote the order statistics $$X_{n,n} \le X_{n-1,n} \le \ldots \le X_{1,n}$$ such that $$X_{n,n}=\min(X_1,\ldots,X_n) \text{ and }X_{1,n}=\max(X_1,\ldots,X_n).</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://gim-am3.netlify.app/template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/template/</guid>
+      <description>TO BE UPDATED #  -- -- </description>
+    </item>
+    
+  </channel>
+</rss>

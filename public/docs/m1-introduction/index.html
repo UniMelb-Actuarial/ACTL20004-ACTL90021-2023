@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The nature of general insurance (MW 1.1) #  General insurance #   also called non-life, or property and casualty  Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …   efficient because of the (weak) law of large numbers (Bernoulli):  $$\lim_{n\rightarrow \infty} \Pr \left[ \left| \frac{1}{n} \sum_{i=1}^n Y_i - E[Y_i]\right| \ge \epsilon\right] = 0$$      for more background:  see general insurance practice for further details about the general insurance area see Pooling and Insurance for further details about the law of large numbers mechanism    Risk components #  Insurance organises a risk transfer:">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="M1 Introduction" />
+<meta property="og:description" content="The nature of general insurance (MW 1.1) #  General insurance #   also called non-life, or property and casualty  Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …   efficient because of the (weak) law of large numbers (Bernoulli):  $$\lim_{n\rightarrow \infty} \Pr \left[ \left| \frac{1}{n} \sum_{i=1}^n Y_i - E[Y_i]\right| \ge \epsilon\right] = 0$$      for more background:  see general insurance practice for further details about the general insurance area see Pooling and Insurance for further details about the law of large numbers mechanism    Risk components #  Insurance organises a risk transfer:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gim-am3.netlify.app/docs/m1-introduction/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-02-22T01:48:24+11:00" />
+
+<title>M1 Introduction | General Insurance Modelling - AM3</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.a08e958a0c32c71fa52257f56602fc9e6f4a8586733f7d90b6b544b160364dce.css" integrity="sha256-oI6Vigwyxx&#43;lIlf1ZgL8nm9KhYZzP32QtrVEsWA2Tc4=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.878ab88e3d4527cf91ebf122d3c2168ec5f07897eee262b8596684862c6a9b5e.js" integrity="sha256-h4q4jj1FJ8&#43;R6/Ei08IWjsXweJfu4mK4WWaEhixqm14=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  <script>
+MathJax = {
+  tex: {
+      macros: { 
+          angl: ["\\enclose{actuarial}{#1}", 1],
+          alert:["\\textcolor{red}{#1}", 1],
+          termins: ["A^{1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          insend: ["\\bar{A}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          pureend: ["A^{\\,\\,\\,\\, 1}_{#1 : \\enclose{actuarial}{#2}}", 2],
+          adv: ["\\maltese"]
+      }
+  }
+};
+</script>
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/img/PRIMARY_A_Vertical_Housed_RGB.png" alt="Logo" /><span style="color: black;">General Insurance Modelling - AM3</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0c375332c765cd598c6ce4ee8867890f" class="toggle"  />
+    <label for="section-0c375332c765cd598c6ce4ee8867890f" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-subject-guide/" class="">Subject Guide</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Eligibility/" class="">Eligibility and Requirements</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/SILO/" class="">Learning Outcomes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Activities/" class="">Activities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Resources/" class="">Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-subject-guide/Assessment/" class="">Assessment</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5b29660809eb857420b6473840d34e82" class="toggle"  />
+    <label for="section-5b29660809eb857420b6473840d34e82" class="flex justify-between">
+      <a href="https://gim-am3.netlify.app/docs/0-study-plan/" class="">Weekly Study Plan</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-study-plan/week-1/" class="">Week 1 Study Plan</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/0-prerequisite-knowledge/" class="">Prerequisite Knowledge</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/m1-introduction/" class=" active">M1 Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/" class="">Claims Modelling (CS2 Section 1)</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m2-collective-risk-modelling/" class="">M2 Collective Risk Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m3-individual-claim-size-modelling/" class="">M3 Individual Claim Size Modelling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m4-compound-approx/" class="">M4 Approximations for Compound Distributions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m5-copulas/" class="">M5 Copulas</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="https://gim-am3.netlify.app/docs/1-claims-modelling/m6-extreme-value-theory/" class="">M6 Extreme Value Theory</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/4436?display=borderless" target="_blank" rel="noopener">
+        Ed discussion forum
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123529" target="_blank" rel="noopener">
+        ACTL30007 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/123552" target="_blank" rel="noopener">
+        ACTL90020 Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406" target="_blank" rel="noopener">
+        Community Canvas
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630303" target="_blank" rel="noopener">
+        Pre-tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630304" target="_blank" rel="noopener">
+        Tutorial exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://canvas.lms.unimelb.edu.au/courses/145406/modules/items/3630305" target="_blank" rel="noopener">
+        Additional and Out-of-Scope exercises
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener">
+        __________________________
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://bavanzicv.netlify.app/" target="_blank" rel="noopener">
+        Benjamin Avanzi
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actl10001.netlify.app/" target="_blank" rel="noopener">
+        Introduction to Actuarial Studies
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://communicate-data-with-r.netlify.app/" target="_blank" rel="noopener">
+        Communicate Data with R
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://actuaries.asn.au/becoming-an-actuary/becoming-a-university-subscriber" target="_blank" rel="noopener">
+        Actuaries Institute info
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>M1 Introduction</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-nature-of-general-insurance-mw-11">The nature of general insurance (MW 1.1)</a>
+      <ul>
+        <li><a href="#general-insurance">General insurance</a></li>
+        <li><a href="#risk-components">Risk components</a></li>
+        <li><a href="#premium-components">Premium components</a></li>
+      </ul>
+    </li>
+    <li><a href="#connections-with-the-course-contents">Connections with the course contents</a>
+      <ul>
+        <li><a href="#r-packages-used-in-this-course">R packages used in this course</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="the-nature-of-general-insurance-mw-11">
+  The nature of general insurance (MW 1.1)
+  <a class="anchor" href="#the-nature-of-general-insurance-mw-11">#</a>
+</h1>
+<h2 id="general-insurance">
+  General insurance
+  <a class="anchor" href="#general-insurance">#</a>
+</h2>
+<ul>
+<li>also called <strong>non-life</strong>, or <strong>property and casualty</strong>
+<ul>
+<li>Includes: car, liability, property, workers compensation, marine, credit, legal, travel, health, …</li>
+</ul>
+</li>
+<li>efficient because of the (weak) law of large numbers (Bernoulli):
+<ul>
+<li><code>$$\lim_{n\rightarrow \infty} \Pr \left[ \left| \frac{1}{n} \sum_{i=1}^n Y_i - E[Y_i]\right| \ge \epsilon\right] = 0$$</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>for more background:
+<ul>
+<li>see 
+  <a href="https://actl10001.netlify.app/docs/actuarial-practice/general-insurance/">general insurance practice</a> for further details about the general insurance area</li>
+<li>see 
+  <a href="https://actl10001.netlify.app/docs/actuarial-techniques/pooling-and-insurance/">Pooling and Insurance</a> for further details about the law of large numbers mechanism</li>
+</ul>
+</li>
+</ul>
+<h2 id="risk-components">
+  Risk components
+  <a class="anchor" href="#risk-components">#</a>
+</h2>
+<p>Insurance organises a risk transfer:</p>
+<ul>
+<li>costing of this transfer is an actuarial problem</li>
+<li>makes sense only because people are risk averse, unless insurance is forced</li>
+</ul>
+<p>Risk / randomness comes from different sources:</p>
+<ul>
+<li>Pure randomness (also called “process risk” or “aleatoric risk”)
+<ul>
+<li>Nature of the risk</li>
+<li>Can be “controlled” by volume (law of large numbers)</li>
+</ul>
+</li>
+<li>Model risk (“epistemic risk”)
+<ul>
+<li><em>All models are wrong, some are useful</em></li>
+<li>model world <code>\(\neq\)</code> real world</li>
+<li>even if model was right, wrong parameters</li>
+<li>non-stationarity</li>
+</ul>
+</li>
+</ul>
+<p><code>\(\Longrightarrow\)</code> we need to add a buffer/margin to the cost of the risk transfer.</p>
+<h2 id="premium-components">
+  Premium components
+  <a class="anchor" href="#premium-components">#</a>
+</h2>
+<p><code>\begin{eqnarray} \text{gross premium} &amp;=&amp; \text{pure risk premium} \\ &amp;&amp; + \text{risk margin} \\ &amp;&amp; + \text{profit margin} \\ &amp;&amp; - \text{financial gains on investments} \\ &amp;&amp; + \text{underwriting expenses} \\ &amp;&amp; + \text{loss adjustment expenses (LAE)} \\ &amp;&amp; (+ \text{taxes}) \end{eqnarray}</code></p>
+<p>This is not necessarily the premium that is charged to customers, but calculating the right hand side is one of the actuary’s roles.</p>
+<h1 id="connections-with-the-course-contents">
+  Connections with the course contents
+  <a class="anchor" href="#connections-with-the-course-contents">#</a>
+</h1>
+<ul>
+<li>We typically insure multiple risks:
+<ul>
+<li>We need to know how to aggregate them (Module 2)</li>
+<li>We need distributions for counts and sums, including random sums (Modules 2, 3, and 4)</li>
+<li>Those risk may not be independent (Module 5)</li>
+</ul>
+</li>
+<li>We need a distribution for the losses
+<ul>
+<li>The “pure risk premium” is the expectation of the risk (Module 3)</li>
+<li>The “risk margin” is typically function of the distribution of the insured loss–a quantile, or a function of variance (Modules 3 and 4)</li>
+<li>Sometimes those risks can be extreme (Module 6)</li>
+</ul>
+</li>
+<li>Losses arise over time, and there may be time dependencies (relationships across time) that are relevant to the modelling (Modules 7-10)</li>
+</ul>
+<h2 id="r-packages-used-in-this-course">
+  R packages used in this course
+  <a class="anchor" href="#r-packages-used-in-this-course">#</a>
+</h2>
+<p>The following packages are useful and should be installed and loaded on your machines:</p>
+<ul>
+<li><code>stats</code> is a generalist package providing statistical functions</li>
+<li><code>MASS</code> (“Modern Applied Statistics with S”) is a powerful package for data analysis</li>
+<li><code>tidyverse</code> is a package for wrangling and preparing data for analysis</li>
+<li><code>actuar</code> is a package with functions that are specific to actuarial studies
+see Dutang, Goulet, and Pigeon (2008)</li>
+<li><code>fitdistrplus</code> builds on the abovementioned packages for advanced fitting features
+see Delignette-Muller and Dutang (2015)</li>
+<li><code>evir</code> and <code>extRemes</code> will be used extensively in Module 6 (Extreme Value Theory)
+see Gilleland and Katz (2016)</li>
+<li><code>xts</code> and <code>astsa</code> will be used extensively in Module 7–10 (Time Series and Analysis)</li>
+</ul>
+<hr>
+<p>In the lectures that follows, I will indicate which package a function comes from the first time it appears by writing <code>package::function</code>, and then will drop the <code>package::</code> part as it is not needed once you load that library.
+[Note this allows you to call a specific function from a package without loading it (useful when there are package clashes).]</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-DMDu15" class="csl-entry">
+<p>Delignette-Muller, Marie Laure, and Christophe Dutang. 2015. “Fitdistrplus: An r Package for Fitting Distributions.” <em>Journal of Statistical Software</em> 64 (4).</p>
+</div>
+<div id="ref-DiGoPi08" class="csl-entry">
+<p>Dutang, Christophe, Vincent Goulet, and Mathieu Pigeon. 2008. “Actuar: An r Package for Actuarial Science.” <em>Journal of Statistical Software</em> 25 (7).</p>
+</div>
+<div id="ref-GiKa16" class="csl-entry">
+<p>Gilleland, Eric, and Richard W. Katz. 2016. “<span class="nocase">extRemes</span> 2.0: An Extreme Value Analysis Package in R.” <em>Journal of Statistical Software</em> 72 (8).</p>
+</div>
+</div>
+</article>
+ 
+      <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/UniMelb-Actuarial/commit/e55c944374dcdb5489e667095daeaeec9d754366" title='Last modified by William Ho | 22 February 2022' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>22 February 2022</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+
+
+  <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+
+
+ 
+        <script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-nature-of-general-insurance-mw-11">The nature of general insurance (MW 1.1)</a>
+      <ul>
+        <li><a href="#general-insurance">General insurance</a></li>
+        <li><a href="#risk-components">Risk components</a></li>
+        <li><a href="#premium-components">Premium components</a></li>
+      </ul>
+    </li>
+    <li><a href="#connections-with-the-course-contents">Connections with the course contents</a>
+      <ul>
+        <li><a href="#r-packages-used-in-this-course">R packages used in this course</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<script src="//yihui.org/js/math-code.js"></script>
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Time Series (CS2 Section 2) on General Insurance Modelling - AM3</title>
+    <link>https://gim-am3.netlify.app/docs/1-time-series/</link>
+    <description>Recent content in Time Series (CS2 Section 2) on General Insurance Modelling - AM3</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://gim-am3.netlify.app/docs/1-time-series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>M7 Characteristics of Time Series</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m7-characteristics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m7-characteristics/</guid>
+      <description>–&amp;gt;
+Introduction (TS 1.0) #  Definition #   Consider data of the same nature that have been observed at different points in time The mere fact that they are of the same nature means that they are likely related in one way or another - let’s call those `correlations’
+(an acceptable term in this context as we focus on this measure, at least in this course) This is in contrast with the usual ``i.</description>
+    </item>
+    
+    <item>
+      <title>M8 Time Series Regression and Exploratory Data Analysis</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m8-regressions-eda/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m8-regressions-eda/</guid>
+      <description>-- Introduction (TS 2.0) #  Objectives #   In the previous module we discussed how important it is to have stationary time series, and started to hint at methods to render time series stationary and/or white noise. In this module we discuss those techniques more precisely and more comprehensively. This includes:  regression in the context of time series de-trending via regression de-trending via differencing nonparametric smoothing of time series   We will also introduce the \alert{backshift operator}, which we will use extensively in Module 9.</description>
+    </item>
+    
+    <item>
+      <title>M9 Time Series Models</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m9-time-series-models/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m9-time-series-models/</guid>
+      <description>-- Introduction (TS 3.1, 3.3, 3.6, S6) #  Overview of main models #  We are now ready to introduce the main models with full generality, and to discuss an overall estimation, fitting, and forecasting approach. The main models we will review are:
+q\)` -- p\)`. -- 0\)`. -- 1\)` for all `\(j\)`.} -- 1\)`, `\(i=1,\ldots,r\)` ($r\le p$ distinct roots) due to causality. -- p\)` the regression of `\(x_{t+h}\)` on `\(\{x_{t+1},\ldots,x_{t+h-1}\}\)` is -- p\)`.</description>
+    </item>
+    
+    <item>
+      <title>M10 Estimation and Forecasting</title>
+      <link>https://gim-am3.netlify.app/docs/1-time-series/m10-estimation-and-forecasting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://gim-am3.netlify.app/docs/1-time-series/m10-estimation-and-forecasting/</guid>
+      <description>-- Estimation #  Summary: analysing the ACF and PACF #  Behaviour of the ACF and PACF for ARMA Models #  \centering \begin{tabular}{rccc} &amp;amp; AR$(p)$ &amp;amp; MA$(q)$ &amp;amp; ARMA$(p,q)$ \ \hline ACF &amp;amp; Tails off &amp;amp; Cuts off after lag \(q\) &amp;amp; Tails off \
+PACF &amp;amp; Cuts off after lag \(p\) &amp;amp; Tails off &amp;amp; Tails off \end{tabular} \vspace{1cm}
+ The PACF for MA models behaves much like the ACF for AR models.</description>
+    </item>
+    
+  </channel>
+</rss>
