@@ -104,6 +104,7 @@ rmarkdown::render(input = curr_file, output_file = output_name, output_dir = out
 # Introduction (TS 1.0)
  
 ## Definition
+
 - Consider data of the same nature that have been observed at different points in time
 - The mere fact that they are of the same nature means that they are likely related in one way or another - let's call those `correlations'  
 (an acceptable term in this context as we focus on this measure, at least in this course)

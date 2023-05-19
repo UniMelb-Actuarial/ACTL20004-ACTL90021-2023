@@ -425,10 +425,7 @@ which increases without bound as `\(t\rightarrow \infty\)`.
   then the mean function is
   $$\mu_{x,t}=E[x_t]=\alpha + \beta t + \mu_y, $$
   which is *not* independent of time. The autocovariance function,
-  $$\begin{array}{rcl}
-  \gamma_x(h)=Cov(x_{t+h},x_t)&=&E[(x_{t+h}-\mu_{x,t+h})(x_t-\mu_{x,t})] \\\\
-  &=&E[(y_{t+h}-\mu_y)(y_t-\mu_y)]=\gamma_y(h),
-  \end{array}$$\`
+  `$$\begin{array}{rcl}   \gamma_x(h)=Cov(x_{t+h},x_t)&=&E[(x_{t+h}-\mu_{x,t+h})(x_t-\mu_{x,t})] \\\\   &=&E[(y_{t+h}-\mu_y)(y_t-\mu_y)]=\gamma_y(h),   \end{array}$$`
   however, is independent of time.
 
 ## Joint stationarity
@@ -467,10 +464,7 @@ which depends only on the lag `\(h\)`, so both series are jointly stationary.
 If the relation above holds true, then the lag `\(\ell\)` can be inferred from the shape of the autocovariance of the input series `\(x_t\)`:
 
 - If `\(w_t\)` is uncorrelated with `\(x_t\)` then
-  $$\begin{array}{rcl}
-  \gamma_{yx}(h)&=& Cov(y_{t+h},x_t) =Cov (Ax_{t+h-\ell} + w_{t+h},x_t) \\
-  &=&Cov (Ax_{t+h-\ell} ,x_t)=A\gamma_x(h-\ell)
-  \end{array}$$\`
+  `$$\begin{array}{rcl}   \gamma_{yx}(h)&=& Cov(y_{t+h},x_t) =Cov (Ax_{t+h-\ell} + w_{t+h},x_t) \\   &=&Cov (Ax_{t+h-\ell} ,x_t)=A\gamma_x(h-\ell)   \end{array}$$`
 - Since
   `$$\gamma_x(h-\ell) \le \gamma_x(0),$$`
   the peak of `\(\gamma_{yx}(h)\)` should be at `\(h=\ell\)`, and  
