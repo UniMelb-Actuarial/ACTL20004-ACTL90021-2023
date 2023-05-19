@@ -7,7 +7,7 @@ type: docs
 
 **<p style="font-size:18px;">Welcome to the 2023 edition of Topics in Actuarial Studies / Topics in Insurance and Finance!</p>**
 
-***Note that this website is still being built for 2023. This message will disappear once the update is complete.***
+***Note that this website is still being built for 2023. This message will disappear once the update is complete. We are still creating the website.***
 
 The overall aim of this website is to provide access to the teaching materials relevant to:
 
