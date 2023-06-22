@@ -44,10 +44,10 @@ menu:
       url: 
       weight: 19
     - name: List of exercises (Excel)
-      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801
+      url: https://canvas.lms.unimelb.edu.au/courses/173733
       weight: 21
     - name: Tutorial exercises
-      url: https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392
+      url: https://canvas.lms.unimelb.edu.au/courses/173733
       weight: 27
     - name: __________Links___________
       url: 

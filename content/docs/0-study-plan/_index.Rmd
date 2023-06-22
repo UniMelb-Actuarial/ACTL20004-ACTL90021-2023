@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 weight: 20
 title: Weekly Study Plan
 bookCollapseSection: true 
