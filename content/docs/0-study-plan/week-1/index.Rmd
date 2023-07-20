@@ -17,21 +17,21 @@ This week, we will cover the following topics:
 
 See also detailed learning outcomes of 1.2 (utility theory) of the CM2 syllabus [``here``](../../0-subject-guide/SILO).
 
-# Videos
+<!-- # Videos -->
 
-Here is the week 1 video introduction. In this video I briefly introduce myself, the subject, and highlight some key aspect of the 2023 delivery and differences with previous years.
+<!-- Here is the week 1 video introduction. In this video I briefly introduce myself, the subject, and highlight some key aspect of the 2023 delivery and differences with previous years. -->
 
-<!--html_preserve-->
-<iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/faeb16b3-0ff2-4335-98fa-fde57450bfb3/public?autoplay=false&automute=false"></iframe>
-<!--/html_preserve-->
+<!-- <!--html_preserve--> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/faeb16b3-0ff2-4335-98fa-fde57450bfb3/public?autoplay=false&automute=false"></iframe> -->
+<!-- <!--/html_preserve--> -->
 
-Furthermore, here is a video with detailed overview of the course resources and organisation:
+<!-- Furthermore, here is a video with detailed overview of the course resources and organisation: -->
 
-<!--html_preserve-->
-<iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/0a8d1f59-14ed-4003-b986-d652306668b1/public?autoplay=false&automute=false"></iframe>
-<!--/html_preserve-->
+<!-- <!--html_preserve--> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/0a8d1f59-14ed-4003-b986-d652306668b1/public?autoplay=false&automute=false"></iframe> -->
+<!-- <!--/html_preserve--> -->
 
-<p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p>
+<!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
 
 
 
@@ -44,24 +44,15 @@ Furthermore, here is a video with detailed overview of the course resources and 
 Please review the [``Prerequisite knowledge``](../../0-prerequisite-knowledge/) page for this course. This is not exhaustive by any means, but provides minimum knowledge you should be comfortable with. Note that Tutorials in Week 1 are your opportunity to ask about those topics.
 
 
-## Module 1: Risk and Insurance
+## Module 1: Utility, Risk and Insurance
 
-Read: [``Module 1: Risk and Insurance``](../../1-utility/m1-risk-insurnance/)
+Read: [``Module 1: Utility, Risk and Insurance``](../../1-utility/m1-risk-insurnance/)
 
 Annotate: [``slides``](../../../output/23-Top-M1-lec.pdf) 
 <!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
 
 Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[``PG``](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.
 
-## Module 2: Collecture Risk Modelling
-
-Read: [``Module 2: Collective Risk Modelling``](../../1-claims-modelling/m2-collective-risk-modelling/)
-
-Annotate: [``slides``](../../../output/23-GIM-M2-lec.pdf) 
-<!-- [``annotated slides``](../../../output/22-GIM-M2-lec_a.pdf) -->
-
-Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[``PG``](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701))
-This is where annotated slides will be made available, too. 
 
 
 # Additional preparation and resources
@@ -70,36 +61,37 @@ This is where annotated slides will be made available, too.
 
 1. Read the [``Subject Guide``](../../0-subject-guide).
 1. As outlined [``above``](../week-1/#prerequisite-knowledge), review the mathematical background and revisions as well as associated tutorial questions.
-1. Chapter 1 of @Wut20 (for Module 1 and revisions)
-1. Chapter 2.1 and 2.2 of @Wut20 (for Module 2)
+1. Chapter 7.1-7.3 and 8.1-8.3 of @Jos13 (for Module 1)
+
 
 ## Optional
 
-1. Chapter 12 of @BoGeHiJoNe97 (free download available from [``Readings Online``](https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/1188))
+1. Unit 2 of @IoA23
+1. Chapter 2 of @Dic23
 
 
 
 # Tutorials
 
-Note that a full list of exercises is available [``here``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801). Please let us know of any mistake or required update on [``Ed``](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless).
+Please let us know of any mistake or required update on [``Ed``](https://canvas.lms.unimelb.edu.au/courses/191080/external_tools/5837?display=borderless).
 
-## Pre-Tutorial work
+<!-- ## Pre-Tutorial work -->
 
-Please study those questions **before** the tutorial.
+<!-- Please study those questions **before** the tutorial. -->
 
-Pre-Tutorial exercises are available in the [``Pre-Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions
+<!-- Pre-Tutorial exercises are available in the [``Pre-Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions -->
 
 ## Tutorial materials
 
 Some questions have been especially selected for the tutorials. Students should review and attempt those questions ***prior to their scheduled tutorial***, after they complete the pre-tutorial work. 
 
-The [``Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
+The [``Tutorial book``]() includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
 
 Note that solutions will be gradually added to that same document. Hence it is not recommended to print it, as it will regularly change (typos will also dynamically be corrected).
 
 ## This week
 
-The whole of Modules 1 and 2 are in scope for the week 1 tutorials. These cover a broad range of revisions, as well as Module 2.
+The whole of Module 1 is in scope for the week 1 tutorials. 
 
 
 <!-- Here is the recording available for Week 1 from William: -->
@@ -120,13 +112,13 @@ The whole of Modules 1 and 2 are in scope for the week 1 tutorials. These cover 
 
 ## Next week (week 2)
 
-Next week, we will discuss Module 3, Sections 1 to 4.
+Next week, we will discuss Modules 2 and 3.
 
 
 
-## Additional questions
+<!-- ## Additional questions -->
 
-The "additional questions" are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available.
+<!-- The "additional questions" are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available. -->
 
 # Preparation for assessment
 
