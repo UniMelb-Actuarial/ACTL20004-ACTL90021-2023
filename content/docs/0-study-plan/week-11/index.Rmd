@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 11 Study Plan"
 weight: 11
 bibliography: ../../../../static/libraries.bib

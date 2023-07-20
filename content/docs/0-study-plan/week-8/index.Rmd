@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 8 Study Plan"
 weight: 8
 bibliography: ../../../../static/libraries.bib

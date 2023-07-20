@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 12 Study Plan"
 weight: 12
 bibliography: ../../../../static/libraries.bib

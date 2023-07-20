@@ -1,6 +1,6 @@
 ---
-bookHidden: true
-bookSearchExclude: true
+bookHidden: false
+bookSearchExclude: false
 weight: 20
 title: Weekly Study Plan
 bookCollapseSection: true 
@@ -12,36 +12,12 @@ tags: []
 ---
 
 
-**<p style="font-size:18px;">Suggested weekly schedule</p>**
+**<p style="font-size:18px;">Weekly plans</p>**
 
-To summarise, in week $n$ you should: 
+This section will provide weekly guidance about the subject activities, and links to relevant sections of the website, and documents (such as slides, for instance).
 
-- on Monday:
-    - [lec] have a first read of the lecture readings for the week (website)
-    - [lec] attend the lecture in person or online (as appropriate)
-    - [tut] review the solutions of the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) of week $n-1$, and seek help if needed*
-- on Tuesday:
-    - [lec] review the lecture notes from Monday, and seek help if needed*
-    - [tut] perform the pre-tutorial work and review solutions (before your Wednesday or Friday tutorial)
-    - [tut] have a first look at the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$ and see whether you can attempt some of them already (before your Wednesday or Friday tutorial)
-    <!-- - [amt] review the [solutions to the review questions](https://canvas.lms.unimelb.edu.au/courses/107520/modules/items/3123110) of week $n-2$, and seek help if needed* -->
-- on Wednesday
-    - [tut] attend tutorials (if they are on Wednesday)
-    - [tut] continue your attempts of the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$
-- on Thursday
-    - [tut] attend tutorials (if they are on Thursday)
-    - [lec] finish your review of lecture notes, and seek help if needed*
-    - [tut] continue your attempts of the[Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$
-    - [amt] consider the [Additional questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464393) if you need more practice on week $n-1$
-- on Friday <- wrapping the week up!
-    - [tut] attend tutorials (if they are on Friday)
-    - [amt] create draft 1 of your own summary of week $n$, and seek help if some areas are unclear*
-    - [amt] upgrade your summary of week $n-1$ into a "cheat sheet" for the [Mid-semester exam and the final exam](../0-subject-guide/Assessment).
-    - [lec] have a first read of the lecture readings for the next week (website)
 
-Note [lec] refers to lecture activities (learning the theory), [tut] to tutorials (applying the theory), and [amt] to assessment preparation (prepare for exams).
-
-\* To seek help:
+To seek help:
 
 - ask your question in [Ed](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless), or
 - ask your tutor at your next [tutorial](../0-subject-guide/Activities/#tutorials), or
@@ -49,3 +25,31 @@ Note [lec] refers to lecture activities (learning the theory), [tut] to tutorial
 - ask your friends in the course (on [Ed](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless) or elsewhere!),
 
 BUT do not e-mail tutors or the course Professor, unless your query is truly personal in nature, or has absolutely no chance of being of any relevance to any other student. Chances are other students have the same question, and so having the question being asked and answered publicly helps everyone.
+
+
+<!-- To summarise, in week $n$ you should:  -->
+
+<!-- - on Monday: -->
+<!--     - [lec] have a first read of the lecture readings for the week (website) -->
+<!--     - [lec] attend the lecture in person or online (as appropriate) -->
+<!--     - [tut] review the solutions of the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) of week $n-1$, and seek help if needed* -->
+<!-- - on Tuesday: -->
+<!--     - [lec] review the lecture notes from Monday, and seek help if needed* -->
+<!--     - [tut] perform the pre-tutorial work and review solutions (before your Wednesday or Friday tutorial) -->
+<!--     - [tut] have a first look at the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$ and see whether you can attempt some of them already (before your Wednesday or Friday tutorial) -->
+<!--     <!-- - [amt] review the [solutions to the review questions](https://canvas.lms.unimelb.edu.au/courses/107520/modules/items/3123110) of week $n-2$, and seek help if needed* --> -->
+<!-- - on Wednesday -->
+<!--     - [tut] attend tutorials (if they are on Wednesday) -->
+<!--     - [tut] continue your attempts of the [Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$ -->
+<!-- - on Thursday -->
+<!--     - [tut] attend tutorials (if they are on Thursday) -->
+<!--     - [lec] finish your review of lecture notes, and seek help if needed* -->
+<!--     - [tut] continue your attempts of the[Tutorials questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) for week $n$ -->
+<!--     - [amt] consider the [Additional questions](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464393) if you need more practice on week $n-1$ -->
+<!-- - on Friday <- wrapping the week up! -->
+<!--     - [tut] attend tutorials (if they are on Friday) -->
+<!--     - [amt] create draft 1 of your own summary of week $n$, and seek help if some areas are unclear* -->
+<!--     - [amt] upgrade your summary of week $n-1$ into a "cheat sheet" for the [Mid-semester exam and the final exam](../0-subject-guide/Assessment). -->
+<!--     - [lec] have a first read of the lecture readings for the next week (website) -->
+
+<!-- Note [lec] refers to lecture activities (learning the theory), [tut] to tutorials (applying the theory), and [amt] to assessment preparation (prepare for exams). -->

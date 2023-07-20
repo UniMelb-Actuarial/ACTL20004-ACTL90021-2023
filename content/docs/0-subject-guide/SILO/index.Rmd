@@ -19,9 +19,9 @@ The ACTL20004 subject intended learning outcomes (SILO) are as follows:
 6.	Apply pre-requisite mathematical and statistical concepts to the solution of problems on the above topics.
 
 
-## ACTL90020 SILO
+## ACTL90021 SILO
 
-The ACTL90020=2 subject intended learning outcomes (SILO) are as follows:
+The ACTL90021 subject intended learning outcomes (SILO) are as follows:
 
 1.	Critically review simple stochastic models for investment returns.
 2.	Compose and assess techniques for analysing a delay (or run-off) triangle and projecting the ultimate position.

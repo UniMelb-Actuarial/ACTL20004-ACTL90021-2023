@@ -12,10 +12,14 @@ Week 1
 
 This week, we will cover the following topics:
 
-- Introduction to the course (Module 1): what are the broader questions we will answer in this subject, and how are they connected?
-- Collective Risk Modelling (Module 2): how do you work out the distribution of the sum of claims if you can make assumptions about their frequency and severity, and what are typical assumptions for claims frequency?
+- Introduction to the course: what are the topics we will cover in this subject, and how are they connected?
+- Risk and Insurance (Module 1): to put it in the way the CM2 notes puts it, how do we model the behaviours of agents on a market? What is a possible mathematical model for “rational” behaviour, that could explain why people purchase insurance?
 
-Here is the week 1 video introduction. In this video I briefly introduce myself, the subject, and highlight some key aspect of the 2023 delivery and possible differences with previous years.
+See also detailed learning outcomes of 1.2 (utility theory) of the CM2 syllabus [`here`](../../0-subject-guide/SILO).
+
+# Videos
+
+Here is the week 1 video introduction. In this video I briefly introduce myself, the subject, and highlight some key aspect of the 2023 delivery and differences with previous years.
 
 <iframe height="420" width="640" allowfullscreen frameborder="0" src="https://echo360.net.au/media/faeb16b3-0ff2-4335-98fa-fde57450bfb3/public?autoplay=false&amp;automute=false">
 </iframe>
@@ -25,10 +29,8 @@ Furthermore, here is a video with detailed overview of the course resources and 
 <iframe height="420" width="640" allowfullscreen frameborder="0" src="https://echo360.net.au/media/0a8d1f59-14ed-4003-b986-d652306668b1/public?autoplay=false&amp;automute=false">
 </iframe>
 <p style="font-size:10px;color: rgb(252, 156, 249);">
-If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only.
+If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only.
 </p>
-
-See also detailed learning outcomes 1.2.1-1.2.4 of the CS2 syllabus [`here`](../../0-subject-guide/SILO).
 
 # Main references and lectures
 
@@ -36,11 +38,11 @@ See also detailed learning outcomes 1.2.1-1.2.4 of the CS2 syllabus [`here`](../
 
 Please review the [`Prerequisite knowledge`](../../0-prerequisite-knowledge/) page for this course. This is not exhaustive by any means, but provides minimum knowledge you should be comfortable with. Note that Tutorials in Week 1 are your opportunity to ask about those topics.
 
-## Module 1: Introduction
+## Module 1: Risk and Insurance
 
-Read: [`Module 1: Introduction`](../../m1-introduction/)
+Read: [`Module 1: Risk and Insurance`](../../1-utility/m1-risk-insurnance/)
 
-Annotate: [`slides`](../../../output/23-GIM-M1-lec.pdf)
+Annotate: [`slides`](../../../output/23-Top-M1-lec.pdf)
 <!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
 
 Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.

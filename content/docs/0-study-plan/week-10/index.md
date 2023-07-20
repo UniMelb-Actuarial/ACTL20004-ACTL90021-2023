@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 10 Study Plan"
 weight: 10
 bibliography: ../../../../static/libraries.bib
@@ -22,7 +24,7 @@ Continuing on with the Time Series component of the subject, which corresponds t
 <!--  -->
 <!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/a195b7a0-95db-41d0-ad45-3e1195905f52/public?autoplay=false&automute=false"></iframe> -->
 <!--  -->
-<!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
+<!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
 
 See also detailed learning outcomes 2.1.2, 2.1.4, and 2.1.5 of the CS2 syllabus [`here`](../../0-subject-guide/SILO).
 

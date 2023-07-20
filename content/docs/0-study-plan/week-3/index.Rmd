@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 3 Study Plan"
 weight: 3
 bibliography: ../../../../static/libraries.bib

@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 6 Study Plan"
 weight: 6
 bibliography: ../../../../static/libraries.bib

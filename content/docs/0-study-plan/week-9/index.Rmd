@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 9 Study Plan"
 weight: 9
 bibliography: ../../../../static/libraries.bib

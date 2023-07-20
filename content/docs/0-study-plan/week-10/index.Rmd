@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 10 Study Plan"
 weight: 10
 bibliography: ../../../../static/libraries.bib

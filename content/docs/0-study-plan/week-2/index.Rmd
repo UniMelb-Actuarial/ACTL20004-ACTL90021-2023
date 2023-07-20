@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 2 Study Plan"
 weight: 2
 bibliography: ../../../../static/libraries.bib

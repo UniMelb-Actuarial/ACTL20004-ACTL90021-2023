@@ -1,4 +1,6 @@
 ---
+bookHidden: true
+bookSearchExclude: true
 title: "Week 4 Study Plan"
 weight: 4
 bibliography: ../../../../static/libraries.bib
