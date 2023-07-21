@@ -36,7 +36,7 @@ Please review the [`Prerequisite knowledge`](../../0-prerequisite-knowledge/) pa
 
 ## Module 1: Utility, Risk and Insurance
 
-Read: [`Module 1: Utility, Risk and Insurance`](../../1-utility/m1-risk-insurnance/)
+Read: [`Module 1: Utility, Risk and Insurance`](../../1-utility/m1-risk-insurance/)
 
 Annotate: [`slides`](../../../output/23-Top-M1-lec.pdf)
 <!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
@@ -54,7 +54,7 @@ Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https
 ## Optional
 
 1.  Unit 2 of IoA (2023)
-2.  Chapter 2 of (**Dic23?**)
+2.  Chapter 2 of *Insurance Risk and Ruin* (2016)
 
 # Tutorials
 
@@ -88,7 +88,7 @@ The whole of Module 1 is in scope for the week 1 tutorials.
 
 ## Next week (week 2)
 
-Next week, we will discuss Modules 2 and 3.
+Next week, we will start on Loss Reserving and will discuss Modules 2 and 3.
 
 <!-- ## Additional questions -->
 <!-- The "additional questions" are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available. -->
@@ -111,6 +111,12 @@ Next week, we will discuss Modules 2 and 3.
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Dic16" class="csl-entry">
+
+*Insurance Risk and Ruin*. 2016. 2nd ed. Cambridge University Press.
+
+</div>
 
 <div id="ref-IoA23" class="csl-entry">
 
