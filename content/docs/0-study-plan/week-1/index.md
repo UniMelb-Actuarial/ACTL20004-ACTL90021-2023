@@ -48,7 +48,7 @@ Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https
 ## Mandatory
 
 1.  Read the [`Subject Guide`](../../0-subject-guide).
-2.  As outlined [`above`](../week-1/#prerequisite-knowledge), review the mathematical background and revisions as well as associated tutorial questions.
+2.  Review the [`prerequisite knowledge`](../week-1/#prerequisite-knowledge).
 3.  Chapter 7.1-7.3 and 8.1-8.3 of Joshi (2013) (for Module 1)
 
 ## Optional
