@@ -41,7 +41,7 @@ Read: [`Module 1: Utility, Risk and Insurance`](../../1-utility/m1-risk-insuranc
 Annotate: [`slides`](../../../output/23-Top-M1-lec.pdf)
 <!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
 
-Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.
+Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/153686/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/154246/external_tools/701)). This is where annotated slides will be made available, too.
 
 # Additional preparation and resources
 
