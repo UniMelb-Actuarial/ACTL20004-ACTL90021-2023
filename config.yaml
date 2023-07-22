@@ -29,7 +29,7 @@ menu:
       url: 
       weight: 13
     - name: Ed discussion forum
-      url: https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless
+      url: https://canvas.lms.unimelb.edu.au/courses/191080/external_tools/5837?display=borderless
       weight: 15
     - name: ACTL20004 Canvas
       url: https://canvas.lms.unimelb.edu.au/courses/153686
@@ -38,16 +38,13 @@ menu:
       url: https://canvas.lms.unimelb.edu.au/courses/154246
       weight: 17
     - name: Community Canvas
-      url: https://canvas.lms.unimelb.edu.au/courses/173733
+      url: https://canvas.lms.unimelb.edu.au/courses/191080
       weight: 18
     - name: _______Exercises__________
       url: 
       weight: 19
-    - name: List of exercises (Excel)
-      url: https://canvas.lms.unimelb.edu.au/courses/173733
-      weight: 21
     - name: Tutorial exercises
-      url: https://canvas.lms.unimelb.edu.au/courses/173733
+      url: https://canvas.lms.unimelb.edu.au/courses/191080
       weight: 27
     - name: __________Links___________
       url: 
