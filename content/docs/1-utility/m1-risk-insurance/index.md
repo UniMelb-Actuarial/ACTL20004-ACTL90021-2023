@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '20 July 2023'
+date: '23 July 2023'
 output:
   beamer_presentation:
     toc: true
@@ -602,9 +602,9 @@ There are essentially two different types of use:
 
 ## Alternatives to describing behaviour
 
-There are many refinements and alternatives to the EUT, to support/describe decision-making. The ones mentioned in the syllabus are
+There are many refinements and alternatives to the EUT, to support/describe decision-making. The ones mentioned in the syllabus (and taught in ACTL30006) are
 
-- mean-variance portfolio theory (see Joshi (2013) and also ACTLxxxx) — this is very similar to using a quadratic utility function
+- mean-variance portfolio theory (see Joshi (2013)) — this is very similar to using a quadratic utility function
 - behavioural finance (Section 3 of IoA 2023)
 
 This is a whole (fascinating) field in itself, but we need to stop here for now!

@@ -701,9 +701,9 @@ There are essentially two different types of use:
 
 ## Alternatives to describing behaviour
 
-There are many refinements and alternatives to the EUT, to support/describe decision-making. The ones mentioned in the syllabus are
+There are many refinements and alternatives to the EUT, to support/describe decision-making. The ones mentioned in the syllabus (and taught in ACTL30006) are
 
-- mean-variance portfolio theory (see @Jos13 and also ACTLxxxx) --- this is very similar to using a quadratic utility function
+- mean-variance portfolio theory (see @Jos13) --- this is very similar to using a quadratic utility function
 - behavioural finance [Section 3 of @IoA23]
 
 This is a whole (fascinating) field in itself, but we need to stop here for now!
