@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '23 July 2023'
+date: '24 July 2023'
 output:
   beamer_presentation:
     toc: true
@@ -64,9 +64,9 @@ classoption: t,handout
 
 ### Understand decisions
 
-- In economics (and social science in general), one can be interested in understanding / modelling how and why individuals make decisions
-- The “problem” is social sciences (as opposed to “hard” sciences) is that human behaviour is subject to complex forces.
-- How a human makes a decision is not as deterministic as calculating, for instance, how long a rock would take to reach then ground if dropped at a certain altitude and under known conditions. Things can get complicated but science you can theoretically calculate this to any level of precision.
+- In economics (and social science in general), one can be interested in understanding / modelling how and why individuals make decisions.
+- The “problem” in social sciences (as opposed to “hard” sciences) is that human behaviour is subject to complex forces.
+- How a human makes a decision is not as deterministic as calculating, for instance, how long a rock would take to reach the ground if dropped at a certain altitude and under known conditions. Things can get complicated but in science you can theoretically calculate this to any level of precision.
 - Here we assume that we know what the objectives and constraints are, and that decisions will depend on our model of the “risk”.
 - The question is then - how do people make decisions in that context?
 - A sub-question, of particular interest in this subject, is why do individuals choose to insure, even though insurance covers are typically charged at a much higher cost than expected value?
@@ -80,9 +80,12 @@ classoption: t,handout
 - **First order stochastic dominance** is defined as follows. Outcome `\(A\)` dominates `\(B\)` if (assuming `\(x\)` is formulated in terms of gains)
   `$$F_A(x) \le F_B(x)\text{ for all }x,\text{ and }$$`
   `$$F_A(x)<F_B(x)\text{ for (at least) some value of }x,$$`
-  that is, `\(A\)` will always give at least as much money as `\(B\)`, and there is at least one instance where it will give you strictly more.
+  that is, the probability that `\(B\)` will yield an outcome higher then a given threshold is never bigger than for `\(A\)`, and there is at least one instance where it is strictly less.
 
-- This is absolute dominance, and no-one in their right mind would choose `\(B\)` over `\(A\)` from a pure financial perspective.
+- This is strong dominance, and no-one in their right mind would choose `\(B\)` over `\(A\)` from a pure financial perspective.
+
+- Note that we could still have an outcome of `\(A\)` being lower than  
+  for `\(B\)` - the dominance is in probabilistic terms.
 
 ------------------------------------------------------------------------
 
@@ -97,7 +100,7 @@ For example, two normal distributions with different means, and same variance:
   `$$\int_{-\infty}^x F_A(y) dy \le \int_{-\infty}^x F_B(y) dy \text{ for all }x,$$`
   `$$\text{ with strict equality holding for some value of }x,$$`
   then `\(A\)` displays second order stochastic dominance over `\(B\)`.
-- Rather than comparing `\(F\)` at all `\(x\)` individually, we look at the whole surface under it, from `\(-\infty\)` to `\(x\)`. This means that we allow from some local violations (“higher” `\(F\)`’s) of the first order stochastic dominance, provided they are compensated by at least as many “gains” (“lower” `\(F\)`’s) in aggregate.
+- Rather than comparing `\(F\)`’s at all `\(x\)` individually, we look at the whole surface under it, from `\(-\infty\)` to `\(x\)`. This means that we allow from some local violations (“higher” `\(F\)`’s) of the first order stochastic dominance, provided they are compensated by at least as many “gains” (“lower” `\(F\)`’s) in aggregate “so far” (up to `\(x\)`).
 - Of course, first order stochastic dominance implies second order stochastic dominance.
 
 ------------------------------------------------------------------------
