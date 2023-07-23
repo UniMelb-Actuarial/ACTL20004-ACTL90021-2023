@@ -15,8 +15,8 @@ title: "Activities"
 
 Lectures will be delivered live, in dual mode (both on Zoom and in person) in the following venue:
 
-- [UG] PAR-FBE-211 (Theatre 2), Mondays, from 11:05am to 1:00pm  
-- [PG] PAR-The Spot-4007, Mondays, from 2.15pm to 4.15pm
+- [PG] PAR-FBE-211 (Theatre 2), Mondays, from 11:05am to 1:00pm  
+- [UG] PAR-The Spot-4007, Mondays, from 2.15pm to 4.15pm
 
 ```{r, fig.align='center', out.width="100%", echo=F}
 knitr::include_graphics("../../../schedule.jpg")
