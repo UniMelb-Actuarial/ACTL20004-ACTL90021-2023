@@ -235,14 +235,11 @@ Notation:
 
 Axioms:
 
-- **Comparability**: a DM can state a preference between all available outcomes
+- **Comparability**: a DM can state a preference between all available outcomes.
 - **Transitivity**:
   $$ A \succ B \text{ and } B \succ C \Longrightarrow A \succ C.$$
 - **Independence**: If `\(A \sim B\)` then
-  \`$$\left\{\begin{array}{cccl} A & \text{ w.p. }& p & \text{ and } \\ 
-  C & \text{ w.p. }& 1-p \end{array}\right.
-  \;\;\sim\;\; \left\{\begin{array}{cccl} B & \text{ w.p. }& p & \text{ and } \\ 
-  C & \text{ w.p. }& 1-p \end{array}\right. $$
+  `\begin{equation*} \left\{ \begin{array}{cccl} A & \text{ w.p. }& p & \text{ and } \\  C & \text{ w.p. }& 1-p \end{array}\right. \;\;\sim\;\; \left\{\begin{array}{cccl} B & \text{ w.p. }& p & \text{ and } \\  C & \text{ w.p. }& 1-p \end{array}\right. \end{equation*}`
 - **Certainty equivalence**:
   - Suppose `\(A \succ B\)`
   - Suppose `\(B \succ C\)`
@@ -348,7 +345,7 @@ We will compare expectation maximisation with utility maximisation graphically.
 
 ### Indifference price and risk premium
 
-- Since the DM will be indifferent between `\(A\)` and \$$I$ with certainty, the quantity
+- Since the DM will be indifferent between `\(A\)` and \$ `\(I\)` with certainty, the quantity
   `$$I-W_0 \equiv P < 0$$`
   is the maximum amount the DM should be willing to pay in order to remove the risk included in `\(A\)`. It is called the **Indifference price**.  
   (Recall that `\(E[u(B)]=E[u(I)]\equiv E[u(W_0+P)]\)` as per the above.)
@@ -361,7 +358,7 @@ We will compare expectation maximisation with utility maximisation graphically.
 
 ## General case
 
-- Assume now that the loss is no longer `\(c\)`, but a general random variable \$$X \in \mathbb{R}$.
+- Assume now that the loss is no longer `\(c\)`, but a general random variable \$ `\(X \in \mathbb{R}\)`.
 - The uncertainty equivalent is
   `$$I = u^{-1} \left( \; E\left[ u(W_0+X)\right]\; \right).$$`
 - The indifference price is
@@ -376,19 +373,19 @@ We will compare expectation maximisation with utility maximisation graphically.
 
 The uncertainty equivalent for each option is
 $$ (\gamma \cdot E[u(W_0+X)]+1)^{1/\gamma},$$
-that is, noting that the numbers in the table ore of the type “$u(W_0+X)$”,
+that is, noting that the numbers in the table ore of the type ” `\(u(W_0+X)\)` ,
 
 - \$7,414 for umbrellas, and
 - \$7,661 for ice creams.
 
 This means that (according to this utility function)
 
-- Ella would be better off keeping her savings ($W_0$) if they exceed those amounts (if `\(W_0>I\)`);
+- Ella would be better off keeping her savings ( `\(W_0\)` ) if they exceed those amounts (if `\(W_0>I\)`);
 - Ella should be prepared to pay \$247 more for the ice cream project than for the umbrella one.
 
 ### St Petersburg paradox
 
-The certainty equivalent of \$$X$ here is
+The certainty equivalent of \$ `\(X\)` here is
 $$ \exp\{ E[u(X)]\} = \exp\{ 2 \log 2\} = 4.$$
 
 This means that an individual with log utility and no money at all (here `\(W_0=0\)` would be indifferent between receiving \$4 with certainty, and playing the game.
@@ -491,7 +488,7 @@ Examples:
   and hence
   `$$A(w) = \frac{1}{w},$$`
   which is directly inversely proportional to wealth.
-- exponential utility `\(u(w)=1-e^{-w}\)` ($a>0$): we have
+- exponential utility `\(u(w)=1-e^{-aw}\)` ( `\(a>0\)` ): we have
   `$$u'(w)=a e^{-aw} \text{ and }u''(w)=-a^2 e^{-aW}$$`
   so that
   `$$A(w) = a,$$`
