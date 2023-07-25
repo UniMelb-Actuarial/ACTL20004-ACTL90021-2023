@@ -74,7 +74,7 @@ Note that solutions will be gradually added to that same document. Hence it is n
 
 ## This week
 
-The whole of Module 1 is in scope for the week 1 tutorials.
+Tutorial exercises in scope this week are Sections 1.1 to 1.3, minus utilins3 (exercise 1.3.5). The two last exercises (`utilins3` and `util8`) will be covered next week.
 
 <!-- Here is the recording available for Week 1 from William: -->
 <!--  -->
@@ -88,7 +88,7 @@ The whole of Module 1 is in scope for the week 1 tutorials.
 
 ## Next week (week 2)
 
-Next week, we will start on Loss Reserving and will discuss Modules 2 and 3.
+The two last exercises of Module `(`utilins3`and`util8\`) will be covered next week. Also, we will start on Loss Reserving and will discuss Modules 2 (and possibly 3).
 
 <!-- ## Additional questions -->
 <!-- The "additional questions" are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available. -->
