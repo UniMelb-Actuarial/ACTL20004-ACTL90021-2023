@@ -2,7 +2,7 @@
 bookHidden: true
 bookSearchExclude: true
 weight: 20
-title: "M1 Risk and Insurnace"
+title: "M3 Reserving Claim Amounts"
 subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |

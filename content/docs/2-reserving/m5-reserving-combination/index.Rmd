@@ -2,7 +2,7 @@
 bookHidden: true
 bookSearchExclude: true
 weight: 20
-title: "M1 Risk and Insurnace"
+title: "M5 Reserving Combination"
 subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
