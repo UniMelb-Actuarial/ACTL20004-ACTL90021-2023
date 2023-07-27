@@ -60,7 +60,7 @@ Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https:/
 ## Mandatory
 
 1. Chapter 7.1-7.3 and 8.1-8.3 of @Jos13 (for Module 1)
-1. Chapter 2 of @Tay00 (for Module 2)
+1. Chapter 1 of @Tay00 (for Module 2)
 
 ## Optional
 
