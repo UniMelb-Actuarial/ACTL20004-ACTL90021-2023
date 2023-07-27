@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '24 July 2023'
+date: '28 July 2023'
 output:
   beamer_presentation:
     toc: true
@@ -359,7 +359,7 @@ We will compare expectation maximisation with utility maximisation graphically.
 ## General case
 
 - Assume now that the loss is no longer `\(c\)`, but a general random variable \$ `\(X \in \mathbb{R}\)`.
-- The uncertainty equivalent is
+- The certainty equivalent is
   `$$I = u^{-1} \left( \; E\left[ u(W_0+X)\right]\; \right).$$`
 - The indifference price is
   $$ P = I - W_0.$$
@@ -371,7 +371,7 @@ We will compare expectation maximisation with utility maximisation graphically.
 
 ### Umbrellas vs Ice cream
 
-The uncertainty equivalent for each option is
+The certainty equivalent for each option is
 $$ (\gamma \cdot E[u(W_0+X)]+1)^{1/\gamma},$$
 that is, noting that the numbers in the table ore of the type ” `\(u(W_0+X)\)` ,
 
@@ -439,7 +439,7 @@ Plot `R` code (result on the next slide):
 ``` r
 par(cex = 1.4)
 curve(umbrella(x), from = 0.01, to = 0.99, lwd = 2, col = "blue",
-  xlab = "gamma", ylab = "Uncertainty equivalent")
+  xlab = "gamma", ylab = "Certainty equivalent")
 curve(icecream(x), from = 0.01, to = 0.99, add = TRUE, lwd = 2,
   col = "red")
 abline(v = 0.5849920142672, col = "green")
@@ -532,7 +532,7 @@ Examples:
 - Think now in **relative** terms.
 - Rather than “adding” random `\(X\)` to `\(W_0\)`, we multiply `\(W_0\)` by a random factor `\(Z\)` with `\(E[Z]=1\)` and `\(Var(Z)=E[Z^2]-1\equiv \sigma^2\)`.
 - So our wealth after risk has been applied is `\(W_0\cdot Z\)`.
-- We must now define the uncertainty equivalent as
+- We must now define the certainty equivalent as
   $$ u(I) = E[u(W_0\cdot Z)].$$
 - The indifference price should also be defined in relative terms, that is,
   `$$I-W_0 \equiv - \pi_R W_0\text{ so that } \pi_R=\frac{W_0-I}{W_0}.$$`

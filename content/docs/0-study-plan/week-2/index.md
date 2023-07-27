@@ -1,6 +1,6 @@
 ---
-bookHidden: true
-bookSearchExclude: true
+bookHidden: false
+bookSearchExclude: false
 title: "Week 2 Study Plan"
 weight: 2
 bibliography: ../../../../static/libraries.bib
@@ -14,80 +14,81 @@ Week 2
 
 This week, we will cover the following topics:
 
-- End of Module 2 (Poisson decomposition, and `\((a,b)\)` family)
-- Data analysis and descriptive statistics (Module 3): how do get a good sense of the properties of a data set, either graphically or numerically?
-- Selected parametric claim size distributions (Module 3): what are good potential candidates for a describing the data likelihood profile with a parametric function?
-- Fitting of distributions (Module 3): How do we then go about fitting the parameters to a given data set?
+- End of Module 1 (characterising risk aversion, and additional considerations)
+- Module 2, which introduces the basics of loss reserving: what it is, why it matters, notation, data
 
-Here is the end of week 1 video, which introduces week 2:
+<!-- Here is the end of week 1 video, which introduces week 2: -->
+<!--  -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/2082fb0b-ecb8-41ba-9937-27b1048f9c06/public?autoplay=false&automute=false"></iframe> -->
+<!--  -->
+<!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
 
-<iframe height="420" width="640" allowfullscreen frameborder="0" src="https://echo360.net.au/media/2082fb0b-ecb8-41ba-9937-27b1048f9c06/public?autoplay=false&amp;automute=false">
-</iframe>
-<p style="font-size:10px;color: rgb(252, 156, 249);">
-If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only.
-</p>
+See also detailed learning outcomes of 1.2 (“Rational choice theory”) and 5.2 (“Liability valuations / Run-off triangles”) of the CM2 syllabus [`here`](../../0-subject-guide/SILO).
 
-See also detailed learning outcomes 1.1.1 and 1.1.5 of the CS2 syllabus [`here`](../../0-subject-guide/SILO).
-\# Main references and lectures
+# Main references and lectures
 
-## Module 3: Sections 1-4
+## Module 1: Utility, Risk and Insurance
 
-Read: [`Module 3, Sections 1 to 4`](../../1-claims-modelling/m3-individual-claim-size-modelling/)
+Read: [`Module 1: Utility, Risk and Insurance`](../../1-utility/m1-risk-insurance/)
 
-Annotate: [`slides`](../../../output/23-GIM-M3-lec.pdf)
+Annotate: [`slides`](../../../output/23-Top-M1-lec.pdf)
 <!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
 
-Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.
+Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/153686/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/154246/external_tools/701)). This is where annotated slides will be made available, too.
+
+## Module 2: Basic Reserving Concepts
+
+Read: [`Module 2: Basic Reserving Concepts`](../../2-reserving/m2-basic-reserving-concepts/)
+
+Annotate: [`slides`](../../../output/23-Top-M2-lec.pdf)
+<!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
+
+Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/153686/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/154246/external_tools/701)). This is where annotated slides will be made available, too.
 
 # Additional preparation and resources
 
 ## Mandatory
 
-1.  Chapter 3.1 and 3.2 of Wuthrich (2022) (for Module 3)
+1.  Chapter 7.1-7.3 and 8.1-8.3 of Joshi (2013) (for Module 1)
+2.  Chapter 2 of Taylor (2000) (for Module 2)
 
 ## Optional
 
-1.  n/a
+1.  Unit 2 of IoA (2023)
+2.  Chapter 2 of *Insurance Risk and Ruin* (2016)
+3.  Unit 5 of IoA (2023)
 
 # Tutorials
 
-Note that a full list of exercises is available [`here`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801). Please let us know of any mistake or required update on [`Ed`](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless).
+Please let us know of any mistake or required update on [`Ed`](https://canvas.lms.unimelb.edu.au/courses/191080/external_tools/5837?display=borderless).
 
-## Pre-Tutorial work
-
-Please study those questions **before** the tutorial.
-
-Pre-Tutorial exercises are available in the [`Pre-Tutorial book`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions
+<!-- ## Pre-Tutorial work -->
+<!-- Please study those questions **before** the tutorial. -->
+<!-- Pre-Tutorial exercises are available in the [``Pre-Tutorial book``](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions -->
 
 ## Tutorial materials
 
-Some questions have been especially selected for the tutorials. Students should review and attempt those questions ***prior to their scheduled tutorial***, after they complete the pre-tutorial work.
-
-The [`Tutorial book`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
-
-Note that solutions will be gradually added to that same document. Hence it is not recommended to print it, as it will regularly change (typos will also dynamically be corrected).
+<!-- Some questions have been especially selected for the tutorials. Students should review and attempt those questions ***prior to their scheduled tutorial***, after they complete the pre-tutorial work.  -->
+<!-- The [``Tutorial book``]() includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set. -->
+<!-- Note that solutions will be gradually added to that same document. Hence it is not recommended to print it, as it will regularly change (typos will also dynamically be corrected). -->
 
 ## This week
 
-Sections 3.1-3.4 of Module 3 are in scope for the week 2 tutorials.
+Tutorial exercises in scope this week are the two last exercises (`utilins3` and `util8`) of Module 1, as well as Module 2.
 
-<!-- Here is the recording available for Week 2 from William: -->
+<!-- Here is the recording available for Week 1 from William: -->
 <!--  -->
-<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/37147348-9bb8-419b-b085-2009b577e9d7/public?autoplay=false&automute=false"></iframe> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/986498e7-d7fa-42c4-8af0-492f068f4ccd/public?autoplay=false&automute=false"></iframe> -->
 <!--  -->
-<!-- Here is the recording available for Week 2 from Eric: -->
+<!-- Here is the recording available for Week 1 from Eric: -->
 <!--  -->
-<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/6c60a367-930d-416f-9884-5400aff0af5e/public?autoplay=false&automute=false"></iframe> -->
+<!-- <iframe height="420" width="640" allowfullscreen frameborder=0 src="https://echo360.net.au/media/a5dc442a-1e84-49c8-b317-3f4eb4c1cfa0/public?autoplay=false&automute=false"></iframe> -->
 <!--  -->
 <!-- <p style="font-size:10px;color: rgb(252, 156, 249);"> If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/145406/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only. </p> -->
 
 ## Next week (week 3)
 
-Next week, we will discuss Module 3, Sections 5 to 7.
-
-## Additional questions
-
-The “additional questions” are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available.
+We will move on to Module 3 (and perhaps 4).
 
 # Preparation for assessment
 
@@ -96,7 +97,7 @@ The “additional questions” are here for reinforcement or revision, but are n
 <!-- install.packages("devtools") -->
 <!-- devtools::install_github("hadley/emo") -->
 
-- Start your summary of Module 2.
+- Start your summary of Module 1.
 
 ## Assignment (25%)
 
@@ -106,9 +107,27 @@ The “additional questions” are here for reinforcement or revision, but are n
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-Wut20" class="csl-entry">
+<div id="ref-Dic16" class="csl-entry">
 
-Wuthrich, Mario V. 2022. “Non-Life Insurance: Mathematics & Statistics.” Lecture notes. RiskLab, ETH Zurich; Swiss Finance Institute.
+*Insurance Risk and Ruin*. 2016. 2nd ed. Cambridge University Press.
+
+</div>
+
+<div id="ref-IoA23" class="csl-entry">
+
+IoA. 2023. *Course Notes and Core Reading for Subject CM2 Models*. The Institute of Actuaries.
+
+</div>
+
+<div id="ref-Jos13" class="csl-entry">
+
+Joshi, Mark Suresh. 2013. *Introduction to Mathematical Portfolio Theory*. Cambridge University Press.
+
+</div>
+
+<div id="ref-Tay00" class="csl-entry">
+
+Taylor, Greg. 2000. *Loss Reserving: An Actuarial Perspective*. Huebner International Series on Risk, Insurance and Economic Security. Kluwer Academic Publishers.
 
 </div>
 

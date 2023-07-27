@@ -119,7 +119,7 @@ library(extRemes)
 
 ## Decision making under risk and uncertainty 
 
-### Context 
+### Context  
 
 - In an Enterprise Risk Management context (ERM), "risk" is defined as the "effect of uncertainty on objectives"
 - So essential ingredients here are:
@@ -129,7 +129,7 @@ library(extRemes)
 
 ### Understand decisions
 
-- In economics (and social science in general), one can be interested in understanding / modelling how and why individuals make decisions.
+- In economics (and social science in general), one can be interested in understanding / modelling how and why individuals make decisions. 
 - The "problem" in social sciences (as opposed to "hard" sciences) is that human behaviour is subject to complex forces. 
 - How a human makes a decision is not as deterministic as calculating, for instance, how long a rock would take to reach the ground if dropped at a certain altitude and under known conditions. Things can get complicated but in science you can theoretically calculate this to any level of precision.
 - Here we assume that we know what the objectives and constraints are, and that decisions will depend on our model of the "risk".
@@ -462,7 +462,7 @@ is called the **Risk premium**.
 ## General case
 
 - Assume now that the loss is no longer $c$, but a general random variable \$ $X \in \mathbb{R}$.
-- The uncertainty equivalent is 
+- The certainty equivalent is 
 $$I = u^{-1} \left( \; E\left[ u(W_0+X)\right]\; \right).$$
 - The indifference price is
 $$ P = I - W_0.$$
@@ -474,7 +474,7 @@ This is the maximum amount an insurer would be able to charge for full protectio
 
 ### Umbrellas vs Ice cream
 
-The uncertainty equivalent for each option is
+The certainty equivalent for each option is
 $$ (\gamma \cdot E[u(W_0+X)]+1)^{1/\gamma},$$
 that is, noting that the numbers in the table ore of the type " $u(W_0+X)$ ,
 
@@ -539,7 +539,7 @@ Plot `R` code (result on the next slide):
 
 ```{r umbicecreamgamma,fig.show='hide'} 
 par(cex=1.4)
-curve(umbrella(x),from=0.01,to=0.99,lwd=2,col="blue",xlab="gamma",ylab="Uncertainty equivalent")
+curve(umbrella(x),from=0.01,to=0.99,lwd=2,col="blue",xlab="gamma",ylab="Certainty equivalent")
 curve(icecream(x),from=0.01,to=0.99,add=TRUE,lwd=2,col="red")
 abline(v=0.5849920142672,col="green")
 text(0.6,6000,paste(signif(0.5849920142672,digits=3),sep=""),col="green",adj=0)
@@ -634,7 +634,7 @@ $$A'(w) < 0.$$
 - Think now in **relative** terms.
 - Rather than "adding" random $X$ to $W_0$, we multiply $W_0$ by a random factor $Z$ with $E[Z]=1$ and $Var(Z)=E[Z^2]-1\equiv \sigma^2$.
 - So our wealth after risk has been applied is $W_0\cdot Z$.
-- We must now define the uncertainty equivalent as
+- We must now define the certainty equivalent as
 $$ u(I) = E[u(W_0\cdot Z)].$$
 - The indifference price should also be defined in relative terms, that is,
 $$I-W_0 \equiv - \pi_R W_0\text{ so that } \pi_R=\frac{W_0-I}{W_0}.$$

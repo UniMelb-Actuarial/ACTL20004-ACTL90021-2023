@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '26 July 2023'
+date: '28 July 2023'
 output:
   beamer_presentation:
     toc: true
@@ -69,7 +69,7 @@ classoption: t,handout
 
 Insurance Australia Group is one of the largest Australian general insurers (the largest under some measures)
 
-Its latest Balance Sheet (as at 31 December 2022), see [`page 20`](https://www.iag.com.au/sites/default/files/Documents/Results%20%26%20reports/IAGL-1H23-Financial-statements.pdf) reads
+Its latest Balance Sheet (as at 31 December 2022, see [`page 20`](https://www.iag.com.au/sites/default/files/Documents/Results%20%26%20reports/IAGL-1H23-Financial-statements.pdf)) shows
 
 - Assets
   - Total: 34,428m (100%)

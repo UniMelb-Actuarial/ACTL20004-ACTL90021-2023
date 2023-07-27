@@ -135,7 +135,7 @@ it's a huge responsibility!
 
 Insurance Australia Group is one of the largest Australian general insurers (the largest under some measures)
 
-Its latest Balance Sheet (as at 31 December 2022), see [`page 20`](https://www.iag.com.au/sites/default/files/Documents/Results%20%26%20reports/IAGL-1H23-Financial-statements.pdf) reads
+Its latest Balance Sheet (as at 31 December 2022, see [`page 20`](https://www.iag.com.au/sites/default/files/Documents/Results%20%26%20reports/IAGL-1H23-Financial-statements.pdf)) shows
 
 - Assets
   - Total: 34,428m (100%)
