@@ -50,7 +50,7 @@ Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https
 ## Mandatory
 
 1.  Chapter 7.1-7.3 and 8.1-8.3 of Joshi (2013) (for Module 1)
-2.  Chapter 2 of Taylor (2000) (for Module 2)
+2.  Chapter 1 of Taylor (2000) (for Module 2)
 
 ## Optional
 
