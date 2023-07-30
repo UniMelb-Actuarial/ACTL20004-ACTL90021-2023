@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '28 July 2023'
+date: '31 July 2023'
 output:
   beamer_presentation:
     toc: true
@@ -409,7 +409,7 @@ Assume now that Ella’s savings were \$100,000, plus the cost of either project
 | **Expectation** | **660.5** |  **656.7** |             |
 
 - We are back to preferring Umbrellas!
-- That is because Ella has sufficient wealth to accept the much higher level of risk of Umbrellas. This extra risk no long trumps the  
+- That is because Ella has sufficient wealth to accept the much higher level of risk of Umbrellas. This extra risk no longer trumps the  
   extra level of expected profit.
 
 ### Umbrellas vs Ice creams: What if `\(\gamma\)` changes?
@@ -460,7 +460,7 @@ text(0.78, 9000, "Umbrellas", col = "blue", adj = 1)
 Observations:
 
 - We have seen above that results in the Umbrella vs Ice cream example depend on the level of wealth, and also on the parameter of the utility function.
-- More generally, results will depend on the shape of the utility function, and the region around decisions are made (level of wealth `\(W_0\)`).
+- More generally, results will depend on the shape of the utility function, and the region around which decisions are made (level of wealth `\(W_0\)`).
 - When referring to “results” here, we refer to the attitudes of the decision maker towards risk, or “risk aversion”.
 
 **Is there a way of characterising risk aversion, that takes into account the utility assumptions and wealth, which we can use for comparisons?**
@@ -493,7 +493,7 @@ Examples:
   so that
   `$$A(w) = a,$$`
   which is constant, and provides a nice interpretation for  
-  parameter `\(a\)`.
+  parameter `\(a\)` in the case of exponential utility.
 
 ### Interpretation: risk premia via Taylor’s expansion
 
@@ -512,15 +512,15 @@ Examples:
   and hence
   `$$\frac{1}{2} u''(W_0)\sigma^2 \approx u'(W_0) P \Longleftrightarrow P \approx \frac{1}{2}\frac{u''(W_0)}{u'(W_0)} \sigma^2 = - A(W_0) \sigma^2.$$`
   This shows that the indifference price is (approximately) proportional to the absolute risk aversion, which makes a lot of sense.
-- Here the risk premium is `\(-P\)`, which means that it is simply `\(A(W_0)\)` scaled up by `\(\sigma^2\)`.
+- Here the risk premium is `\(-P\)` (remember `\(E[X]0\)` ), which means that it is simply `\(A(W_0)\)` scaled up by `\(\sigma^2\)`.
 
 ### Effect of wealth on ARA
 
-- The formula for ARA `\(A(w)\)` is a function of `\(W\)`
+- The formula for the ARA `\(A(w)\)` is a function of `\(w\)`
 - This means that the ARA varies for different of wealth, which makes sense: a millionaire is more likely gamble \$100 than a poor student with no money.
 - In general, one expects the ARA to be decreasing with wealth, that is,
   `$$A'(w) < 0.$$`
-- If, on the other hand `\(A'(w)-\)`, this means that the risk premium is constant for any levels of wealth.
+- If, on the other hand `\(A'(w)=0\)`, this means that the risk premium is constant for any levels of wealth.
 - Examples:
   - log utility: `\(A'(w) = - w^{-2} < 0\)`.
   - exponential utility: `\(A'(w) = 0\)`. Here the risk premium is insensitive to wealth.
@@ -545,13 +545,13 @@ Examples:
   which as mean 0 and variance `\(W_0^2 \sigma^2\)`, we get
   `$$u(W_0 Z) \approx u(W_0)+u'(W_0) (W_0 Z-W_0) + u''(W_0)\frac{(W_0 Z-W_0)^2}{2},$$`
   and hence that
-  `$$E[u(W_0 Z)] = u(W_0) + \frac{1}{2} \sigma^2 u''(W_0) W_0^2.$$`
+  `$$E[u(W_0 Z)] \approx u(W_0) + \frac{1}{2} \sigma^2 u''(W_0) W_0^2.$$`
 
 ------------------------------------------------------------------------
 
 - Similarly, noting that
   `$$I = W_0 - \pi_R W_0,$$`
-  we get
+  we get (via Taylor) that
   `$$u(I) \approx u(W_0) - \pi_R u'(W_0) W_0.$$`  
 - Combining those two results as before yields
   `$$\pi_R = -\frac{\sigma^2}{2}W_0 \frac{u''(W_0)}{u'(W_0)}.$$`
@@ -596,16 +596,16 @@ There are essentially two different types of use:
 
 - The EUT was gigantic step forward towards being able to describe decision making of humans.
 - It suffers from a number of flaws and limitations, though. Here are a few:
-  - It assumes we can determine someone’s utility function, which is a strong assumption
-  - It requires being able to describe risk with certainty. In reality there is uncertainty about outcomes, which complicates things
+  - It assumes we can determine someone’s utility function, which is a strong assumption.
+  - It requires being able to describe risk with certainty. In reality there is uncertainty about outcomes, which complicates things.
   - Whether a company has a utility function is debatable (and debated!). At best, it makes decision on the basis of a combination of different utility functions (the decision makers). In the worst case, it is simply impossible to describe decision making with a utility function. One can also argue that risk aversion is a trait of human nature, which is not relevant to a company.
 
 ## Alternatives to describing behaviour
 
 There are many refinements and alternatives to the EUT, to support/describe decision-making. The ones mentioned in the syllabus (and taught in ACTL30006) are
 
-- mean-variance portfolio theory (see Joshi (2013)) — this is very similar to using a quadratic utility function
-- behavioural finance (Section 3 of IoA 2023)
+- mean-variance portfolio theory (see Joshi (2013)) — this is very similar to using a quadratic utility function;
+- behavioural finance (Section 3 of IoA 2023).
 
 This is a whole (fascinating) field in itself, but we need to stop here for now!
 
