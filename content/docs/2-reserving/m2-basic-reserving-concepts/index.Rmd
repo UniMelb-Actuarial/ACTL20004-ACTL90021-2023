@@ -115,23 +115,26 @@ library(extRemes)
 
 [^1]: References: Chapter 1 of @Tay00 | $\; \rightarrow$ [\textcolor{blue}{\underline{latest slides}}](https://gim-am3.netlify.app/output/23-Top-M2-lec.pdf) 
 
-# Introduction
+# Introduction - Claims liabilities
 
-## Claims liabilities
-
-### Definition
+## Definition
 
 - Generally in insurance, premiums are collected first, before coverage is provided.   The insurer can't consider this premium as income before coverage is provided.
-- Furthermore, as times goes by, the insurer does not know instantly how much losses it will have to pay (e.g., delays in notification, delays in payments)
+- Furthermore, as times goes by, the insurer does not know instantly how much losses it will have to pay (e.g., delays in notification, delays in payments).
+
+---
+
+
 - This gives rise to two types of liabilities:
-  - **Unearned premium liability**: an amount set aside for covering losses of coverage *not yet provided*, but where a premium has already been collected;
+  - **Unearned premium liability**: an amount set aside for covering losses related to coverage *not yet provided*, but where a premium has already been collected;
   - **Outstanding claim liability**: an amount set aside for for covering losses corresponding to coverage that *has already been provided*, but where payments are still expected to occur.
-- These take a significant proportion of an insurer's balance sheet, often multiple times its equity, as exemplified in the IAG example (forthwith)
-- It is the actuary's responsibility to determine those amounts  
-it's a huge responsibility!
+- These take a significant proportion of an insurer's balance sheet, often multiple times its equity, as exemplified in the IAG example (forthwith).
+- It is the actuary's responsibility to determine those amounts 
+
+**It's a huge responsibility!**
 
 
-### The case of IAG
+## The case of IAG
 
 Insurance Australia Group is one of the largest Australian general insurers (the largest under some measures)
 
@@ -175,7 +178,7 @@ From $t_2$ and $t_9$:
 
 ## Inflation
 
-- Because claims are paid at different points in time, they are subject to inflation
+- Because claims are paid at different points in time, they are subject to inflation.
 - Inflation will generally be different from CPI, and is typically specific to a line of business. Let $\lambda(t)$ be an index describing such claims inflation.
 - Inflation may continue beyond the point of occurrence of a claim, up to the point of payment.
   - This can have a very long duration (e.g. income in workers compensation)
@@ -204,16 +207,16 @@ include_graphics(sprintf("%s/Figure_1_2.png", graphics_path), error = F)
 
 Note
 
-- if $t\ge t_1$: the liability exists, and ideally the claim should be considered in some shape or form
-- if $t_1 \ge t \ge t_2$: claim is unknown, but the insurer knows that there are unknowns. It will try to estimate those as "IBNR" (see also next module)
-- if $t\ge t_2$: claim will be known, and the insurer will try to estimate its cost (case reserve)
-- between $t_6$ and $t_7$, as well as after $t_9$, the insurer's estimate will be zero (because the claim is deemed closed)
+- if $t\ge t_1$: the liability exists, and ideally the claim should be considered in some shape or form.
+- if $t_1 \ge t \ge t_2$: claim is unknown, but the insurer knows that there are unknowns. It will try to estimate those as "IBNR" (see also next module).
+- if $t\ge t_2$: claim will be known, and the insurer will try to estimate its cost (case reserve).
+- between $t_6$ and $t_7$, as well as after $t_9$, the insurer's estimate will be zero (because the claim is deemed closed).
 
 ### Time dimensions of "periods"
 
 Let:
 
-- a $period$ be some measure of time length, such as a month, quarter or year
+- a $period$ be some appropriate measure of time length, such as a month, quarter or year.
 
 Now when referring to a specific claim payment, it can be classified according to:
 
@@ -232,7 +235,7 @@ This illustrates those concepts:
 ```{r  fig.align='center',out.width="100%", echo=F}
 include_graphics(sprintf("%s/Figure_1_3.png", graphics_path), error = F)
 ```
-Relation between periods of origin, development and experience
+Relation between periods of origin, development and experience.
 
 ### Further notation
 
@@ -242,10 +245,10 @@ $$  P(i,j)\equiv \overline{P}(i,k) \equiv \sum_{m=j+1}^\infty C(i,m)$$
 (note you can replace $j$ with $k-i$ in the lower bound)
 - Total outstanding loss liability at the end of $k$ - for all periods of origin:
 $$ \overline{P}(k) = \sum_{i=0}^I \overline{P}(i,k) = \sum_{i=0}^I \sum_{m=k-i+1}^\infty C(i,m).$$
-- Both $\overline{P}(i,k)$ and $\overline{P}(k)$ are aggregate amounts (not claims based)
+- Both $\overline{P}(i,k)$ and $\overline{P}(k)$ are aggregate amounts (not claims based).
 - While the textbook says that most actuarial estimates are aggregate, **individual claims reserving** has gathered a lot of momentum  
 since then, thanks to data availability, computing power  
-and machine learning capabilities
+and machine learning capabilities.
 
 ## Components of outstanding loss liability
 
@@ -264,32 +267,33 @@ Usually, the reserving technique will yield estimates of $C^*$, that is, as of d
 $$C(i,j) = C^*(i,j)\frac{\lambda(k)}{\lambda_0},$$
 where
 
-- $\lambda(k)$ is the relevant claims inflation index
+- $\lambda(k)$ is the relevant claims inflation index;
 - $\lambda_0$ is the value of that index on the base date.
 
-(again, superimposed inflation is out of scope)
+(again, superimposed inflation is out of scope, but can conceptually be seen as adjusting $\lambda$ appropriately)
 
 ### Loss adjustment expenses
 
 We consider:
 
 - **allocated** loss adjustment expenses (ALAE)
-  - these can be linked to specific claims
-  - these are typically included in the $C(i,j)$ and don't require extra treatment
+  - These can be linked to specific claims.
+  - These are typically included in the $C(i,j)$ and don't require extra treatment.
 - **unallocated** loss adjustment expenses (ULAE)
-  - these cannot be easily linked to specific claims (think overhead)
-  - these are typically ont in the $C(i,j)$ and will require  specific consideration if they are to be included.
-  - denote
+  - These cannot be easily linked to specific claims (think overhead costs, for instance).
+  - These are typically not in the $C(i,j)$ and will require  specific consideration if they are to be included.
+  - Denote
   $$ e(i,j)$$
-  as the *proportion* of paid losses to be added to costs for ULAE
+  as the *proportion* of paid losses to be added to costs for ULAE.
   
 
 ### Investment income
 
-- liabilities will have assets covering them on the balance sheet
-- these may be invested, and it may be required to consider corresponding investment returns 
-- that is, if the \$10 you have to pay in 5 years can be covered with \$9 today (even after allowing for inflation), then you may be required/allowed to reserve \$9 instead of \$10.
-- let $d(k)$, $k=I+1, I+2, \ldots$, be the discount factor to be applied for payments made in experience period $k$ (in the example above, we would have $d(I+5)=9/10$) 
+- Liabilities will have assets covering them on the balance sheet.
+- These may be invested, and it may be required to consider corresponding investment returns.
+- That is, if the \$10 you have to pay in 5 years can be covered with \$9 today (even after allowing for inflation), then you may be required/allowed to reserve \$9 instead of \$10.
+- Let $d(k)$, $k=I+1, I+2, \ldots$, be the discount factor to be applied for payments made in experience period $k$ (in the example above, we would have $d(I+5)=9/10$) .
+- Note that $\lambda \neq d$: there is no reason why claims inflation should evolve in the same identical way to your investments.
 
 ---
 
@@ -304,9 +308,9 @@ In the end, we have:
 
 Possible recoveries (offsetting claims):
 
-- reinsurer payments
-- third parties at fault
-- salvage value (for property insurance)
+- reinsurer payments;
+- third parties at fault;
+- salvage value (for property insurance).
 
 Generally speaking, insurers have a [`subrogation right`](https://www.investopedia.com/terms/s/subrogation.asp), which allows them to seek compensation on behalf of the insured if they believe it is worth the effort.
 
@@ -317,11 +321,11 @@ This can be considered as negative $C(i,j)$, or may require another triangle alt
 ## General
 
 
-- So far, we have defined the "oustanding loss liability" as a random variable - this is the actual amount that will have to be paid
-- In general this is unknown, and is now the question is how to estimate this, and how much to set aside for covering those liabilities
-- I makes sense that you would reserve its expectation plus some margin, so that we define:
-  - **Expected outstanding loss liability**: this is the expectation, also called **central estimate**
-  - **Prudential margin** or **risk margin** is the margin you add to the central estimate to allow for estimation error
+- So far, we have defined the "oustanding loss liability" as a random variable - this is the actual amount that will have to be paid.
+- In general this is unknown, and now the question is how to estimate this, and how much to set aside for covering those liabilities.
+- It makes sense that you would reserve its expectation plus some margin, so that we define:
+  - **Expected outstanding loss liability**: this is the expectation, also called **central estimate**;
+  - **Prudential margin** or **risk margin**: this is the margin you add to the central estimate to allow for estimation error, and "worse than average" cases.
 - In the end we have:
 $$\text{loss reserve }= \text{ central estimate }+ \text{ risk margin}.$$
 
@@ -363,13 +367,13 @@ Generally, available data includes at least:
 - claim payments;
 - case estimates.
 
-Nowadays, one also typically have:
+Nowadays, one also typically has:
 
-- details of payment dates for each claim
-- details of case reserve amounts and associate revision dates for each claim
+- details of payment dates for each claim;
+- details of case reserve amounts and associate revision dates for each claim;
 - additional data such as policy data, claims qualitative data (description of the event), etc...
 
-These can be used for improving reserving, but this is outside scope of this subject.
+These can be (are nowadays increasingly) used for improving reserving, but this is outside scope of this subject.
 
 ## Aggregate data
 
@@ -377,10 +381,10 @@ These can be used for improving reserving, but this is outside scope of this sub
 
 In the case of aggregate data, each cell $(i,j)$ will have data of four types:
 
-- $N(i,j)$ are the counts of claims notified
-- $C(i,j)$ are paid losses
-- $U(i,j)$ are the counts of claims open
-- $Q(i,j)$ are the case estimates of oustanding liability
+- $N(i,j)$ are the counts of claims notified;
+- $C(i,j)$ are paid losses;
+- $U(i,j)$ are the counts of claims open ;
+- $Q(i,j)$ are the case estimates of oustanding liability.
 
 Because those numbers refer to cell $(i,j)$ *only*, we often refer to the as **incremental data**.
 
