@@ -2,7 +2,7 @@
 bookHidden: true
 bookSearchExclude: true
 weight: 20
-title: "M4 Basic Reserving Concepts"
+title: "M3 Reserving Claim Counts"
 subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
@@ -55,8 +55,8 @@ library(knitr)
 
 ### Change these two variables to change name of image folder and output file
 #
-graphics_folder <- "module-2"
-output_name <- "23-Top-M2-lec" # change latest slides below, too!
+graphics_folder <- "module-3"
+output_name <- "23-Top-M3-lec" # change latest slides below, too!
 
 ### Do not change the following unless you know what you are doing
 # output width
@@ -113,10 +113,113 @@ library(extRemes)
 ```
 
 
-[^1]: References: Chapter 1 of @Tay00 | $\; \rightarrow$ [\textcolor{blue}{\underline{latest slides}}](https://gim-am3.netlify.app/output/23-Top-M2-lec.pdf) 
+[^1]: References: Chapter 2 of @Tay00 | $\; \rightarrow$ [\textcolor{blue}{\underline{latest slides}}](https://gim-am3.netlify.app/output/23-Top-M2-lec.pdf) 
 
-# Introduction: Models for aggregate losses  
+# Exposure
 
+## General idea
+
+Assume that we there exists $e(i)$ so that we can write
+
+$$E[N(i,j)] \equiv e(i) \mu(j),$$
+where (this is important), $\mu(j)$ does **not depend on $i$**.
+
+- $e(i)$ will be called the **exposure** in period of occurrence $i$ (for instance, "car-years").
+- $\mu(j)$ may be interpreted as **relative claim frequency** in period $j$ (per unit of exposure).
+- The cumulative version
+$$\frac{E[N(i,\cdot)]}{e(i)} = \mu(\cdot)$$
+is the **relative frequency of claim occurence per period**.
+
+--- 
+
+In practice, this is not always achievable, that is,
+$$\frac{E[N(i,j)]}{e(i)} = \mu(i,j),$$
+with only *weak dependency* of $\mu(i,j)$ on $i$.
+
+# IBNR claims
+
+## Exposure based methods
+
+### Allowing for an $i$ effect in $\mu$
+
+Assume
+$$ \mu(i,j) = f(i) v(j),$$
+where $f(i)$ is some known function (otherwise determined).
+
+We have then
+$$E[N(i,j)] = e(i)f(i)v(j).$$
+We will discuss how to work with this.
+
+### Examples of $f(i)$
+
+- A simple example could be:
+$$ f(i) = \alpha + \beta i,$$
+which leads to a linear adjustment across rows (periods of origin $i$) to development "base frequency" $v(j)$ (for given development period $j$).
+- It is unlikely to hold across all columns without modification, so one could extend this to
+$$ \mu(i,j) = f_j(i) v(j)$$
+so that $\alpha$ and $\beta$ will (potentially) depend on $j$ as well
+- This could lead to a highly over-parametrised model.
+
+---
+
+- In practice, changes in "development speed" often occur in the first two development periods mostly, and in opposite direction (justifying a separate $\alpha$ and $\beta$). 
+- We could then use
+\begin{eqnarray*}
+\mu(i,0) &=& f_0(i) = \alpha_0 + \beta_0 i, \\
+\mu(i,1) &=& f_1(i) = \alpha_1 + \beta_1 i, \\
+\mu(i,j) &=& v(j), j=2, 3, \ldots.
+\end{eqnarray*}
+
+
+### Estimating $N(i,j)$
+
+Now, assume
+$$N(i,j)\sim \text{Poisson}(e(i)f(i)v(j))$$
+so that (assuming independence across periods of origin)
+$$N(\cdot,j)\sim \text{Poisson}\left(v(j) \sum_i e(i)f(i)\right).$$
+Then we can show that
+$$\hat{v}(j) = \frac{N(\cdot,j)}{\sum_i e(i)f(i)}$$
+(over existing data) is a maximum likelihood, minimum variance, unbiased, consistent estimator (in short, a good one!).
+
+---
+
+In the end, our estimator for $E[N(i,j)]$ is
+$$\widehat{E[N(i,j)]} = e(i)f(i)\left[ \sum_{j=I-i+1}^I + \sum_{j=I+1}^\infty \right] \hat{v}(j).$$
+
+- the first $\sum$ include $\hat{v}$'s estimated from available data 
+- the second $\sum$ cannot be estimated from data, and will be extrapolated from the former set (e.g. linear regression or more typically, log-linear regression as exemplified later).
+
+### Example
+
+@Tay00, Table 2.1 and Table 2.2 provide an example of such calculations, where $f(i)=1$.
+
+## Normalised methods
+
+### Motivation
+
+- In the previous section, one hoped that claim notification rates $\mu$ (as proportions of exposure $e$ ) would consistent (constant) across periods of origin $i$, or at least approximatively or predictively so.
+- There may not always exist such an exposure.
+- For instance, consider Public Liability of a manufacturer of toys:
+  - would time a good measure of exposure? or revenue?
+  - this would unlikely to be satisfactory as the mix of business (which toys are sold and at what level) is likely to change all the time
+  
+
+  
+  
+### The idea
+
+- We keep the idea of multiplicative structure, but $\mu$ would multiply something else than $e(i)$, say $\alpha(i)$:
+$$ E[N(i,j)] = \alpha(i)\mu(j).$$
+- We will "anchor" our prediction on a subset $S$ of existing data, say:
+$$ \alpha(i) \approx \sum_{m \in S} N(i,m),$$
+where $S$ is typically the first $m$ development periods for each period of origin $i$. 
+- This should work well if these are deemed a good indicator of the propensity to claim in a given period $i$.
+
+---
+
+- Then we assume that the ratio 
+$$\frac{E[N(i,j)]}{E\left[ \sum_{m \in S} N(i,m) \right]} = \frac{\alpha(i) \mu(j)}{\alpha(i)\sum_{m \in S} \mu(m)} = \frac{ \mu(j)}{\sum_{m \in S} \mu(m)},$$
+which is independent of $i$, can be estimated from data and used to "complete the rectangle".
 
 # References {.allowframebreaks}
 
