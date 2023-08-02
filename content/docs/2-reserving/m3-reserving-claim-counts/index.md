@@ -1,13 +1,13 @@
 ---
-bookHidden: true
-bookSearchExclude: true
+bookHidden: false
+bookSearchExclude: false
 weight: 20
 title: "M3 Reserving Claim Counts"
 subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '01 August 2023'
+date: '02 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -114,14 +114,17 @@ Then we can show that
 ------------------------------------------------------------------------
 
 In the end, our estimator for `\(E[N(i,j)]\)` is
-`$$\widehat{E[N(i,j)]} = e(i)f(i)\left[ \sum_{j=I-i+1}^I + \sum_{j=I+1}^\infty \right] \hat{v}(j).$$`
-
+`$$\widehat{E[N(i,j)]} = e(i)f(i)\hat{v}(j)$$`
+with IBNR
+`$$\text{IBNR}(i) = e(i)f(i)\left[ \sum_{j=I-i+1}^I + \sum_{j=I+1}^\infty \right] \hat{v}(j).$$`
 - the first `\(\sum\)` include `\(\hat{v}\)`’s estimated from available data
 - the second `\(\sum\)` cannot be estimated from data, and will be extrapolated from the former set (e.g. linear regression or more typically, log-linear regression as exemplified later).
 
 ### Example
 
 Taylor (2000), Table 2.1 and Table 2.2 provide an example of such calculations, where `\(f(i)=1\)`.
+
+See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
 
 ## Normalised methods
 
@@ -137,20 +140,155 @@ Taylor (2000), Table 2.1 and Table 2.2 provide an example of such calculations, 
 
 - We keep the idea of multiplicative structure, but `\(\mu\)` would multiply something else than `\(e(i)\)`, say `\(\alpha(i)\)`:
   $$ E[N(i,j)] = \alpha(i)\mu(j).$$
-- We will “anchor” our prediction on a subset `\(S\)` of existing data, say:
-  $$ \alpha(i) \approx \sum_{m \in S} N(i,m),$$
-  where `\(S\)` is typically the first `\(m\)` development periods for each period of origin `\(i\)`.
-- This should work well if these are deemed a good indicator of the propensity to claim in a given period `\(i\)`.
+- Then we automatically have
+  `$$\frac{E[N(i,j)]}{E[N(i,0)]}= \frac{\mu(j)}{\mu(0)}$$`
+  which is independnt of `\(i\)`.
+- Now Jensen’s inequality teaches us that
+  `$$\frac{E[N(i,j)]}{E[N(i,0)]} \neq E\left[\frac{N(i,j)}{N(i,0)}\right];$$`
+  Nevertheless Taylor (2000) argues that the difference is small and  
+  that we can use the ratios `\(N(i,j)/N(i,0)\)` to estimate the `\(\mu\)`’s.
 
 ------------------------------------------------------------------------
 
-- Then we assume that the ratio
-  `$$\frac{E[N(i,j)]}{E\left[ \sum_{m \in S} N(i,m) \right]} = \frac{\alpha(i) \mu(j)}{\alpha(i)\sum_{m \in S} \mu(m)} = \frac{ \mu(j)}{\sum_{m \in S} \mu(m)},$$`
-  which is independent of `\(i\)`, can be estimated from data and used to “complete the rectangle”.
+- Taking a weighted average, we get
+  `$$\hat{v}(j) = \frac{\sum_i N(i,j)}{\sum_i N(i,0)}$$`
+  as an (approximately) unbiased estimator of `\(\mu(j)/\mu(0)\)`.
+- Hence,
+  `$$E[N(i,j)] \text{ is estimated by }N(i,0)\hat{v}(j)$$`
+  and
+  $$ \text{IBNR}(i) = N(i,0) \left[ \sum_{j=I-i+1}^I + \sum_{j=I+1}^\infty  \right] \hat{v}(j).$$
+  This is analogous to the previous “exposure” based formula.
+
+-Note that even if we don’t have `\(E[N(i,j)] = \alpha(i)\mu(j)\)` but rather `\(E[N(i,j)] = \alpha_j(i)\mu(j)\)`, the triangle of normalised counts `\(N(i,j)/N(i,0)\)` are useful to investigate, to look for trends.
+
+### Generalisation
+
+- We will now “anchor” our prediction on a subset `\(S\)` of existing data
+- This generalises what we had before to
+  `$$\frac{E[N(i,j)]}{E\left[\sum_{m \in S} N(i,m)\right]} = \frac{\mu(j)}{\sum_{m \in S} \mu(m)}.$$`
+  where `\(S\)` is any subset of `\(\{0,1,\ldots,I\}\)`, but typically the first `\(m\)` development periods for each period of origin `\(i\)`.
+- It is assumed that this ratio is independent of `\(i\)`
+- This should work well if `\(S\)` is deemed to be a good indicator of the propensity to claim in a given period `\(i\)`.
+
+------------------------------------------------------------------------
+
+- The prediction of `\(N(i,j)\)` becomes
+  `$$\left(\sum_{m \in S} N(i,m)\right) \hat{v}(j)$$`
+  with `\(\hat{v}(j)\)` the estimate of the the ratio on the previous slide.
+- Note that the most recent origin years may require special treatment (see example), as we do not have observations for all `\(m\in S\)`.
+
+### Example
+
+- Table 2.3 and 2.4 revisit the previous example with `\(S=\{0,1\}\)`.
+- This can be useful if some disturbance to the claim notification process has caused a movement between development periods 0 and 1 but has had no other effect.
+- The last row in the triangle requires special treament, as only `\(N(I,0)\)` is available. We extrapolate
+  `$$N(I,0)+N(I,1) \text{ as }N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}$$`
+  Because `\(\hat{v}(0)+\hat{v}(1) = 1000\)` (by definition since we take them from the same type of average) we end up with
+  $$ N(I,j)\text{ is estimated by }\left(N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}\right)\frac{\hat{v}(j)}{1000} = N(I,0)\frac{\hat{v}(j)}{\hat{v}(0)}.$$
+- See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
+
+## Chain Ladder
+
+### Introduction
+
+- Probably the most famous (and basic) loss reserving technique
+- Quoting Taylor (2000): “The name is understood to refer to the chaining of a sequence of ratios (the age to age factors below) into a ladder of factors (the age to ultimate factors below) which enable one to climb (i.e. project) from experience recorded to date to its predicted ultimate value.”
+- We will see three derivations, which are informative about the meaning of the method.
+
+### Derivation 1 - Heuristic approach
+
+- We start from
+  $$ E[N(i,j)] = \alpha(i)\mu(j)$$
+  as before, but consider
+  `$$\frac{E[A(i,j+1)]}{E[A(i,j)]} = \frac{\sum_{m=0}^{j+1} \mu(m)}{\sum_{m=0}^j \mu(m)} \equiv v(j)$$`
+  instead, where
+  $$ A(i,j) = \sum_{m=0}^j N(i,m).$$
+
+------------------------------------------------------------------------
+
+- This leads to an estimator
+  `$$\hat{v}(j) = \frac{\sum_i A(i,j+1)}{\sum_i A(i,j)},$$`
+  where the summations run over those values of `\(i\)` where we have both `\(A\)`’s available.
+- These are called **chain ladder factors**, **age to age factors**, or **link ratios**.
+
+------------------------------------------------------------------------
+
+- Future values of `\(A(i,j)\)` are predicted by
+  `$$\hat{A}(i,j) = A(i,I-i) \hat{v}(I-i)\hat{v}(I-i+1)\cdots \hat{v}(j-1),$$`
+  where `\(A(i,I-i)\)` is the latest observation for period `\(i\)` (on the diagonal).
+- In particular, ultimate counts are
+  `$$\hat{A}(i,\infty) = A(i,I-i) \hat{\pi}(I-i),$$`
+  where
+  $$\hat{\pi}(I-i) = \prod_{m=0}^\infty \hat{v}(I-i+m), $$
+  called **age to ultimate factors**.
+
+### Example
+
+- Table 2.5, 2.6 and 2.7 revisit the previous example using the chain ladder example.
+- See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
+
+### Derivation 2 - Poisson approach
+
+- Assume that
+  $$ N(i,j) \sim \text{Poisson}(\alpha(i) \mu(j)),$$
+  and that they are mutually independent.
+- Because
+  `$$\alpha(i)\mu(j) = \left[k \cdot \alpha(i)\right] \left[ \frac{1}{k} \cdot \mu(j)\right],$$`
+  `\(\alpha\)` and `\(\mu\)` are not uniquely defined unless we introduce an extra condition, which we conveniently choose to be
+  `$$\sum_{j=0}^J \mu(j) = 1,$$`
+  ($J$ being the largest value of `\(j\)` for which any `\(N(i,j)\)` is observed) so that `\(\mu(j)\)` can be interpreted as the proportion of claims being notified in development year `\(j\)`.
+- It can be shown (see Taylor (2000)) that the estimators seen  
+  before are the MLE estimators in this context.
+
+### Derivation 3 - Non-parametric approach
+
+- The Poisson derivation is a parametric one, and starts with rather strong assumptions.
+- What assumptions do we need to make *at a minimum*, in order to retrieve the chain ladder estimators according to some rigorous calculations? (in particular, do we need the Poisson assumption?)
+- It turns out that if we assume
+  $$ E[N(i,j+1)|A(i,j)] = x(j) A(i,j)$$
+  for some `\(x(j)\)`, and that
+  $$ Var(N(i,j+1)|A(i,j)) = \sigma^2(j)A(i,j),$$
+  for some constant `\(\sigma^2(j)>0\)`, then minimising *weighted least squares* between this model and the data yields `\(x(j)\)` such that we get the chain ladder estimators again.
+- This does not require any distributional assumption!
+
+### The Chain Ladder setting
+
+- Chain ladder won’t always work.
+- In particular, it requires a **fixed notification pattern** - the `\(\mu(j)\)` can’t vary across origin periods.
+- One can think of many reasons why notifications may come quicker (e.g. IT systems) or slower (COVID-19), either permanently or temporarily (same examples, respectively).
+- As a solution, one can either “tweak” the chain ladder procedure, or proceed with an entirely different approach, which allows for such changes. This is (mostly) out of scope of this introductory treatment of reserving techniques.
+
+# Claim frequency
+
+## Claim frequency
+
+- If an exposure exists, it is possible to estimate a **claim frequency**, that is, the number of claims per unit of exposure.
+- This is mathematically defined as
+  `$$f(i) = \frac{A(i,\infty)}{e(i)}$$`
+  for period of origin `\(i\)`, and is estimated by
+  `$$\hat{f}(i) = \frac{\hat{A}(i,\infty)}{e(i)}.$$`
+- Examination of such claim frequencies may help with model validation, and may help identify anomalies.
+
+## Notified claim frequency
+
+- This is defined as
+  `$$\frac{A(i,I-i)}{e(i)}$$`
+  for period of origin `\(i\)`.
+- This corresponds to the frequency of claims that have already been notified (obviously, a decreasing number in `\(i\)`)
+- Comparing this with `\(\hat{f}(i)\)` gives an idea of the proportion of ultimate claims that have already been notified.
+
+## Example
+
+- Table 2.8 (see [`spreadsheet here for calculations`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291)) displays estimated claim frequencies from the three methods presented in the previous section.
+  - 1991 and 1992 seem to reverse a strong downward trend from 1984 to 1990.
+  - is this due to a method issue, or due to a real effect?
+- Table 2.9 (see [`spreadsheet here for calculations`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291)) and associated Figure 2.2 compares the notified claims frequency with the estimated claims frequencies of Table 2.8.
+  - It appears that the reversal of trend is already present in the actual data, and is not a result of the modelling.
+  - This may reassure the actuary that the reversal is real. She would need to gather more data from the claims department to ascertain whether that is a reasonable feature of the model.
 
 # References
 
-*Selected references:*
+*Main reference:*
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
