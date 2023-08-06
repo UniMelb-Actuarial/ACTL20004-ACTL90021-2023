@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '02 August 2023'
+date: '07 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -89,7 +89,7 @@ We will discuss how to work with this.
 
 - A simple example could be:
   $$ f(i) = \alpha + \beta i,$$
-  which leads to a linear adjustment across rows (periods of origin `\(i\)`) to development “base frequency” `\(v(j)\)` (for given development period `\(j\)`).
+  which leads to a linear adjustment across rows (periods of origin `\(i\)`) to “base frequency” of development `\(v(j)\)` (for given development period `\(j\)`).
 - It is unlikely to hold across all columns without modification, so one could extend this to
   $$ \mu(i,j) = f_j(i) v(j)$$
   so that `\(\alpha\)` and `\(\beta\)` will (potentially) depend on `\(j\)` as well
@@ -99,7 +99,7 @@ We will discuss how to work with this.
 
 - In practice, changes in “development speed” often occur in the first two development periods mostly, and in opposite direction (justifying a separate `\(\alpha\)` and `\(\beta\)`).
 - We could then use
-  `\begin{eqnarray*} \mu(i,0) &=& f_0(i) = \alpha_0 + \beta_0 i, \\ \mu(i,1) &=& f_1(i) = \alpha_1 + \beta_1 i, \\ \mu(i,j) &=& v(j), j=2, 3, \ldots. \end{eqnarray*}`
+  `\begin{eqnarray*} \mu(i,0) &=& f_0(i) = \alpha_0 + \beta_0 i, \\ \mu(i,1) &=& f_1(i) = \alpha_1 + \beta_1 i, \\ \mu(i,j) &=& v(j),\; j=2, 3, \ldots. \end{eqnarray*}`
 
 ### Estimating `\(N(i,j)\)`
 
@@ -126,15 +126,26 @@ Taylor (2000), Table 2.1 and Table 2.2 provide an example of such calculations, 
 
 See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
 
+------------------------------------------------------------------------
+
+Notes on the extrapolation:
+
+- We fit a linear regression to `\(\ln \hat{v}(j)\)` for `\(j=4,\ldots,10\)` and tell Excel that `\(x \equiv j-5\)`.
+- Using `SLOPE` and `INTERCEPT` functions we get `\(\beta_1\)` and `\(\beta_0\)`, so that
+  $$ \tilde{v}(j) = \exp\left[\beta_0+\beta_1 (j-5)\right] = e^{\beta_0}\times\left(e^{\beta_1}\right)^{j-5} = 3.87\times \left(0.54\right)^{j-5} \quad \text{(2.14)}.$$
+- Note you can also get `\(\beta+\beta_1 (j-5)\)` with the Excel function `FORECAST`.
+- Now, for the tail estimate (“11 and later”):
+  `$$\sum_{j=11}^\infty  \tilde{v}(j) = e^{\beta_0}\left(e^{\beta_1}\right)^{6} \sum_{j=0}^\infty \left(e^{\beta_1}\right)^{j} = e^{\beta_0}\left(e^{\beta_1}\right)^{6}\frac{1}{1-e^{\beta_1}} \quad \text{(2.15).}$$`
+
 ## Normalised methods
 
 ### Motivation
 
-- In the previous section, one hoped that claim notification rates `\(\mu\)` (as proportions of exposure `\(e\)` ) would consistent (constant) across periods of origin `\(i\)`, or at least approximatively or predictively so.
+- In the previous section, one hoped that claim notification rates `\(\mu\)` (as proportions of exposure `\(e\)` ) would be consistent (constant) across periods of origin `\(i\)`, or at least approximatively or predictively so.
 - There may not always exist such an exposure.
 - For instance, consider Public Liability of a manufacturer of toys:
-  - would time a good measure of exposure? or revenue?
-  - this would unlikely to be satisfactory as the mix of business (which toys are sold and at what level) is likely to change all the time
+  - Would time a good measure of exposure? or revenue?
+  - This would unlikely to be satisfactory as the mix of business (which toys are sold and in what quantities) is likely to change all the time.
 
 ### The idea
 
@@ -142,7 +153,7 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
   $$ E[N(i,j)] = \alpha(i)\mu(j).$$
 - Then we automatically have
   `$$\frac{E[N(i,j)]}{E[N(i,0)]}= \frac{\mu(j)}{\mu(0)}$$`
-  which is independnt of `\(i\)`.
+  which is independent of `\(i\)`.
 - Now Jensen’s inequality teaches us that
   `$$\frac{E[N(i,j)]}{E[N(i,0)]} \neq E\left[\frac{N(i,j)}{N(i,0)}\right];$$`
   Nevertheless Taylor (2000) argues that the difference is small and  
@@ -153,21 +164,22 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
 - Taking a weighted average, we get
   `$$\hat{v}(j) = \frac{\sum_i N(i,j)}{\sum_i N(i,0)}$$`
   as an (approximately) unbiased estimator of `\(\mu(j)/\mu(0)\)`.
+
 - Hence,
   `$$E[N(i,j)] \text{ is estimated by }N(i,0)\hat{v}(j)$$`
   and
   $$ \text{IBNR}(i) = N(i,0) \left[ \sum_{j=I-i+1}^I + \sum_{j=I+1}^\infty  \right] \hat{v}(j).$$
   This is analogous to the previous “exposure” based formula.
 
--Note that even if we don’t have `\(E[N(i,j)] = \alpha(i)\mu(j)\)` but rather `\(E[N(i,j)] = \alpha_j(i)\mu(j)\)`, the triangle of normalised counts `\(N(i,j)/N(i,0)\)` are useful to investigate, to look for trends.
+- Note that even if we don’t have `\(E[N(i,j)] = \alpha(i)\mu(j)\)` but rather `\(E[N(i,j)] = \alpha_j(i)\mu(j)\)`, the triangle of normalised counts `\(N(i,j)/N(i,0)\)` are useful to investigate, to look for trends.
 
 ### Generalisation
 
-- We will now “anchor” our prediction on a subset `\(S\)` of existing data
+- We will now “anchor” our prediction not just on `\(N(i,0)\)`, but on on a subset `\(S\)` of existing data.
 - This generalises what we had before to
   `$$\frac{E[N(i,j)]}{E\left[\sum_{m \in S} N(i,m)\right]} = \frac{\mu(j)}{\sum_{m \in S} \mu(m)}.$$`
   where `\(S\)` is any subset of `\(\{0,1,\ldots,I\}\)`, but typically the first `\(m\)` development periods for each period of origin `\(i\)`.
-- It is assumed that this ratio is independent of `\(i\)`
+- It is assumed that this ratio is independent of `\(i\)`.
 - This should work well if `\(S\)` is deemed to be a good indicator of the propensity to claim in a given period `\(i\)`.
 
 ------------------------------------------------------------------------
@@ -181,17 +193,22 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
 
 - Table 2.3 and 2.4 revisit the previous example with `\(S=\{0,1\}\)`.
 - This can be useful if some disturbance to the claim notification process has caused a movement between development periods 0 and 1 but has had no other effect.
-- The last row in the triangle requires special treament, as only `\(N(I,0)\)` is available. We extrapolate
-  `$$N(I,0)+N(I,1) \text{ as }N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}$$`
-  Because `\(\hat{v}(0)+\hat{v}(1) = 1000\)` (by definition since we take them from the same type of average) we end up with
-  $$ N(I,j)\text{ is estimated by }\left(N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}\right)\frac{\hat{v}(j)}{1000} = N(I,0)\frac{\hat{v}(j)}{\hat{v}(0)}.$$
 - See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
+
+------------------------------------------------------------------------
+
+Notes on treatment of the last row:
+
+- The last row in the triangle requires special treament, as only `\(N(I,0)\)` is available. We extrapolate
+  `$$N(I,0)+N(I,1) \text{ as }N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}.$$`
+  Now, because `\(\hat{v}(0)+\hat{v}(1) = 1000\)` (by definition since we take them from the same type of average - “orange” here) we end up with
+  $$ N(I,j)\text{ is estimated by }\left(N(I,0) \frac{\hat{v}(0)+\hat{v}(1)}{\hat{v}(0)}\right)\frac{\hat{v}(j)}{1000} = N(I,0)\frac{\hat{v}(j)}{\hat{v}(0)}.$$
 
 ## Chain Ladder
 
 ### Introduction
 
-- Probably the most famous (and basic) loss reserving technique
+- Probably the most famous (and basic) loss reserving technique.
 - Quoting Taylor (2000): “The name is understood to refer to the chaining of a sequence of ratios (the age to age factors below) into a ladder of factors (the age to ultimate factors below) which enable one to climb (i.e. project) from experience recorded to date to its predicted ultimate value.”
 - We will see three derivations, which are informative about the meaning of the method.
 
@@ -202,7 +219,8 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
   as before, but consider
   `$$\frac{E[A(i,j+1)]}{E[A(i,j)]} = \frac{\sum_{m=0}^{j+1} \mu(m)}{\sum_{m=0}^j \mu(m)} \equiv v(j)$$`
   instead, where
-  $$ A(i,j) = \sum_{m=0}^j N(i,m).$$
+  $$ A(i,j) = \sum_{m=0}^j N(i,m)$$
+  are the **cumulative** claim counts for period of origin `\(i\)`, as of development period `\(j\)`.
 
 ------------------------------------------------------------------------
 
@@ -226,6 +244,7 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
 
 - Table 2.5, 2.6 and 2.7 revisit the previous example using the chain ladder example.
 - See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291).
+- Notes on the extrapolation: assuming that it is the excess over 1 that decays exponentially, we fit `\(\ln\left[\hat{v}(j-6)-1\right]\)` for `\(j=6,\ldots,9\)`. The extrapolation to infinity is then added to 1 to get an age to ultimate factor. This is an ad hoc approach, but it’s the one’s taken in the book.
 
 ### Derivation 2 - Poisson approach
 
@@ -239,6 +258,16 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
   ($J$ being the largest value of `\(j\)` for which any `\(N(i,j)\)` is observed) so that `\(\mu(j)\)` can be interpreted as the proportion of claims being notified in development year `\(j\)`.
 - It can be shown (see Taylor (2000)) that the estimators seen  
   before are the MLE estimators in this context.
+
+------------------------------------------------------------------------
+
+Because
+`$$\frac{1}{\pi(j)} = \frac{A(i,j)}{A(i,\infty)}$$`
+is the proportion of claims notified **by** period `\(j\)`,
+$$ \frac{1}{\pi(j)}- \frac{1}{\pi(j-1)} \equiv \mu(j)$$
+is the proportion of claims notified **in** development period `\(j\)` (assume `\(\pi(-1)=1\)` ).
+
+- Example: The age to ultimate factors and corresponding proportions `\(\mu(j)\)` are calculated under Table 2.5.
 
 ### Derivation 3 - Non-parametric approach
 
@@ -274,14 +303,14 @@ See the spreadsheet [`here`](https://canvas.lms.unimelb.edu.au/courses/191080/mo
 - This is defined as
   `$$\frac{A(i,I-i)}{e(i)}$$`
   for period of origin `\(i\)`.
-- This corresponds to the frequency of claims that have already been notified (obviously, a decreasing number in `\(i\)`)
+- This corresponds to the frequency of claims that have already been notified (obviously, a decreasing number in `\(i\)`).
 - Comparing this with `\(\hat{f}(i)\)` gives an idea of the proportion of ultimate claims that have already been notified.
 
 ## Example
 
 - Table 2.8 (see [`spreadsheet here for calculations`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291)) displays estimated claim frequencies from the three methods presented in the previous section.
   - 1991 and 1992 seem to reverse a strong downward trend from 1984 to 1990.
-  - is this due to a method issue, or due to a real effect?
+  - is this due to a method issue (introduced when “completing the rectangle”), or due to a real effect?
 - Table 2.9 (see [`spreadsheet here for calculations`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291)) and associated Figure 2.2 compares the notified claims frequency with the estimated claims frequencies of Table 2.8.
   - It appears that the reversal of trend is already present in the actual data, and is not a result of the modelling.
   - This may reassure the actuary that the reversal is real. She would need to gather more data from the claims department to ascertain whether that is a reasonable feature of the model.
