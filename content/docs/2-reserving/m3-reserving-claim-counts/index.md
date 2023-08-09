@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '07 August 2023'
+date: '10 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -329,4 +329,4 @@ Taylor, Greg. 2000. *Loss Reserving: An Actuarial Perspective*. Huebner Internat
 
 </div>
 
-[^1]: References: Chapter 2 of Taylor (2000) \| `\(\; \rightarrow\)` [](https://gim-am3.netlify.app/output/23-Top-M2-lec.pdf)
+[^1]: References: Chapter 2 of Taylor (2000) \| `\(\; \rightarrow\)` [](https://gim-am3.netlify.app/output/23-Top-M3-lec.pdf)
