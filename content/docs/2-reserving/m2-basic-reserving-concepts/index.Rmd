@@ -384,7 +384,7 @@ In the case of aggregate data, each cell $(i,j)$ will have data of four types:
 - $N(i,j)$ are the counts of claims notified;
 - $C(i,j)$ are paid losses;
 - $U(i,j)$ are the counts of claims open ;
-- $Q(i,j)$ are the case estimates of oustanding liability.
+- $Q(i,j)$ are the case estimates of outstanding liability.
 
 Because those numbers refer to cell $(i,j)$ *only*, we often refer to the as **incremental data**.
 

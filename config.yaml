@@ -48,10 +48,10 @@ menu:
       weight: 27
     - name: __________Links___________
       url: 
-      weight: 35
+      weight: 35 
     - name: Benjamin Avanzi
       url: https://bavanzicv.netlify.app/
-      weight: 46
+      weight: 37
     - name: Let's connect on LinkedIn!
       url: https://www.linkedin.com/in/benjaminavanzi/
       weight: 38

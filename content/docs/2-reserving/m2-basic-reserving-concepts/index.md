@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '31 July 2023'
+date: '10 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -303,7 +303,7 @@ In the case of aggregate data, each cell `\((i,j)\)` will have data of four type
 - `\(N(i,j)\)` are the counts of claims notified;
 - `\(C(i,j)\)` are paid losses;
 - `\(U(i,j)\)` are the counts of claims open ;
-- `\(Q(i,j)\)` are the case estimates of oustanding liability.
+- `\(Q(i,j)\)` are the case estimates of outstanding liability.
 
 Because those numbers refer to cell `\((i,j)\)` *only*, we often refer to the as **incremental data**.
 
