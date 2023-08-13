@@ -1,0 +1,13 @@
+\beamer@sectionintoc {1}{Case estimation (3.1)}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Case estimates: Definition}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Two approaches}{6}{0}{1}
+\beamer@subsectionintoc {1}{3}{Proposition 3.1}{9}{0}{1}
+\beamer@sectionintoc {2}{Chain ladder (3.2)}{11}{0}{2}
+\beamer@subsectionintoc {2}{1}{Introduction}{12}{0}{2}
+\beamer@subsectionintoc {2}{2}{Chain ladder on paid losses}{14}{0}{2}
+\beamer@subsectionintoc {2}{3}{Chain ladder on incurred losses}{26}{0}{2}
+\beamer@sectionintoc {3}{Separation method (3.3)}{30}{0}{3}
+\beamer@subsectionintoc {3}{1}{Main rationale}{31}{0}{3}
+\beamer@subsectionintoc {3}{2}{Model}{33}{0}{3}
+\beamer@subsectionintoc {3}{3}{Estimation}{36}{0}{3}
+\beamer@subsectionintoc {3}{4}{Example}{40}{0}{3}

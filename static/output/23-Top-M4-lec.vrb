@@ -1,0 +1,14 @@
+\frametitle{Example}
+\begin{itemize}
+\tightlist
+\item
+  See the spreadsheet
+  \href{https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5059291}{\texttt{Chapter3.xlsx}}
+  for details of the calculations.
+\item
+  Table 3.13 starts by computing the \(C(i,j)/N(i)\), where \(N(i)\)
+  comes from Table 2.4. It also displays diagonal and column sums.
+\item
+  Those sums are used in Table 3.14 to calculate the \(\hat{\kappa}(k)\)
+  and \(v^*(j)\) in the sequential way described above.
+\end{itemize}
