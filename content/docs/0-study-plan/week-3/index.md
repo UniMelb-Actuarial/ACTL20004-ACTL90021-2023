@@ -79,12 +79,6 @@ All of Module 3 is in scope for this week.
 
 Next week, we will discuss Module 4.
 
-## Additional questions
-
-The “additional questions” are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available.
-
-In particular this week, there are additional exercises for the out-of-scope Section 3.6.
-
 # Preparation for assessment
 
 ## Mid-semester (15%) and final (60%) exams

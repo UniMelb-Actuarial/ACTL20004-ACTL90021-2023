@@ -1,6 +1,6 @@
 ---
-bookHidden: true
-bookSearchExclude: true
+bookHidden: false
+bookSearchExclude: false
 title: "Week 4 Study Plan"
 weight: 4
 bibliography: ../../../../static/libraries.bib
@@ -12,39 +12,30 @@ Week 4
 
 # Overview
 
-This week, we will cover the following topics, mostly from Module 4:
+This week, we will cover the following topics:
 
-- Finalising stop-loss calculations
-- Discretisation of continuous distributions (to be able to use Panjer, in particular; see next item)
-- Use of Panjer’s recursion algorithm, which allows us to calculate the exact compound distribution of any random sum, if the frequency follows the `\((a,b)\)` family
-- Recap of the Normal approximation, as well as translated gamma and lognormal approximations, to be used when one needs a quick approximation, or when only moments are available.
+- Module 4, which is concerned with the calculation of IBNR claim amounts.
+- There are some slides with the main elements, but a major component of the module is with two spreadsheets, which can be downloaded [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080918) and [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080919)
 
-Here is the end of week 3 video, which introduces week 4:
-
-<iframe height="420" width="640" allowfullscreen frameborder="0" src="https://echo360.net.au/media/e8c17a0f-f4c6-44a6-84a2-5058755409cc/public?autoplay=false&amp;automute=false">
-</iframe>
-<p style="font-size:10px;color: rgb(252, 156, 249);">
-If you wish to watch the embedded videos from Lecture Capture, you need to have logged in and <a href="https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701">entered Lecture Capture</a> via Canvas once for each session. This is to restrict access to students enrolled at the University of Melbourne only.
-</p>
-
-This is not part of the CS2 syllabus, but must be covered for the Society of Actuaries CAE, exam ASTAM topic 2; see also [`here`](../../0-subject-guide/SILO/#mapping-to-the-society-of-actuaries-exams).
+See also detailed learning outcomes of 5.2 (“Liability valuations / Run-off triangles”) of the CM2 syllabus [`here`](../../0-subject-guide/SILO).
 
 # Main references and lectures
 
 ## Module 4
 
-Read: [`Module 4`](../../1-claims-modelling/m4-compound-approx/)
+Read: [`Module 4`](../../2-reserving/m4-reserving-claim-amounts/)
 
-Annotate: [`slides`](../../../output/23-GIM-M4-lec.pdf)
-<!-- [``annotated slides``](../../../output/22-GIM-M1-lec_a.pdf) -->
+Annotate: [`slides`](../../../output/23-Top-M4-lec.pdf)
 
-Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/150824/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/150864/external_tools/701)). This is where annotated slides will be made available, too.
+Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https://canvas.lms.unimelb.edu.au/courses/153686/external_tools/701)/[`PG`](https://canvas.lms.unimelb.edu.au/courses/154246/external_tools/701)). This is where annotated slides will be made available, too.
 
 # Additional preparation and resources
 
 ## Mandatory
 
-1.  Chapter 4.1.1-4.1.2, as well as 4.2.1 of Wuthrich (2022)
+1.  Chapter 3 of Taylor (2000).
+2.  Spreadsheet [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080918)
+3.  Spreadsheet [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080919)
 
 ## Optional
 
@@ -52,19 +43,11 @@ Watch: refer to your lecture recording under “Lecture Capture” ([`UG`](https
 
 # Tutorials
 
-Note that a full list of exercises is available [`here`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4466801). Please let us know of any mistake or required update on [`Ed`](https://canvas.lms.unimelb.edu.au/courses/173733/external_tools/5601?display=borderless).
-
-## Pre-Tutorial work
-
-Please study those questions **before** the tutorial.
-
-Pre-Tutorial exercises are available in the [`Pre-Tutorial book`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464391), which already includes solutions. It is recommended to attempt the questions *before* looking at the solutions
+Please let us know of any mistake or required update on [`Ed`](https://canvas.lms.unimelb.edu.au/courses/191080/external_tools/5837?display=borderless).
 
 ## Tutorial materials
 
-Some questions have been especially selected for the tutorials. Students should review and attempt those questions ***prior to their scheduled tutorial***, after they complete the pre-tutorial work.
-
-The [`Tutorial book`](https://canvas.lms.unimelb.edu.au/courses/173733/modules/items/4464392) includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
+Some questions have been especially selected for the tutorials. Students should review The [`Tutorial book`]() includes all questions for the whole semester already, but solutions will only be added sequentially at the end of each week, as we work our way through the set.
 
 Note that solutions will be gradually added to that same document. Hence it is not recommended to print it, as it will regularly change (typos will also dynamically be corrected).
 
@@ -84,11 +67,7 @@ All of Module 4 is in scope for the week 4 tutorials.
 
 ## Next week (week 5)
 
-Next week, we will discuss Module 5.
-
-## Additional questions
-
-The “additional questions” are here for reinforcement or revision, but are not the main focus of the tutorials. Solutions for those exercises are already available.
+Next week, we will do a Q&A for the mid-semester exam.
 
 # Preparation for assessment
 
@@ -98,21 +77,22 @@ The “additional questions” are here for reinforcement or revision, but are n
 <!-- devtools::install_github("hadley/emo") -->
 
 - Finalise your summary of Module 3 as you consolidate your understanding with the exercises.
-- Start your summary of Module 4
+- Start your summary of Module 4. This is the last one in scope for the mid-semester exam.
 
 ***Make sure you start preparing for the mid-semester exam***
 
 ## Assignment (25%)
 
 - Nothing to do for now.
+- The assignment will likely be made available shortly after the mid-semester exam.
 
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-Wut20" class="csl-entry">
+<div id="ref-Tay00" class="csl-entry">
 
-Wuthrich, Mario V. 2022. “Non-Life Insurance: Mathematics & Statistics.” Lecture notes. RiskLab, ETH Zurich; Swiss Finance Institute.
+Taylor, Greg. 2000. *Loss Reserving: An Actuarial Perspective*. Huebner International Series on Risk, Insurance and Economic Security. Kluwer Academic Publishers.
 
 </div>
 

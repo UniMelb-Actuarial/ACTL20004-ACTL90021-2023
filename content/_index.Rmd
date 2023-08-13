@@ -30,7 +30,7 @@ This component will be taught by Yuyu Chen.
 <!-- This is code to show an image called 'schedule.png' -->
 
 ```{r, fig.align='center', out.width="100%", echo=F}
-knitr::include_graphics("schedule2.jpg")
+knitr::include_graphics("schedule.png")
 ```
 
 

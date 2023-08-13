@@ -29,7 +29,7 @@ This component will be taught by Yuyu Chen.
 
 <!-- This is code to show an image called 'schedule.png' -->
 
-<img src="schedule2.jpg" width="100%" style="display: block; margin: auto;" />
+<img src="schedule.png" width="100%" style="display: block; margin: auto;" />
 
 
 Some links in this website are only available to students enrolled in the relevant subjects at the University of Melbourne, and so is the information about subjects. Please post any question on the Ed discussion forum (see link in the left navigation bar).

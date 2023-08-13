@@ -2,7 +2,7 @@
 bookHidden: false
 bookSearchExclude: false
 weight: 20
-title: "M3 Reserving Claim Counts"
+title: "M3 Reserving Claim Counts" 
 subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
