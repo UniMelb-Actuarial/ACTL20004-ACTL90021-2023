@@ -79,10 +79,10 @@ So which one should you use?
 
 Quote from Taylor (2000):
 
-1)  When outstanding loss liability is to be estimated in respect of a **large number of claims**, an **aggregate estimate** will usually exhibit performance, as measured by the relative error R, superior to that of case estimates.
+1)  When outstanding loss liability is to be estimated in respect of a **large number of claims**, an **aggregate estimate** will usually exhibit performance, as measured by the relative error, superior to that of case estimates.
 2)  When the liability is to be estimated in respect of a **small number of claims**, superior performance will usually be exhibited by **case estimates corrected for bias**.”
 
-This is discussed/applied in Section 4.4 of Taylor (2000).
+This is discussed/applied in Section 4.4 of Taylor (2000) (outside scope).
 
 # Chain ladder (3.2)
 
@@ -91,7 +91,7 @@ This is discussed/applied in Section 4.4 of Taylor (2000).
 - We used chain ladder for claim counts in Module 3.
 - We can use it for forecasting other variables `\(Y(i,\cdot)\)` which can be expressed in the cross-classified structure (i.e. `\(i\times j\)` ) in much the same way, from a triangle of aggregate quantities
   `$$Y(i,j) = \sum_{m=0}^j X(i,m),$$`
-  where `\(X(i,j)\)` are observed quantities in cell `\((i,j)\)`.
+  where `\(X(i,j)\)` are observed (incremental) quantities in cell `\((i,j)\)`.
 - Assumptions of proportionality can be made in much the same way, and the method applies in much the same way.
 - Note that you can apply this on either paid or incurred losses (that is, `\(X\)` would be either paid losses or incurred losses), as discussed in the following two subsections.
 - Applications are quite wide and apply in a range of contexts and  
@@ -99,19 +99,19 @@ This is discussed/applied in Section 4.4 of Taylor (2000).
 
 ## Chain ladder on paid losses
 
-### Introduction
+### Unadjusted chain ladder
 
 - We focus on paid losses, that is,
   $$ X(i,j) = C(i,j).$$
 - Hence `\(\hat{Y}(i,j)\)` will yield estimates of future loss payments in future cells `\((i,j)\)`.
 - Everything else is the same as before.
 
-### Example (unadjusted chain ladder)
+### Example
 
 - See the spreadsheet [`Chapter3.xlsx`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080918) for details of the calculations. The first tab sets out payment data corresponding to the example we studied in Module 3.
 - Table 3.1-3.3 demonstrate how chain ladder can be used on payment data, in absence of inflation adjusment.
 
-### Inflation
+### Inflation adjusted chain ladder
 
 - We are now dealing with payment data, which is typically distorted by inflation. This cannot be ignored.
 - Not adjusting the data corresponds to making a rather strong assumption about inflation, as explained below.
@@ -119,13 +119,13 @@ This is discussed/applied in Section 4.4 of Taylor (2000).
 
 ------------------------------------------------------------------------
 
-- If (as assumed in chain ladder)
+- Assuming the multiplicative structure of the chain ladder model, if
   $$ E\left[ C^*(i,j) \right] = \alpha^*(i) \mu^*(j)$$
   then we have the “**inflation adjusted**” chain ladder model
   $$ E\left[ C(i,j) \right] = \alpha^*(i) \mu^*(j) \frac{\lambda(k)}{\lambda_0},$$
-  to be compared with the “**unadjusted**” chain ladder model
+  which is to be compared with the “**unadjusted**” chain ladder model
   $$ E\left[ C(i,j) \right] = \alpha(i) \mu(j).$$
-- Tables 3.1-3.3 operationalise the “unadjusted” version.
+- Note that Tables 3.1-3.3 corresponded to the “unadjusted” version.
 
 ------------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ The last sentence means that we require
 
 Theorem 3.3 of Taylor (2000) implies that when claims inflation is constant at rate `\(f\)`,
 `$$\begin{aligned} \alpha(i) &= \frac{\lambda(0)}{\lambda_0} \alpha^*(i) (1+f)^i, \\ \mu(j) &= \mu^*(j) (1+f)^j, \text{ with}\\ \sum_j \mu^*(j) &= 1. \end{aligned}$$`
-Note that the adjustment `\(\lambda(0)/\lambda_0\)` would typically be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average).
+Note that, if all payments are brought to the date of the diagonal, then the adjustment `\(\lambda(0)/\lambda_0\)` would typically just be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average).
 
 ------------------------------------------------------------------------
 
@@ -155,11 +155,11 @@ Note:
 - If inflation was very heterogeneous in the past `\(I\)` periods, and/or if it is assumed to be inconsistent with future inflation, an inflation adjusted chain ladder will lead to better forecasts (although it will require assumptions to be made about future inflation). See also Corollary 3.5 in Taylor (2000).
 - Results hold by analogy in presence of superimposed inflation.
 
-### Example (inflation adjusted chain ladder)
+### Example
 
 - See the spreadsheet [`Chapter3.xlsx`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080918) for details of the calculations.
 - Table 3.4 displays `\(C^*(i,j)\)` as of 31 December 1995 using the inflation index set of Appendix B.2.
-  - Note the accumulation factor of 1995 is not 1; it is `\(\lambda(0)/\lambda_0\)` and likely reflects the fact that payments in cells `\(k=1995\)` were made in the middle of the year on average.
+  - Note the accumulation factor of 1995 is not 1; it likely reflects the fact that payments in cells `\(k=1995\)` were spread throughout 1995, so some adjustment is required to bring them to 31 December.
 - Table 3.5 determines age to age factors, which we analyse from the point a view of the discussion above before proceeding to projections.
 
 ------------------------------------------------------------------------
@@ -170,7 +170,7 @@ Note:
   and hence we can derive an “implied” rate `\(f_j\)` for each period `\(j\)`:
   `$$f_j = \left(\frac{\widehat{\mu}(j)}{\widehat{\mu}^*(j)}\right)^{1/j}-1$$`
 - This is also in Table 3.6, and is informative of the evolution of claims inflation over 1978-1995. The weighted average uses `\(\widehat{\mu}^*(j)\)` as weights.
-- It is now clear how inflation distorted the evolution of claim payments, making them look longer tailed than the would otherwise be.
+- It is now clear how inflation distorted the evolution of claim payments, making them look longer tailed than they would otherwise have been.
 
 ------------------------------------------------------------------------
 
@@ -178,16 +178,16 @@ Note:
   - the “All” averaged factors over years 1978-1995
   - the “Last 6” over years 1989-1995
   - the “Last 3” over 1992-1995
-- The average inflation rate over those years in Appendix B.2 was 6.8%, 4%, and 3.3% respectively.
+- The average inflation rate over those years in Appendix B.2 was 6.8%, 4%, and 3.3% respectively (see calculations in spreadsheet).
 - This illustrates Theorem 3.3.
 
 ------------------------------------------------------------------------
 
-- Now Tables 3.7 and 3.8 forecast paid losses in 31/12/1995 dollar values
+- Now, Tables 3.7 and 3.8 forecast paid losses in 31/12/1995 dollar values
   - Note the forecast of \$374.8mio is evidently lower than the \$428.4mio forecast of the unadjusted chain ladder, as the latter implicitly allowed for inflation, and the former not.
 - Table 3.9 lifts those forecasts to allow for future inflation
-  - note the half year adjustment required for payment in the middle of the year on average
-  - using 3.6% for future inflation leads to a forecast of \$421.1mio, which is very close to the unadjusted chain ladder forecast. This illustrates Proposition 3.4.
+  - Note the half year adjustment `\(\lambda(0)/\lambda_0\)` required for payment in the middle of the year on average.
+  - Using 3.6% for future inflation leads to a forecast of \$421.1mio, which is very close to the unadjusted chain ladder forecast. This illustrates Proposition 3.4.
 
 ## Chain ladder on incurred losses
 
@@ -196,33 +196,33 @@ Note:
 - Here we will produce a triangle of incurred losses, as an indicator of how our estimates typically evolve over time, and converge to ultimate:
   - the “aggregate” equivalent will be the incurred losses
   - the “incremental” equivalent are **adjustments** to incurred losses
-- Note that this means that factors generally won’t be `\(>1\)` since the incurred loss process is *not* a mostly nondecreasing process any more; this is illustrated in the two examples of claim developments earlier.  
+- Note that this means that age-to-age factors of incurred losses generally won’t be `\(>1\)` since the incurred loss process is *not* a mostly nondecreasing process any more; this is illustrated in the two examples of claim developments earlier..  
   (Aggregate payments were generally nondecreasing, even though there can be negative payments sometimes.)
 
 ### Example
 
 - See the spreadsheet [`Chapter3.xlsx`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5080918) for details of the calculations.
-- Table 3.10 displays incurred losses `\(I(i,j)\)` (the “cumulative” data), which is decomposed in the next table (not in book) into `\(\Delta I(i,j)\)` (the “incremental” data).
-- Table 3.11 age to age factors on the incremental data.
-- Note that the factors are no longer all `\(>1\)`, which leads to a new smoothing method, namely here a 3-period moving average; see (3.61) in Taylor (2000).
+- Table 3.10 displays incurred losses `\(I(i,j)\)` (the “cumulative” data), which is decomposed in the next table (not in book) into `\(\Delta I(i,j)\)` (the “incremental” data) - the heat map on that triangle illustrates the generally increasing, then decreasing nature of aggregate incurred losses.
+- Table 3.11 age to age factors on the cumulative data.
+- Note that the factors are no longer all `\(>1\)`, which requires a new smoothing method, namely here a 3-period moving average; see (3.61) in Taylor (2000).
 - Finally, Table 3.12 implements the chosen age to age factors into outstanding liabilities.
 
 ## Commentary
 
 - The difference between `\(I(i,\infty)\)` and `\(I(i,j)\)` can be decomposed into:
   - an **IBNR** component (due to unreported claims);
-  - an **IBNER** component (“Incurred But Not Enough Reported”), due to future revisions (inadcuracy) of case estimates.
+  - an **IBNER** component (“Incurred But Not Enough Reported”), due to future revisions (inaccuracy) of case estimates.
 - Tables 3.3 and 3.12 are very different (see comparison under Table 3.12)
-  - Paid CL is much higher than Incurred CL for 1986 and later
+  - Paid CL is much higher than Incurred CL for 1986 and later.
   - This is due to using last-3-year averages, where payments were heavier than before.
-  - Using all-year averages would reduce liability by 34%
+  - The leverage on immature years is illustrated with the age-to-ultimate factors in gray in tab “Table 3.1”. Using all-year averages would reduce liability by 34-39% for the three most immature years.
   - A natural question would then be: are those changes permanent?
 
 # Separation method (3.3)
 
 ## Main rationale
 
-- A choice of inflation rate can be controversial, especially if it is significant.
+- A choice of inflation rate can be controversial, especially if it is significant or erratic. Unfortunately, this is also when it is the most impactful…
 - In that context, the unadjusted chain ladder is unreliable, and the adjusted one will lead to conflict.
 - Can we “let the data speak for themselves”?
 
@@ -313,7 +313,7 @@ $$ \hat{\kappa}(k) = \frac{\displaystyle
 
 ## Commentary
 
-- The interpretation of `\(\lambda(k)\)` is rather superficial, as it is a “catch all” indicator.
+- The interpretation of `\(\lambda(k)\)` requires care, as it is a “catch all” indicator.
 - For instance, a change of speed of payment / notification across calendar years would be caught (would distort) by `\(\lambda(k)\)`.
 
 # The average payments per claim incurred (PPCI) method
@@ -321,7 +321,7 @@ $$ \hat{\kappa}(k) = \frac{\displaystyle
 ## Main rationale
 
 - Assume you have data on aggregate payments and claim counts.
-- One can then try to project counts, and cost per claim separately.
+- One can then try to project counts, and payments per claim separately.
 - The product can then be used as an estimate for ultimate.
 - One need to be careful to have consistent claims severity and frequency data, typically:
   - If paid (fully) claims, match to finalised claims.
@@ -331,11 +331,11 @@ $$ \hat{\kappa}(k) = \frac{\displaystyle
 
 ## Process
 
-- Project incurred claim counts as per Chapter 2.
-- Work out average cost per claim incurred in a triangle:
+- Project incurred claim counts as per Chapter 2 (frequency).
+- Work out average payments per claim (severity) incurred in a triangle:
   - These will evolve over time.
-  - We can analye their evolution in a “chain ladder” type analysis.
-- The method rests on the assumption that this evolution is sufficiently regular that we can use it to “develop” our latest value of incurred claim cost (in the diagonal) into a final cost per claim incurred, to be multiplied by our projected total number of claim incurred.
+  - We can analyse this evolution in a “chain ladder” type way.
+- The method rests on the assumption that this evolution is sufficiently regular that we can use it to “develop” our latest value of incurred claim cost (in the diagonal) into a final “payments per claim incurred”, to be multiplied by our projected total number of claim incurred.
 
 ## Example
 
@@ -345,7 +345,12 @@ $$ \hat{\kappa}(k) = \frac{\displaystyle
   - Analysis of age to age actors shows that recent years are different, especially for later years.
   - The age-to-ultimate factors are those used to “develop” the latest average PPCI, into an ultimate one.
 - In the end, forecast outstanding liabilities are not dissimilar to those obtained form the incurred CL, although a little higher, perhaps due to slightly more responsiveness to the recent changes in claim development.
-- A comparison is provided at the bottom.
+
+------------------------------------------------------------------------
+
+A comparison and recap of all methods seen in this module is provided at the bottom.
+
+**Which one would you choose?**
 
 # References
 
