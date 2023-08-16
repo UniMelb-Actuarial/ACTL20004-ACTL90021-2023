@@ -113,7 +113,7 @@ library(extRemes)
 ```
 
 
-[^1]: References: Chapter 3 & 4 of @Tay00 | $\; \rightarrow$  [\textcolor{blue}{\underline{latest slides}}](https://gim-am3.netlify.app/output/23-Top-M4-lec.pdf) 
+[^1]: References: Chapter 3 of @Tay00 | $\; \rightarrow$  [\textcolor{blue}{\underline{latest slides}}](https://gim-am3.netlify.app/output/23-Top-M4-lec.pdf) 
 
 # Case estimation (3.1) 
 
