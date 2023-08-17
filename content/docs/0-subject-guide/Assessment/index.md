@@ -56,13 +56,12 @@ The mid-semester exam will be a "traditional", closed book, pen on paper exam.
 
 <!-- Important online mid-semester examination information: This mid-semester examination is the equivalent of a 50-minute assessment; however, students are provided with 75-minutes to accommodate the time that will be required for typesetting of mathematical expressions, loading, processing and modelling of data with the statistical software R, and the uploading of documents / answers. -->
 
-50 minutes sharp, plus 5 minutes reading time.
+50 minutes sharp, plus 5 minutes reading time. You are not allowed to write during reading time.
 
 ## Scope
 
-The mid-semester exam will assess contents from Modules 1 to 5 (lectures of weeks 1-5) and associated tutorial exercises, readings, spreadsheets, and course contents. This focuses on the risk and insurance, as well as all of reserving components of the subject.
+The mid-semester exam will assess contents from Modules 1 to 4 (lectures of weeks 1-4) and associated tutorial exercises, readings, spreadsheets, and course contents. This focuses on the risk and insurance, as well as all of reserving components of the subject.
 
-Examinable materials include associated tutorial questions, revision questions, additional questions, technical and practice lectures with slides and associated mandatory readings.
 
 ## Practice
 
