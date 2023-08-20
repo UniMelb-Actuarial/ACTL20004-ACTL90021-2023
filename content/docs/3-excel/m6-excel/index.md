@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '17 August 2023'
+date: '20 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -74,6 +74,8 @@ I know there are counter arguments for all of those, but this presupposes you kn
 
 # Assumed knowledge
 
+## List of prerequisite
+
 See [`prerequisite knowledge on the website`](https://topics-actl.netlify.app/docs/0-prerequisite-knowledge/). Some extracts:
 
 - Autofill: Chapter 3, p. 105-116, and p. 298-301
@@ -87,7 +89,73 @@ Page references are for Slager and Slager (2020), see [`link here`](https://link
 
 # General etiquette and tools
 
-1.  
+## Etiquette
+
+You should build your spreadsheet with (at least) the following **objectives** in mind:
+
+1.  so as to minimise chances or error (accuracy)
+2.  so as to minimise unnecessary calculations (efficiency)
+3.  so as to make the structure as clear as possible (transparency)
+4.  so as to make updates, changes and extensions possible and easy (extendibility)
+5.  so as to allow someone else to use it easily (user friendliness)
+6.  so as to allow someone else to verify it easily (auditability)
+
+Those are, of course, interconnected. We could add more (for instance, automation of data input via an API, automation of communication objects, etc…).
+
+## Principles
+
+There is no single way to achieve the objectives above, but there are a number of principles that one could list that contribute to those objectives:
+
+- Have a separate tab that collects all your assumptions that are valid for the whole spreadsheet (1, 3, 4, 5, 6)
+  - Include some explanations about the source/justification of those assumptions.
+  - Give your assumptions names (for instance, the technical rate of interest to calculate life insurance could be called `techint` or similar, for ease of later reference, and to make formulas more easily readable)
+- Also include your data sets in separate table (1, 3, 4, 5, 6)
+  - Name your data (including columns and/or rows if possible; e.g. `FIFA WWC` in the spreadsheet; see also Named ranges and constants: Chapter 7, page 312-332)
+
+------------------------------------------------------------------------
+
+- Consider colouring / contouring input and output differently (3, 5)
+  - This is not always advisable, but if you have a large model with relatively few input (e.g. purchase price and interest rate for a propoerty mortgage schedule) and/or few outputs (e.g. NPV) then this achieves many of the objectives
+- Use named ranges and variables as much as possible (1, 3, 5, 6)
+- Use more advanced formulas if shorter, and avoid too much nesting (1, 3, 4, 5, 6)
+
+## Tools for auditing
+
+### Dependents and precendents
+
+Use of dependents / precedents, e.g.:
+
+1.  go to tab `Dependents - Precedents - PPCI`
+2.  click on one of the outstanding losses
+3.  make sure the formula tool tab is live
+4.  click on the “trace precedents” sequentially
+
+This will highlight dependence of each cell to previous cells, sequentially.
+
+This is useful for
+
+- understanding the structure of a spreadsheet
+- check formulas (audit)
+- debug issues
+
+(Formula Auditing: Chapter 9, p. 436-439)
+
+### Show formulas
+
+- The “Formulas” tool tab should have a “Show formula” tile. This will replace all numeric values by formulas.
+  - This is helpful to check what numbers are hard coded, and which are results of calculations. Together with dependents, it helps seeing if everything is as dynamic as it should.
+- If you want a formula to be shown all the time start with an apostrophe `'`, and the formula will show as text.
+
+(Formula Auditing: Chapter 9, p. 436-439)
+
+## Tools for analysing data
+
+### Pivot tables
+
+- Pivot tables are often considered as very difficult to master, but they are not that difficult to start with.
+- Example (in [`spreadsheet`]()): FIFA WWC
+
+## Advanced formulas
 
 # References
 
