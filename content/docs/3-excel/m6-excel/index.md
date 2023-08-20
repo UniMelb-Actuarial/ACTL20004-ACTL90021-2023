@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '20 August 2023'
+date: '21 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -88,7 +88,7 @@ See [`prerequisite knowledge on the website`](https://topics-actl.netlify.app/do
 
 Page references are for Slager and Slager (2020), see [`link here`](https://link.springer.com/book/10.1007/978-1-4842-6209-2).
 
-Also, see tab `Prerequisite` in the [\`module 6 spreadsheet]().
+Also, see tab `Prerequisite` in the [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456).
 
 # General etiquette and tools
 
@@ -148,6 +148,7 @@ This is useful for
 - The “Formulas” tool tab should have a “Show formula” tile. This will replace all numeric values by formulas.
   - This is helpful to check what numbers are hard coded, and which are results of calculations. Together with dependents, it helps seeing if everything is as dynamic as it should.
 - If you want a formula to be shown all the time start with an apostrophe `'`, and the formula will show as text.
+- Note also the `FORMULATEXT()` formula which is a dynamic array formula requiring spilling (see later section “Dynamic Arrays”!)
 
 (Formula Auditing: Chapter 9, p. 436-439)
 
@@ -156,7 +157,7 @@ This is useful for
 ## Pivot tables
 
 - Pivot tables are often considered as very difficult to master, but they are not that difficult to start with.
-- Example (in [`spreadsheet`]()): FIFA WWC
+- Example (in [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456)): FIFA WWC
   - Insert / Pivot Table.
   - See how you can use variables as filters, rows, or columns. Move them around.
   - See how columns can display other things than `Sum`, such as `Count`, `Average`, `Max`, `Min`, or `Product`
@@ -167,22 +168,64 @@ This is useful for
 
 - A pivot chart can be created from the Pivot Table but also directly from the data.
 - A major difference with start charts is that you it will be somewhat “interactive” - there will be buttons you can use to alter the chart.
-- Example (in [`spreadsheet`]()): FIFA WWC
+- Example (in [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456)): FIFA WWC
   - Insert / Pivot Chart;
   - In the example I changed the style of graph to “Combo” to allow for the two different scales;
   - I also included a “slicer” (click on chart / insert slicer), in order to easily filter by squad
 - Reference: Chapter 15 of Slager and Slager (2020).
 
-# Advanced formulas
+# Dynamic Arrays
+
+## Spilling
+
+- One advantage of programs like `R` are the easy use and manipulation of vectors.
+- Excel can do similar things, and the vectors are called arrays. This is new (post Office 365), and is a bit of a game changer.
+- Before Office 365, Excel was incapable of depositing results beyond just 1 cell. This is called “spilling”.
+- Note Excell will need the required space to spill.
+- Main reference is Katz (2023) - we’ll only introduce this here.
+
+### Example
+
+- Here we introduce array formulas.
+  - If you calculate the sum of an array you’ll get a single number.
+  - The result of an array formula (such as `LEN()`), when you input in array, will give you an array.
+- See [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456):
+  - `LEN()` gives an array.
+  - You could then get the sum without having to put the array anywhere: `SUM(LEN(B3:B6))`.
+  - Note that when I wrote the above, it became `SUM(LEN(B3#))` - more on that later.
+- `SUM(LEN(B3:B6))` will work in any version of Excel because it requires only one cell to output, but not `LEN(B3:B6)` as it requires several cells (“spilling”).
+- Note you can spill named ranges, too!
+
+## Think in vectors
+
+- Once you understand you can create vectors and either display or manipulate them, Excel becomes a lot more powerful.
+- You can also use arrays in arguments of known formulas such as `VLOOKUP()`,
+  - For instance `VLOOKUP(.,.,{2,5})` will return value from the 2nd and 5th columns row-wise.
+  - If you use `VLOOKUP(.,.,{2;5})` (with the semicolon) they will display columnwise.
+  - See examples in [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456).
+
+## The `#` sign
+
+- The `#` sign when added to a reference to a cell where a dynamic array is written will duplicate that array (and spilled results).
+- It is shorter, but also it will dynamically change the size of the array
+  - This can be desired or not.
+  - See example in [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456).
+
+## New formulas
+
+- There are a number of new formulas which were available in coding languages like `R` for a long time, which can be useful, and which are now available in Excel
+  - for instance `SEQUENCE()`, `UNIQUE()`, `FILTER()`, `RANDARRAY()`…
+- Some of those are exemplifed in [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456).
+- You are encouraged to browse through. They really bring data handling in Excel a little closer to coded languages such as `R`.
 
 # Next steps
 
+- All of Katz (2023) is relevant, but take it as a cook book for the assignment. You can go as far as you wish.
 - Chapters 16, 17, 18, and 19 of Slager and Slager (2020) are out of scope.
-- However, macros and VBA are essential components of Excel
+- However, macros and VBA (which is Chapter 19) are essential components of Excel
   - I strongly encourage you to get started. Start by recording a macro, then play around with the code.
   - VBA allows more efficient calculations via compiled code, and is a powerful addition to Excel.
-- Read more of Katz (2023) as arrays are really a fundamental reason for the existence of Excel…
-- The 2021 [`Excel World Champion`](https://www.fmworldcup.com/excel-esports/microsoft-excel-world-championship/) is an actuary (and a former student of mine!): Andrew Ngai, now Director at Taylor Fry.
+- Fun fact: the 2021 [`Excel World Champion`](https://www.fmworldcup.com/excel-esports/microsoft-excel-world-championship/) is an actuary: Andrew Ngai, now Director at Taylor Fry.
 
 # References
 

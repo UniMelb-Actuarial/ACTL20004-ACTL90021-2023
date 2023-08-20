@@ -44,7 +44,7 @@ Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https:/
 
 Read: [``Module 6``](../../3-excel/m6-excel/)
 
-Annotate: [``slides``](../../../output/23-Top-M6-lec.pdf) and Excel spreadsheet
+Annotate: [``slides``](../../../output/23-Top-M6-lec.pdf) and Excel [`module 6 spreadsheet`](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5091456)
 
 Watch: refer to your lecture recording under "Lecture Capture" ([``UG``](https://canvas.lms.unimelb.edu.au/courses/153686/external_tools/701)/[``PG``](https://canvas.lms.unimelb.edu.au/courses/154246/external_tools/701)). This is where annotated slides will be made available, too.
 
