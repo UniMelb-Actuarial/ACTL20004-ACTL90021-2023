@@ -1,6 +1,6 @@
 ---
-bookHidden: true
-bookSearchExclude: true
+bookHidden: false
+bookSearchExclude: false
 title: "Week 5 Study Plan"
 weight: 5
 bibliography: ../../../../static/libraries.bib
