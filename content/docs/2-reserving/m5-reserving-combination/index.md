@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '16 August 2023'
+date: '21 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -64,6 +64,7 @@ We have seen covered a number of reserving methods:
 6.  payments per claim incurred (PPCI)
 
 The IBNR claims (counts) were estimated according to a number of methods, too:
+
 - exposure
 - normaliser
 - chain ladder
@@ -96,10 +97,10 @@ Decision factors include:
 
 ## Idea
 
-- Let `\(\hat{P}_h^*(i,j)\)` be the estimate of outstanding liability of model `\(h=1,2\ldots\)`, at tend of development period `\(j\)` and for period of origin `\(i\)`.
-- Assume we combine such estimates (at the end of experience period `\(k\)` ) as follows:
+- Let `\(\hat{P}_h^*(i,j)\)` be the estimate of outstanding liability of model `\(h=1,2\ldots\)`, at end of development period `\(j\)` and for period of origin `\(i\)`.
+- Assume the we want to combine such estimates (at the end of experience period `\(k\)` ) as follows:
   `$$\overline{\hat{P}^*}(i,k) = \sum_h w_h(i) \overline{\hat{P}^*_h}(i,k),$$`
-  where `\(w_h(i)\)` are weights allocated to to model `\(h\)`,
+  where `\(\overline{\hat{P}^*_h}(i,k) = \hat{P}_h^*(i,k-i)\)`, `\(w_h(i)\)` are weights allocated to to model `\(h\)`,
   `$$\sum_h w_h(i)=1.$$`
 - Note that in general those weights depend on `\(i\)` as well; different reserving models will typically perform better for different levels of maturity (in complex environments - understand “non chain ladder like”).
 
@@ -109,8 +110,8 @@ Those weights can be determined in different ways:
 
 - Judgmentally, by considering the properties of the models available, and their respective strenghts and weaknesses for different `\(i\)`.
 - With respect to some sort of objective criteria.
-  - This is done to some extent in the book (Chapter 12)
-  - This has been done a lot more rigorously only very recently by [Avanzi et al. (2023)](https://arxiv.org/abs/2206.08541), which was awarded the 2023 Hachemeister Prize by the American Casualty Actuarial Society (CAS).
+  - This is done to some extent in the book (Chapter 12).
+  - This has been done a lot more rigorously only very recently by [Avanzi et al. (2023)](https://arxiv.org/abs/2206.08541) via ensembling, which was awarded the 2023 Hachemeister Prize by the American Casualty Actuarial Society (CAS).
   - It is still a relevant topic!
 
 # Allowance for prior expectations
@@ -125,34 +126,37 @@ Those weights can be determined in different ways:
   - `\(\overline{P_0^*}(i,k)\)` is the prior expectation (examples later), and
   - `\(z(i)\)` is the credibility assigned to the model estimate `\(\overline{\hat{P}^*}(i,k)\)`
 - One probably should give more credibility to models in more mature years (small `\(i\)` ).
-- It is equivalent to apply `\(z(i)\)` on incurred amounts (see Taylor (2000))
+- The formula above will yield equivalent results if `\(z(i)\)` is applied on incurred amounts instead (see Taylor (2000)).
 
 ## Choice of credibility weights
 
 ### Bornhuetter-Ferguson
 
-Bornhuetter and Ferguson (1972) suggested the most simple approach, to use either
+Bornhuetter and Ferguson (1972) suggested the most simple approach, which is to use either
 
-- `\(z(i)=0\)`: outstanding liability is exclusively calculated on the basis of prior expectations
+- `\(z(i)=0\)`: outstanding liability is exclusively calculated on the basis of prior expectations; or
 - `\(z(i)=1\)`: outstanding liability is entirely based on models, ignoring prior expectations totally.
 
-The textbook, plain vanilla Bornhuetter-Ferguson (BF):
+The “textbook”, “plain” vanilla Bornhuetter-Ferguson (BF):
+
 - applies `\(z(i)\)` on all or only some subset of the most immature years
-- calculated the prior expectation based on premium and loss ratios (more on that shortly in the next section)
+- calculates the prior expectation based on premium and loss ratios
+
+An example is provided below.
 
 ### More generally
 
 The following would make sense:
 
-- `\(z(i)=0\)` when no information has been collected (start of development period 0)
-- `\(z(i)=1\)` at the end of the running off period (when all claims and their costs are known and certain)
+- `\(z(i)=0\)` when no information has been collected (start of development period 0);
+- `\(z(i)=1\)` at the end of the running off period (when all claims and their costs are known and certain);
 - some monotonic progression between those two extremes.
 
 For instance, `\(1/\pi\)` from chain ladder:
 
-- It satisfies the criteria above
+- It satisfies the criteria above:
 - It is somewhat reflective of the amount of information gathered so far
-- In particular, a highly leveraged line, which would benefit from moderation with prior expectation, will have a very low `\(z(I) = 1/\pi(0)\)`.
+- In particular, a highly leveraged line, which would benefit from averaging with prior expectation, will have a very low `\(z(I) = 1/\pi(0)\)`.
 
 ## Prior expectations
 
@@ -162,8 +166,8 @@ In this section we review some possible choices for the “prior expectations”
 
 The loss method proceeds as follows. For each `\(i\)`
 
-- Define `\(EP(i)\)` as the gross aggregate premium earnt for period of origin `\(i\)`
-- Define `\(C(i)\)` as the aggregate sum of all payments made for period of origin `\(i\)` (the ultimate)
+- Define `\(EP(i)\)` as the gross aggregate premium earnt for period of origin `\(i\)`.
+- Define `\(C(i)\)` as the aggregate sum of all payments made for period of origin `\(i\)` (the ultimate).
 - The loss ratio is then defined as
   $$ LR(i) = \frac{C(i)}{EP(i)}.$$
 
@@ -175,14 +179,14 @@ which is typically applied with `\(z(i)=1\)` in immature (or all) years.
 
 Consider the following triangle (cumulative claims):
 
-| Origin |  EP   | DY1 | DY2  | DY3 | DY4 |
-|:------:|:-----:|:---:|:----:|:---:|:---:|
-|  2020  |  860  | 473 | 620  | 690 | 715 |
-|  2021  |  940  | 512 | 660  | 750 |     |
-|  2022  |  980  | 611 | 700& |     |     |
-|  2023  | 1,020 | 647 |      |     |     |
+| Origin |  EP   | DY1 | DY2 | DY3 | DY4 |
+|:------:|:-----:|:---:|:---:|:---:|:---:|
+|  2020  |  860  | 473 | 620 | 690 | 715 |
+|  2021  |  940  | 512 | 660 | 750 |     |
+|  2022  |  980  | 611 | 700 |     |     |
+|  2023  | 1,020 | 647 |     |     |     |
 
-The ultimate loss ratios for
+It is assumed that the ultimate loss ratios for
 underwriting years 2021-2023 are expected to be in line with year 2020.
 
 ------------------------------------------------------------------------
@@ -200,8 +204,8 @@ Now, we have
 
 ### Extensions
 
-- The problem with the plain vanilla BF is that it does not explain how `\(LR(i)\)` is determined. A priori, this is too judgmental.
-- There are a number of methods which try to make this choice more objective, such as modified BF, Cape Cod
+- The problem with the plain vanilla BF is that it does not specify objectively how `\(LR(i)\)` is determined. A priori, this is too judgmental.
+- There are a number of methods which try to make this choice more objective, such as “modified BF”, “Cape Cod”, …
 
 # References
 
