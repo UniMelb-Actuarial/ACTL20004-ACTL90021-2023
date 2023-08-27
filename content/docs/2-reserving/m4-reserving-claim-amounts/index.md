@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '16 August 2023'
+date: '27 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -139,8 +139,11 @@ The last sentence means that we require
 ------------------------------------------------------------------------
 
 Theorem 3.3 of Taylor (2000) implies that when claims inflation is constant at rate `\(f\)`,
-`$$\begin{aligned} \alpha(i) &= \frac{\lambda(0)}{\lambda_0} \alpha^*(i) (1+f)^i, \\ \mu(j) &= \mu^*(j) (1+f)^j, \text{ with}\\ \sum_j \mu^*(j) &= 1. \end{aligned}$$`
-Note that, if all payments are brought to the date of the diagonal, then the adjustment `\(\lambda(0)/\lambda_0\)` would typically just be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average).
+`$$\begin{aligned} \alpha(i) &= \frac{\lambda(0)}{K\lambda_0} \alpha^*(i) (1+f)^i, \\ \mu(j) &= K\mu^*(j) (1+f)^j, \text{ with} \end{aligned}$$`
+Note
+
+- One can choose `\(K=1\)` or such that `\(\sum_j \mu^*(j) = 1.\)` (this will generally not be the case). In the example below we have `\(K=1\)`.
+- If all payments are brought to the date of the diagonal, then the adjustment `\(\lambda(0)/\lambda_0\)` would typically just be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average).
 
 ------------------------------------------------------------------------
 

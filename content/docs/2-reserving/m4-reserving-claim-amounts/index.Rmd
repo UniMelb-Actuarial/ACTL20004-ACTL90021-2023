@@ -212,11 +212,14 @@ $$\frac{\lambda(k)}{\lambda(k-1)}\text{ to be constant for all }k>1.$$
 
 Theorem 3.3 of @Tay00 implies that when claims inflation is constant at rate $f$,
 $$\begin{aligned}
-\alpha(i) &= \frac{\lambda(0)}{\lambda_0} \alpha^*(i) (1+f)^i, \\
-\mu(j) &= \mu^*(j) (1+f)^j, \text{ with}\\
-\sum_j \mu^*(j) &= 1.
+\alpha(i) &= \frac{\lambda(0)}{K\lambda_0} \alpha^*(i) (1+f)^i, \\
+\mu(j) &= K\mu^*(j) (1+f)^j, \text{ with}
 \end{aligned}$$
-Note that, if all payments are brought to the date of the diagonal, then the adjustment $\lambda(0)/\lambda_0$ would typically just be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average). 
+Note 
+
+- One can choose $K=1$ or such that $\sum_j \mu^*(j) = 1.$ (this will generally not be the case). In the example below we have $K=1$.
+- If all payments are brought to the date of the diagonal, then the adjustment $\lambda(0)/\lambda_0$ would typically just be an adjustment due to the fact that payments are not all made on the first or last day of the periods (typically, we assume in the middle on average). 
+
 
 ---
 
