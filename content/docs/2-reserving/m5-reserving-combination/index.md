@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '21 August 2023'
+date: '28 August 2023'
 output:
   beamer_presentation:
     toc: true
@@ -91,7 +91,7 @@ Decision factors include:
   - e.g., do those average claims make sense, given our (also qualitative) knowledge of the claims development processes??
   - e.g., do trends in average claim size agree with our beliefs around claims inflation and superimposed inflation?
 - relation of forecasts of liability to case estimates
-  - e.g., can they broadly be reconciled? (they should be roughly equal, or if not the difference should be consistant or explainable)
+  - e.g., they are not directly comparable, but the evolution of the ratio should be smooth enough.
 
 # Combining the results of the different models
 
