@@ -18,4 +18,6 @@ The main references for Modules 7-9 is TBC.
 <!-- [Taylor] Taylor, G. (2000) Loss Reserving: An Actuarial Perspective Huebner International Series on Risk, Insurance and Economic Security (HSRI volume 21) https://link.springer.com/book/10.1007/978-1-4615-4583-5 -->
 <!-- {{< /hint >}} -->
 
-<!-- Slides for week 7 are available [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5029017) -->
+Slides for week 7 are available [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5117394)
+
+
