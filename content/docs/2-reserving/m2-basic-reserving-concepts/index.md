@@ -88,6 +88,10 @@ latest financial statements of IAG.
 
 # The claims process
 
+## Main reference
+
+Note that figures, notation, examples and structure are mostly drawn from Taylor (2000), which is the main reference for Modules 2–5.
+
 ## Time line of a claim and IBNR
 
 <img src="../../../../../../../../../../../img/module-2/Figure_1_1.png" width="100%" style="display: block; margin: auto;" />

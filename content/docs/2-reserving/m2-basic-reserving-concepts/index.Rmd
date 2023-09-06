@@ -157,6 +157,10 @@ latest financial statements of IAG.
 
 # The claims process
 
+## Main reference
+
+Note that figures, notation, examples and structure are mostly drawn from @Tay00, which is the main reference for Modules 2--5.
+
 ## Time line of a claim and IBNR
 
 ```{r  fig.align='center',out.width="100%", echo=F}
@@ -168,6 +172,7 @@ From $t_1$ to $t_2$:
 - A liability exists (an insured event occurred)
 - However, the insurer is unaware of the claim
 - During this interval, the claim is said to be **incurred but not reported** (or "**IBNR**").
+
 
 ---
 
