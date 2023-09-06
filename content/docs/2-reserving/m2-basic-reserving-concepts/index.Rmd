@@ -331,6 +331,15 @@ $$\text{loss reserve }= \text{ central estimate }+ \text{ risk margin}.$$
 
 ## In Australia
 
+### Legislative framework
+
+The Standard governing actuarial valuations of insurance liabilities is found at [`www.legislation.gov.au`](https://www.legislation.gov.au/Details/F2023L00699/Html/Text#_Toc110005238)
+
+- Section 8 states that "An insurer must determine a value for both its outstanding claims liabilities and its premiums liabilities for each class of business underwritten by the insurer."
+- Sections 9 defines "outstanding claims liabilities" as relating "to all claims incurred prior to the valuation date, whether or not they have been reported to the insurer".
+- Section 10 defines "premium liability" as relating "to all future claim payments arising from future events post the valuation date that will be insured under the insurer’s existing policies that have not yet expired".
+
+
 ### Outstanding claims liability in Australia
 
 APRA's [`GRS 210 (where "RS" stands for "Reporting standards")`](https://www.apra.gov.au/sites/default/files/reporting_standard_grs_210.0_g_outstanding_claims_liability_insurance_risk_charge_0.pdf) says:
@@ -350,6 +359,9 @@ Furthermore, it continues on by clarifying:
 (b) *the central estimate plus one half of a standard deviation above the mean for the insurance liabilities of the Level 2 insurance group.*
 
 There's a lot more information in the document.
+
+
+
 
 ### Solvency capital requirements in Australia
 

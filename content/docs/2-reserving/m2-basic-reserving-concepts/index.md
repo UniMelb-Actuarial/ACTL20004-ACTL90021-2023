@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '10 August 2023'
+date: '07 September 2023'
 output:
   beamer_presentation:
     toc: true
@@ -249,6 +249,14 @@ This can be considered as negative `\(C(i,j)\)`, or may require another triangle
   `$$\text{loss reserve }= \text{ central estimate }+ \text{ risk margin}.$$`
 
 ## In Australia
+
+### Legislative framework
+
+The Standard governing actuarial valuations of insurance liabilities is found at [`www.legislation.gov.au`](https://www.legislation.gov.au/Details/F2023L00699/Html/Text#_Toc110005238)
+
+- Section 8 states that “An insurer must determine a value for both its outstanding claims liabilities and its premiums liabilities for each class of business underwritten by the insurer.”
+- Sections 9 defines “outstanding claims liabilities” as relating “to all claims incurred prior to the valuation date, whether or not they have been reported to the insurer”.
+- Section 10 defines “premium liability” as relating “to all future claim payments arising from future events post the valuation date that will be insured under the insurer’s existing policies that have not yet expired”.
 
 ### Outstanding claims liability in Australia
 
