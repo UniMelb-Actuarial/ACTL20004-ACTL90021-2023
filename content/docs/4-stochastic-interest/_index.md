@@ -20,4 +20,6 @@ The main references for Modules 7-9 is TBC.
 
 Slides for week 7 are available [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5117394)
 
+Slides for week 8 are available [here](https://canvas.lms.unimelb.edu.au/courses/191080/modules/items/5134046)
+
 

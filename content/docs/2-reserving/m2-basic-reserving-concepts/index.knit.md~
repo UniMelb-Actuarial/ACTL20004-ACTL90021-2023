@@ -1,0 +1,66 @@
+---
+bookHidden: false        
+bookSearchExclude: false
+weight: 10
+title: "M2 Basic Reserving Concepts"
+subtitle: "Topics in Insurance, Risk, and Finance [^1]"
+author: "Professor Benjamin Avanzi"
+institute:  |
+  ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
+date: '08 September 2023'
+output:
+  beamer_presentation:
+    toc: true
+    number_sections: true
+    df_print: kable
+    slide_level: 3
+    theme: "CambridgeUS"  
+    colortheme: "dolphin"  
+    fonttheme: "default"
+bibliography: ../../../../static/libraries.bib
+header-includes:
+  - \graphicspath{{../../../../static/}}
+  - \usepackage{color}
+  - \usepackage{hyperref}
+  - \usepackage{marvosym}
+  - \usepackage{amsmath}
+  - \usepackage{amsthm}
+  - \usepackage{amsfonts}
+  - \usepackage{array}
+  - \usepackage{booktabs}
+  - \usepackage{verbatim}
+  - \usepackage[english]{varioref}
+  - \usepackage{natbib}
+  - \usepackage{actuarialangle}
+  - \usepackage{pgfpages}    
+  - \pgfdeclareimage[height=1cm]{university-logo}{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}
+  - \pgfdeclareimage[height=2.5cm]{university-logo2}{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}
+  - \logo{\raisebox{-3ex}[0pt]{\pgfuseimage{university-logo}}}
+  - \AtBeginSection[]{     \begin{frame}    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide/hide/hide]     \end{frame}  \addtocounter{framenumber}{-1}}
+  - \AtBeginSubsection[]{     \begin{frame}    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]      \end{frame}  \addtocounter{framenumber}{-1}} # to remove this you need to also change "slide_level" to 2
+  - \definecolor{DolphinBlue}{RGB}{51,44,159}
+  - \setbeamerfont{section in toc}{size=\normalsize}
+  - \setbeamerfont{subsection in toc}{size=\normalsize}
+  - \pretocmd{\tableofcontents}{\setlength{\parskip}{.2em}}{}{}
+  - \setbeamertemplate{footline}{\hspace*{.4em} \raisebox{1.5ex}[0pt]{\textcolor{DolphinBlue}{\insertframenumber/\inserttotalframenumber}}}
+  #- \setbeamertemplate{footline}{\hspace*{.4em} \raisebox{1.5ex}[0pt]{\textcolor{DolphinBlue}{\insertframenumber}}}
+  #- \apptocmd{\tableofcontents}{\linespread{1.0}}{}{}
+  # - \setbeamerfont{subsubsection in toc}{size=fontsize}
+  - \newcommand{\adv}{$\maltese$}
+classoption: t,handout 
+---
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
