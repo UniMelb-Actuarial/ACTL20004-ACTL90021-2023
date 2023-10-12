@@ -117,6 +117,9 @@ http://students.unimelb.edu.au/admin/special
 
 The final exam will be a “traditional”, closed book, pen on paper exam.
 
+**You will be allowed to bring one A4 sheet of notes, double sided. You can write as much as you want on that one sheet of paper (text and/or formulas), on both sides, but it cannot be more than one A4 sheet.**
+
+**You will be allowed to bring a Casio FX-82 (with or without suffix) calculator.**
 
 ## Date
 
@@ -125,7 +128,7 @@ The date of the final exam is published on the [``University of Melbourne Exams 
 
 ## Duration
 
-2 hours, plus 10 minutes of reading time
+2 hours, plus 15 minutes of reading time
 
 
 ## Scope
@@ -255,7 +258,7 @@ Assessments in this course will generally:
 - test whether you can apply the methods in a realistic environment (in particular, with data and spreadsheets);
 - test whether you understand the theory behind those methods, and can explain the associated strengths and limitations.
 
-To prepare for this exam we suggest you review the tutorial exercises and past exam questions. You should also make sure you read all prescribed readings and have *understood* the main arguments. 
+To prepare for this exam we suggest you review the tutorial exercises and [`past CM2 exam questions`](Assessment#past-cm2-exams). You should also make sure you read all prescribed readings and have *understood* the main arguments. 
 
 <!-- Remember that this is an open book exam, so there is nothing to memorise. You must demonstrate understanding instead, and being able to "connect the dots". If you have done the work and know where the things are, you should be able to easily find the details you need to answer the questions. -->
 
@@ -263,8 +266,6 @@ More specifically:
 
 - Finalise ***your own*** summaries and formula sheets in preparation for the exam.
 - I recommend you review carefully the [`Detailed Learning Outcomes pages`](../../learning-outcomes/):
-  - For Actuarial Practice: are you able to do all these? (describe, list, explain, ...); if you are on top of those you should be well prepared for the final exam;
-  - For Actuarial Techniques: do you understand all those formulas? Do you have formulas to add? Is there anything to add to your own summaries?
 - Of course, review also all tutorial exercises. For each question:
   - What skill(s) is this exercise testing?
   - Where are the required concepts in your summaries? in your formula sheets?
