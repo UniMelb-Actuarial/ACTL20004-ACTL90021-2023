@@ -184,7 +184,7 @@ Will be announced later.
 
 <!-- Alternatively, you can call the following numbers for assistance during the exam if you are experiencing technical difficulties. Inside Australia: 13MELB (13 6352) (select Option 1 for current students then select Option 1 again for exam enquiries). Outside Australia: +61 3 9035 5511 (select Option 1 for current students and then select Option 1 again for exam enquiries). -->
 
-## Additional details
+## Additional details 
 
 <!-- See [`Exam Format`](../Assessment/#exam-format) and [`General Advice`](/Assessment/##general-advice) for further details. -->
 
