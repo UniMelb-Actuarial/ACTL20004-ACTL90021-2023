@@ -121,6 +121,8 @@ The final exam will be a “traditional”, closed book, pen on paper exam.
 
 **You will be allowed to bring a Casio FX-82 (with or without suffix) calculator.**
 
+Additional instructions for the exam are on the cover sheets ([UG](https://canvas.lms.unimelb.edu.au/courses/153686/modules/items/5212151)/[PG](https://canvas.lms.unimelb.edu.au/courses/154246/modules/items/5212152))
+
 ## Date
 
 The date of the final exam is published on the [``University of Melbourne Exams Timetable website``](https://my.unimelb.edu.au/).
@@ -128,15 +130,26 @@ The date of the final exam is published on the [``University of Melbourne Exams 
 
 ## Duration
 
-2 hours, plus 15 minutes of reading time
+2 hours, plus 15 minutes of reading time.
 
 
 ## Scope
 
-The final exam will assess **all** contents of the course, with particular focus on the materials taught beyond week 6.
+The final exam will assess **all** contents of the course, with particular focus on the materials taught beyond week 6. The questions will focus particlarly on:
+
+- Modules 1 and 5 (and associated knowledge which may come from Modules 2-4)
+- Modules 7 to 12
+
+The material from the following slides from Modules 7 to 12 is not required for the final exam:
+
+- Module 7: p. 54-56
+- Module 9: p. 10, p. 23, and anything directly related to Excel, e.g., how to implement a procedure in Excel  (however, you may need to understand the procedure, i.e., know the theoretical basis). 
+- Module 10: p. 25 and p. 27
+- Module 11: p. 23-28
+- Module 12: p. 9-11
 
 
-Examinable materials include associated tutorial questions, revision questions, additional questions, technical and practice lectures with slides and associated mandatory readings, as well as the assignment task and the mid-semester exam.
+Examinable materials include associated tutorial questions (it is important that you understand the details of the examples /questions in these materials and that you are able to replicate the solutions independently and efficiently), associated mandatory readings, as well as the assignment task and the mid-semester exam.
 
 ## Marks and allocation to topics
 
@@ -163,6 +176,15 @@ Will be available later.
 ## Exam consultation
 
 Will be announced later.
+
+
+Please see below the schdule of extra consultation times for the final exam. 
+
+- October 18, 13:00-15:00, FBE 365 (Sam)
+- October 20, 15:00-17:00, FBE 365 (Sam)
+- October 24, 13:00-15:00, FBE 308 (Aileen)
+- October 27, 11:00-12:00, FBE 318 (Yuyu)
+
 
 <!-- Beyond support on Yellowdig, the following exam consultation hours with tutors will be available on Zoom: -->
 
