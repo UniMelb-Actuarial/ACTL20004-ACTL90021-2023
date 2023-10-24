@@ -268,7 +268,7 @@ $$\begin{aligned}
 Then calculate the loss ratio $LR$ and the prior expectations of ultimate:
 $$\begin{aligned}
 LR(1)EP(1) &=  LR \cdot 860 = 715 \Longrightarrow LR = 0.8314 \\
-LR(2)EP(2)  &= LR \cdot 940 = 781.42\\
+LR(2)EP(2)  &= LR \cdot 940 = 781.52\\
 LR(3)EP(3)  &= LR \cdot 980 = 814.77\\
 LR(4)EP(4)  &= LR \cdot 1020 = 848.02
 \end{aligned}$$

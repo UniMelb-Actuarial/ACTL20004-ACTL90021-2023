@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '28 August 2023'
+date: '25 October 2023'
 output:
   beamer_presentation:
     toc: true
@@ -194,7 +194,7 @@ underwriting years 2021-2023 are expected to be in line with year 2020.
 First calculate the development factors:
 `$$\begin{aligned} \widehat{f}_1 &= \frac{620+660+700}{473+512+611} = 1.2406 \\ \widehat{f}_2 &= \frac{690+750}{620+660} = 1.125 \\ \widehat{f}_3 &= \frac{715}{690} = 1.0362 \end{aligned}$$`
 Then calculate the loss ratio `\(LR\)` and the prior expectations of ultimate:
-`$$\begin{aligned} LR(1)EP(1) &=  LR \cdot 860 = 715 \Longrightarrow LR = 0.8314 \\ LR(2)EP(2)  &= LR \cdot 940 = 781.42\\ LR(3)EP(3)  &= LR \cdot 980 = 814.77\\ LR(4)EP(4)  &= LR \cdot 1020 = 848.02 \end{aligned}$$`
+`$$\begin{aligned} LR(1)EP(1) &=  LR \cdot 860 = 715 \Longrightarrow LR = 0.8314 \\ LR(2)EP(2)  &= LR \cdot 940 = 781.52\\ LR(3)EP(3)  &= LR \cdot 980 = 814.77\\ LR(4)EP(4)  &= LR \cdot 1020 = 848.02 \end{aligned}$$`
 
 ------------------------------------------------------------------------
 
