@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '25 October 2023'
+date: '31 October 2023'
 output:
   beamer_presentation:
     toc: true
@@ -21,7 +21,6 @@ bibliography: ../../../../static/libraries.bib
 header-includes:
   - \graphicspath{{../../../../static/}}
   - \usepackage{color}
-  - \usepackage{hyperref}
   - \usepackage{marvosym}
   - \usepackage{amsmath}
   - \usepackage{amsthm}
@@ -31,6 +30,7 @@ header-includes:
   - \usepackage{verbatim}
   - \usepackage[english]{varioref}
   - \usepackage{natbib}
+  - \usepackage{hyperref}
   - \usepackage{actuarialangle}
   - \usepackage{pgfpages}    
   - \pgfdeclareimage[height=1cm]{university-logo}{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}
@@ -202,6 +202,8 @@ Now, we have
 
 `$$\begin{aligned} \text{outstanding} &= \sum_{i=1}^4 \overline{P_0^*}(i,4) \\ &= \sum_{i=1}^4 LR(i)EP(i)\left(1-\frac{1}{\pi(i)}\right) \\ &= 0+27.30+115.82+261.64 \\ &=404.76. \end{aligned}$$`
 
+Remember that `\(\pi\)` is normally defined as a `\(\pi(j)\)`, so that `\(\pi(1)\)` applies to that year where we have only `\(j=1\)` cell available - the last row. Similarly, `\(\pi(3)\)` is the one that applies to the amount in the diagonal that is at `\(j=3\)` - here 781.41.
+
 ### Extensions
 
 - The problem with the plain vanilla BF is that it does not specify objectively how `\(LR(i)\)` is determined. A priori, this is too judgmental.
@@ -209,7 +211,7 @@ Now, we have
 
 # References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 
 <div id="ref-AvLiWoXi23" class="csl-entry">
 
