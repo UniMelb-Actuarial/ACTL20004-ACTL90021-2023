@@ -1,0 +1,10 @@
+\beamer@sectionintoc {1}{Background}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Summary}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Motivation}{6}{0}{1}
+\beamer@subsectionintoc {1}{3}{Criteria for choice}{8}{0}{1}
+\beamer@sectionintoc {2}{Combining the results of the different models}{10}{0}{2}
+\beamer@subsectionintoc {2}{1}{Idea}{11}{0}{2}
+\beamer@sectionintoc {3}{Allowance for prior expectations}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Idea}{15}{0}{3}
+\beamer@subsectionintoc {3}{2}{Choice of credibility weights}{17}{0}{3}
+\beamer@subsectionintoc {3}{3}{Prior expectations}{20}{0}{3}

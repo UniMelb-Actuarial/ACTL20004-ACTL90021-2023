@@ -47,7 +47,7 @@ header-includes:
   #- \apptocmd{\tableofcontents}{\linespread{1.0}}{}{}
   # - \setbeamerfont{subsubsection in toc}{size=fontsize}
   - \newcommand{\adv}{$\maltese$}
-classoption: t,handout 
+classoption: t,handout  
 ---
  
 ```{r setup, include=FALSE}
@@ -74,6 +74,9 @@ if (exists("output_type") && output_type == "beamer") {
 # Make sure that the setup chunk is run first
 #  (to set graphics_folder and output_name)
 #
+
+options(tinytex.verbose = TRUE)
+
 #  The file is also saved before running this file
 output_type <- "beamer"
 

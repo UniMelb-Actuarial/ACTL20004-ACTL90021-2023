@@ -1,0 +1,568 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  t,handout]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{CambridgeUS}
+\usecolortheme{dolphin}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\graphicspath{{../../../../static/}}
+\usepackage{color}
+\usepackage{marvosym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage[english]{varioref}
+\usepackage{natbib}
+\bibliographystyle{elsarticle-harv}
+\usepackage{hyperref}
+\usepackage{actuarialangle}
+\usepackage{pgfpages}
+\pgfdeclareimage[height=1cm]{university-logo}{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}
+\pgfdeclareimage[height=2.5cm]{university-logo2}{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}
+\logo{\raisebox{-3ex}[0pt]{\pgfuseimage{university-logo}}}
+\AtBeginSection[]{     \begin{frame}    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide/hide/hide]     \end{frame}  \addtocounter{framenumber}{-1}}
+\AtBeginSubsection[]{     \begin{frame}    \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]      \end{frame}  \addtocounter{framenumber}{-1}}
+\definecolor{DolphinBlue}{RGB}{51,44,159}
+\setbeamerfont{section in toc}{size=\normalsize}
+\setbeamerfont{subsection in toc}{size=\normalsize}
+\pretocmd{\tableofcontents}{\setlength{\parskip}{.2em}}{}{}
+\setbeamertemplate{footline}{\hspace*{.4em} \raisebox{1.5ex}[0pt]{\textcolor{DolphinBlue}{\insertframenumber/\inserttotalframenumber}}}
+\newcommand{\adv}{$\maltese$}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={M5 Reserving Combination},
+  pdfauthor={Professor Benjamin Avanzi},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{M5 Reserving Combination}
+\subtitle{Topics in Insurance, Risk, and Finance \footnote<.->{References:
+  Chapter 5 of Taylor (2000) \textbar{} \(\; \rightarrow\)
+  \href{https://gim-am3.netlify.app/output/23-Top-M5-lec.pdf}{\textcolor{blue}{\underline{latest slides}}}}}
+\author{Professor Benjamin Avanzi}
+\date{01 November 2023}
+\institute{\includegraphics[width=1.2in,height=\textheight]{../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png}}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}[allowframebreaks]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+\section{Background}\label{background}
+
+\subsection{Summary}\label{summary}
+
+\begin{frame}{Summary}
+We have seen covered a number of reserving methods:
+
+\begin{enumerate}
+\tightlist
+\item
+  unadjusted chain ladder on paid losses
+\item
+  inflation adjusted chain ladder on paid losses
+\item
+  unadjusted chain ladder on incurred losses
+\item
+  inflation adjusted chain ladder on incurred losses
+\item
+  separation
+\item
+  payments per claim incurred (PPCI)
+\end{enumerate}
+
+The IBNR claims (counts) were estimated according to a number of
+methods, too:
+
+\begin{itemize}
+\tightlist
+\item
+  exposure
+\item
+  normaliser
+\item
+  chain ladder
+\end{itemize}
+\end{frame}
+
+\subsection{Motivation}\label{motivation}
+
+\begin{frame}{Motivation}
+\begin{itemize}
+\tightlist
+\item
+  All those methods are producing outstanding liability \$ estimates in
+  nominal terms.
+\item
+  There are a number of differences:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    whether inflation is accounted for explicitly (2, 4, 5, 6) or not
+    (1, 3)
+  \item
+    whether inflation is assumed for past data (2, 4), or a result of
+    the method (1, 3, 5, 6)
+  \item
+    whether paid (1, 2, 6) or incurred (3, 4, 5) losses are used
+  \item
+    whether aggregate amounts (1, 2, 3, 4) or amounts per claim (5, 6)
+    are used. The latter require an estimate of IBNR counts.
+  \end{itemize}
+\item
+  All methods have strengths and weaknesses.
+\end{itemize}
+
+There is obviously a good mix of assumptions and approaches. Which one
+should we choose? Or should we combine them?
+\end{frame}
+
+\subsection{Criteria for choice}\label{criteria-for-choice}
+
+\begin{frame}{Criteria for choice}
+Decision factors include:
+
+\begin{itemize}
+\tightlist
+\item
+  analytical properties of the various models
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g., we know there has been a change in the past, that affected the
+    development of claims. Can the method allow for that?
+  \end{itemize}
+\item
+  average claim sizes for various periods of origin
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g., do those average claims make sense, given our (also
+    qualitative) knowledge of the claims development processes??
+  \item
+    e.g., do trends in average claim size agree with our beliefs around
+    claims inflation and superimposed inflation?
+  \end{itemize}
+\item
+  relation of forecasts of liability to case estimates
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g., they are not directly comparable, but the evolution of the
+    ratio should be smooth enough.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Combining the results of the different
+models}\label{combining-the-results-of-the-different-models}
+
+\subsection{Idea}\label{idea}
+
+\begin{frame}{Idea}
+\begin{itemize}
+\tightlist
+\item
+  Let \(\hat{P}_h^*(i,j)\) be the estimate of outstanding liability of
+  model \(h=1,2\ldots\), at end of development period \(j\) and for
+  period of origin \(i\).
+\item
+  Assume the we want to combine such estimates (at the end of experience
+  period \(k\) ) as follows:
+  \[\overline{\hat{P}^*}(i,k) = \sum_h w_h(i) \overline{\hat{P}^*_h}(i,k),\]
+  where \(\overline{\hat{P}^*_h}(i,k) = \hat{P}_h^*(i,k-i)\), \(w_h(i)\)
+  are weights allocated to to model \(h\), \[\sum_h w_h(i)=1.\]
+\item
+  Note that in general those weights depend on \(i\) as well; different
+  reserving models will typically perform better for different levels of
+  maturity (in complex environments - understand ``non chain ladder
+  like'').
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Those weights can be determined in different ways:
+
+\begin{itemize}
+\tightlist
+\item
+  Judgmentally, by considering the properties of the models available,
+  and their respective strenghts and weaknesses for different \(i\).
+\item
+  With respect to some sort of objective criteria.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is done to some extent in the book (Chapter 12).
+  \item
+    This has been done a lot more rigorously only very recently by
+    \href{https://arxiv.org/abs/2206.08541}{Avanzi et al. (2023)} via
+    ensembling, which was awarded the 2023 Hachemeister Prize by the
+    American Casualty Actuarial Society (CAS).
+  \item
+    It is still a relevant topic!
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Allowance for prior
+expectations}\label{allowance-for-prior-expectations}
+
+\subsection{Idea}\label{idea-1}
+
+\begin{frame}{Idea}
+\begin{itemize}
+\tightlist
+\item
+  Imagine one might to combine a ``prior expectation'' (or belief) with
+  the estimate of liability provided by a method (or ensemble thereof).
+\item
+  This can be done in a way which is routinely referred to as
+  ``credibility weighting'' by actuaries:
+  \[ \text{estimate} = [1-z(i)] \overline{P_0^*}(i,k) + z(i) \overline{\hat{P}^*}(i,k),\]
+  where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\overline{\hat{P}^*}(i,k)\) is the quantity defined earlier
+  \item
+    \(\overline{P_0^*}(i,k)\) is the prior expectation (examples later),
+    and
+  \item
+    \(z(i)\) is the credibility assigned to the model estimate
+    \(\overline{\hat{P}^*}(i,k)\)
+  \end{itemize}
+\item
+  One probably should give more credibility to models in more mature
+  years (small \(i\) ).
+\item
+  The formula above will yield equivalent results if \(z(i)\) is applied
+  on incurred amounts instead (see Taylor (2000)).
+\end{itemize}
+\end{frame}
+
+\subsection{Choice of credibility
+weights}\label{choice-of-credibility-weights}
+
+\begin{frame}{Bornhuetter-Ferguson}
+\phantomsection\label{bornhuetter-ferguson}
+Bornhuetter and Ferguson (1972) suggested the most simple approach,
+which is to use either
+
+\begin{itemize}
+\tightlist
+\item
+  \(z(i)=0\): outstanding liability is exclusively calculated on the
+  basis of prior expectations; or
+\item
+  \(z(i)=1\): outstanding liability is entirely based on models,
+  ignoring prior expectations totally.
+\end{itemize}
+
+The ``textbook'', ``plain'' vanilla Bornhuetter-Ferguson (BF):
+
+\begin{itemize}
+\tightlist
+\item
+  applies \(z(i)\) on all or only some subset of the most immature years
+\item
+  calculates the prior expectation based on premium and loss ratios
+\end{itemize}
+
+An example is provided below.
+\end{frame}
+
+\begin{frame}{More generally}
+\phantomsection\label{more-generally}
+The following would make sense:
+
+\begin{itemize}
+\tightlist
+\item
+  \(z(i)=0\) when no information has been collected (start of
+  development period 0);
+\item
+  \(z(i)=1\) at the end of the running off period (when all claims and
+  their costs are known and certain);
+\item
+  some monotonic progression between those two extremes.
+\end{itemize}
+
+For instance, \(1/\pi\) from chain ladder:
+
+\begin{itemize}
+\tightlist
+\item
+  It satisfies the criteria above:
+\item
+  It is somewhat reflective of the amount of information gathered so far
+\item
+  In particular, a highly leveraged line, which would benefit from
+  averaging with prior expectation, will have a very low
+  \(z(I) = 1/\pi(0)\).
+\end{itemize}
+\end{frame}
+
+\subsection{Prior expectations}\label{prior-expectations}
+
+\begin{frame}{Prior expectations}
+In this section we review some possible choices for the ``prior
+expectations''.
+\end{frame}
+
+\begin{frame}{BF loss ratio}
+\phantomsection\label{bf-loss-ratio}
+The loss method proceeds as follows. For each \(i\)
+
+\begin{itemize}
+\tightlist
+\item
+  Define \(EP(i)\) as the gross aggregate premium earnt for period of
+  origin \(i\).
+\item
+  Define \(C(i)\) as the aggregate sum of all payments made for period
+  of origin \(i\) (the ultimate).
+\item
+  The loss ratio is then defined as \[ LR(i) = \frac{C(i)}{EP(i)}.\]
+\end{itemize}
+
+The method projects \(LR(i)\) from past values and infers \(C(i)\) from
+observable \(EP(i)\). We have then (assuming chain ladder development
+patterns)
+\[\overline{P_0^*}(i,k) = LR(i)EP(i)\left( 1-\frac{1}{\pi(k)}\right)\]
+which is typically applied with \(z(i)=1\) in immature (or all) years.
+\end{frame}
+
+\begin{frame}{Example}
+\phantomsection\label{example}
+Consider the following triangle (cumulative claims):
+
+\begin{longtable}[]{@{}cccccc@{}}
+\toprule\noalign{}
+Origin & EP & DY1 & DY2 & DY3 & DY4 \\
+\midrule\noalign{}
+\endhead
+2020 & 860 & 473 & 620 & 690 & 715 \\
+2021 & 940 & 512 & 660 & 750 & \\
+2022 & 980 & 611 & 700 & & \\
+2023 & 1,020 & 647 & & & \\
+\bottomrule\noalign{}
+\end{longtable}
+
+It is assumed that the ultimate loss ratios for underwriting years
+2021-2023 are expected to be in line with year 2020.
+\end{frame}
+
+\begin{frame}
+First calculate the development factors: \[\begin{aligned}
+\widehat{f}_1 &= \frac{620+660+700}{473+512+611} = 1.2406 \\
+\widehat{f}_2 &= \frac{690+750}{620+660} = 1.125 \\
+\widehat{f}_3 &= \frac{715}{690} = 1.0362
+\end{aligned}\] Then calculate the loss ratio \(LR\) and the prior
+expectations of ultimate: \[\begin{aligned}
+LR(1)EP(1) &=  LR \cdot 860 = 715 \Longrightarrow LR = 0.8314 \\
+LR(2)EP(2)  &= LR \cdot 940 = 781.52\\
+LR(3)EP(3)  &= LR \cdot 980 = 814.77\\
+LR(4)EP(4)  &= LR \cdot 1020 = 848.02
+\end{aligned}\]
+\end{frame}
+
+\begin{frame}
+Now, we have
+
+\[\begin{aligned}
+\text{outstanding} &= \sum_{i=1}^4 \overline{P_0^*}(i,4) \\
+&= \sum_{i=1}^4 LR(i)EP(i)\left(1-\frac{1}{\pi(i)}\right) \\
+&= 0+27.30+115.82+261.64 \\
+&=404.76.
+\end{aligned}\]
+
+Remember that \(\pi\) is normally defined as a \(\pi(j)\), so that
+\(\pi(1)\) applies to that year where we have only \(j=1\) cell
+available - the last row. Similarly, \(\pi(3)\) is the one that applies
+to the amount in the diagonal that is at \(j=3\) - here 781.41.
+\end{frame}
+
+\begin{frame}{Extensions}
+\phantomsection\label{extensions}
+\begin{itemize}
+\tightlist
+\item
+  The problem with the plain vanilla BF is that it does not specify
+  objectively how \(LR(i)\) is determined. A priori, this is too
+  judgmental.
+\item
+  There are a number of methods which try to make this choice more
+  objective, such as ``modified BF'', ``Cape Cod'', \ldots{}
+\end{itemize}
+\end{frame}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\begin{frame}[allowframebreaks]{References}
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-AvLiWoXi23}
+Avanzi, Benjamin, Yanfeng Li, Bernard Wong, and Alan Xian. 2023.
+{``Ensemble Distributional Forecasting for Insurance Loss Reserving.''}
+
+\bibitem[\citeproctext]{ref-BoFe72}
+Bornhuetter, R., and R. Ferguson. 1972. {``The Actuary and
+\textsc{IBNR}.''} \emph{Proceedings of The Casualty Actuarial Society}
+59: 181--95.
+
+\bibitem[\citeproctext]{ref-Tay00}
+Taylor, Greg. 2000. \emph{Loss Reserving: An Actuarial Perspective}.
+Huebner International Series on Risk, Insurance and Economic Security.
+Kluwer Academic Publishers.
+
+\end{CSLReferences}
+\end{frame}
+
+\end{document}

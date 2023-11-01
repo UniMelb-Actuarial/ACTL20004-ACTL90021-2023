@@ -7,7 +7,7 @@ subtitle: "Topics in Insurance, Risk, and Finance [^1]"
 author: "Professor Benjamin Avanzi"
 institute:  |
   ![](../../../../static/img/PRIMARY_A_Vertical_Housed_RGB.png){width=1.2in}  
-date: '31 October 2023'
+date: '01 November 2023'
 output:
   beamer_presentation:
     toc: true
@@ -47,7 +47,7 @@ header-includes:
   #- \apptocmd{\tableofcontents}{\linespread{1.0}}{}{}
   # - \setbeamerfont{subsubsection in toc}{size=fontsize}
   - \newcommand{\adv}{$\maltese$}
-classoption: t,handout 
+classoption: t,handout  
 ---
 
 # Background
